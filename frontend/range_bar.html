@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Range Slider</title>
+    <link rel="stylesheet" href="css/rSlider.min.css">
+</head>
+<style>
+    .rs-container {
+        max-width: 500px;
+        min-width: 200px;
+        width: 80%; /* 或者根据父容器的宽度设定百分比 */
+        /* 其他样式保持不变 */
+    }
+    
+
+    /* 仅显示被选中的刻度数字 */
+    .rs-scale span.active ins {
+        visibility: visible;
+    }
+</style>
+<body>
+    <div class="rs-container">
+        <input type="text" id="sampleSlider" />
+    </div>
+    
+    
+    <script src="js/rSlider.min.js"></script>
+    <script>
+        (function () {
+            'use strict';
+
+            var init = function () {                
+                var slider3 = new rSlider({
+                    target: '#sampleSlider',
+                    values: {min: 0, max: 100},
+                    step: 1,
+                    range: true,
+                    set: [10, 20],
+                    scale: false,
+                    labels: false,
+                    onChange: function (vals) {
+                        console.log(vals);
+                    }
+                });
+            };
+            
+            window.onload = init;
+        })();
+
+       
+    </script>
+</body>
+</html>

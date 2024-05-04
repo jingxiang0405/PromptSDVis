@@ -1,0 +1,6 @@
+.rs-container {
+    max-width: 400px;
+    min-width: 200px;
+    width: 100%; /* 或者根据父容器的宽度设定百分比 */
+    /* 其他样式保持不变 */
+}

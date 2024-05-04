@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <!-- Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!-- rSlider CSS -->
+    <link rel="stylesheet" href="css/rSlider.min.css">
+     <!-- Index CSS -->
+     <link rel="stylesheet" href="./index.css">
+    <style type="text/css">
+        .outlayer{
+            width: 1900px;
+            height: 1080px;
+            border-style:solid; 
+        }
+        body {
+            width: 1900px;
+            height: 1080px;
+            border-style:solid;    
+        }
+        
+        .header_title{
+            border-style:solid; 
+            font-size: 48px;
+        }
+        <!-- prompt_config image_browser local_exploration-->
+        .modules{
+            border-style:solid; 
+        }
+       
+        .image_browser{
+            border-style:solid; 
+            width: 980px;
+            height: 1028px;
+        }
+        .local_exploration{
+            border-style:solid;
+            width: 512px;
+            height: 1028px; 
+        }
+        <!-- Text-->
+        .main_title{
+            margin-bottom: 40px;
+            font-size: 30pt;
+          
+        }
+        .sub_title{
+            font-size: 20pt;
+            
+        }
+
+        <!-- Prompt CSS-->
+        .prompt_config{
+            border-style:solid; 
+            width: 417px;
+            height: 1028px;
+        }
+        .prompt_input{
+            width: 377px;
+            height: 74px;
+        }
+        .negative_prompt_input{
+            width: 377px;
+            height: 32px;
+        }
+        <!-- Generation Input-->
+
+        .generation_area {
+            width: 377px;
+            height: 32px;
+        }
+        .geneation_input {
+            margin-right: 40px;
+            width: 220px;
+            height: 32px;
+        }
+        .geneation_button {
+            
+            width: 130px;
+            height: 32px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <div class="row header_title">PromtpVisSD</div>
+        <div class="row modules">
+            <div class="col-3 prompt_config">
+                <div class="main_title">Model Input</div>
+                <div class="prompt_area">
+                    <div class="sub_title">Prompt</div>
+                    <textarea class="prompt_input" placeholder="prompt" id="prompt"></textarea>
+                    <textarea class="negative_prompt_input" placeholder="negative prompt" id="negative_prompt"></textarea>
+                </div>
+                <div class="guidance_scale_area">
+                    <div class="sub_title rs-container">Guidance Scale</div>
+                    <input type="text" id="range_slider" />
+                </div>
+                <div>
+                    <div class="sub_title"><font class="sub_title">Total Generation</font></div>
+                    <div class="generation_area">
+                        <input type="text" class="float-start geneation_input" id="total_generation" />
+                        <button type="submit" class="btn btn-primary geneation_button" id="generate">Generate</button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-8 image_browser">
+                
+                <div id="image_overview"></div>
+
+                <img id="plt_result">
+            </div>
+            <div class="col local_exploration">
+                
+            </div>
+        </div>
+    </div>
+    <!--
+        /sd?epo=1&device_id=0&scale_left=12.0&scale_right=14.0&prompt=hello
+    -->
+    <script>
+        // Request Data
+        document.getElementById('generate').addEventListener('click', function(event){
+            event.preventDefault(); 
+            const prompt_val = document.getElementById('prompt').value;
+            const negative_prompt_val = document.getElementById('negative_prompt').value;
+            const range_slider_val = document.getElementById('range_slider').value;
+            const total_generation_val = document.getElementById('total_generation').value;
+
+            console.log('prompt_val:' + prompt_val);
+            console.log(negative_prompt_val);
+            console.log(range_slider_val);
+            console.log(total_generation_val);
+
+            var params = {
+                'prompt_val': prompt_val,
+                'negative_prompt_val': negative_prompt_val,
+                'range_slider_val': range_slider_val,
+                'total_generation_val': total_generation_val
+            };
+
+            send_xhttp(params);
+
+        })
+
+        function send_xhttp(params){
+            var xhttp = new XMLHttpRequest();
+            var queryString = Object.keys(params).map(function(key) {
+                return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+            }).join('&');
+
+            // console.log(queryString)
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    //console.log(xhttp.responseText); // Log the raw JSON response
+                    let data;
+                    try {
+                        data = JSON.parse(xhttp.responseText);
+                    } catch (e) {
+                        console.error("Parsing error:", e); // Log any parsing errors
+                        return;
+                    }
+                    //console.log(data);
+                    const plt_result = data['plt_result'];
+                    const plt_image = document.getElementById('plt_result');
+                    plt_image.src = 'data:image/png;base64,' + plt_result;
+                    plt_image.width = 256;
+                    plt_image.height = 256;
+
+                    // Loop through the parsed data
+                    data['images'].forEach(item => {
+                        // Create a new image element
+                        const img = new Image();
+                        // Set the source of the image element to the base64 string
+                        img.src = 'data:image/png;base64,' + item.img;
+                        // Set any additional attributes you may want, e.g., width and height or alt text
+                        img.alt = 'Generated Image';
+                        img.width = parseInt(item.width, 10);
+                        img.height = parseInt(item.height, 10);
+                        // Append the image to the body of the page, or any other container
+                        document.getElementById("image_overview").appendChild(img);
+                        // You can also access other properties like seed, guidanceScale, etc.
+                        console.log(`Seed: ${item.seed}`);
+                    });
+                }
+            };
+
+            xhttp.open("GET", "http://127.0.0.1:5002/image_overview?" + queryString, true);
+            xhttp.send();
+        }
+    
+
+    </script>
+
+    
+    <!-- Option 2: Separate Popper and Bootstrap JS-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    
+     <!-- rSlider JS -->
+    <script src="js/rSlider.min.js"></script>
+    <!-- Index JS -->
+    <script src="./index.js"></script>
+    <!--
+       
+        -->
+</body>
+</html>
