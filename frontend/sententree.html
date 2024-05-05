@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>左至右节点布局示例</title>
     <style>
+        
         .link {
             stroke: #999;
             stroke-opacity: 0.6;
@@ -56,15 +57,23 @@
                 {
                     id: 1, name: "Prompt Bvvv", "has_similarity": true,
                     "diffusiondb": [{ "similarity": 50, name: "B1" },
-                    { "similarity": 70, name: "B2" }],
+                    { "similarity": 70, name: "B2" },
+                    { "similarity": 70, name: "Basdasdas6" }],
                     "laion4b": [{ "similarity": 90, name: "B3" },
+                    { "similarity": 60, name: "B4" },
                     { "similarity": 60, name: "B4" }]
                 },
                 { id: 2, name: "Prompt C", "has_similarity": false },
-                { id: 3, name: "Prompt D", "has_similarity": false },
+                { id: 3, name: "Prompt D", "has_similarity": true ,
+                    "diffusiondb": [{ "similarity": 50, name: "B1" },
+                    { "similarity": 70, name: "D1" },
+                    { "similarity": 70, name: "D2" }],
+                    "laion4b": [{ "similarity": 90, name: "B3" },
+                    { "similarity": 60, name: "B4" },
+                    { "similarity": 60, name: "B4" }]},
                 { id: 4, name: "Prompt E", "has_similarity": false },
                 {
-                    id: 5, name: "Prompt E", "has_similarity": true,
+                    id: 5, name: "Prompt E", "is_end": true, "has_similarity": true,
                     "diffusiondb": [{ "similarity": 50, name: "E1" },
                     { "similarity": 70, name: "E2" }],
                     "laion4b": [{ "similarity": 90, name: "E3" },
@@ -130,13 +139,13 @@
 
             const nodes = svg.selectAll(".node")
                 .data(dataset.nodes, d => d.id);
-
+            // 处理退出的旧节点
+            nodes.exit().remove();
 
             const enter_nodes = nodes.enter()
                 .append("g")
                 .attr("class", "node")
                 .attr("transform", d => `translate(${d.x}, ${d.y})`);
-
 
             enter_nodes.append("text")
                 .attr("class", "text")
@@ -144,8 +153,9 @@
                 .each(function (d) {
                     const bbox = this.getBBox();
                     d.bbox = bbox;
-                    console.log(bbox)
+
                 });
+
             // 为新节点添加文本背景
             enter_nodes.insert("rect", "text")
                 .attr("class", "text-bg")
@@ -158,7 +168,8 @@
 
             const links = svg.selectAll(".link")
                 .data(dataset.links);
-
+            // 处理退出的旧链接
+            links.exit().remove();
             links.enter().append("line")
                 .attr("class", "link")
                 .attr("x1", d => dataset.nodes[d.source].x)
@@ -167,105 +178,116 @@
                 .attr("y2", d => dataset.nodes[d.target].y)
                 .style("stroke", "#ccc")
                 .style("stroke-width", 2);
-
-
         }
+        function removeNewNodesAndLinks(d) {
+            console.log('removeNewNodesAndLinks:' + d.id)
+
+            // 找出所有标记为 'is_new' 且与特定节点 d 相关的节点的 ID
+            let newNodeIds = dataset.nodes.filter(node => node.is_new && (node.relatedId === d.id)).map(node => node.id);
+            console.log('newNodeIds:' + newNodeIds)
+            // 过滤掉这些节点
+            dataset.nodes = dataset.nodes.filter(node => !newNodeIds.includes(node.id));
+
+            // 同时过滤掉与这些节点相关的链接
+            dataset.links = dataset.links.filter(link => !newNodeIds.includes(link.source) && !newNodeIds.includes(link.target));
+
+            updateGraph()
+            console.log("Removed new nodes and links.");
+        }
+
         function addNewNodeBySimilarity(nodes, d) {
+
             const currentNodeIndex = nodes.findIndex(node => node.id === d.id);
-            const currentNode = nodes[currentNodeIndex]; // Get the next node
-            const nextNodeIndex = currentNodeIndex + 1; // Assumes there is a sequential next node
-            const nextNode = nodes[nextNodeIndex]; // Get the next node
+            const currentNode = nodes[currentNodeIndex]; // 當前節點
+            const is_end = currentNode.is_end;
+            const nextNodeIndex = currentNodeIndex + 1; // 假設有順序的下一個節點
+            const nextNode = nodes[nextNodeIndex]; // 獲取下一個節點
 
-            diffusiondb_sim = currentNode.diffusiondb.map(d => ({ similarity: d.similarity, name: d.name }));
-            laion4b_sim = currentNode.laion4b.map(d => ({ similarity: d.similarity, name: d.name }));
+            const addNodes = (similarityData, yOffset) => {
+                similarityData.forEach((data, index) => {
+                    let newX, newY;
+                    if (!is_end) {
+                        newX = (d.x + nextNode.x) / 2;
+                        newY = d.y + yOffset * (index + 1);
+                    } else {
+                        newX = d.x + nodeSpacing / 2;
+                        newY = d.y + yOffset * (index + 1);
+                    }
+                    const newNode = {
+                        id: dataset.nodes.length,
+                        name: data.name,
+                        x: newX,
+                        y: newY,
+                        has_similarity: false,
+                        is_new: true,
+                        relatedId: d.id  // 设置关联ID为当前节点的ID
+                    };
+                    dataset.nodes.push(newNode);
+                    dataset.links.push({ source: d.id, target: newNode.id });
+                    if (!is_end) {
+                        dataset.links.push({ source: newNode.id, target: nextNode.id });
+                    }
+                });
+            };
+
+            let diffusiondb_sim = currentNode.diffusiondb.map(d => ({ similarity: d.similarity, name: d.name }));
+            let laion4b_sim = currentNode.laion4b.map(d => ({ similarity: d.similarity, name: d.name }));
+
             diffusiondb_sim.sort((a, b) => b.similarity - a.similarity);
-
             laion4b_sim.sort((a, b) => b.similarity - a.similarity);
 
-            diffusiondb_sim.forEach((data, index) => {
-                // 计算新节点的位置
-                let newX, newY;
-                if (nextNode) {
-                    newX = (d.x + nextNode.x) / 2;
-                    newY = d.y - 50 * (index + 1);
-                } else {
-                    // 如果没有下一个节点，就在当前节点的右侧创建新节点
-                    newX = d.x + nodeSpacing / 2;
-                    newY = d.y - 50 * (index + 1);
-                }
-                const newNode = {
-                    id: dataset.nodes.length,
-                    name: data.name,
-                    x: newX,
-                    y: newY,
-                    has_similarity: false
-                };
-                dataset.nodes.push(newNode);
-                if (nextNode) {
-                    dataset.links.push({ source: newNode.id, target: nextNode.id });
-                }
-                dataset.links.push({ source: d.id, target: newNode.id });
+            addNodes(diffusiondb_sim, -50); // 向上添加
+            addNodes(laion4b_sim, 50); // 向下添加
 
-            });
-            laion4b_sim.forEach((data, index) => {
-                // 计算新节点的位置
-                let newX, newY;
-                if (nextNode) {
-                    newX = (d.x + nextNode.x) / 2;
-                    newY = d.y + 50 * (index + 1);
-                } else {
-                    // 如果没有下一个节点，就在当前节点的右侧创建新节点
-                    newX = d.x + nodeSpacing / 2;
-                    newY = d.y + 50 * (index + 1);
-                }
-                const newNode = {
-                    id: dataset.nodes.length,
-                    name: data.name,
-                    x: newX,
-                    y: newY,
-                    has_similarity: false
-                };
-                dataset.nodes.push(newNode);
-                if (nextNode) {
-                    dataset.links.push({ source: newNode.id, target: nextNode.id });
-                }
-
-                dataset.links.push({ source: d.id, target: newNode.id });
-
-            });
             updateGraph();
 
         }
 
-      
-        
+
         // 添加加号圆形和交叉线
         dataset.nodes.filter(d => d.has_similarity).forEach((d, i) => {
             const plusGroup = svg.append("g")
                 .attr("class", "plus-group")
+                .classed("active", d.has_similarity)
                 .attr("transform", `translate(${d.bbox.x + d.bbox.width + 15}, ${d.y})`)
-                .on("click", () => {
-                    addNewNodeBySimilarity(dataset.nodes, d, i)
+                .on("click", function () {
+                    const group = d3.select(this);
+                    const isActive = group.classed("active");
+                    console.log(isActive)
+                    if (isActive) {
+                        group.select(".plus-line.vertical").style("opacity", 0);
+                        addNewNodeBySimilarity(dataset.nodes, d);
+
+                    } else {
+
+                        group.select(".plus-line.vertical").style("opacity", 1);
+                        removeNewNodesAndLinks(d);
+                    }
+                    // 只更新当前点击的组的状态
+                    group.classed("active", !isActive);
                 });
+
+
 
             plusGroup.append("circle")
                 .attr("class", "plus-circle")
                 .attr("r", 8);
 
             plusGroup.append("line")
-                .attr("class", "plus-line")
+                .attr("class", "plus-line horizontal")
                 .attr("x1", -5)
                 .attr("y1", 0)
                 .attr("x2", 5)
                 .attr("y2", 0);
 
+            // 添加垂直線，初始時為可見（opacity為1）
             plusGroup.append("line")
-                .attr("class", "plus-line")
+                .attr("class", "plus-line vertical")
                 .attr("x1", 0)
                 .attr("y1", -5)
                 .attr("x2", 0)
-                .attr("y2", 5);
-
+                .attr("y2", 5)
+                .style("opacity", d.has_similarity ? 1 : 0);  // 初始為顯示，點擊後隱藏
         });
 
     </script>
