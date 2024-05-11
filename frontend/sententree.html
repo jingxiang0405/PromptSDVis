@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>左至右节点布局示例</title>
     <style>
-        
         .link {
             stroke: #999;
             stroke-opacity: 0.6;
@@ -53,7 +52,13 @@
 
         let dataset = {
             nodes: [
-                { id: 0, name: "Prompt Addd", "has_similarity": false },
+                {
+                    id: 0, name: "Prompt Addd", "has_similarity": false, "has_similarity": true,
+                    "diffusiondb": [{ "similarity": 50, name: "E1" },
+                    { "similarity": 70, name: "E2" }],
+                    "laion4b": [{ "similarity": 90, name: "E3" },
+                    { "similarity": 60, name: "E4" }]
+                },
                 {
                     id: 1, name: "Prompt Bvvv", "has_similarity": true,
                     "diffusiondb": [{ "similarity": 50, name: "B1" },
@@ -61,19 +66,21 @@
                     { "similarity": 70, name: "Basdasdas6" }],
                     "laion4b": [{ "similarity": 90, name: "B3" },
                     { "similarity": 60, name: "B4" },
-                    { "similarity": 60, name: "B4" }]
+                    { "similarity": 60, name: "B5" }]
                 },
                 { id: 2, name: "Prompt C", "has_similarity": false },
-                { id: 3, name: "Prompt D", "has_similarity": true ,
+                {
+                    id: 3, name: "Prompt D", "has_similarity": true,
                     "diffusiondb": [{ "similarity": 50, name: "B1" },
                     { "similarity": 70, name: "D1" },
                     { "similarity": 70, name: "D2" }],
-                    "laion4b": [{ "similarity": 90, name: "B3" },
-                    { "similarity": 60, name: "B4" },
-                    { "similarity": 60, name: "B4" }]},
+                    "laion4b": [{ "similarity": 90, name: "D3" },
+                    { "similarity": 60, name: "D4" },
+                    { "similarity": 60, name: "D5" }]
+                },
                 { id: 4, name: "Prompt E", "has_similarity": false },
                 {
-                    id: 5, name: "Prompt E", "is_end": true, "has_similarity": true,
+                    id: 5, name: "Prompt F", "is_end": true, "has_similarity": true,
                     "diffusiondb": [{ "similarity": 50, name: "E1" },
                     { "similarity": 70, name: "E2" }],
                     "laion4b": [{ "similarity": 90, name: "E3" },
@@ -153,7 +160,6 @@
                 .each(function (d) {
                     const bbox = this.getBBox();
                     d.bbox = bbox;
-
                 });
 
             // 为新节点添加文本背景
@@ -164,20 +170,33 @@
                 .attr("width", d => d.bbox.width + 10)
                 .attr("height", d => d.bbox.height + 4)
                 .attr("fill", "#f0f0f0");
-
-
             const links = svg.selectAll(".link")
-                .data(dataset.links);
-            // 处理退出的旧链接
-            links.exit().remove();
+                .data(dataset.links, d => `${d.source}-${d.target}`);
+            console.log('update link')
+            console.log(dataset.links)
             links.enter().append("line")
                 .attr("class", "link")
-                .attr("x1", d => dataset.nodes[d.source].x)
-                .attr("y1", d => dataset.nodes[d.source].y)
-                .attr("x2", d => dataset.nodes[d.target].x)
-                .attr("y2", d => dataset.nodes[d.target].y)
+                .attr("x1", d => {
+                    const sourceNode = dataset.nodes.find(node => node.id === d.source);
+                    return sourceNode.x;
+                })
+                .attr("y1", d => {
+                    const sourceNode = dataset.nodes.find(node => node.id === d.source);
+                    return sourceNode.y;
+                })
+                .attr("x2", d => {
+                    const targetNode = dataset.nodes.find(node => node.id === d.target);
+                    return targetNode.x;
+                })
+                .attr("y2", d => {
+                    const targetNode = dataset.nodes.find(node => node.id === d.target);
+                    return targetNode.y;
+                })
                 .style("stroke", "#ccc")
                 .style("stroke-width", 2);
+            // 处理退出的旧链接
+            links.exit().remove();
+
         }
         function removeNewNodesAndLinks(d) {
             console.log('removeNewNodesAndLinks:' + d.id)
@@ -187,13 +206,22 @@
             console.log('newNodeIds:' + newNodeIds)
             // 过滤掉这些节点
             dataset.nodes = dataset.nodes.filter(node => !newNodeIds.includes(node.id));
-
+            //console.log(dataset.links);
+            //console.log("Removed Before.");
             // 同时过滤掉与这些节点相关的链接
             dataset.links = dataset.links.filter(link => !newNodeIds.includes(link.source) && !newNodeIds.includes(link.target));
-
+            // console.log("Removed After.");
+            //console.log(dataset.links);
             updateGraph()
             console.log("Removed new nodes and links.");
+
+            //console.log(dataset.nodes);
         }
+        // 假设节点的 ID 是从 0 开始，递增
+        let lastId = dataset.nodes.reduce((max, node) => node.id > max ? node.id : max, -1);
+
+        // 全局 ID 计数器初始化为最大 ID + 1
+        let nodeIdCounter = lastId + 1;
 
         function addNewNodeBySimilarity(nodes, d) {
 
@@ -213,9 +241,10 @@
                         newX = d.x + nodeSpacing / 2;
                         newY = d.y + yOffset * (index + 1);
                     }
+                    console.log('d.id:' + d.id)
                     const newNode = {
-                        id: dataset.nodes.length,
-                        name: data.name,
+                        id: nodeIdCounter++,
+                        name: data.name + ':' + ((d.id + 1) * 10 + dataset.nodes.length) + ':' + d.id,
                         x: newX,
                         y: newY,
                         has_similarity: false,
@@ -225,6 +254,7 @@
                     dataset.nodes.push(newNode);
                     dataset.links.push({ source: d.id, target: newNode.id });
                     if (!is_end) {
+                        console.log('end')
                         dataset.links.push({ source: newNode.id, target: nextNode.id });
                     }
                 });
@@ -257,11 +287,14 @@
                     if (isActive) {
                         group.select(".plus-line.vertical").style("opacity", 0);
                         addNewNodeBySimilarity(dataset.nodes, d);
-
+                        console.log('addNewNodeBySimilarity dataset.nodes.filter')
+                        console.log(dataset.nodes)
                     } else {
 
                         group.select(".plus-line.vertical").style("opacity", 1);
                         removeNewNodesAndLinks(d);
+                        console.log('removeNewNodesAndLinks dataset.nodes.filter')
+                        console.log(dataset.nodes)
                     }
                     // 只更新当前点击的组的状态
                     group.classed("active", !isActive);
