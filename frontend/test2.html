@@ -1,90 +1,158 @@
-source: 0, target: 1}
-1 {source: 1, target: 2}
-2 {source: 2, target: 3}
-3 {source: 3, target: 4}
-4 {source: 4, target: 5}
-5 {source: 0, target: 16}
-6 {source: 16, target: 1}
-7 {source: 0, target: 17}
-8 {source: 17, target: 1}
-9 {source: 0, target: 18}
-10 {source: 18, target: 1}
-11 {source: 0, target: 19}
-12 {source: 19, target: 1}
+<!DOCTYPE html>
+<html lang="en">
 
-source: 0, target: 1}
-1 {source: 1, target: 2}
-2 {source: 2, target: 3}
-3 {source: 3, target: 4}
-4 {source: 4, target: 5}
-5 {source: 0, target: 16}
-6 {source: 16, target: 1}
-7 {source: 0, target: 17}
-8 {source: 17, target: 1}
-9 {source: 0, target: 18}
-10 {source: 18, target: 1}
-11 {source: 0, target: 19}
-12 {source: 19, target: 1}
-13 {source: 1, target: 30}
-14 {source: 30, target: 2}
-15 {source: 1, target: 31}
-16 {source: 31, target: 2}
-17 {source: 1, target: 32}
-18 {source: 32, target: 2}
-19 {source: 1, target: 33}
-20 {source: 33, target: 2}
-21 {source: 1, target: 34}
-22 {source: 34, target: 2}
-23 {source: 1, target: 35}
-24 {source: 35, target: 2}
-25 {source: 3, target: 56}
-26 {source: 56, target: 4}
-27 {source: 3, target: 57}
-28 {source: 57, target: 4}
-29 {source: 3, target: 58}
-30 {source: 58, target: 4}
-31 {source: 3, target: 59}
-32 {source: 59, target: 4}
-33 {source: 3, target: 60}
-34 {source: 60, target: 4}
-35 {source: 3, target: 61}
-36 {source: 61, target: 4}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatter Plot with Image Markers</title>
+    <style>
+        /* Add your CSS styling here */
+        svg {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="tooltip"
+        style="position: absolute; background: rgba(255,255,255,0.8); padding: 5px; border: 1px solid #d3d3d3; display: none;">
+    </div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const images = [
+                { id: 'img1', src: './img/01.png', x: 50, y: 50, width: 100, height: 100, title: "Image1" },
+                { id: 'img2', src: './img/02.png', x: 200, y: 200, width: 100, height: 100, title: "Image2" },
+                { id: 'img3', src: './img/03.png', x: 350, y: 100, width: 100, height: 100, title: "Image3" }
+            ];
+
+            const width = 600;
+            const height = 600;
+            const tooltip = d3.select('#tooltip');
 
 
-{source: 0, target: 1}
-1 {source: 1, target: 2}
-2 {source: 2, target: 3}
-3 {source: 3, target: 4}
-4 {source: 4, target: 5}
-5 {source: 0, target: 16}
-6 {source: 16, target: 1}
-7 {source: 0, target: 17}
-8 {source: 17, target: 1}
-9 {source: 0, target: 18}
-10 {source: 18, target: 1}
-11 {source: 0, target: 19}
-12 {source: 19, target: 1}
-13 {source: 1, target: 30}
-14 {source: 30, target: 2}
-15 {source: 1, target: 31}
-16 {source: 31, target: 2}
-17 {source: 1, target: 32}
-18 {source: 32, target: 2}
-19 {source: 1, target: 33}
-20 {source: 33, target: 2}
-21 {source: 1, target: 34}
-22 {source: 34, target: 2}
-23 {source: 1, target: 35}
-24 {source: 35, target: 2}
-25 {source: 3, target: 56}
-26 {source: 56, target: 4}
-27 {source: 3, target: 57}
-28 {source: 57, target: 4}
-29 {source: 3, target: 58}
-30 {source: 58, target: 4}
-31 {source: 3, target: 59}
-32 {source: 59, target: 4}
-33 {source: 3, target: 60}
-34 {source: 60, target: 4}
-35 {source: 3, target: 61}
-36 {source: 61, target: 4}
+            const svg = d3.select("body").append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+            const g = svg.append('g');
+
+            const imageElements = g.selectAll('image')
+                .data(images)
+                .enter()
+                .append('image')
+                .attr('id', d => d.id)
+                .attr('xlink:href', d => d.src)
+                .attr('x', d => d.x)
+                .attr('y', d => d.y)
+                .attr('width', d => d.width)
+                .attr('height', d => d.height)
+                .on('mouseover', function (event, d) {
+                    tooltip.style('display', 'block')
+                        .html(d.title)
+                        .style('left', `${event.pageX + 10}px`)
+                        .style('top', `${event.pageY + 10}px`);
+                })
+                .on('mouseout', function () {
+                    tooltip.style('display', 'none');
+                });
+
+            // 圖片邊框
+            const rects = g.selectAll('rect')
+                .data(images)
+                .enter()
+                .append('rect')
+                .attr('x', d => d.x)
+                .attr('y', d => d.y)
+                .attr('width', d => d.width)
+                .attr('height', d => d.height)
+                .style("fill", "none")
+                .style("stroke", "black")
+                .style("stroke-width", 2);
+
+            // zoom -> 視圖放大縮小
+            svg.call(d3.zoom()
+                .extent([[0, 0], [width, height]])
+                .scaleExtent([1, 8])
+                .on("zoom", zoomed));
+
+            function zoomed({ transform }) {
+                g.attr("transform", transform);
+            }
+            // Brush -> 將圖片匡起來
+            const brush = d3.brush()
+                .extent([[0, 0], [width, height]])
+                .on('start brush', event => {
+                    if (event.selection) {
+                        const [[x0, y0], [x1, y1]] = event.selection;
+                        rects.each(function (d) {
+                            const rect = d3.select(this);
+                            // 检查刷选框与矩形是否重叠
+                            const overlaps =
+                                (
+                                    ((d.x <= x0 && x0 <= (d.x + d.width)) ||
+                                        (d.x <= x1 && x1 <= (d.x + d.width)))
+                                    &&
+                                    ((d.y <= y0 && y0 <= (d.y + d.height)) ||
+                                        (d.y <= y1 && y1 <= (d.y + d.height)))
+                                ) ||
+                                (
+                                    (x0 <= d.x && x1 >= (d.x + d.width)) &&
+                                    (y0 <= d.y && y1 >= (d.y + d.height))
+                                ) ||
+                                (
+                                    ((d.x <= x0 && x0 <= (d.x + d.width)) ||
+                                        (d.x <= x1 && x1 <= (d.x + d.width)))
+                                    &&
+                                    (y0 <= d.y && y1 >= (d.y + d.height))
+                                ) ||
+                                (
+                                    ((d.y <= y0 && y0 <= (d.y + d.height)) ||
+                                        (d.y <= y1 && y1 <= (d.y + d.height)))
+                                    &&
+                                    (x0 <= d.x && x1 >= (d.x + d.width))
+                                )
+                            rect.style("stroke", overlaps ? "red" : "black");
+                        });
+                    }
+                })
+                .on('end', event => {
+                    if (!event.selection) {
+                        // Reset all rects if the brush is cleared
+                        rects.style("stroke", "black");
+                    }
+                });
+
+
+            let isBrushActive = false;
+            // Toggle brush and zoom on spacebar press
+            document.body.onkeyup = function (e) {
+                if (e.key === " ") {
+                    // Clear brush
+                    d3.selectAll(".brush").on(".brush", null);
+                    d3.selectAll(".brush").remove();
+                    const brushGroup = svg.append("g").attr("class", "brush");
+                    brushGroup.call(brush);
+                    svg.on(".zoom", null);
+                }
+                if (e.key === "Escape") {
+                    console.log('Escape')
+                    // Clear brush
+                    d3.selectAll(".brush").on(".brush", null);
+                    d3.selectAll(".brush").remove();
+                    rects.style("stroke", "black");
+                    // Re-enable zoom
+                    svg.call(d3.zoom()
+                        .extent([[0, 0], [width, height]])
+                        .scaleExtent([1, 8])
+                        .on("zoom", zoomed));
+                }
+            };
+
+        });
+    </script>
+</body>
+
+</html>
