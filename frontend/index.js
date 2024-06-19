@@ -4,7 +4,7 @@
 
     var init = function () {                
         var slider3 = new rSlider({
-            target: '#range_slider',
+            target: '#range-slider',
             values: {min: 0, max: 100},
             step: 1,
             range: true,
