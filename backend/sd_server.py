@@ -32,9 +32,11 @@ pipe = pipe.to("cuda:0")
 print("Start inference")
 
 # 沒有設定method get or post 都可以
-@app.route('/sd')
+@app.route('/sd', methods=['GET', 'POST'])
 def sd():
-    args = request.args
+    #. POST 如何取得參數
+    args = request.get_json()
+    print(f'args: {args}')
     epo = int(args.get('epo'))
     scale_left = float(args.get('scale_left'))
     scale_right = float(args.get('scale_right'))
@@ -50,7 +52,7 @@ def sd():
     print('Guidance scale sample list:', w_list)
     
     result_dict = []
-    print('epo:' + str(epo))
+    
     for i in range(int(epo)):
         st = time.time()
         scale = w_list[random.randrange(0, w_len)]
@@ -85,7 +87,7 @@ def sd():
             inner['seed'] = str(seed_list[j])
 
             result_dict.append(inner)
-
+            
     headers = {
         'content-type':'application/json'
     }
