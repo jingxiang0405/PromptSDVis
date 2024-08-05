@@ -18,6 +18,8 @@ from sklearn.manifold import TSNE
 import scipy.cluster.hierarchy as sch
 import spacy
 import itertools
+import spacy
+import itertools
 from config import *
 from PIL import Image
 import random
@@ -43,7 +45,13 @@ diffusiondb_data = []
 with open('../data/diffusiondb_data/imgs_with_keywords.csv', 'r') as file:
     csv_reader = csv.DictReader(file)
     diffusiondb_data = [row for row in csv_reader]
+diffusiondb_data = []
+with open('../data/diffusiondb_data/imgs_with_keywords.csv', 'r') as file:
+    csv_reader = csv.DictReader(file)
+    diffusiondb_data = [row for row in csv_reader]
 
+# Global Data
+keywords = [datas['keywords'].split(', ') for datas in diffusiondb_data]
 # Global Data
 keywords = [datas['keywords'].split(', ') for datas in diffusiondb_data]
 """
@@ -60,8 +68,12 @@ mouseover 顯示圖片的詳細資料
 # Global Value
 
 # 前端輸入Prompt 進入的第一個API
+all_process_img_list = []
+# 前端輸入Prompt 進入的第一個API
 @app.route('/image_overview')
 def get_image_overview():
+    ###################     Request Data   ######################
+    request_data = requestParse(request) #print(request_data)
     ###################     Request Data   ######################
     request_data = requestParse(request) #print(request_data)
     prompt = request_data['prompt_val']
@@ -148,7 +160,11 @@ def get_image_overview():
 
 # request POST to sd_server.py
 def sd_infer(prompt: str, negative_prompt: str, scale_left: float, scale_right: float, n_epo=int):
+# request POST to sd_server.py
+def sd_infer(prompt: str, negative_prompt: str, scale_left: float, scale_right: float, n_epo=int):
     port = 5008
+    url = f"{sd_ip}{port}/sd"
+    data = {
     url = f"{sd_ip}{port}/sd"
     data = {
         'epo': n_epo,
@@ -157,6 +173,11 @@ def sd_infer(prompt: str, negative_prompt: str, scale_left: float, scale_right: 
         'prompt': prompt,
         'negative_prompt': negative_prompt,
     }
+    # print(f"url: {url}")
+    # print(f"data: {data}")
+    response = requests.post(url, json=data)
+    # print(f"response: {response}")
+    return response.json()
     # print(f"url: {url}")
     # print(f"data: {data}")
     response = requests.post(url, json=data)
@@ -171,6 +192,7 @@ def encode_image(image_list, encode_model):
 		image_features = encode_model.encode_image(image_tensor)
 		
 	return image_features
+
 
 # Embed the feature into 2D space
 def embed_feature(encode_feature):
@@ -268,6 +290,75 @@ def all_permutations(input_prompt:str, data:dict):
     comma_separated_strings = [', '.join(combination) for combination in product_result]
 
     return comma_separated_strings
+
+# Get POS Tag Words
+def get_target_words(prompt: str, pos_tags: list):
+    nlp = spacy.load('en_core_web_sm') # Load en_core_web_sm model
+    process_prompt = nlp(prompt) # Process Prompt
+    words = [token.text for token in process_prompt if token.pos_ in pos_tags] # Extract words based on specified POS tags
+    return words
+
+# Find Similarity By all-mpnet-base-v2
+# words:['person', 'cute', 'hot', 'dog', 'beautiful', 'cat']
+# keywords :[['omnious', 'church', 'creepy', 'abandoned', 'atmosphere']]
+# return format
+# {'person':[{'church':80}, {'porche':60}], 'person':[{'church':80}, {'porche':60}]}
+def find_similarity_keywords(words, keywords):
+    embedding_model = SentenceTransformer('all-mpnet-base-v2')
+    # 向量化
+    words_embedding = embedding_model.encode(words, convert_to_tensor=True)
+    keywords_embedding = [[embedding_model.encode(subword, convert_to_tensor=True) for subword in keyword_list] for keyword_list in keywords]
+    similarity_dict = {}
+    # 遍歷每個單詞
+    for i, word in enumerate(words):
+        word_embedding = words_embedding[i].unsqueeze(0)  # 單個單詞的向量
+        similarity_list = [] # 存儲該單詞的相似度結果
+        # 遍歷每個關鍵詞列表
+        for keyword_list, keyword_embeddings in zip(keywords, keywords_embedding):
+            keyword_similarity = {}
+            # 計算單詞向量與每個子詞向量之間的餘弦相似度
+            for j, subword_embedding in enumerate(keyword_embeddings):
+                cosine_similarities = util.pytorch_cos_sim(word_embedding, subword_embedding)
+                similarity = cosine_similarities.item() * 100  # 轉換為百分比
+                keyword_similarity[keyword_list[j]] = round(similarity, 2)
+            similarity_list.append(keyword_similarity)
+        #print(f'similarity_list:{similarity_list}')
+        # 排序並選擇相似度最高的五個關鍵詞
+        flat_similarity_list = [item for sublist in similarity_list for item in sublist.items()]
+        flat_similarity_list.sort(key=lambda x: x[1], reverse=True)
+        top_k = 5
+        unique_similarity_list = []
+        seen_keywords = set()
+        for keyword, similarity in flat_similarity_list:
+            if keyword != word and keyword not in seen_keywords:
+                unique_similarity_list.append({keyword: similarity})
+                seen_keywords.add(keyword)
+                if len(unique_similarity_list) == top_k:
+                    break
+        similarity_dict[word] = unique_similarity_list
+    return similarity_dict
+
+
+
+def all_combinations(prompt:str, similarity_keywords:dict):
+    # Creating mapping from the data
+    mapping = {
+        'person': [list(item.keys())[0] for item in similarity_keywords['person']],
+        'dog': [list(item.keys())[0] for item in similarity_keywords['dog']],
+        'cat': [list(item.keys())[0] for item in similarity_keywords['cat']]
+    }
+    # 生成所有关键词替换的组合
+    all_combinations = list(product(*mapping.values()))
+
+    # 生成新的input prompts
+    new_prompts = []
+    for combination in all_combinations:
+        new_prompt = prompt
+        for keyword, replacement in zip(mapping.keys(), combination):
+            new_prompt = new_prompt.replace(keyword, replacement)
+        new_prompts.append(new_prompt)
+    new_prompts.append(prompt)
+    return new_prompts
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', threaded=True, port=5002)
