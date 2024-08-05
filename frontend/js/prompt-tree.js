@@ -1,7 +1,7 @@
 function initPromptTree(dataset) {
     const width = 980, height = 400;
     const nodeSpacing = 150; // 节点之间的间距
-    const startX = 80; // 起始X坐标
+    const startX = 80;       // 起始X坐标
     const centerY = height / 2; // Y坐标保持居中
 
     const svg = d3.select("#prompt-tree").append("svg")

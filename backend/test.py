@@ -1,3 +1,4 @@
+
 """
 from flask import Flask, render_template
 import matplotlib.pyplot as plt
@@ -28,36 +29,40 @@ if __name__ == '__main__':
     app.run()
 
 """
-from itertools import product
-
-# Input data
-input_prompt = "hello, person cute, hot dog, beautiful cat"
+import itertools
+# 定义初始数据和输入
+input_prompt = "cat,dog hello"
 data = {
-    'person': [{'human': 66.94}, {'people': 64.57}, {'guy': 58.13}, {'pedestrian': 55.19}, {'woman': 52.89}],
-    'dog': [{'puppy': 77.83}, {'terrier': 68.31}, {'cat': 60.81}, {'bark': 60.27}, {'paw': 55.37}],
-    'cat': [{'dog': 60.81}, {'puppy': 56.23}, {'catgirls': 54.93}, {'lion': 52.92}, {'tiger': 51.33}]
+    'cat': [{'dog': 60.81}, {'puppy': 56.23}, {'catgirls': 54.93}], 
+    'dog': [{'puppy': 77.83}, {'terrier': 68.31}, {'cat': 60.81}]
 }
+items = input_prompt.split(",")# 解析输入提示，根据逗号分隔
+# ['cat'] ['dog hello'] ['hw dog'] 
+print(f'items: {items}')
 
+# Prepare the data for replacements by flattening the dictionary to direct mappings
+replacement_map = {}
+for key, replacements in data.items():
+    # Flatten to a single replacement list
+    replacement_map[key] = [list(rep.keys())[0] for rep in replacements]
 
+replace_data = []
+for item in items:
+    replace_item = [item]  # Initialize with the original item
+    for key in replacement_map:
+        if key in item:
+            # Directly replace the key with each of its replacements
+            replace_item.extend(item.replace(key, rep) for rep in replacement_map[key])
+    replace_data.append(replace_item)
 
-# Creating mapping from the data
-mapping = {
-    'person': [list(item.keys())[0] for item in data['person']],
-    'dog': [list(item.keys())[0] for item in data['dog']],
-    'cat': [list(item.keys())[0] for item in data['cat']]
-}
-# 生成所有关键词替换的组合
-all_combinations = list(product(*mapping.values()))
+# Generate all combinations using itertools.product
+product_result = list(itertools.product(*replace_data))
 
-# 生成新的input prompts
-new_prompts = []
-for combination in all_combinations:
-    new_prompt = input_prompt
-    for keyword, replacement in zip(mapping.keys(), combination):
-        new_prompt = new_prompt.replace(keyword, replacement)
-    new_prompts.append(new_prompt)
-new_prompts.append(input_prompt)
-print(type(new_prompts))
-# 打印所有新生成的字符串
-print(new_prompts)
+# Convert tuples to comma-separated strings
+comma_separated_strings = [', '.join(combination) for combination in product_result]
 
+print(comma_separated_strings)
+
+"""
+
+"""

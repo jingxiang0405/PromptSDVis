@@ -124,12 +124,16 @@
             <div class="col-8 image-browser">
                 <!-- Prompt Tree -->
                 <div id="prompt-tree">
-
+        
                 </div>
                 <!-- Scatter View-->
-                <div id="tooltip"
-                    style="position: absolute; background: rgba(255,255,255,0.8); padding: 5px; border: 1px solid #d3d3d3; display: none;">
+                <div id="scatter-tree">
+                    <svg id="svg1" width="980" height="580"></svg>
+                    <div id="tooltip"
+                        style="position: absolute; background: rgba(255,255,255,0.8); padding: 5px; border: 1px solid #d3d3d3; display: none;">
+                    </div>
                 </div>
+                
                 <!-- <img id="plt-result">-->
             </div>
 
@@ -150,16 +154,6 @@
     <script src="js/prompt-tree.js"></script>
 
     <script>
-
-
-        // Scatter Plot image data
-        const images = [
-            { id: 'img1', src: './img/01.png', x: 50, y: 50, width: 100, height: 100, title: "Image1" },
-            { id: 'img2', src: './img/02.png', x: 200, y: 200, width: 100, height: 100, title: "Image2" },
-            { id: 'img3', src: './img/03.png', x: 350, y: 100, width: 100, height: 100, title: "Image3" }
-        ];
-        initScatterPlot(images);
-
         // Prompt Tree data
         let dataset = {
             nodes: [
@@ -252,28 +246,38 @@
             Recieve Data from server.py
         */
         function recieveData(data) {
-            // console.log(data);
-            const pltResult = data['plt_result'];
-            const pltImage = document.getElementById('plt-result');
-            pltImage.src = 'data:image/png;base64,' + pltResult;
-            pltImage.width = 256;
-            pltImage.height = 256;
-
-            // Loop through the parsed data
-            data['images'].forEach(item => {
-                // Create a new image element
-                const img = new Image();
-                // Set the source of the image element to the base64 string
-                img.src = 'data:image/png;base64,' + item.img;
-                // Set any additional attributes you may want, e.g., width and height or alt text
-                img.alt = 'Generated Image';
-                img.width = parseInt(item.width, 10);
-                img.height = parseInt(item.height, 10);
-                // Append the image to the body of the page, or any other container
-                document.getElementById("image-overview").appendChild(img);
-                // You can also access other properties like seed, guidanceScale, etc.
-                console.log(`Seed: ${item.seed}`);
+            const images = data.embed_position.map((position, index) => {
+                const result = data.result[index];
+                return {
+                    id: `img${result.seed}`,
+                    src: `data:image/png;base64,${result.img}`,
+                    x: position[0],
+                    y: position[1],
+                    width: 30,  // 假设宽度和高度为100，这个可以根据实际需求调整
+                    height: 30,
+                    title: result.prompt
+                };
             });
+            console.log(images)
+            initScatterPlot(images);
+
+            /// 待處理 
+            // 转换为 nodes 和 links
+            let dataset = { nodes: [], links: [] };
+
+            // 假设每个 result 对应一个 embed_position
+            data.data.forEach((data, index) => {
+                dataset.nodes.push({
+                    id: index,
+                    name: data.result[index],  // 根据需求自定义名称
+                    hasSimilarity: true, // 假设都有相似度信息
+                    x: data.embed_position[index][0], // X坐标
+                    y: data.embed_position[index][1], // Y坐标
+                    details: result  // 存储具体的其他信息
+                });
+            });
+            /// 待處理 
+            //initPromptTree(dataset);
         }
 
 

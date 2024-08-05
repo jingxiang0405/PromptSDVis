@@ -9,8 +9,8 @@ n_test = 5
 
 # stable diffusion
 model_id = "runwayml/stable-diffusion-v1-5"
-sd_height = 256
-sd_width = 256
+sd_height = 512
+sd_width = 512
 n_inference_steps = 50
 n_images_per_prompt = 1
 # n_epo = 1 # one epo cost 20s
