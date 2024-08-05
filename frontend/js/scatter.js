@@ -1,6 +1,6 @@
 function initScatterPlot(images) {
     const imageOverview = d3.select('#tooltip');
-    const svg = d3.select("#svg1")
+    const svg = d3.select("#scatter")
     const width = svg.attr("width");
     const height = svg.attr("height");
     // 尚未解決完問題 start

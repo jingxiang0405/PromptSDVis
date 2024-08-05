@@ -1,0 +1,201 @@
+2024-08-01 18:11:39,382 - root - [INFO] - 
+
+
+---------- Parse answers ------------
+2024-08-01 18:11:39,382 - root - [INFO] - dataname: diffusiondb
+2024-08-01 18:11:39,382 - root - [INFO] - folder: 0
+2024-08-01 18:11:39,382 - root - [INFO] - datamode: train
+2024-08-01 18:11:39,382 - root - [INFO] - demo_datamode: train
+2024-08-01 18:11:39,382 - root - [INFO] - model: gpt-3.5-turbo
+2024-08-01 18:11:39,382 - root - [INFO] - ports: None
+2024-08-01 18:11:39,382 - root - [INFO] - task_hint: None
+2024-08-01 18:11:39,382 - root - [INFO] - reason_hint: None
+2024-08-01 18:11:39,382 - root - [INFO] - reason_hint_person: None
+2024-08-01 18:11:39,382 - root - [INFO] - reason_hint_pos: None
+2024-08-01 18:11:39,382 - root - [INFO] - few_shot_setting: zs
+2024-08-01 18:11:39,382 - root - [INFO] - demo_size: 1
+2024-08-01 18:11:39,383 - root - [INFO] - demo_select_method: None
+2024-08-01 18:11:39,383 - root - [INFO] - demo_retrieval_method: None
+2024-08-01 18:11:39,383 - root - [INFO] - few_shot_number: 0
+2024-08-01 18:11:39,383 - root - [INFO] - n_skip: None
+2024-08-01 18:11:39,383 - root - [INFO] - diverseKNN_number: 50
+2024-08-01 18:11:39,383 - root - [INFO] - diverseKNN_sampling: random
+2024-08-01 18:11:39,383 - root - [INFO] - consistency: 1
+2024-08-01 18:11:39,383 - root - [INFO] - query_times: 5
+2024-08-01 18:11:39,383 - root - [INFO] - temperature: 0.7
+2024-08-01 18:11:39,383 - root - [INFO] - consis_level: question
+2024-08-01 18:11:39,383 - root - [INFO] - consistency_selection: two_stage_majority_voting
+2024-08-01 18:11:39,383 - root - [INFO] - output_SC_all_answer: 0
+2024-08-01 18:11:39,383 - root - [INFO] - tool_aug: None
+2024-08-01 18:11:39,383 - root - [INFO] - tool_desc: None
+2024-08-01 18:11:39,383 - root - [INFO] - parse_tool: hanlp
+2024-08-01 18:11:39,383 - root - [INFO] - start_time: TIME_STAMP
+2024-08-01 18:11:39,383 - root - [INFO] - self_annotation: True
+2024-08-01 18:11:39,383 - root - [INFO] - self_annotate_tag: None
+2024-08-01 18:11:39,383 - root - [INFO] - confident: False
+2024-08-01 18:11:39,383 - root - [INFO] - confidence_scoring_method: SC
+2024-08-01 18:11:39,383 - root - [INFO] - conf_select_method: None
+2024-08-01 18:11:39,383 - root - [INFO] - confident_sample_size: 0
+2024-08-01 18:11:39,383 - root - [INFO] - lang: en
+2024-08-01 18:11:39,383 - root - [INFO] - prompt_pool: <class 'DesignPrompts.PromptPoolEnglish'>
+2024-08-01 18:11:39,383 - root - [INFO] - stop: None
+
+2024-08-01 18:11:39,383 - root - [INFO] - abb2labelname_path: data/diffusiondb/abb2labelname.json
+2024-08-01 18:11:39,383 - root - [INFO] - abb2lname: {'ST': 'Subject term', 'SM': 'Style modifier', 'IP': 'Image prompt', 'QB': 'Quality booster', 'RT': 'Repeating term', 'MT': 'Magic term'}
+2024-08-01 18:11:39,383 - root - [INFO] - id2label: ['Subject term', 'Style modifier', 'Image prompt', 'Quality booster', 'Repeating term', 'Magic term']
+2024-08-01 18:11:39,383 - root - [INFO] - MV_func: <function two_stage_majority_voting at 0x141f55f70>
+2024-08-01 18:11:39,383 - root - [INFO] - prompt_path: prompts/self_consistent_annotate/diffusiondb/self_annotation/train/zs/train_prompts__0.json
+2024-08-01 18:11:39,383 - root - [INFO] - response_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_response.txt
+2024-08-01 18:11:39,383 - root - [INFO] - response_dir: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV
+2024-08-01 18:11:39,383 - root - [INFO] - pred_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_response.json
+2024-08-01 18:11:39,383 - root - [INFO] - SC_all_ans_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_SC_all_ans.json
+2024-08-01 18:11:39,383 - root - [INFO] - metric_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_metrics.csv
+2024-08-01 18:11:39,383 - root - [INFO] - twostage_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_metrics_twostage.csv
+2024-08-01 18:11:39,383 - root - [INFO] - response_MV_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_question_5_MV/TIME_STAMP_train__0_response.txt
+2024-08-01 18:11:39,383 - root - [INFO] - response_TSMV_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_question_5_TSMV/TIME_STAMP_train__0_response.txt
+2024-08-01 18:11:39,383 - root - [INFO] - log_path: log/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_Metr.log
+2024-08-01 18:11:39,412 - root - [INFO] - ===== Metrics =====
+              Type  Gold count Gold rate  ...  Prec   Rec    F1
+0     Subject term           0      0.00  ...  0.00  0.00  0.00
+1   Style modifier           0      0.00  ...  0.00  0.00  0.00
+2     Image prompt           0      0.00  ...  0.00  0.00  0.00
+3  Quality booster           0      0.00  ...  0.00  0.00  0.00
+4   Repeating term           0      0.00  ...  0.00  0.00  0.00
+5       Magic term           0      0.00  ...  0.00  0.00  0.00
+6            ToTal           0       100  ...  0.00  0.00  0.00
+
+[7 rows x 9 columns]
+2024-08-01 18:16:30,046 - root - [INFO] - 
+
+
+---------- Parse answers ------------
+2024-08-01 18:16:30,047 - root - [INFO] - dataname: diffusiondb
+2024-08-01 18:16:30,047 - root - [INFO] - folder: 0
+2024-08-01 18:16:30,047 - root - [INFO] - datamode: train
+2024-08-01 18:16:30,047 - root - [INFO] - demo_datamode: train
+2024-08-01 18:16:30,047 - root - [INFO] - model: gpt-3.5-turbo
+2024-08-01 18:16:30,047 - root - [INFO] - ports: None
+2024-08-01 18:16:30,047 - root - [INFO] - task_hint: None
+2024-08-01 18:16:30,047 - root - [INFO] - reason_hint: None
+2024-08-01 18:16:30,047 - root - [INFO] - reason_hint_person: None
+2024-08-01 18:16:30,047 - root - [INFO] - reason_hint_pos: None
+2024-08-01 18:16:30,047 - root - [INFO] - few_shot_setting: zs
+2024-08-01 18:16:30,047 - root - [INFO] - demo_size: 1
+2024-08-01 18:16:30,047 - root - [INFO] - demo_select_method: None
+2024-08-01 18:16:30,047 - root - [INFO] - demo_retrieval_method: None
+2024-08-01 18:16:30,047 - root - [INFO] - few_shot_number: 0
+2024-08-01 18:16:30,047 - root - [INFO] - n_skip: None
+2024-08-01 18:16:30,047 - root - [INFO] - diverseKNN_number: 50
+2024-08-01 18:16:30,047 - root - [INFO] - diverseKNN_sampling: random
+2024-08-01 18:16:30,047 - root - [INFO] - consistency: 1
+2024-08-01 18:16:30,047 - root - [INFO] - query_times: 5
+2024-08-01 18:16:30,047 - root - [INFO] - temperature: 0.7
+2024-08-01 18:16:30,047 - root - [INFO] - consis_level: question
+2024-08-01 18:16:30,047 - root - [INFO] - consistency_selection: two_stage_majority_voting
+2024-08-01 18:16:30,047 - root - [INFO] - output_SC_all_answer: 0
+2024-08-01 18:16:30,047 - root - [INFO] - tool_aug: None
+2024-08-01 18:16:30,047 - root - [INFO] - tool_desc: None
+2024-08-01 18:16:30,047 - root - [INFO] - parse_tool: hanlp
+2024-08-01 18:16:30,047 - root - [INFO] - start_time: TIME_STAMP
+2024-08-01 18:16:30,047 - root - [INFO] - self_annotation: True
+2024-08-01 18:16:30,047 - root - [INFO] - self_annotate_tag: None
+2024-08-01 18:16:30,047 - root - [INFO] - confident: False
+2024-08-01 18:16:30,047 - root - [INFO] - confidence_scoring_method: SC
+2024-08-01 18:16:30,047 - root - [INFO] - conf_select_method: None
+2024-08-01 18:16:30,047 - root - [INFO] - confident_sample_size: 0
+2024-08-01 18:16:30,047 - root - [INFO] - lang: en
+2024-08-01 18:16:30,048 - root - [INFO] - prompt_pool: <class 'DesignPrompts.PromptPoolEnglish'>
+2024-08-01 18:16:30,048 - root - [INFO] - stop: None
+
+2024-08-01 18:16:30,048 - root - [INFO] - abb2labelname_path: data/diffusiondb/abb2labelname.json
+2024-08-01 18:16:30,048 - root - [INFO] - abb2lname: {'ST': 'Subject term', 'SM': 'Style modifier', 'IP': 'Image prompt', 'QB': 'Quality booster', 'RT': 'Repeating term', 'MT': 'Magic term'}
+2024-08-01 18:16:30,048 - root - [INFO] - id2label: ['Subject term', 'Style modifier', 'Image prompt', 'Quality booster', 'Repeating term', 'Magic term']
+2024-08-01 18:16:30,048 - root - [INFO] - MV_func: <function two_stage_majority_voting at 0x16690ff70>
+2024-08-01 18:16:30,048 - root - [INFO] - prompt_path: prompts/self_consistent_annotate/diffusiondb/self_annotation/train/zs/train_prompts__0.json
+2024-08-01 18:16:30,048 - root - [INFO] - response_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_response.txt
+2024-08-01 18:16:30,048 - root - [INFO] - response_dir: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV
+2024-08-01 18:16:30,048 - root - [INFO] - pred_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_response.json
+2024-08-01 18:16:30,048 - root - [INFO] - SC_all_ans_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_SC_all_ans.json
+2024-08-01 18:16:30,048 - root - [INFO] - metric_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_metrics.csv
+2024-08-01 18:16:30,048 - root - [INFO] - twostage_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_metrics_twostage.csv
+2024-08-01 18:16:30,048 - root - [INFO] - response_MV_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_question_5_MV/TIME_STAMP_train__0_response.txt
+2024-08-01 18:16:30,048 - root - [INFO] - response_TSMV_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_question_5_TSMV/TIME_STAMP_train__0_response.txt
+2024-08-01 18:16:30,048 - root - [INFO] - log_path: log/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_Metr.log
+2024-08-01 18:16:30,079 - root - [INFO] - ===== Metrics =====
+              Type  Gold count Gold rate  ...  Prec   Rec    F1
+0     Subject term           0      0.00  ...  0.00  0.00  0.00
+1   Style modifier           0      0.00  ...  0.00  0.00  0.00
+2     Image prompt           0      0.00  ...  0.00  0.00  0.00
+3  Quality booster           0      0.00  ...  0.00  0.00  0.00
+4   Repeating term           0      0.00  ...  0.00  0.00  0.00
+5       Magic term           0      0.00  ...  0.00  0.00  0.00
+6            ToTal           0       100  ...  0.00  0.00  0.00
+
+[7 rows x 9 columns]
+2024-08-01 19:29:22,483 - root - [INFO] - 
+
+
+---------- Parse answers ------------
+2024-08-01 19:29:22,484 - root - [INFO] - dataname: diffusiondb
+2024-08-01 19:29:22,484 - root - [INFO] - folder: 0
+2024-08-01 19:29:22,484 - root - [INFO] - datamode: train
+2024-08-01 19:29:22,484 - root - [INFO] - demo_datamode: train
+2024-08-01 19:29:22,484 - root - [INFO] - model: gpt-3.5-turbo
+2024-08-01 19:29:22,484 - root - [INFO] - ports: None
+2024-08-01 19:29:22,484 - root - [INFO] - task_hint: None
+2024-08-01 19:29:22,484 - root - [INFO] - reason_hint: None
+2024-08-01 19:29:22,484 - root - [INFO] - reason_hint_person: None
+2024-08-01 19:29:22,484 - root - [INFO] - reason_hint_pos: None
+2024-08-01 19:29:22,484 - root - [INFO] - few_shot_setting: zs
+2024-08-01 19:29:22,484 - root - [INFO] - demo_size: 1
+2024-08-01 19:29:22,484 - root - [INFO] - demo_select_method: None
+2024-08-01 19:29:22,484 - root - [INFO] - demo_retrieval_method: None
+2024-08-01 19:29:22,484 - root - [INFO] - few_shot_number: 0
+2024-08-01 19:29:22,484 - root - [INFO] - n_skip: None
+2024-08-01 19:29:22,484 - root - [INFO] - diverseKNN_number: 50
+2024-08-01 19:29:22,484 - root - [INFO] - diverseKNN_sampling: random
+2024-08-01 19:29:22,484 - root - [INFO] - consistency: 1
+2024-08-01 19:29:22,484 - root - [INFO] - query_times: 5
+2024-08-01 19:29:22,484 - root - [INFO] - temperature: 0.7
+2024-08-01 19:29:22,484 - root - [INFO] - consis_level: question
+2024-08-01 19:29:22,484 - root - [INFO] - consistency_selection: two_stage_majority_voting
+2024-08-01 19:29:22,484 - root - [INFO] - output_SC_all_answer: 0
+2024-08-01 19:29:22,484 - root - [INFO] - tool_aug: None
+2024-08-01 19:29:22,484 - root - [INFO] - tool_desc: None
+2024-08-01 19:29:22,484 - root - [INFO] - parse_tool: hanlp
+2024-08-01 19:29:22,484 - root - [INFO] - start_time: TIME_STAMP
+2024-08-01 19:29:22,484 - root - [INFO] - self_annotation: True
+2024-08-01 19:29:22,484 - root - [INFO] - self_annotate_tag: None
+2024-08-01 19:29:22,484 - root - [INFO] - confident: False
+2024-08-01 19:29:22,484 - root - [INFO] - confidence_scoring_method: SC
+2024-08-01 19:29:22,484 - root - [INFO] - conf_select_method: None
+2024-08-01 19:29:22,484 - root - [INFO] - confident_sample_size: 0
+2024-08-01 19:29:22,484 - root - [INFO] - lang: en
+2024-08-01 19:29:22,484 - root - [INFO] - prompt_pool: <class 'DesignPrompts.PromptPoolEnglish'>
+2024-08-01 19:29:22,484 - root - [INFO] - stop: None
+
+2024-08-01 19:29:22,484 - root - [INFO] - abb2labelname_path: data/diffusiondb/abb2labelname.json
+2024-08-01 19:29:22,484 - root - [INFO] - abb2lname: {'ST': 'Subject term', 'SM': 'Style modifier', 'IP': 'Image prompt', 'QB': 'Quality booster', 'RT': 'Repeating term', 'MT': 'Magic term'}
+2024-08-01 19:29:22,484 - root - [INFO] - id2label: ['Subject term', 'Style modifier', 'Image prompt', 'Quality booster', 'Repeating term', 'Magic term']
+2024-08-01 19:29:22,484 - root - [INFO] - MV_func: <function two_stage_majority_voting at 0x13010ff70>
+2024-08-01 19:29:22,484 - root - [INFO] - prompt_path: prompts/self_consistent_annotate/diffusiondb/self_annotation/train/zs/train_prompts__0.json
+2024-08-01 19:29:22,484 - root - [INFO] - response_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_response.txt
+2024-08-01 19:29:22,484 - root - [INFO] - response_dir: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV
+2024-08-01 19:29:22,484 - root - [INFO] - pred_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_response.json
+2024-08-01 19:29:22,484 - root - [INFO] - SC_all_ans_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_SC_all_ans.json
+2024-08-01 19:29:22,484 - root - [INFO] - metric_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_metrics.csv
+2024-08-01 19:29:22,484 - root - [INFO] - twostage_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_metrics_twostage.csv
+2024-08-01 19:29:22,485 - root - [INFO] - response_MV_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_question_5_MV/TIME_STAMP_train__0_response.txt
+2024-08-01 19:29:22,485 - root - [INFO] - response_TSMV_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_question_5_TSMV/TIME_STAMP_train__0_response.txt
+2024-08-01 19:29:22,485 - root - [INFO] - log_path: log/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_Metr.log
+2024-08-01 19:29:22,515 - root - [INFO] - ===== Metrics =====
+              Type  Gold count Gold rate  ...  Prec   Rec    F1
+0     Subject term           0      0.00  ...  0.00  0.00  0.00
+1   Style modifier           0      0.00  ...  0.00  0.00  0.00
+2     Image prompt           0      0.00  ...  0.00  0.00  0.00
+3  Quality booster           0      0.00  ...  0.00  0.00  0.00
+4   Repeating term           0      0.00  ...  0.00  0.00  0.00
+5       Magic term           0      0.00  ...  0.00  0.00  0.00
+6            ToTal           0       100  ...  0.00  0.00  0.00
+
+[7 rows x 9 columns]
