@@ -89,7 +89,7 @@ def sd():
             inner['guidance_scale'] = str(scale)
             inner['seed'] = str(seed_list[j])
             result_dict.append(inner)
-            
+
     headers = {
         'content-type':'application/json'
     }
