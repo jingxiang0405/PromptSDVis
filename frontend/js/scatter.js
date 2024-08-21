@@ -3,36 +3,14 @@ function initScatterPlot(images) {
     const svg = d3.select("#scatter")
     const width = svg.attr("width");
     const height = svg.attr("height");
-    // 尚未解決完問題 start
-    // 移除现有的 <g> 元素
+
+    // 移除現有的 <g> 元素
     svg.selectAll("g").remove();
+
     const g = svg.append('g');
 
-    // 计算 t-SNE 数据的边界框
-    let minX = d3.min(images, d => d.x);
-    let maxX = d3.max(images, d => d.x);
-    let minY = d3.min(images, d => d.y);
-    let maxY = d3.max(images, d => d.y);
-
-    // 计算缩放比例和平移量
-    let scaleX = width / (maxX - minX);
-    let scaleY = height / (maxY - minY);
-    let scale = Math.min(scaleX, scaleY) * 0.8; // 乘以 0.8 以留出一些边界空间
-
-    // 设置缩放限制
-    const minScale = 0.1; // 最小缩放限制
-    const maxScale = 2; // 最大缩放限制
-
-    // 调整缩放比例，保证它在合理的范围内
-    scale = Math.max(minScale, Math.min(maxScale, scale));
-
-    // 调整平移量以保证视图居中
-    let translateX = -minX * scale + (width - (maxX - minX) * scale) / 2;
-    let translateY = -minY * scale + (height - (maxY - minY) * scale) / 2;
-
-    // 应用缩放和平移
-    g.attr("transform", `translate(${translateX},${translateY}) scale(${scale})`);
     // 尚未解決完問題 end
+    // zoom -> 視圖放大縮小
     const imageElements = g.selectAll('image')
         .data(images)
         .enter()
@@ -52,13 +30,15 @@ function initScatterPlot(images) {
         .on('mouseout', function () {
             imageOverview.style('display', 'none');
         });
+
     imageElements.exit().remove();
 
     // 圖片邊框
-    const rects = g.selectAll('rect')
+    let rects = g.selectAll('rect')
         .data(images)
         .enter()
         .append('rect')
+        .attr('class', 'image-border')
         .attr('x', d => d.x)
         .attr('y', d => d.y)
         .attr('width', d => d.width)
@@ -68,18 +48,25 @@ function initScatterPlot(images) {
         .style("stroke-width", 2);
 
     rects.exit().remove();
-
-    // 初始缩放状态
+    //  初始放大縮小狀態會改變
     let currentTransform = d3.zoomIdentity;
-    // zoom -> 視圖放大縮小
-    svg.call(d3.zoom()
-        .extent([[0.1, 10], [width, height]])
-        .scaleExtent([1, 8])
-        .on("zoom", function (event) {
-            currentTransform = event.transform;
-            g.attr("transform", currentTransform);
-        }));
-        
+    let zoom = d3.zoom()
+    .extent([[0,0], [width, height]])
+    .scaleExtent([1, 8])
+    .on("zoom", function (event) {
+        currentTransform = event.transform
+        // 调整图片位置
+        g.selectAll('image')
+            .attr('x', d => currentTransform.applyX(d.x * currentTransform.k))  // 根据缩放比例调整位置
+            .attr('y', d => currentTransform.applyY(d.y * currentTransform.k)); // 根据缩放比例调整位置
+        g.selectAll('.image-border')
+            .attr('x', d => currentTransform.applyX(d.x * currentTransform.k))  // 根据缩放比例调整位置
+            .attr('y', d => currentTransform.applyY(d.y * currentTransform.k)); // 根据缩放比例调整位置
+        //會導致判斷brush會有問題
+        //g.attr("transform", currentTransform);
+    })
+    svg.call(zoom);
+    
     // Brush -> 將圖片匡起來
     const brush = d3.brush()
         .extent([[0, 0], [width, height]])
@@ -87,10 +74,13 @@ function initScatterPlot(images) {
             if (event.selection) {
                 const [[x0, y0], [x1, y1]] = event.selection;
                 rects.each(function (d) {
-                    const dx = currentTransform.applyX(d.x);
-                    const dy = currentTransform.applyY(d.y);
+                    
+                    // 初始缩放状态
+                    const dx = currentTransform.applyX(d.x * currentTransform.k);
+                    const dy = currentTransform.applyY(d.y * currentTransform.k);
                     const dw = currentTransform.k * d.width;
-                    const dh = currentTransform.k * d.height;
+                    const dh = currentTransform.k * d.height
+                    
                     // 检查刷选框与矩形是否重叠
                     const overlaps =
                         (
@@ -138,19 +128,15 @@ function initScatterPlot(images) {
             brushGroup.call(brush);
             svg.on(".zoom", null);
         }
-        if (e.key === "Escape") {
+        if (e.key === "t") {
             // Clear brush
             d3.selectAll(".brush").on(".brush", null);
             d3.selectAll(".brush").remove();
             rects.style("stroke", "black");
+            
             // Re-enable zoom
-            svg.call(d3.zoom()
-                .extent([[0, 0], [width, height]])
-                .scaleExtent([1, 8])
-                .on("zoom", function (event) {
-                    currentTransform = event.transform;
-                    g.attr("transform", currentTransform);
-                }));
+            svg.call(zoom);
+            
         }
     };
     
