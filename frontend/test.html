@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test transformTestResultsToData Function</title>
+    <style>
+        /* Internal CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        pre {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+    <!-- D3 JS -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body>
+    <pre id="output"></pre>
+    <div class="container">
+        <h1>Test transformTestResultsToData Function</h1>
+        <p>Check the console or see the output below:</p>
+        <pre id="output"></pre>
+    </div>
+    <div class="col local-exploration">
+        <svg id="zoomable-circle-packing" width="400" height="400"></svg>
+    </div>
+    <textarea class="prompt-input" placeholder="prompt" id="prompt"></textarea>
+    <!-- Optional: You can include external JavaScript here -->
+    <script>
+        // Example test data
+        const testResults = {'test_results': [{'test_idx': '36', 'predictions': [{'test_prediction': 'Van Gogh', 'category': 'Style modifier', 'top_similar': [{'train_value': 'norman rockwell', 'train_indices': ['image_11.png'], 'similarity': 0.5830664038658142}, {'train_value': 'Lois van Baarle', 'train_indices': ['image_4.png'], 'similarity': 0.5372676849365234}, {'train_value': 'oil painting', 'train_indices': ['image_18.png'], 'similarity': 0.5255828499794006}, {'train_value': 'renaissance oil painting', 'train_indices': ['image_20.png'], 'similarity': 0.5245212316513062}, {'train_value': 'digital art', 'train_indices': ['image_11.png'], 'similarity': 0.42970049381256104}, {'train_value': 'mona lisa', 'train_indices': ['image_15.png', 'image_18.png', 'image_20.png'], 'similarity': 0.3978193700313568}, {'train_value': 'retrowave style artwork', 'train_indices': ['image_6.png'], 'similarity': 0.37302374839782715}, {'train_value': 'film', 'train_indices': ['image_1.png', 'image_5.png'], 'similarity': 0.3544333577156067}, {'train_value': 'Artgerm', 'train_indices': ['image_4.png'], 'similarity': 0.3247203528881073}, {'train_value': 'alan bean', 'train_indices': ['image_14.png', 'image_17.png'], 'similarity': 0.3231472969055176}]}, {'test_prediction': 'Norman Rockwell', 'category': 'Style modifier', 'top_similar': [{'train_value': 'norman rockwell', 'train_indices': ['image_11.png'], 'similarity': 1.0}, {'train_value': 'mona lisa', 'train_indices': ['image_15.png', 'image_18.png', 'image_20.png'], 'similarity': 0.5541529655456543}, {'train_value': 'digital art', 'train_indices': ['image_11.png'], 'similarity': 0.45089033246040344}, {'train_value': 'renaissance oil painting', 'train_indices': ['image_20.png'], 'similarity': 0.44155624508857727}, {'train_value': 'oil painting', 'train_indices': ['image_18.png'], 'similarity': 0.4259154200553894}, {'train_value': 'peter elson', 'train_indices': ['image_14.png', 'image_17.png'], 'similarity': 0.3917057514190674}, {'train_value': 'film', 'train_indices': ['image_1.png', 'image_5.png'], 'similarity': 0.3905155658721924}, {'train_value': 'photorealistic', 'train_indices': ['image_2.png', 'image_7.png'], 'similarity': 0.38707512617111206}, {'train_value': 'greg rutkowski', 'train_indices': ['image_11.png'], 'similarity': 0.3858761787414551}, {'train_value': 'Lois van Baarle', 'train_indices': ['image_4.png'], 'similarity': 0.3799628019332886}]}]}, {'test_idx': '42', 'predictions': [{'test_prediction': 'Van Gogh', 'category': 'Style modifier', 'top_similar': [{'train_value': 'norman rockwell', 'train_indices': ['image_11.png'], 'similarity': 0.5830664038658142}, {'train_value': 'Lois van Baarle', 'train_indices': ['image_4.png'], 'similarity': 0.5372676849365234}, {'train_value': 'oil painting', 'train_indices': ['image_18.png'], 'similarity': 0.5255828499794006}, {'train_value': 'renaissance oil painting', 'train_indices': ['image_20.png'], 'similarity': 0.5245212316513062}, {'train_value': 'digital art', 'train_indices': ['image_11.png'], 'similarity': 0.42970049381256104}, {'train_value': 'mona lisa', 'train_indices': ['image_15.png', 'image_18.png', 'image_20.png'], 'similarity': 0.3978193700313568}, {'train_value': 'retrowave style artwork', 'train_indices': ['image_6.png'], 'similarity': 0.37302374839782715}, {'train_value': 'film', 'train_indices': ['image_1.png', 'image_5.png'], 'similarity': 0.3544333577156067}, {'train_value': 'Artgerm', 'train_indices': ['image_4.png'], 'similarity': 0.3247203528881073}, {'train_value': 'alan bean', 'train_indices': ['image_14.png', 'image_17.png'], 'similarity': 0.3231472969055176}]}, {'test_prediction': 'Freeman Rockwell', 'category': 'Style modifier', 'top_similar': [{'train_value': 'norman rockwell', 'train_indices': ['image_11.png'], 'similarity': 0.7520495057106018}, {'train_value': 'greg rutkowski', 'train_indices': ['image_11.png'], 'similarity': 0.4694380760192871}, {'train_value': 'mona lisa', 'train_indices': ['image_15.png', 'image_18.png', 'image_20.png'], 'similarity': 0.3908300995826721}, {'train_value': 'thomas kindkade', 'train_indices': ['image_11.png'], 'similarity': 0.36228829622268677}, {'train_value': 'alan bean', 'train_indices': ['image_14.png', 'image_17.png'], 'similarity': 0.35842081904411316}, {'train_value': 'peter elson', 'train_indices': ['image_14.png', 'image_17.png'], 'similarity': 0.3333565890789032}, {'train_value': 'by Akihiko Yoshida', 'train_indices': ['image_13.png'], 'similarity': 0.3140556812286377}, {'train_value': 'digital art', 'train_indices': ['image_11.png'], 'similarity': 0.30148959159851074}, {'train_value': 'Lois van Baarle', 'train_indices': ['image_4.png'], 'similarity': 0.29788321256637573}, {'train_value': 'stubble', 'train_indices': ['image_3.png'], 'similarity': 0.2806892395019531}]}]}, {'test_idx': '43', 'predictions': [{'test_prediction': 'Van Gogh', 'category': 'Style modifier', 'top_similar': [{'train_value': 'norman rockwell', 'train_indices': ['image_11.png'], 'similarity': 0.5830664038658142}, {'train_value': 'Lois van Baarle', 'train_indices': ['image_4.png'], 'similarity': 0.5372676849365234}, {'train_value': 'oil painting', 'train_indices': ['image_18.png'], 'similarity': 0.5255828499794006}, {'train_value': 'renaissance oil painting', 'train_indices': ['image_20.png'], 'similarity': 0.5245212316513062}, {'train_value': 'digital art', 'train_indices': ['image_11.png'], 'similarity': 0.42970049381256104}, {'train_value': 'mona lisa', 'train_indices': ['image_15.png', 'image_18.png', 'image_20.png'], 'similarity': 0.3978193700313568}, {'train_value': 'retrowave style artwork', 'train_indices': ['image_6.png'], 'similarity': 0.37302374839782715}, {'train_value': 'film', 'train_indices': ['image_1.png', 'image_5.png'], 'similarity': 0.3544333577156067}, {'train_value': 'Artgerm', 'train_indices': ['image_4.png'], 'similarity': 0.3247203528881073}, {'train_value': 'alan bean', 'train_indices': ['image_14.png', 'image_17.png'], 'similarity': 0.3231472969055176}]}, {'test_prediction': 'Emmanuel Rockwell', 'category': 'Style modifier', 'top_similar': [{'train_value': 'norman rockwell', 'train_indices': ['image_11.png'], 'similarity': 0.8426313996315002}, {'train_value': 'mona lisa', 'train_indices': ['image_15.png', 'image_18.png', 'image_20.png'], 'similarity': 0.5298314094543457}, {'train_value': 'greg rutkowski', 'train_indices': ['image_11.png'], 'similarity': 0.43017953634262085}, {'train_value': 'Lois van Baarle', 'train_indices': ['image_4.png'], 'similarity': 0.38609176874160767}, {'train_value': 'digital art', 'train_indices': ['image_11.png'], 'similarity': 0.3827359080314636}, {'train_value': 'peter elson', 'train_indices': ['image_14.png', 'image_17.png'], 'similarity': 0.3827289342880249}, {'train_value': 'thomas kindkade', 'train_indices': ['image_11.png'], 'similarity': 0.36779525876045227}, {'train_value': 'renaissance oil painting', 'train_indices': ['image_20.png'], 'similarity': 0.3551015853881836}, {'train_value': 'film', 'train_indices': ['image_1.png', 'image_5.png'], 'similarity': 0.3536405861377716}, {'train_value': 'photorealistic', 'train_indices': ['image_2.png', 'image_7.png'], 'similarity': 0.34931328892707825}]}]}]}
+        // Run the test and display result
+        const resultData = transformTestResultsToData(testResults);
+        document.getElementById("output").textContent = JSON.stringify(resultData, null, 2);
+
+        function initZoomableCirclepacking(data) {
+            function renderChart(data) {
+                const svg = d3.select("#zoomable-circle-packing")
+                const width = svg.attr("width");
+                const height = svg.attr("height");
+
+                const color = d3.scaleLinear()
+                    .domain([0, 5])
+                    .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
+                    .interpolate(d3.interpolateHcl);
+
+                const pack = data => d3.pack()
+                    .size([width, height])
+                    .padding(3)(
+                        d3.hierarchy(data)
+                            .sum(d => d.value)
+                            .sort((a, b) => b.value - a.value)
+                    );
+
+                // 移除現有的 <g> 元素
+                svg.selectAll("g").remove();
+
+                const root = pack(data);
+
+                svg.attr("viewBox", `-${width / 2} -${height / 2} ${width} ${height}`)
+                    .attr("width", width)
+                    .attr("height", height)
+                    .attr("style", `max-width: 100%; height: auto; display: block; background: ${color(0)};`);
+
+                const node = svg.append("g")
+                    .selectAll("circle")
+                    .data(root.descendants().slice(1))
+                    .join("circle")
+                    .attr("fill", d => d.data.img ? `url(#pattern-${d.data.name})` : color(d.depth))
+                    .attr("pointer-events", d => !d.children ? "none" : null)
+                    .on("mouseover", function () {
+                        d3.select(this).attr("stroke", "#000");
+                    })
+                    .on("mouseout", function () {
+                        d3.select(this).attr("stroke", null);
+                    })
+                    .on("click", (event, d) => focus !== d && (zoom(event, d), event.stopPropagation()));
+
+                const defs = svg.append("defs");
+
+                root.descendants().filter(d => d.data.img).forEach(function (d) {
+                    defs.append("pattern")
+                        .attr("id", `pattern-${d.data.name}`)
+                        .attr("patternUnits", "userSpaceOnUse")
+                        .attr("width", d.r * 2)
+                        .attr("height", d.r * 2)
+                        .attr("x", -d.r)
+                        .attr("y", -d.r)
+                        .append("image")
+                        .attr("x", "0%")
+                        .attr("y", "0%")
+                        .attr("width", d.r * 2)
+                        .attr("height", d.r * 2)
+                        .attr("href", d.data.img);
+                });
+
+                // 新增部分
+                const textarea = d3.select("#prompt");
+
+                const initialText = textarea.property('value');
+                const initialLabels = initialText ? initialText.split('\n').map(s => s.trim()).filter(s => s) : [];
+
+                const clickedLabels = []; // 存储通过点击添加的标签名称
+
+                const label = svg.append("g")
+                    .style("font", "10px sans-serif")
+                    .attr("text-anchor", "middle")
+                    .selectAll("text")
+                    .data(root.descendants())
+                    .join("text")
+                    .attr("pointer-events", d => d.depth > 1 ? "auto" : "none")
+                    .style("fill-opacity", d => d.parent === root ? 1 : 0)
+                    .style("display", d => d.parent === root ? "inline" : "none")
+                    .text(d => d.data.name)
+                    .on("click", function (event, d) {
+                        if (d.depth > 1) {
+                            event.stopPropagation(); // 阻止缩放
+                            handleLabelClick(d.data.name);
+                        }
+                    });
+
+                function handleLabelClick(labelName) {
+                    // 检查是否已在 clickedLabels 中
+                    const index = clickedLabels.lastIndexOf(labelName);
+                    if (index !== -1) {
+                        // 存在，删除最近添加的一个
+                        clickedLabels.splice(index, 1);
+                    } else {
+                        // 不存在，添加到 clickedLabels
+                        clickedLabels.push(labelName);
+                    }
+
+                    // 更新标签选中状态
+                    const isSelected = clickedLabels.includes(labelName);
+                    label.filter(d => d.data.name === labelName)
+                        .classed('selected', isSelected);
+
+                    // 更新 textarea 内容
+                    updateTextarea();
+                }
+
+                function updateTextarea() {
+                    const textareaContent = initialLabels.concat(clickedLabels);
+                    textarea.property('value', textareaContent.join('\n'));
+                }
+
+                // 初始时，标签不受 textarea 内容影响，不需要设置选中状态
+
+                svg.on("click", (event) => zoom(event, root));
+                let focus = root;
+                let view;
+
+                zoomTo([focus.x, focus.y, focus.r * 2]);
+
+                function zoomTo(v) {
+                    const k = width / v[2];
+                    view = v;
+
+                    label.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
+                    node.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
+                    node.attr("r", d => d.r * k);
+
+                    root.descendants().filter(d => d.data.img).forEach(d => {
+                        const pattern = d3.select(`#pattern-${d.data.name}`);
+                        const newRadius = d.r * k;
+
+                        pattern
+                            .attr("width", newRadius * 2)
+                            .attr("height", newRadius * 2)
+                            .attr("x", -newRadius)
+                            .attr("y", -newRadius);
+
+                        pattern.select("image")
+                            .attr("width", newRadius * 2)
+                            .attr("height", newRadius * 2);
+                    });
+                }
+
+                function zoom(event, d) {
+                    const focus0 = focus;
+                    focus = d;
+
+                    const transition = svg.transition()
+                        .duration(750)
+                        .tween("zoom", d => {
+                            const i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2]);
+                            return t => zoomTo(i(t));
+                        });
+
+                    label
+                        .filter(function (d) {
+                            return d.parent === focus || this.style.display === "inline";
+                        })
+                        .transition(transition)
+                        .style("fill-opacity", d => d.parent === focus ? 1 : 0)
+                        .on("start", function (d) {
+                            if (d.parent === focus) this.style.display = "inline";
+                        })
+                        .on("end", function (d) {
+                            if (d.parent !== focus) this.style.display = "none";
+                        });
+                }
+            }
+
+            renderChart(data);
+        }
+
+
+        function transformTestResultsToData(testResults) {
+    const data = {
+        "name": "flare",
+        "children": []
+    };
+
+    // Helper function to find or create category node
+    function findOrCreateNode(parentNode, nodeName) {
+        let node = parentNode.children.find(child => child.name === nodeName);
+        if (!node) {
+            console.log("Creating new node:", nodeName);
+            node = {
+                "name": nodeName,
+                "children": []
+            };
+            parentNode.children.push(node);
+        } else {
+            console.log("Using existing node:", nodeName);
+        }
+        return node;
+    }
+
+    // Iterate over test_results
+    testResults.test_results.forEach(testResult => {
+        testResult.predictions.forEach(prediction => {
+            const categoryNode = findOrCreateNode(data, prediction.category);
+            const predictionNode = findOrCreateNode(categoryNode, prediction.test_prediction);
+
+            // Add top_similar items as children under the prediction node
+            prediction.top_similar.forEach(similarItem => {
+                const value = similarItem.similarity * 1000; // Scale similarity
+                const trainImages = similarItem.train_indices.map(imageName => `../data/diffusiondb_data/images/${imageName}`);
+
+                // Check if the similar item node already exists
+                let similarNode = predictionNode.children.find(child => child.name === similarItem.train_value);
+                if (!similarNode) {
+                    // If not exist, create similar item node
+                    similarNode = {
+                        "name": similarItem.train_value,
+                        "value": value,
+                        "children": []
+                    };
+                    predictionNode.children.push(similarNode);
+                }
+
+                // Check if the train image already exists
+                trainImages.forEach((imgUrl, index) => {
+                    let existingImageNode = similarNode.children.find(child => child.name === similarItem.train_indices[index]);
+                    if (!existingImageNode) {
+                        // Only add the image if it doesn't already exist
+                        similarNode.children.push({
+                            "name": similarItem.train_indices[index], // e.g., "image_3.jpg"
+                            "value": value,
+                            "img": imgUrl
+                        });
+                    }
+                });
+            });
+        });
+    });
+
+    return data;
+}
+
+
+
+        initZoomableCirclepacking(resultData)
+
+    </script>
+
+</body>
+
+</html>

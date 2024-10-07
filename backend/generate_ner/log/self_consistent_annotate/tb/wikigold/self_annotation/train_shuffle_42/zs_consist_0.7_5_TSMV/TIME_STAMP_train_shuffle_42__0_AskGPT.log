@@ -30,7 +30,7 @@
 2024-07-31 22:43:24,211 - root - [INFO] - start_time: TIME_STAMP
 2024-07-31 22:43:24,211 - root - [INFO] - breakpoint_continue: False
 2024-07-31 22:43:24,212 - root - [INFO] - stop: None
-
+2024-07-31 22:43:24,212 - root - [INFO] - ""
 2024-07-31 22:43:24,212 - root - [INFO] - abb2labelname_path: data/wikigold/abb2labelname.json
 2024-07-31 22:43:24,212 - root - [INFO] - abb2lname: {'ORG': 'Organization', 'PER': 'Person', 'LOC': 'Location', 'MISC': 'Miscellaneous'}
 2024-07-31 22:43:24,212 - root - [INFO] - id2label: ['Organization', 'Person', 'Location', 'Miscellaneous']

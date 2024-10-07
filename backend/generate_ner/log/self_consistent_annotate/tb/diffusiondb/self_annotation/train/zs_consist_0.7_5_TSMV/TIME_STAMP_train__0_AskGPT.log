@@ -114,7 +114,7 @@
 2024-08-01 16:52:49,972 - root - [INFO] - start_time: TIME_STAMP
 2024-08-01 16:52:49,972 - root - [INFO] - breakpoint_continue: False
 2024-08-01 16:52:49,972 - root - [INFO] - stop: None
-
+2024-08-01 16:52:49,972 - root - [INFO] - ""
 2024-08-01 16:52:49,972 - root - [INFO] - abb2labelname_path: data/diffusiondb/abb2labelname.json
 2024-08-01 16:52:49,972 - root - [INFO] - abb2lname: {'ST': 'Subject term', 'SM': 'Style modifier', 'IP': 'Image prompt', 'QB': 'Quality booster', 'RT': 'Repeating term', 'MT': 'Magic term'}
 2024-08-01 16:52:49,972 - root - [INFO] - id2label: ['Subject term', 'Style modifier', 'Image prompt', 'Quality booster', 'Repeating term', 'Magic term']
@@ -125,7 +125,7 @@
 2024-08-01 16:52:49,972 - root - [INFO] - Annotation size = 500
 2024-08-01 16:53:06,105 - root - [INFO] - Finished!
 2024-08-01 16:53:06,105 - root - [INFO] - response saved to: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_response.txt
-
+2024-08-01 16:53:06,106 - root - [INFO] - used ""
 2024-08-01 16:53:20,632 - root - [INFO] - ---------- Ask ChatGPT - Self-Annotation ------------
 2024-08-01 16:53:20,632 - root - [INFO] - dataname: diffusiondb
 2024-08-01 16:53:20,632 - root - [INFO] - folder: 0
@@ -158,7 +158,7 @@
 2024-08-01 16:53:20,633 - root - [INFO] - start_time: TIME_STAMP
 2024-08-01 16:53:20,633 - root - [INFO] - breakpoint_continue: False
 2024-08-01 16:53:20,633 - root - [INFO] - stop: None
-
+2024-08-01 16:53:20,633 - root - [INFO] - ""
 2024-08-01 16:53:20,633 - root - [INFO] - abb2labelname_path: data/diffusiondb/abb2labelname.json
 2024-08-01 16:53:20,633 - root - [INFO] - abb2lname: {'ST': 'Subject term', 'SM': 'Style modifier', 'IP': 'Image prompt', 'QB': 'Quality booster', 'RT': 'Repeating term', 'MT': 'Magic term'}
 2024-08-01 16:53:20,633 - root - [INFO] - id2label: ['Subject term', 'Style modifier', 'Image prompt', 'Quality booster', 'Repeating term', 'Magic term']
@@ -169,7 +169,7 @@
 2024-08-01 16:53:20,633 - root - [INFO] - Annotation size = 500
 2024-08-01 16:53:37,592 - root - [INFO] - Finished!
 2024-08-01 16:53:37,593 - root - [INFO] - response saved to: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_response.txt
-
+2024-08-01 16:53:37,593 - root - [INFO] - used ""
 2024-08-01 18:15:39,710 - root - [INFO] - ---------- Ask ChatGPT - Self-Annotation ------------
 2024-08-01 18:15:39,710 - root - [INFO] - dataname: diffusiondb
 2024-08-01 18:15:39,710 - root - [INFO] - folder: 0
@@ -202,7 +202,7 @@
 2024-08-01 18:15:39,711 - root - [INFO] - start_time: TIME_STAMP
 2024-08-01 18:15:39,711 - root - [INFO] - breakpoint_continue: False
 2024-08-01 18:15:39,711 - root - [INFO] - stop: None
-
+2024-08-01 18:15:39,711 - root - [INFO] - ""
 2024-08-01 18:15:39,711 - root - [INFO] - abb2labelname_path: data/diffusiondb/abb2labelname.json
 2024-08-01 18:15:39,711 - root - [INFO] - abb2lname: {'ST': 'Subject term', 'SM': 'Style modifier', 'IP': 'Image prompt', 'QB': 'Quality booster', 'RT': 'Repeating term', 'MT': 'Magic term'}
 2024-08-01 18:15:39,711 - root - [INFO] - id2label: ['Subject term', 'Style modifier', 'Image prompt', 'Quality booster', 'Repeating term', 'Magic term']
@@ -213,7 +213,7 @@
 2024-08-01 18:15:39,711 - root - [INFO] - Annotation size = 500
 2024-08-01 18:16:28,061 - root - [INFO] - Finished!
 2024-08-01 18:16:28,061 - root - [INFO] - response saved to: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_response.txt
-
+2024-08-01 18:16:28,061 - root - [INFO] - used ""
 2024-08-01 19:28:37,842 - root - [INFO] - ---------- Ask ChatGPT - Self-Annotation ------------
 2024-08-01 19:28:37,842 - root - [INFO] - dataname: diffusiondb
 2024-08-01 19:28:37,842 - root - [INFO] - folder: 0
@@ -246,7 +246,7 @@
 2024-08-01 19:28:37,843 - root - [INFO] - start_time: TIME_STAMP
 2024-08-01 19:28:37,843 - root - [INFO] - breakpoint_continue: False
 2024-08-01 19:28:37,843 - root - [INFO] - stop: None
-
+2024-08-01 19:28:37,843 - root - [INFO] - ""
 2024-08-01 19:28:37,843 - root - [INFO] - abb2labelname_path: data/diffusiondb/abb2labelname.json
 2024-08-01 19:28:37,843 - root - [INFO] - abb2lname: {'ST': 'Subject term', 'SM': 'Style modifier', 'IP': 'Image prompt', 'QB': 'Quality booster', 'RT': 'Repeating term', 'MT': 'Magic term'}
 2024-08-01 19:28:37,843 - root - [INFO] - id2label: ['Subject term', 'Style modifier', 'Image prompt', 'Quality booster', 'Repeating term', 'Magic term']
@@ -257,3 +257,164 @@
 2024-08-01 19:28:37,843 - root - [INFO] - Annotation size = 500
 2024-08-01 19:29:20,848 - root - [INFO] - Finished!
 2024-08-01 19:29:20,849 - root - [INFO] - response saved to: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_response.txt
+2024-08-01 19:29:20,849 - root - [INFO] - used ""
+2024-08-26 23:49:40,829 - root - [INFO] - ---------- Ask ChatGPT - Self-Annotation ------------
+2024-08-26 23:49:40,829 - root - [INFO] - dataname: diffusiondb
+2024-08-26 23:49:40,829 - root - [INFO] - folder: 0
+2024-08-26 23:49:40,830 - root - [INFO] - datamode: train
+2024-08-26 23:49:40,830 - root - [INFO] - demo_datamode: train
+2024-08-26 23:49:40,830 - root - [INFO] - model: gpt-3.5-turbo
+2024-08-26 23:49:40,830 - root - [INFO] - ports: None
+2024-08-26 23:49:40,830 - root - [INFO] - task_hint: None
+2024-08-26 23:49:40,830 - root - [INFO] - reason_hint: None
+2024-08-26 23:49:40,830 - root - [INFO] - reason_hint_person: None
+2024-08-26 23:49:40,830 - root - [INFO] - reason_hint_pos: None
+2024-08-26 23:49:40,830 - root - [INFO] - few_shot_setting: zs
+2024-08-26 23:49:40,830 - root - [INFO] - demo_size: 300
+2024-08-26 23:49:40,830 - root - [INFO] - demo_select_method: None
+2024-08-26 23:49:40,830 - root - [INFO] - demo_retrieval_method: None
+2024-08-26 23:49:40,830 - root - [INFO] - few_shot_number: 0
+2024-08-26 23:49:40,830 - root - [INFO] - n_skip: None
+2024-08-26 23:49:40,830 - root - [INFO] - diverseKNN_number: 50
+2024-08-26 23:49:40,830 - root - [INFO] - diverseKNN_sampling: random
+2024-08-26 23:49:40,830 - root - [INFO] - consistency: 1
+2024-08-26 23:49:40,830 - root - [INFO] - query_times: 5
+2024-08-26 23:49:40,830 - root - [INFO] - temperature: 0.7
+2024-08-26 23:49:40,830 - root - [INFO] - consistency_selection: two_stage_majority_voting
+2024-08-26 23:49:40,830 - root - [INFO] - tool_aug: None
+2024-08-26 23:49:40,831 - root - [INFO] - tool_desc: None
+2024-08-26 23:49:40,831 - root - [INFO] - parse_tool: hanlp
+2024-08-26 23:49:40,831 - root - [INFO] - self_annotation: True
+2024-08-26 23:49:40,831 - root - [INFO] - self_annotate_tag: None
+2024-08-26 23:49:40,831 - root - [INFO] - annotation_size: 500
+2024-08-26 23:49:40,831 - root - [INFO] - start_time: TIME_STAMP
+2024-08-26 23:49:40,831 - root - [INFO] - breakpoint_continue: False
+2024-08-26 23:49:40,831 - root - [INFO] - stop: None
+2024-08-26 23:49:40,831 - root - [INFO] - ""
+2024-08-26 23:49:40,831 - root - [INFO] - abb2labelname_path: data/diffusiondb/abb2labelname.json
+2024-08-26 23:49:40,831 - root - [INFO] - abb2lname: {'ST': 'Subject term', 'SM': 'Style modifier', 'IP': 'Image prompt', 'QB': 'Quality booster', 'RT': 'Repeating term', 'MT': 'Magic term'}
+2024-08-26 23:49:40,831 - root - [INFO] - id2label: ['Subject term', 'Style modifier', 'Image prompt', 'Quality booster', 'Repeating term', 'Magic term']
+2024-08-26 23:49:40,831 - root - [INFO] - prompt_path: prompts/self_consistent_annotate/diffusiondb/self_annotation/train/zs/train_prompts__0.json
+2024-08-26 23:49:40,831 - root - [INFO] - MV_func: <function two_stage_majority_voting at 0x152e3f820>
+2024-08-26 23:49:40,831 - root - [INFO] - response_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_response.txt
+2024-08-26 23:49:40,831 - root - [INFO] - log_path: log/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_AskGPT.log
+2024-08-26 23:50:53,227 - root - [INFO] - ---------- Ask ChatGPT - Self-Annotation ------------
+2024-08-26 23:50:53,227 - root - [INFO] - dataname: diffusiondb
+2024-08-26 23:50:53,227 - root - [INFO] - folder: 0
+2024-08-26 23:50:53,227 - root - [INFO] - datamode: train
+2024-08-26 23:50:53,227 - root - [INFO] - demo_datamode: train
+2024-08-26 23:50:53,227 - root - [INFO] - model: gpt-3.5-turbo
+2024-08-26 23:50:53,227 - root - [INFO] - ports: None
+2024-08-26 23:50:53,227 - root - [INFO] - task_hint: None
+2024-08-26 23:50:53,227 - root - [INFO] - reason_hint: None
+2024-08-26 23:50:53,227 - root - [INFO] - reason_hint_person: None
+2024-08-26 23:50:53,227 - root - [INFO] - reason_hint_pos: None
+2024-08-26 23:50:53,227 - root - [INFO] - few_shot_setting: zs
+2024-08-26 23:50:53,227 - root - [INFO] - demo_size: 300
+2024-08-26 23:50:53,227 - root - [INFO] - demo_select_method: None
+2024-08-26 23:50:53,228 - root - [INFO] - demo_retrieval_method: None
+2024-08-26 23:50:53,228 - root - [INFO] - few_shot_number: 0
+2024-08-26 23:50:53,228 - root - [INFO] - n_skip: None
+2024-08-26 23:50:53,228 - root - [INFO] - diverseKNN_number: 50
+2024-08-26 23:50:53,228 - root - [INFO] - diverseKNN_sampling: random
+2024-08-26 23:50:53,228 - root - [INFO] - consistency: 1
+2024-08-26 23:50:53,228 - root - [INFO] - query_times: 5
+2024-08-26 23:50:53,228 - root - [INFO] - temperature: 0.7
+2024-08-26 23:50:53,228 - root - [INFO] - consistency_selection: two_stage_majority_voting
+2024-08-26 23:50:53,228 - root - [INFO] - tool_aug: None
+2024-08-26 23:50:53,228 - root - [INFO] - tool_desc: None
+2024-08-26 23:50:53,228 - root - [INFO] - parse_tool: hanlp
+2024-08-26 23:50:53,228 - root - [INFO] - self_annotation: True
+2024-08-26 23:50:53,228 - root - [INFO] - self_annotate_tag: None
+2024-08-26 23:50:53,228 - root - [INFO] - annotation_size: 500
+2024-08-26 23:50:53,228 - root - [INFO] - start_time: TIME_STAMP
+2024-08-26 23:50:53,228 - root - [INFO] - breakpoint_continue: False
+2024-08-26 23:50:53,228 - root - [INFO] - stop: None
+2024-08-26 23:50:53,228 - root - [INFO] - ""
+2024-08-26 23:50:53,228 - root - [INFO] - abb2labelname_path: data/diffusiondb/abb2labelname.json
+2024-08-26 23:50:53,228 - root - [INFO] - abb2lname: {'ST': 'Subject term', 'SM': 'Style modifier', 'IP': 'Image prompt', 'QB': 'Quality booster', 'RT': 'Repeating term', 'MT': 'Magic term'}
+2024-08-26 23:50:53,228 - root - [INFO] - id2label: ['Subject term', 'Style modifier', 'Image prompt', 'Quality booster', 'Repeating term', 'Magic term']
+2024-08-26 23:50:53,228 - root - [INFO] - prompt_path: prompts/self_consistent_annotate/diffusiondb/self_annotation/train/zs/train_prompts__0.json
+2024-08-26 23:50:53,228 - root - [INFO] - MV_func: <function two_stage_majority_voting at 0x15a9be820>
+2024-08-26 23:50:53,228 - root - [INFO] - response_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_response.txt
+2024-08-26 23:50:53,228 - root - [INFO] - log_path: log/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_AskGPT.log
+2024-08-26 23:57:51,006 - root - [INFO] - ---------- Ask ChatGPT - Self-Annotation ------------
+2024-08-26 23:57:51,006 - root - [INFO] - dataname: diffusiondb
+2024-08-26 23:57:51,006 - root - [INFO] - folder: 0
+2024-08-26 23:57:51,006 - root - [INFO] - datamode: train
+2024-08-26 23:57:51,006 - root - [INFO] - demo_datamode: train
+2024-08-26 23:57:51,006 - root - [INFO] - model: gpt-3.5-turbo
+2024-08-26 23:57:51,006 - root - [INFO] - ports: None
+2024-08-26 23:57:51,006 - root - [INFO] - task_hint: None
+2024-08-26 23:57:51,006 - root - [INFO] - reason_hint: None
+2024-08-26 23:57:51,006 - root - [INFO] - reason_hint_person: None
+2024-08-26 23:57:51,006 - root - [INFO] - reason_hint_pos: None
+2024-08-26 23:57:51,006 - root - [INFO] - few_shot_setting: zs
+2024-08-26 23:57:51,006 - root - [INFO] - demo_size: 300
+2024-08-26 23:57:51,006 - root - [INFO] - demo_select_method: None
+2024-08-26 23:57:51,006 - root - [INFO] - demo_retrieval_method: None
+2024-08-26 23:57:51,006 - root - [INFO] - few_shot_number: 0
+2024-08-26 23:57:51,006 - root - [INFO] - n_skip: None
+2024-08-26 23:57:51,006 - root - [INFO] - diverseKNN_number: 50
+2024-08-26 23:57:51,006 - root - [INFO] - diverseKNN_sampling: random
+2024-08-26 23:57:51,006 - root - [INFO] - consistency: 1
+2024-08-26 23:57:51,006 - root - [INFO] - query_times: 5
+2024-08-26 23:57:51,006 - root - [INFO] - temperature: 0.7
+2024-08-26 23:57:51,006 - root - [INFO] - consistency_selection: two_stage_majority_voting
+2024-08-26 23:57:51,006 - root - [INFO] - tool_aug: None
+2024-08-26 23:57:51,006 - root - [INFO] - tool_desc: None
+2024-08-26 23:57:51,006 - root - [INFO] - parse_tool: hanlp
+2024-08-26 23:57:51,007 - root - [INFO] - self_annotation: True
+2024-08-26 23:57:51,007 - root - [INFO] - self_annotate_tag: None
+2024-08-26 23:57:51,007 - root - [INFO] - annotation_size: 500
+2024-08-26 23:57:51,007 - root - [INFO] - start_time: TIME_STAMP
+2024-08-26 23:57:51,007 - root - [INFO] - breakpoint_continue: False
+2024-08-26 23:57:51,007 - root - [INFO] - stop: None
+2024-08-26 23:57:51,007 - root - [INFO] - ""
+2024-08-26 23:57:51,007 - root - [INFO] - abb2labelname_path: data/diffusiondb/abb2labelname.json
+2024-08-26 23:57:51,007 - root - [INFO] - abb2lname: {'ST': 'Subject term', 'SM': 'Style modifier', 'IP': 'Image prompt', 'QB': 'Quality booster', 'RT': 'Repeating term', 'MT': 'Magic term'}
+2024-08-26 23:57:51,007 - root - [INFO] - id2label: ['Subject term', 'Style modifier', 'Image prompt', 'Quality booster', 'Repeating term', 'Magic term']
+2024-08-26 23:57:51,007 - root - [INFO] - prompt_path: prompts/self_consistent_annotate/diffusiondb/self_annotation/train/zs/train_prompts__0.json
+2024-08-26 23:57:51,007 - root - [INFO] - MV_func: <function two_stage_majority_voting at 0x1273be820>
+2024-08-26 23:57:51,007 - root - [INFO] - response_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_response.txt
+2024-08-26 23:57:51,007 - root - [INFO] - log_path: log/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_AskGPT.log
+2024-08-26 23:58:28,939 - root - [INFO] - ---------- Ask ChatGPT - Self-Annotation ------------
+2024-08-26 23:58:28,939 - root - [INFO] - dataname: diffusiondb
+2024-08-26 23:58:28,939 - root - [INFO] - folder: 0
+2024-08-26 23:58:28,939 - root - [INFO] - datamode: train
+2024-08-26 23:58:28,939 - root - [INFO] - demo_datamode: train
+2024-08-26 23:58:28,940 - root - [INFO] - model: gpt-3.5-turbo
+2024-08-26 23:58:28,940 - root - [INFO] - ports: None
+2024-08-26 23:58:28,940 - root - [INFO] - task_hint: None
+2024-08-26 23:58:28,940 - root - [INFO] - reason_hint: None
+2024-08-26 23:58:28,940 - root - [INFO] - reason_hint_person: None
+2024-08-26 23:58:28,940 - root - [INFO] - reason_hint_pos: None
+2024-08-26 23:58:28,940 - root - [INFO] - few_shot_setting: zs
+2024-08-26 23:58:28,940 - root - [INFO] - demo_size: 300
+2024-08-26 23:58:28,940 - root - [INFO] - demo_select_method: None
+2024-08-26 23:58:28,940 - root - [INFO] - demo_retrieval_method: None
+2024-08-26 23:58:28,940 - root - [INFO] - few_shot_number: 0
+2024-08-26 23:58:28,940 - root - [INFO] - n_skip: None
+2024-08-26 23:58:28,940 - root - [INFO] - diverseKNN_number: 50
+2024-08-26 23:58:28,940 - root - [INFO] - diverseKNN_sampling: random
+2024-08-26 23:58:28,940 - root - [INFO] - consistency: 1
+2024-08-26 23:58:28,940 - root - [INFO] - query_times: 5
+2024-08-26 23:58:28,940 - root - [INFO] - temperature: 0.7
+2024-08-26 23:58:28,940 - root - [INFO] - consistency_selection: two_stage_majority_voting
+2024-08-26 23:58:28,940 - root - [INFO] - tool_aug: None
+2024-08-26 23:58:28,940 - root - [INFO] - tool_desc: None
+2024-08-26 23:58:28,940 - root - [INFO] - parse_tool: hanlp
+2024-08-26 23:58:28,940 - root - [INFO] - self_annotation: True
+2024-08-26 23:58:28,940 - root - [INFO] - self_annotate_tag: None
+2024-08-26 23:58:28,940 - root - [INFO] - annotation_size: 500
+2024-08-26 23:58:28,940 - root - [INFO] - start_time: TIME_STAMP
+2024-08-26 23:58:28,940 - root - [INFO] - breakpoint_continue: False
+2024-08-26 23:58:28,940 - root - [INFO] - stop: None
+2024-08-26 23:58:28,940 - root - [INFO] - ""
+2024-08-26 23:58:28,940 - root - [INFO] - abb2labelname_path: data/diffusiondb/abb2labelname.json
+2024-08-26 23:58:28,940 - root - [INFO] - abb2lname: {'ST': 'Subject term', 'SM': 'Style modifier', 'IP': 'Image prompt', 'QB': 'Quality booster', 'RT': 'Repeating term', 'MT': 'Magic term'}
+2024-08-26 23:58:28,940 - root - [INFO] - id2label: ['Subject term', 'Style modifier', 'Image prompt', 'Quality booster', 'Repeating term', 'Magic term']
+2024-08-26 23:58:28,940 - root - [INFO] - prompt_path: prompts/self_consistent_annotate/diffusiondb/self_annotation/train/zs/train_prompts__0.json
+2024-08-26 23:58:28,940 - root - [INFO] - MV_func: <function two_stage_majority_voting at 0x12693f820>
+2024-08-26 23:58:28,940 - root - [INFO] - response_path: result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_response.txt
+2024-08-26 23:58:28,940 - root - [INFO] - log_path: log/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train__0_AskGPT.log

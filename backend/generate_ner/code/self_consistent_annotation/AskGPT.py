@@ -21,8 +21,20 @@ from utils_parse_answer import response_2_prediction, two_stage_majority_voting,
 from const import model_list
 
 logger = logging.getLogger()
-
-
+"""
+python code/self_consistent_annotation/AskGPT.py \
+    --dataname $dataname \
+    --datamode $datamode \
+    --demo_datamode $demo_datamode \
+    --model $MODEL \
+    --few_shot_setting $FEW_SHOT_SETTING --demo_size $DEMO_SIZE \
+    --demo_select_method $demo_select_method \
+    --demo_retrieval_method $DEMO_RETRIEVAL_METHOD \
+    --diverseKNN_number $diverseKNN_number --diverseKNN_sampling $diverseKNN_sampling \
+    --few_shot_number $FEW_SHOT_NUMBER \
+    --start_time $START_TIME \
+    --self_annotate_tag $self_annotate_tag
+"""
 def generate_responses_per_query(args, query):
     messages = [
         {"role": "user", "content": query["prompt"]}
@@ -34,7 +46,7 @@ def generate_responses_per_query(args, query):
         temperature=args.temperature,
         stop=args.stop
     )
-
+    print(f'generate_responses_per_query response-> {response}')
     query_resp = {
         "idx": query["idx"],
         "sentence": query["sentence"],
@@ -65,6 +77,10 @@ def generate_responses_per_query_multiquery(args, query, query_times=5, temperat
     responses = []
     predictions = []
     for i_time in range(query_times):
+        print(f'message-> {messages}')
+        print(f'api_key-> {args.api_key}')
+        print(f'temperature-> {temperature}')
+        print(f'args.stop-> {args.stop}')
         response = run_llm(
             messages,
             openai_key=args.api_key,
@@ -72,6 +88,7 @@ def generate_responses_per_query_multiquery(args, query, query_times=5, temperat
             temperature=temperature,
             stop=args.stop
         )
+        print(f'generate_responses_per_query_multiquery response-> {response}')
         responses.append(response)
         predictions.append(response_2_prediction(args, query, response))
 
@@ -114,7 +131,7 @@ def generate_responses_batch(args, data_prompts):
         if len(pre_res) > 0:
             start_idx = len(pre_res)
         logger.info(f"Continue from last run, start_idx={start_idx}.")
-    with open(args.response_path, "ab", buffering=0) as realtime_f:
+    with open(args.response_path, "w", encoding="utf-8") as realtime_f:
         for i_query, query in enumerate(bar):
             bar.set_description("Query ChatGPT NER")
 
@@ -126,7 +143,8 @@ def generate_responses_batch(args, data_prompts):
             else:
                 query_resp = generate_responses_per_query_multiquery(args, query, query_times=args.query_times, temperature=args.temperature)
             
-            realtime_f.write((str(query_resp)+"\n").encode("utf-8"))
+            # Writing as string, no need to encode to bytes
+            realtime_f.write(str(query_resp) + "\n")
     
     logger.info("Finished!")
     logger.info(f"response saved to: {args.response_path}")
@@ -206,6 +224,7 @@ def get_paths(args):
     model_folder = model_list[args.model]["abbr"]
 
     args.prompt_path = f"prompts/{sca_folder}/{dataname}/{sa_sp_folder}/{datamode_folder}/{folder}/{prompt_filename}"
+    print(f"prompts/{sca_folder}/{dataname}/{sa_sp_folder}/{datamode_folder}/{folder}/{prompt_filename}")
     print(f'args.prompt_path-> {args.prompt_path}')
     folder_resp = folder
     if args.consistency:
@@ -233,6 +252,142 @@ def get_paths(args):
     logger = get_logger(logger_filename, log_dir, config_dir)
     
     return args
+
+def ask_gpt_function(
+    abb2labelname_path,
+    prompt_path,
+    response_path,
+    log_path,
+    dataname="diffusiondb",
+    datamode="test",
+    model="gpt-3.5-turbo",
+    few_shot_setting="pool",
+    demo_size=21,
+    demo_datamode="train",
+    demo_select_method="std_c5",
+    demo_retrieval_method="GPTEmbDvrsKNN",
+    diverseKNN_number=10,
+    diverseKNN_sampling="Sc",
+    few_shot_number=8,
+    self_annotate_tag="std_c5",
+):
+    # 參數
+    parser = argparse.ArgumentParser()
+    
+    # data
+    parser.add_argument("--dataname", default=None, type=str)
+    parser.add_argument("--folder", default=0, type=str)
+    parser.add_argument("--datamode", default=None, type=str)
+    parser.add_argument("--demo_datamode", default=None, type=str)
+    # model
+    parser.add_argument("--model", default="gpt-3.5-turbo", type=str)
+    parser.add_argument("--ports", default=None, nargs="+", type=int)
+
+    # prompt
+    # parser.add_argument("--prompt_method", default="vanilla")
+    parser.add_argument("--task_hint", default=None)
+
+    parser.add_argument("--reason_hint", default=None)
+    parser.add_argument("--reason_hint_person", default="first", choices=["first", "second"])
+    parser.add_argument("--reason_hint_pos", default="b", choices=[None, "f", "b"])
+    # retrieval
+    parser.add_argument("--few_shot_setting", default="zs", choices=["fixed", "pool", "full", "zs"])
+    parser.add_argument("--demo_size", default=300, type=int)
+    parser.add_argument("--demo_select_method", default=None) # ["random", "GPTEmbClusterKmeans"]
+    parser.add_argument("--demo_retrieval_method", default="GPTEmbCos", choices=[None, "random", "GPTEmbCos", "SBERTEmbCos", "GPTEmbDvrsKNN"])
+    parser.add_argument("--few_shot_number", default=5, type=int)
+    # skip tok-k in KNN
+    parser.add_argument("--n_skip", default=None, type=int, help="skip top-n in Cosine Similar Retrieval.")
+    # settings for diverseKNN
+    parser.add_argument("--diverseKNN_number", default=50, type=int, help="#samples in diverse KNN.")
+    parser.add_argument("--diverseKNN_sampling", default="random", type=str, choices=["random", "Sc"], help="Sampling method to sample from diverseKNN")
+
+    # self-consistency
+    parser.add_argument("--consistency", default=0, type=int)
+    parser.add_argument("--query_times", default=5, type=int)
+    parser.add_argument("--temperature", default=0.7, type=float)
+    # SC voting method: [two_stage_majority_voting, majority_voting]
+    parser.add_argument("--consistency_selection", default="two_stage_majority_voting", type=str)
+    
+    # tool aug
+    parser.add_argument("--tool_aug", default=None, choices=[None, "ToolTokCoarse", "ToolPos", "ToolDep", "ToolCon"])
+    parser.add_argument("--tool_desc", default=1, type=int)
+    parser.add_argument("--parse_tool", default="hanlp", choices=["hanlp", "spacy", "stanza"])
+
+    # Two modes：1. self_supervision; 2. self_annotation
+    parser.add_argument("--self_annotation", action="store_true")
+    # For self-annotation, set to None; For self-supervision set to corresponding tag.
+    parser.add_argument("--self_annotate_tag", default=None, type=str) # basic, tool_aug, syn_prompt, ToolDep_ToolUseHint_first_b_consist_5_confident    
+    # cost saving
+    parser.add_argument("--annotation_size", default=None, type=int)     
+
+    parser.add_argument("--start_time", default=None)
+    parser.add_argument("--breakpoint_continue", default=False, action="store_true")
+
+    # 設置參數
+    args = parser.parse_args()
+    args.dataname = dataname
+    args.datamode = datamode
+    args.model = model
+    args.few_shot_setting = few_shot_setting
+    args.demo_size = demo_size
+    args.demo_datamode = demo_datamode
+    args.demo_select_method = demo_select_method
+    args.demo_retrieval_method = demo_retrieval_method
+    args.diverseKNN_number = diverseKNN_number
+    args.diverseKNN_sampling = diverseKNN_sampling
+    args.few_shot_number = few_shot_number
+    args.self_annotate_tag = self_annotate_tag
+    args.MV_func = two_stage_majority_voting
+    # stop_ls = ["\n", "[]", "[{}]"]
+    stop_ls = None
+    args.stop = stop_ls    
+    
+    if args.few_shot_setting == "fixed":
+        args.few_shot_number = args.demo_size
+        args.demo_retrieval_method = None
+    if args.few_shot_setting == "zs":
+        args.few_shot_number = 0 
+        args.demo_retrieval_method = None
+
+    if args.reason_hint is None:
+        args.reason_hint_pos = None
+        args.reason_hint_person = None
+
+    if args.tool_aug is None:
+        args.tool_desc = None        
+
+    if not args.consistency:
+        args.temperature = 0
+
+    if args.consistency:
+        assert args.temperature > 0
+        assert args.query_times > 0
+    else:
+        assert args.temperature == 0
+
+    # Change the model according to the maximum context length requirement
+    assert_gpt35_turbo_16k(args, chat_paradigm="standard")
+    # 设置api keys
+    args.api_key = set_api_key(model_name=args.model, ports=args.ports)
+
+    # 調整讀取特定資料路徑
+    args.abb2labelname_path = os.path.join(abb2labelname_path)
+    args.abb2lname = json.load(open(args.abb2labelname_path, "r", encoding="utf-8"))
+    args.id2label = list(args.abb2lname.values())
+    # 動態設置路徑
+    args.prompt_path = os.path.join(prompt_path)
+    args.response_path = os.path.join(response_path)
+    args.log_path = os.path.join(log_path)
+    
+
+    sa_sp_tag = "Self-Annotation" if args.self_annotation else "Self-Supervision"
+    logger.info(f"---------- Ask ChatGPT - {sa_sp_tag} ------------")
+    for arg in vars(args):
+        logger.info(f"{arg}: {getattr(args, arg)}")
+    
+    # 調用主要功能邏輯
+    main(args)
 
 
 if __name__ == "__main__":

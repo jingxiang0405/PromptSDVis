@@ -41,31 +41,30 @@ def sd():
     args = request.get_json()
     print(f'args: {args}')
     epo = int(args.get('epo'))
-    scale_left = float(args.get('scale_left'))
-    scale_right = float(args.get('scale_right'))
+    guidance_scale = float(args.get('guidance_scale'))
     prompt = args.get('prompt')
     negative_prompt = args.get('negative_prompt')
+    random_seed = args.get('random_seed')
+    print('Guidance scale :', guidance_scale)
+    print('Random seed :', random_seed)
 
-    # set scale list
-    w_list = []
-    while (scale_left <= scale_right):
-        w_list.append(scale_left)
-        scale_left += 0.5
-    w_len = len(w_list)
-    print('Guidance scale sample list:', w_list)
+    if (random_seed < 0) or (random_seed > random.randrange(2**32 - 1)):
+        random_seed = random.randrange(2**32 - 1)
+    
+
+
     result_dict = []
     for i in range(int(epo)):
         st = time.time()
-        scale = w_list[random.randrange(0, w_len)]
+        scale = guidance_scale
         # set seed
         generators = []
         seed_list = []
         for i in range(n_images_per_prompt):
-            seed = random.randrange(2**32 - 1)
             generator = torch.Generator(device='cuda')
-            generator = generator.manual_seed(seed)
+            generator = generator.manual_seed(random_seed)
             generators.append(generator)
-            seed_list.append(seed)
+            seed_list.append(random_seed)
         # 使用锁
         with lock:
             if len(negative_prompt) == 0:

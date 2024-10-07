@@ -16,5 +16,5 @@ n_images_per_prompt = 1
 # n_epo = 1 # one epo cost 20s
 n_device = 1 # number of GPU
 sd_ip = 'http://127.0.0.1:'
-rand_left = 212463292853
-rand_right = 958446223563
+#rand_left = 212463292853
+#rand_right = 958446223563

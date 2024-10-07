@@ -1,0 +1,191 @@
+[
+    {
+        "idx": "image_0.png",
+        "sentence": "what or who markiplier would smash. ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{}",
+            "consistency_score": "{'entities': {}, 'avg': 0}"
+        }
+    },
+    {
+        "idx": "image_1.png",
+        "sentence": "island town, the stars shine in the starry sky, bright moon, waves, sparkling sea, clouds and fog, whimsical, detailed, volumetric lights, intricate details, raytracing, great complexity, cinematic, film, 8 k, octane render by ivan aivazovsky and noah bradley ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'island town': 'Subject term', 'whimsical': 'Style modifier', 'detailed': 'Quality booster', 'volumetric lights': 'Quality booster', 'intricate details': 'Quality booster', 'raytracing': 'Quality booster', 'cinematic': 'Style modifier', 'film': 'Style modifier', '8 k': 'Quality booster', 'octane render by ivan aivazovsky and noah bradley': 'Style modifier'}",
+            "consistency_score": "{'entities': {('island town', 'Subject term'): 5, ('whimsical', 'Style modifier'): 5, ('detailed', 'Quality booster'): 5, ('volumetric lights', 'Quality booster'): 5, ('intricate details', 'Quality booster'): 5, ('raytracing', 'Quality booster'): 3, ('cinematic', 'Style modifier'): 5, ('film', 'Style modifier'): 5, ('8 k', 'Quality booster'): 5, ('octane render by ivan aivazovsky and noah bradley', 'Style modifier'): 4}, 'avg': 4.7}"
+        }
+    },
+    {
+        "idx": "image_2.png",
+        "sentence": "a beautiful 3 d render of a pond, perfect, hazy, volumetric lighting, snowy summits in the background, very detailed, serene, cirrus, cyan accents, gold accents, washed out colors, photorealistic, master level composition, raytracing ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'3 d render': 'Subject term', 'pond': 'Subject term', 'hazy': 'Style modifier', 'volumetric lighting': 'Style modifier', 'snowy summits': 'Subject term', 'serene': 'Quality booster', 'cirrus': 'Style modifier', 'cyan accents': 'Style modifier', 'gold accents': 'Style modifier', 'washed out colors': 'Quality booster', 'photorealistic': 'Style modifier', 'master level composition': 'Quality booster', 'raytracing': 'Style modifier', 'very detailed': 'Quality booster'}",
+            "consistency_score": "{'entities': {('3 d render', 'Subject term'): 4, ('pond', 'Subject term'): 3, ('hazy', 'Style modifier'): 4, ('volumetric lighting', 'Style modifier'): 4, ('snowy summits', 'Subject term'): 4, ('serene', 'Quality booster'): 5, ('cirrus', 'Style modifier'): 4, ('cyan accents', 'Style modifier'): 3, ('gold accents', 'Style modifier'): 3, ('washed out colors', 'Quality booster'): 3, ('photorealistic', 'Style modifier'): 5, ('master level composition', 'Quality booster'): 5, ('raytracing', 'Style modifier'): 4, ('very detailed', 'Quality booster'): 3}, 'avg': 3.857142857142857}"
+        }
+    },
+    {
+        "idx": "image_3.png",
+        "sentence": "royal side - view portrait of a man wearing a slim crown, buzzcut, stubble, wears a red coat, gothic stained glass window, shiny blue background, very masterful, backlit ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'gothic stained glass window': 'Style modifier', 'shiny blue background': 'Style modifier', 'very masterful': 'Quality booster', 'man': 'Subject term', 'buzzcut': 'Style modifier', 'stubble': 'Style modifier', 'backlit': 'Quality booster'}",
+            "consistency_score": "{'entities': {('gothic stained glass window', 'Style modifier'): 3, ('shiny blue background', 'Style modifier'): 4, ('very masterful', 'Quality booster'): 5, ('man', 'Subject term'): 3, ('buzzcut', 'Style modifier'): 2, ('stubble', 'Style modifier'): 2, ('backlit', 'Quality booster'): 2}, 'avg': 3.0}"
+        }
+    },
+    {
+        "idx": "image_4.png",
+        "sentence": "a woman with red hair and glasses sits on top of a tall pile of books, reading. clean cel shaded vector art by lois van baarle, artgerm, helen huang, by makoto shinkai and ilya kuvshinov, rossdraws, illustration, art by ilya kuvshinov ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'Lois van Baarle': 'Style modifier', 'Artgerm': 'Style modifier', 'Helen Huang': 'Style modifier', 'Makoto Shinkai': 'Style modifier', 'Ilya Kuvshinov': 'Style modifier', 'Rossdraws': 'Style modifier'}",
+            "consistency_score": "{'entities': {('Lois van Baarle', 'Style modifier'): 4, ('Artgerm', 'Style modifier'): 5, ('Helen Huang', 'Style modifier'): 5, ('Makoto Shinkai', 'Style modifier'): 5, ('Ilya Kuvshinov', 'Style modifier'): 5, ('Rossdraws', 'Style modifier'): 5}, 'avg': 4.833333333333333}"
+        }
+    },
+    {
+        "idx": "image_5.png",
+        "sentence": "island town, the stars shine in the starry sky, bright moon, waves, sparkling sea, clouds and fog, whimsical, detailed, volumetric lights, intricate details, raytracing, great complexity, cinematic, film, 8 k, octane render by ivan aivazovsky and noah bradley ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'island town': 'Subject term', 'whimsical': 'Style modifier', 'detailed': 'Quality booster', 'volumetric lights': 'Quality booster', 'intricate details': 'Quality booster', 'raytracing': 'Quality booster', 'great complexity': 'Quality booster', 'cinematic': 'Style modifier', 'film': 'Style modifier', '8 k': 'Quality booster', 'octane render by ivan aivazovsky and noah bradley': 'Style modifier'}",
+            "consistency_score": "{'entities': {('island town', 'Subject term'): 5, ('whimsical', 'Style modifier'): 5, ('detailed', 'Quality booster'): 5, ('volumetric lights', 'Quality booster'): 4, ('intricate details', 'Quality booster'): 5, ('raytracing', 'Quality booster'): 3, ('great complexity', 'Quality booster'): 3, ('cinematic', 'Style modifier'): 4, ('film', 'Style modifier'): 4, ('8 k', 'Quality booster'): 5, ('octane render by ivan aivazovsky and noah bradley', 'Style modifier'): 3}, 'avg': 4.181818181818182}"
+        }
+    },
+    {
+        "idx": "image_6.png",
+        "sentence": "a retrowave style artwork of acadia national park, a land of the dead, divine, hazy, volumetric lighting, spacetime bending, very detailed, serene, gold accents, washed out colors, beautiful artwork, master level composition, raytracing ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'retrowave style artwork': 'Style modifier', 'acadia national park': 'Subject term', 'divine': 'Quality booster', 'hazy': 'Quality booster', 'volumetric lighting': 'Quality booster', 'spacetime bending': 'Quality booster', 'very detailed': 'Quality booster', 'serene': 'Quality booster', 'gold accents': 'Quality booster', 'washed out colors': 'Quality booster', 'beautiful artwork': 'Quality booster', 'master level composition': 'Quality booster', 'raytracing': 'Quality booster'}",
+            "consistency_score": "{'entities': {('retrowave style artwork', 'Style modifier'): 4, ('acadia national park', 'Subject term'): 4, ('divine', 'Quality booster'): 4, ('hazy', 'Quality booster'): 4, ('volumetric lighting', 'Quality booster'): 5, ('spacetime bending', 'Quality booster'): 4, ('very detailed', 'Quality booster'): 5, ('serene', 'Quality booster'): 5, ('gold accents', 'Quality booster'): 5, ('washed out colors', 'Quality booster'): 5, ('beautiful artwork', 'Quality booster'): 5, ('master level composition', 'Quality booster'): 5, ('raytracing', 'Quality booster'): 5}, 'avg': 4.615384615384615}"
+        }
+    },
+    {
+        "idx": "image_7.png",
+        "sentence": "a beautiful 3 d render of a pond, perfect, hazy, volumetric lighting, snowy summits in the background, very detailed, serene, cirrus, cyan accents, gold accents, washed out colors, photorealistic, master level composition, raytracing ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'volumetric lighting': 'Style modifier', 'snowy summits': 'Subject term', 'serene': 'Quality booster', 'cirrus': 'Style modifier', 'cyan accents': 'Style modifier', 'gold accents': 'Style modifier', 'washed out colors': 'Style modifier', 'photorealistic': 'Style modifier', 'master level composition': 'Quality booster', 'raytracing': 'Style modifier', 'very detailed': 'Quality booster'}",
+            "consistency_score": "{'entities': {('volumetric lighting', 'Style modifier'): 3, ('snowy summits', 'Subject term'): 4, ('serene', 'Quality booster'): 5, ('cirrus', 'Style modifier'): 5, ('cyan accents', 'Style modifier'): 5, ('gold accents', 'Style modifier'): 5, ('washed out colors', 'Style modifier'): 4, ('photorealistic', 'Style modifier'): 5, ('master level composition', 'Quality booster'): 5, ('raytracing', 'Style modifier'): 4, ('very detailed', 'Quality booster'): 3}, 'avg': 4.363636363636363}"
+        }
+    },
+    {
+        "idx": "image_8.png",
+        "sentence": "spritesheet game asset vector art, smooth style beeple, by thomas kinkade hearstone league of legends dofus overwatch ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'spritesheet game asset vector art': 'Subject term', 'smooth style beeple': 'Style modifier', 'by thomas kinkade': 'Style modifier', 'hearstone league of legends dofus overwatch': 'Subject term'}",
+            "consistency_score": "{'entities': {('spritesheet game asset vector art', 'Subject term'): 3, ('smooth style beeple', 'Style modifier'): 4, ('by thomas kinkade', 'Style modifier'): 4, ('hearstone league of legends dofus overwatch', 'Subject term'): 2}, 'avg': 3.25}"
+        }
+    },
+    {
+        "idx": "image_9.png",
+        "sentence": "kitchen made of moss, octane render, trending on artstation, very rough sand on wall, flooring made of hard rock ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'kitchen made of moss': 'Subject term', 'octane render': 'Style modifier', 'trending on artstation': 'Quality booster', 'very rough sand on wall': 'Quality booster', 'flooring made of hard rock': 'Subject term'}",
+            "consistency_score": "{'entities': {('kitchen made of moss', 'Subject term'): 5, ('octane render', 'Style modifier'): 5, ('trending on artstation', 'Quality booster'): 5, ('very rough sand on wall', 'Quality booster'): 5, ('flooring made of hard rock', 'Subject term'): 3}, 'avg': 4.6}"
+        }
+    },
+    {
+        "idx": "image_10.png",
+        "sentence": "character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'pixiv fanbox': 'Image prompt', 'dramatic lighting': 'Quality booster', 'maximalist pastel color palette': 'Style modifier', 'splatter paint': 'Style modifier', 'pixar and disney exploded - view drawing': 'Image prompt', 'graphic novel by fiona staples and dustin nguyen': 'Subject term', 'peter elson': 'Subject term', 'alan bean': 'Subject term', 'wangechi mutu': 'Subject term', 'clean cel shaded vector art': 'Style modifier', 'trending on artstation': 'Quality booster'}",
+            "consistency_score": "{'entities': {('pixiv fanbox', 'Image prompt'): 4, ('dramatic lighting', 'Quality booster'): 4, ('maximalist pastel color palette', 'Style modifier'): 3, ('splatter paint', 'Style modifier'): 2, ('pixar and disney exploded - view drawing', 'Image prompt'): 2, ('graphic novel by fiona staples and dustin nguyen', 'Subject term'): 4, ('peter elson', 'Subject term'): 2, ('alan bean', 'Subject term'): 2, ('wangechi mutu', 'Subject term'): 2, ('clean cel shaded vector art', 'Style modifier'): 4, ('trending on artstation', 'Quality booster'): 4}, 'avg': 3.0}"
+        }
+    },
+    {
+        "idx": "image_11.png",
+        "sentence": "sci - fi space base, space rocket!! mist, sunrays, dust in the air, unreal engine, octane render, dramatic lighting, lake, ultra clear detailed. digital art, by stanley artgerm lau, greg rutkowski, thomas kindkade, alphonse mucha, loish, norman rockwell ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'sci-fi space base': 'Subject term', 'space rocket': 'Subject term', 'mist': 'Quality booster', 'sunrays': 'Quality booster', 'dust in the air': 'Quality booster', 'unreal engine': 'Style modifier', 'octane render': 'Style modifier', 'dramatic lighting': 'Style modifier', 'lake': 'Subject term', 'ultra clear detailed': 'Quality booster', 'digital art': 'Style modifier', 'by stanley artgerm lau': 'Style modifier', 'greg rutkowski': 'Style modifier', 'thomas kindkade': 'Style modifier', 'alphonse mucha': 'Style modifier', 'loish': 'Style modifier', 'norman rockwell': 'Style modifier'}",
+            "consistency_score": "{'entities': {('sci-fi space base', 'Subject term'): 4, ('space rocket', 'Subject term'): 3, ('mist', 'Quality booster'): 2, ('sunrays', 'Quality booster'): 2, ('dust in the air', 'Quality booster'): 2, ('unreal engine', 'Style modifier'): 3, ('octane render', 'Style modifier'): 3, ('dramatic lighting', 'Style modifier'): 3, ('lake', 'Subject term'): 3, ('ultra clear detailed', 'Quality booster'): 5, ('digital art', 'Style modifier'): 4, ('by stanley artgerm lau', 'Style modifier'): 4, ('greg rutkowski', 'Style modifier'): 4, ('thomas kindkade', 'Style modifier'): 4, ('alphonse mucha', 'Style modifier'): 4, ('loish', 'Style modifier'): 4, ('norman rockwell', 'Style modifier'): 4}, 'avg': 3.411764705882353}"
+        }
+    },
+    {
+        "idx": "image_12.png",
+        "sentence": "a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, oil on canvas, centered, wide shot, highly detailed, masterpiece, award winning, sharp focus ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'mona lisa': 'Subject term', 'oil on canvas': 'Style modifier', 'centered': 'Quality booster', 'wide shot': 'Quality booster', 'highly detailed': 'Quality booster', 'masterpiece': 'Quality booster', 'award winning': 'Quality booster', 'sharp focus': 'Quality booster'}",
+            "consistency_score": "{'entities': {('mona lisa', 'Subject term'): 2, ('oil on canvas', 'Style modifier'): 5, ('centered', 'Quality booster'): 3, ('wide shot', 'Quality booster'): 3, ('highly detailed', 'Quality booster'): 5, ('masterpiece', 'Quality booster'): 4, ('award winning', 'Quality booster'): 4, ('sharp focus', 'Quality booster'): 4}, 'avg': 3.75}"
+        }
+    },
+    {
+        "idx": "image_13.png",
+        "sentence": "album cover of golden troop marvelous by akihiko yoshida ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'golden troop marvelous': 'Subject term', 'by Akihiko Yoshida': 'Style modifier'}",
+            "consistency_score": "{'entities': {('golden troop marvelous', 'Subject term'): 3, ('by Akihiko Yoshida', 'Style modifier'): 3}, 'avg': 3.0}"
+        }
+    },
+    {
+        "idx": "image_14.png",
+        "sentence": "character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'pixiv fanbox': 'Image prompt', 'dramatic lighting': 'Quality booster', 'maximalist pastel color palette': 'Style modifier', 'splatter paint': 'Style modifier', 'pixar and disney exploded - view drawing': 'Subject term', 'graphic novel by fiona staples and dustin nguyen': 'Subject term', 'peter elson': 'Style modifier', 'alan bean': 'Style modifier', 'wangechi mutu': 'Style modifier', 'clean cel shaded vector art': 'Style modifier', 'trending on artstation': 'Quality booster'}",
+            "consistency_score": "{'entities': {('pixiv fanbox', 'Image prompt'): 4, ('dramatic lighting', 'Quality booster'): 4, ('maximalist pastel color palette', 'Style modifier'): 3, ('splatter paint', 'Style modifier'): 3, ('pixar and disney exploded - view drawing', 'Subject term'): 2, ('graphic novel by fiona staples and dustin nguyen', 'Subject term'): 5, ('peter elson', 'Style modifier'): 5, ('alan bean', 'Style modifier'): 5, ('wangechi mutu', 'Style modifier'): 5, ('clean cel shaded vector art', 'Style modifier'): 5, ('trending on artstation', 'Quality booster'): 5}, 'avg': 4.181818181818182}"
+        }
+    },
+    {
+        "idx": "image_15.png",
+        "sentence": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, oil on canvas, centered, highly detailed, masterpiece, award winning, sharp focus ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'portrait picture': 'Subject term', 'skinny young woman': 'Subject term', 'workout clothes': 'Subject term', 'yoga near the lake': 'Subject term', 'mona lisa': 'Style modifier', 'oil on canvas': 'Style modifier', 'centered': 'Quality booster', 'highly detailed': 'Quality booster', 'masterpiece': 'Quality booster', 'award winning': 'Quality booster', 'sharp focus': 'Quality booster'}",
+            "consistency_score": "{'entities': {('portrait picture', 'Subject term'): 5, ('skinny young woman', 'Subject term'): 5, ('workout clothes', 'Subject term'): 5, ('yoga near the lake', 'Subject term'): 3, ('mona lisa', 'Style modifier'): 3, ('oil on canvas', 'Style modifier'): 5, ('centered', 'Quality booster'): 3, ('highly detailed', 'Quality booster'): 5, ('masterpiece', 'Quality booster'): 5, ('award winning', 'Quality booster'): 5, ('sharp focus', 'Quality booster'): 5}, 'avg': 4.454545454545454}"
+        }
+    },
+    {
+        "idx": "image_16.png",
+        "sentence": "side - view portrait of ciri from the witcher, 1 0 th century stained glass window, very masterful ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'ciri': 'Subject term', 'stained glass window': 'Style modifier', 'masterful': 'Quality booster'}",
+            "consistency_score": "{'entities': {('ciri', 'Subject term'): 4, ('stained glass window', 'Style modifier'): 3, ('masterful', 'Quality booster'): 3}, 'avg': 3.3333333333333335}"
+        }
+    },
+    {
+        "idx": "image_17.png",
+        "sentence": "character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'pixiv fanbox': 'Image prompt', 'dramatic lighting': 'Quality booster', 'maximalist pastel color palette': 'Style modifier', 'splatter paint': 'Style modifier', 'pixar and disney exploded - view drawing': 'Style modifier', 'graphic novel by fiona staples and dustin nguyen': 'Subject term', 'peter elson': 'Style modifier', 'alan bean': 'Style modifier', 'wangechi mutu': 'Style modifier', 'clean cel shaded vector art': 'Style modifier', 'trending on artstation': 'Quality booster'}",
+            "consistency_score": "{'entities': {('pixiv fanbox', 'Image prompt'): 3, ('dramatic lighting', 'Quality booster'): 3, ('maximalist pastel color palette', 'Style modifier'): 4, ('splatter paint', 'Style modifier'): 4, ('pixar and disney exploded - view drawing', 'Style modifier'): 3, ('graphic novel by fiona staples and dustin nguyen', 'Subject term'): 5, ('peter elson', 'Style modifier'): 5, ('alan bean', 'Style modifier'): 5, ('wangechi mutu', 'Style modifier'): 5, ('clean cel shaded vector art', 'Style modifier'): 5, ('trending on artstation', 'Quality booster'): 5}, 'avg': 4.2727272727272725}"
+        }
+    },
+    {
+        "idx": "image_18.png",
+        "sentence": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, beautiful oil painting, centered, highly detailed, masterpiece, award winning, sharp focus ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'portrait picture': 'Subject term', 'mona lisa': 'Style modifier', 'centered': 'Quality booster', 'highly detailed': 'Quality booster', 'masterpiece': 'Quality booster', 'award winning': 'Quality booster', 'sharp focus': 'Quality booster', 'skinny young woman': 'Subject term', 'workout clothes': 'Subject term', 'yoga near the lake': 'Subject term', 'oil painting': 'Style modifier'}",
+            "consistency_score": "{'entities': {('portrait picture', 'Subject term'): 5, ('mona lisa', 'Style modifier'): 3, ('centered', 'Quality booster'): 5, ('highly detailed', 'Quality booster'): 5, ('masterpiece', 'Quality booster'): 5, ('award winning', 'Quality booster'): 5, ('sharp focus', 'Quality booster'): 5, ('skinny young woman', 'Subject term'): 4, ('workout clothes', 'Subject term'): 3, ('yoga near the lake', 'Subject term'): 3, ('oil painting', 'Style modifier'): 3}, 'avg': 4.181818181818182}"
+        }
+    },
+    {
+        "idx": "image_19.png",
+        "sentence": "mural of jean michel basquiat ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'jean michel basquiat': 'Subject term'}",
+            "consistency_score": "{'entities': {('jean michel basquiat', 'Subject term'): 4}, 'avg': 4.0}"
+        }
+    },
+    {
+        "idx": "image_20.png",
+        "sentence": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, renaissance oil painting, centered, masterpiece, award winning, sharp focus ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'portrait picture': 'Subject term', 'skinny young woman': 'Subject term', 'workout clothes': 'Subject term', 'mona lisa': 'Style modifier', 'renaissance oil painting': 'Style modifier', 'centered': 'Quality booster', 'masterpiece': 'Quality booster', 'award winning': 'Quality booster', 'sharp focus': 'Quality booster', 'yoga near the lake': 'Subject term'}",
+            "consistency_score": "{'entities': {('portrait picture', 'Subject term'): 5, ('skinny young woman', 'Subject term'): 5, ('workout clothes', 'Subject term'): 5, ('mona lisa', 'Style modifier'): 2, ('renaissance oil painting', 'Style modifier'): 5, ('centered', 'Quality booster'): 4, ('masterpiece', 'Quality booster'): 5, ('award winning', 'Quality booster'): 5, ('sharp focus', 'Quality booster'): 5, ('yoga near the lake', 'Subject term'): 3}, 'avg': 4.4}"
+        }
+    }
+]

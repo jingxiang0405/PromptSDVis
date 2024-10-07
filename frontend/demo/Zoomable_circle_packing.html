@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoomable Circle Packing with Images</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        text.label-box {
+            background-color: white;
+            border: 1px solid black;
+            padding: 2px;
+        }
+
+        .clicked {
+            border-color: red !important;
+            font-weight: bold;
+        }
+
+        text:hover {
+            cursor: pointer;
+            font-size: 24px;
+            fill: black;
+            background-color: white;
+            padding: 3px;
+            border-radius: 5px;
+        }
+
+        .bg-white {
+            background-color: white;
+            stroke: black;
+            stroke-width: 0.5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Zoomable Circle Packing</h1>
+
+    <div id="chart"></div>
+    <textarea id="prompt"></textarea>
+    <script>
+        // 假數據，新增 img 屬性
+        const fakeData = {
+            "name": "flare",
+            "children": [
+                {
+                    "name": "Quality booster",
+                    "children": [
+                        {
+                            "name": "8K",
+                            //"img": "/data/diffusiondb_data/images/image_99.png",
+                            "children": [
+                                {
+                                    "name": "8 k",
+                                    "value": 858.7337732315063,
+                                    "children": [
+                                        {
+                                            "name": "image_1.png",
+                                            "value": 858.7337732315063,
+                                            "img": "/data/diffusiondb_data/images/image_1.png"
+                                        },
+                                        {
+                                            "name": "image_5.png",
+                                            "value": 858.7337732315063,
+                                            "img": "/data/diffusiondb_data/images/image_5.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "backlit",
+                                    "value": 262.7049386501312,
+                                    "children": [
+                                        {
+                                            "name": "image_3.png",
+                                            "value": 262.7049386501312,
+                                            "img": "/data/diffusiondb_data/images/image_3.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "divine",
+                                    "value": 225.37080943584442,
+                                    "children": [
+                                        {
+                                            "name": "image_6.png",
+                                            "value": 225.37080943584442,
+                                            "img": "/data/diffusiondb_data/images/image_6.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "hazy",
+                                    "value": 223.16773235797882,
+                                    "children": [
+                                        {
+                                            "name": "image_6.png",
+                                            "value": 223.16773235797882,
+                                            "img": "/data/diffusiondb_data/images/image_6.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "award winning",
+                                    "value": 222.36782312393188,
+                                    "children": [
+                                        {
+                                            "name": "image_12.png",
+                                            "value": 222.36782312393188,
+                                            "img": "/data/diffusiondb_data/images/image_12.png"
+                                        },
+                                        {
+                                            "name": "image_15.png",
+                                            "value": 222.36782312393188,
+                                            "img": "/data/diffusiondb_data/images/image_15.png"
+                                        },
+                                        {
+                                            "name": "image_18.png",
+                                            "value": 222.36782312393188,
+                                            "img": "/data/diffusiondb_data/images/image_18.png"
+                                        },
+                                        {
+                                            "name": "image_20.png",
+                                            "value": 222.36782312393188,
+                                            "img": "/data/diffusiondb_data/images/image_20.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "wide shot",
+                                    "value": 201.56699419021606,
+                                    "children": [
+                                        {
+                                            "name": "image_12.png",
+                                            "value": 201.56699419021606,
+                                            "img": "/data/diffusiondb_data/images/image_12.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "sharp focus",
+                                    "value": 188.02061676979065,
+                                    "children": [
+                                        {
+                                            "name": "image_12.png",
+                                            "value": 188.02061676979065,
+                                            "img": "/data/diffusiondb_data/images/image_12.png"
+                                        },
+                                        {
+                                            "name": "image_15.png",
+                                            "value": 188.02061676979065,
+                                            "img": "/data/diffusiondb_data/images/image_15.png"
+                                        },
+                                        {
+                                            "name": "image_18.png",
+                                            "value": 188.02061676979065,
+                                            "img": "/data/diffusiondb_data/images/image_18.png"
+                                        },
+                                        {
+                                            "name": "image_20.png",
+                                            "value": 188.02061676979065,
+                                            "img": "/data/diffusiondb_data/images/image_20.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "ultra clear detailed",
+                                    "value": 183.164581656456,
+                                    "children": [
+                                        {
+                                            "name": "image_11.png",
+                                            "value": 183.164581656456,
+                                            "img": "/data/diffusiondb_data/images/image_11.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "beautiful artwork",
+                                    "value": 182.66849219799042,
+                                    "children": [
+                                        {
+                                            "name": "image_6.png",
+                                            "value": 182.66849219799042,
+                                            "img": "/data/diffusiondb_data/images/image_6.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "gold accents",
+                                    "value": 174.54583942890167,
+                                    "children": [
+                                        {
+                                            "name": "image_6.png",
+                                            "value": 174.54583942890167,
+                                            "img": "/data/diffusiondb_data/images/image_6.png"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                    ]
+                },
+                {
+                    "name": "Subject term",
+                    "children": [
+                        {
+                            "name": "puppy",
+                            //"img": "/data/diffusiondb_data/images/image_99.png",
+                            "children": [
+                                {
+                                    "name": "space rocket",
+                                    "value": 319.80791687965393,
+                                    "children": [
+                                        {
+                                            "name": "image_11.png",
+                                            "value": 319.80791687965393,
+                                            "img": "/data/diffusiondb_data/images/image_11.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "golden troop marvelous",
+                                    "value": 305.9143126010895,
+                                    "children": [
+                                        {
+                                            "name": "image_13.png",
+                                            "value": 305.9143126010895,
+                                            "img": "/data/diffusiondb_data/images/image_13.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "pond",
+                                    "value": 301.5485405921936,
+                                    "children": [
+                                        {
+                                            "name": "image_2.png",
+                                            "value": 301.5485405921936,
+                                            "img": "/data/diffusiondb_data/images/image_2.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "ciri",
+                                    "value": 261.82422041893005,
+                                    "children": [
+                                        {
+                                            "name": "image_16.png",
+                                            "value": 261.82422041893005,
+                                            "img": "/data/diffusiondb_data/images/image_16.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "lake",
+                                    "value": 243.82925033569336,
+                                    "children": [
+                                        {
+                                            "name": "image_11.png",
+                                            "value": 243.82925033569336,
+                                            "img": "/data/diffusiondb_data/images/image_11.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "man",
+                                    "value": 230.87963461875916,
+                                    "children": [
+                                        {
+                                            "name": "image_3.png",
+                                            "value": 230.87963461875916,
+                                            "img": "/data/diffusiondb_data/images/image_3.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "peter elson",
+                                    "value": 212.5326544046402,
+                                    "children": [
+                                        {
+                                            "name": "image_10.png",
+                                            "value": 212.5326544046402,
+                                            "img": "/data/diffusiondb_data/images/image_10.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "portrait picture",
+                                    "value": 211.542546749115,
+                                    "children": [
+                                        {
+                                            "name": "image_15.png",
+                                            "value": 211.542546749115,
+                                            "img": "/data/diffusiondb_data/images/image_15.png",
+                                        },
+                                        {
+                                            "name": "image_18.png",
+                                            "value": 211.542546749115,
+                                            "img": "/data/diffusiondb_data/images/image_18.png"
+                                        },
+                                        {
+                                            "name": "image_20.png",
+                                            "value": 211.542546749115,
+                                            "img": "/data/diffusiondb_data/images/image_20.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "wangechi mutu",
+                                    "value": 201.91526412963867,
+                                    "children": [
+                                        {
+                                            "name": "image_10.png",
+                                            "value": 201.91526412963867,
+                                            "img": "/data/diffusiondb_data/images/image_10.png"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "mona lisa",
+                                    "value": 198.0496048927307,
+                                    "children": [
+                                        {
+                                            "name": "image_12.png",
+                                            "value": 198.0496048927307,
+                                            "img": "/data/diffusiondb_data/images/image_12.png"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+
+        // 使用 D3.js 渲染圖表
+        function renderChart(data) {
+            const width = 400;
+            const height = width;
+
+            const color = d3.scaleLinear()
+                .domain([0, 5])
+                .range(["white", "white"])
+                .interpolate(d3.interpolateHcl);
+
+            const pack = data => d3.pack()
+                .size([width, height])
+                .padding(3)(
+                    d3.hierarchy(data)
+                        .sum(d => d.value)
+                        .sort((a, b) => b.value - a.value)
+                );
+
+            const root = pack(data);
+
+            const svg = d3.select("#chart").append("svg")
+                .attr("viewBox", `-${width / 2} -${height / 2} ${width} ${height}`)
+                .attr("width", width)
+                .attr("height", height)
+                .attr("style", `max-width: 100%; height: auto; display: block; background: ${color(0)};`);
+
+            const node = svg.append("g")
+                .selectAll("circle")
+                .data(root.descendants())
+                .join("circle")
+                // 动态检查是否有 img 属性，并根据 depth 使用图像或颜色
+                .attr("fill", d => d.data.img ? `url(#pattern-${d.data.name}-${d.depth})` : "white")
+                .attr("stroke", "black")  // 设置圆形边框为黑色
+                .attr("stroke-width", 2)
+                .attr("pointer-events", d => !d.children ? "none" : null)
+                .on("mouseover", function () {
+                    d3.select(this).attr("stroke", "red");
+                })
+                .on("mouseout", function () {
+
+                    d3.select(this).attr("stroke", "black");
+                })
+                .on("click", (event, d) => focus !== d && (zoom(event, d), event.stopPropagation()));
+
+            const defs = svg.append("defs");
+            root.descendants().filter(d => d.data.img).forEach(d => {
+                defs.append("pattern")
+                    .attr("id", `pattern-${d.data.name}-${d.depth}`)
+                    .attr("patternContentUnits", "objectBoundingBox")
+                    .attr("x", 0)
+                    .attr("y", 0)
+                    .attr("width", 1)
+                    .attr("height", 1)
+                    .append("image")
+                    .attr("xlink:href", d.data.img)
+                    .attr("preserveAspectRatio", "xMidYMid meet")
+                    .attr("width", 1)
+                    .attr("height", 1);
+            });
+            // 新增部分
+            const textarea = d3.select("#prompt");
+
+            const initialText = textarea.property('value');
+            const initialLabels = initialText ? initialText.split('\n').map(s => s.trim()).filter(s => s) : [];
+
+            const clickedLabels = []; // 存储通过点击添加的标签名称
+
+            const label = svg.append("g")
+                .style("font", "20px sans-serif")
+                .attr("text-anchor", "middle")
+                .selectAll("text")
+                .data(root.descendants())
+                .join("text")
+                .style("fill-opacity", d => d.parent === root ? 1 : 0)
+                .style("display", d => d.parent === root ? "inline" : "none")
+                .attr("pointer-events", d => d.depth > 1 ? "auto" : "none")
+                .text(d => {
+                    if (d.depth === 1) {
+                        return `${d.data.name}`;
+                    } else if (d.depth === 3) {
+
+                        return `${d.data.name}`;
+                    } else {
+                        return "";  // 其他層級不顯示名稱
+                    }
+                }).on("click", function (event, d) {
+                    if (d.depth > 1) {
+                        event.stopPropagation(); // 阻止缩放
+                        handleLabelClick(d.data.name);
+                    }
+                });
+
+
+            function handleLabelClick(labelName) {
+                // 检查是否已在 clickedLabels 中
+                const index = clickedLabels.lastIndexOf(labelName);
+                if (index !== -1) {
+                    // 存在，删除最近添加的一个
+                    clickedLabels.splice(index, 1);
+                } else {
+                    // 不存在，添加到 clickedLabels
+                    clickedLabels.push(labelName);
+                }
+
+                // 更新标签选中状态
+                const isSelected = clickedLabels.includes(labelName);
+                label.filter(d => d.data.name === labelName)
+                    .classed('selected', isSelected);
+
+                // 更新 textarea 内容
+                updateTextarea();
+            }
+
+            function updateTextarea() {
+                const textareaContent = initialLabels.concat(clickedLabels);
+                textarea.property('value', textareaContent.join('\n'));
+            }
+
+            svg.on("click", (event) => zoom(event, root));
+            let focus = root;
+            let view;
+
+            zoomTo([focus.x, focus.y, focus.r * 2]);
+
+            function zoomTo(v) {
+                const k = width / v[2];
+                view = v;
+
+                label.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
+                node.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
+                node.attr("r", d => d.r * k)
+                    .attr("stroke-width", Math.max(2 / k, 1)).attr("stroke", "black");
+
+            }
+
+            function zoom(event, d) {
+                const focus0 = focus;
+                focus = d;
+
+                const transition = svg.transition()
+                    .duration(750)
+                    .tween("zoom", d => {
+                        const i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2]);
+                        return t => zoomTo(i(t));
+                    });
+
+                label
+                    .filter(function (d) {
+                        return d.parent === focus || this.style.display === "inline";
+                    })
+                    .transition(transition)
+                    .style("fill-opacity", d => d.parent === focus ? 1 : 0)
+                    .on("start", function (d) {
+                        if (d.parent === focus) this.style.display = "inline";
+                    })
+                    .on("end", function (d) {
+                        if (d.parent !== focus) this.style.display = "none";
+                    });
+            }
+        }
+
+        renderChart(fakeData);
+    </script>
+</body>
+
+</html>

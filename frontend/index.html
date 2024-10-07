@@ -8,45 +8,52 @@
     <!-- Bootstrap CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <!-- rSlider CSS -->
-    <link rel="stylesheet" href="css/rSlider.min.css">
+    <!-- Range Value CSS -->
+    <link rel="stylesheet" href="./css/range.css">
     <!-- Prompt Tree CSS -->
     <link rel="stylesheet" href="./css/prompt-tree.css">
     <!-- Scatter CSS -->
     <link rel="stylesheet" href="./css/scatter.css">
     <!-- Index CSS -->
     <link rel="stylesheet" href="./index.css">
+
+    <!-- body -->
     <style type="text/css">
         .outlayer {
             width: 1900px;
             height: 1080px;
             border-style: solid;
         }
+
         body {
             width: 1900px;
             height: 1080px;
-            border-style: solid;
         }
+
         .header-title {
             border-style: solid;
             font-size: 48px;
         }
+
         /*
             prompt-config image_browser local_exploration
         */
         .modules {
             border-style: solid;
         }
+
         .image-browser {
             border-style: solid;
             width: 1028px;
             height: 1028px;
         }
+
         .local-exploration {
             border-style: solid;
             width: 512px;
             height: 1028px;
         }
+
         /*
             text
         */
@@ -54,10 +61,12 @@
             margin-bottom: 40px;
             font-size: 30pt;
         }
+
         .sub-title {
             font-size: 20pt;
 
         }
+
         /*
             Prompt CSS
         */
@@ -66,14 +75,17 @@
             width: 417px;
             height: 1028px;
         }
+
         .prompt-input {
             width: 377px;
             height: 74px;
         }
+
         .negative-prompt-input {
             width: 377px;
             height: 32px;
         }
+
         /*
         < !-- Generation Input-->
         */
@@ -81,11 +93,13 @@
             width: 377px;
             height: 32px;
         }
+
         .geneation-input {
             margin-right: 40px;
             width: 220px;
             height: 32px;
         }
+
         .geneation-button {
             width: 100px;
             height: 32px;
@@ -108,14 +122,25 @@
                 </div>
                 <div class="guidance-scale-area">
                     <div class="sub-title rs-container">Guidance Scale</div>
-                    <input type="text" id="range-slider" />
+                    <div class="range-wrap">
+                        <div class="range-value" id="rangeV"></div>
+                        <input id="range" type="range" min="0" max="100" value="0" step="1">
+                    </div>
                 </div>
-                <div>
+                <div style="display:none;">
                     <div class="sub-title">
                         <font class="sub-title">Total Generation</font>
                     </div>
                     <div class="generation-area">
-                        <input type="text" class="float-start geneation-input" id="total-generation" />
+                        <input type="text" class="float-start geneation-input" id="total-generation" value=1 />
+                    </div>
+                </div>
+                <div>
+                    <div class="sub-title">
+                        <font class="sub-title">Random Seed</font>
+                    </div>
+                    <div class="generation-area">
+                        <input type="text" class="float-start geneation-input" id="random-seed" value="-1" />
                         <button type="submit" class="btn btn-primary geneation-button" id="generate">Generate</button>
                     </div>
                 </div>
@@ -124,36 +149,41 @@
             <div class="col-8 image-browser">
                 <!-- Prompt Tree -->
                 <div id="prompt-tree">
-        
+
                 </div>
                 <!-- Scatter View-->
                 <div id="scatter-tree">
                     <svg id="scatter" width="980" height="580"></svg>
+                    <!--<svg id="scatter-minimap" width="200" height="100"></svg>-->
                     <div id="tooltip"
                         style="position: absolute; background: rgba(255,255,255,0.8); padding: 5px; border: 1px solid #d3d3d3; display: none;">
                     </div>
                 </div>
-                
+
                 <!-- <img id="plt-result">-->
             </div>
 
             <!-- 暫時先不動 -->
             <div class="col local-exploration">
-
+                <svg id="zoomable-circle-packing" width="400" height="400"></svg>
             </div>
         </div>
     </div>
     <!--
         /sd?epo=1&device_id=0&scale_left=12.0&scale_right=14.0&prompt=hello
     -->
-    <!-- D3 JS-->
+
+    <!-- D3 JS -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <!-- Scatter JS -->
     <script src="js/scatter.js"></script>
-    <!-- Prompt Tree JS-->
+    <!-- Prompt Tree JS -->
     <script src="js/prompt-tree.js"></script>
+    <!-- Zoomable Circle Packing -->
+    <script src="js/zoomable-circle-packing.js"></script>
 
     <script>
+
         // Prompt Tree data
         /*
         let dataset = {
@@ -205,54 +235,63 @@
         /*
             Form Data and Ready to Send
         */
+        const METHOD_GET = "get"
+        const METHOD_POST = "post"
         document.getElementById('generate').addEventListener('click', function (event) {
             event.preventDefault();
             const promptVal = document.getElementById('prompt').value;
             const negativePromptVal = document.getElementById('negative-prompt').value;
-            const rangeSliderVal = document.getElementById('range-slider').value;
+            const rangeSliderVal = document.getElementById('range').value;
             const totalGenerationVal = document.getElementById('total-generation').value;
+            const randomSeedVal = document.getElementById('random-seed').value;
             var params = {
                 'prompt_val': promptVal,
                 'negative_prompt_val': negativePromptVal,
                 'range_slider_val': rangeSliderVal,
-                'total_generation_val': totalGenerationVal
+                'total_generation_val': totalGenerationVal,
+                'random_seed_val': randomSeedVal
             };
-            sendXhttp(params);
+            sendXhttp(params, METHOD_GET, "image_overview", function (data) {
+                console.log("Image overview data:", data);
+                recieveDataFromImageOverview(data);  // 调用 recieveData 处理返回的图片数据
+            });
         })
         /*
             Send Data to server.py
         */
-        function sendXhttp(params) {
-            var xhttp = new XMLHttpRequest();
-            var queryString = Object.keys(params).map(function (key) {
-                return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
-            }).join('&');
+        function sendXhttp(params, method, path, callback) {
+            const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    /*
-                        Recieve Data from server.py
-                    */
                     let data;
                     try {
                         data = JSON.parse(xhttp.responseText);
+                        if (callback && typeof callback === 'function') {
+                            callback(data);
+                        }
                     } catch (e) {
-                        console.error("Parsing error:", e); // Log any parsing errors
-                        return;
+                        console.error("Parsing error:", e);
                     }
-                    recieveData(data);
                 }
             };
-            xhttp.open("GET", "http://127.0.0.1:5002/image_overview?" + queryString, true);
-            xhttp.send();
+            if (method === METHOD_GET) {
+                var queryString = generateQueryString(params);
+                xhttp.open("GET", "http://127.0.0.1:5002/" + path + "?" + queryString, true);
+                xhttp.send();
+            } else if (method === METHOD_POST) {
+                xhttp.open("POST", "http://127.0.0.1:5002/" + path, true);
+                xhttp.setRequestHeader("Content-Type", "application/json");
+                xhttp.send(JSON.stringify(params));
+            }
         }
         /*
-            Recieve Data from server.py
+            (Callback Function) Recieve Data from server.py Path -> image_overview 
         */
-        function recieveData(data) {
+        function recieveDataFromImageOverview(data) {
             const images = data.embed_position.map((position, index) => {
                 const result = data.result[index];
                 return {
-                    id: `img${result.seed}`,
+                    id: index,
                     src: `data:image/png;base64,${result.img}`,
                     x: position[0],
                     y: position[1],
@@ -263,13 +302,12 @@
             });
             console.log(images)
             initScatterPlot(images);
-
+            /*
             /// 待處理 
             // 转换为 nodes 和 links
             let dataset = { nodes: [], links: [] };
-
             // 假设每个 result 对应一个 embed_position
-            data.data.forEach((data, index) => {
+            data.forEach((data, index) => {
                 dataset.nodes.push({
                     id: index,
                     name: data.result[index],  // 根据需求自定义名称
@@ -281,8 +319,268 @@
             });
             /// 待處理 
             //initPromptTree(dataset);
+            */
         }
 
+        // This is the function you want to test
+        function transformTestResultsToData(testResults) {
+            const data = {
+                "name": "flare",
+                "children": []
+            };
+
+            // Helper function to find or create category node
+            function findOrCreateNode(parentNode, nodeName) {
+                let node = parentNode.children.find(child => child.name === nodeName);
+                if (!node) {
+                    console.log("Creating new node:", nodeName);
+                    node = {
+                        "name": nodeName,
+                        "children": []
+                    };
+                    parentNode.children.push(node);
+                } else {
+                    console.log("Using existing node:", nodeName);
+                }
+                return node;
+            }
+
+            // Iterate over test_results
+            testResults.test_results.forEach(testResult => {
+                testResult.predictions.forEach(prediction => {
+                    const categoryNode = findOrCreateNode(data, prediction.category);
+                    const predictionNode = findOrCreateNode(categoryNode, prediction.test_prediction);
+
+                    // Add top_similar items as children under the prediction node
+                    prediction.top_similar.forEach(similarItem => {
+                        const value = similarItem.similarity * 1000; // Scale similarity
+                        const trainImages = similarItem.train_indices.map(imageName => `../data/diffusiondb_data/images/${imageName}`);
+
+                        // Check if the similar item node already exists
+                        let similarNode = predictionNode.children.find(child => child.name === similarItem.train_value);
+                        if (!similarNode) {
+                            console.log("Creating similarNode:", similarNode);
+                            // If not exist, create similar item node
+                            similarNode = {
+                                "name": similarItem.train_value,
+                                "value": value,
+                                "children": []
+                            };
+                            predictionNode.children.push(similarNode);
+                        } else {
+                            console.log("existing similarNode:", similarNode);
+                        }
+
+                        // Check if the train image already exists
+                        trainImages.forEach((imgUrl, index) => {
+                            let existingImageNode = similarNode.children.find(child => child.name === similarItem.train_indices[index]);
+                            if (!existingImageNode) {
+                                // Only add the image if it doesn't already exist
+                                similarNode.children.push({
+                                    "name": similarItem.train_indices[index], // e.g., "image_3.jpg"
+                                    "value": value,
+                                    "img": imgUrl
+                                });
+                            }
+                        });
+                    });
+                });
+            });
+
+            return data;
+        }
+
+        /*
+            (Callback Function) Recieve Data from server.py Path -> sentence_analyze 
+        */
+
+        function recieveDataFromSentenceAnalyze(data) {
+            //console.log(data)
+            /*
+            const fakeData = {
+                "name": "flare",
+                "children": [
+                    {
+                        "name": "Subject term",
+                        "children": [
+                            { "name": "CommunityStructure", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
+                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" }
+                        ]
+                    },
+                    {
+                        "name": "Style modifier",
+                        "children": [
+                            { "name": "Easing", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" }
+                        ]
+                    },
+                    {
+                        "name": "Image prompt",
+                        "children": [
+                            { "name": "Easing", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" }
+                        ]
+                    }
+                    ,
+                    {
+                        "name": "Quality booster",
+                        "children": [
+                            { "name": "Easing", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" }
+                        ]
+                    },
+                    {
+                        "name": "Repeating term",
+                        "children": [
+                            { "name": "Easing", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" }
+                        ]
+                    },
+                    {
+                        "name": "Magic term",
+                        "children": [
+                            { "name": "Easing", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" }
+                        ]
+                    }
+                ]
+            };
+            */
+            covertData = transformTestResultsToData(data)
+            console.log("transformTestResultsToData:", covertData);
+            initZoomableCirclepacking(covertData);
+        }
+
+        // 從 scatter.js 中scatterSelectionEnd  Send to Server.py Path -> sentence_analyze
+        function sendSelectionToServer(selectedImages) {
+            var params = selectedImages.map(image => ({
+                'id': image.id,
+                'title': image.title
+            }));
+            sendXhttp(params, METHOD_POST, "sentence_analyze", function (data) {
+                console.log("Rewrite Sentence analyze data:", data);
+                recieveDataFromSentenceAnalyze(data);
+            });
+        }
+
+        // 監聽 scatter.js 中的scatterSelectionEnd结束事件
+
+        let sentences = [];
+
+        document.addEventListener("scatterSelectionEnd", function (event) {
+
+            const selectedImages = event.detail;  // 获取事件中传递的选中图片
+            if (selectedImages.length !== 0) {
+                // 清空 sentences 数组
+                sentences = [];
+
+                // 遍历选中的图片，提取 title 并放入 sentences 数组
+                selectedImages.forEach(image => {
+                    sentences.push(image.title);
+                });
+
+                console.log("Sentences array: ", sentences);
+
+                // 调用 compareSentences 函数生成结果
+                const result = compareSentences(sentences);
+                console.log("Comparison result: ", result);
+
+                // 将结果放到 prompt-input 的 textarea 中
+                document.getElementById('prompt').value = result;
+            }
+
+            if (selectedImages.length != 0) {
+                console.log("Selected images with ID and Title: ", selectedImages);
+                sendSelectionToServer(selectedImages);  // 调用发送函数，将选中图片传递到服务器
+            }
+
+        });
+
+        function generateQueryString(params) {
+            // 判断 params 是否为数组
+            if (Array.isArray(params)) {
+                return params.map(function (item, index) {
+                    // 处理数组中的每个对象
+                    return Object.keys(item).map(function (key) {
+                        return encodeURIComponent(`params[${index}][${key}]`) + '=' + encodeURIComponent(item[key]);
+                    }).join('&');
+                }).join('&');
+            }
+            // 如果是对象
+            else if (typeof params === 'object' && params !== null) {
+                return Object.keys(params).map(function (key) {
+                    const value = params[key];
+                    // 如果值是数组，遍历数组生成多个键值对
+                    if (Array.isArray(value)) {
+                        return value.map(item => encodeURIComponent(key) + '=' + encodeURIComponent(item)).join('&');
+                    }
+                    // 如果是嵌套对象，处理对象的键值对
+                    else if (typeof value === 'object' && value !== null) {
+                        return Object.keys(value).map(function (subKey) {
+                            return encodeURIComponent(key + '[' + subKey + ']') + '=' + encodeURIComponent(value[subKey]);
+                        }).join('&');
+                    }
+                    // 普通的键值对
+                    else {
+                        return encodeURIComponent(key) + '=' + encodeURIComponent(value);
+                    }
+                }).join('&');
+            } else {
+                throw new Error('Invalid parameters: must be an object or an array of objects.');
+            }
+        }
+
+        // 比對匡選圖片關的詞是否有不同
+        function compareSentences(sentences) {
+            // 将每个句子按逗号分隔为多个部分，再分别处理每个部分的差异
+            const splitSentences = sentences.map(sentence => sentence.split(/\s*,\s*/));
+            // 找到最长句子的长度
+            const maxLen = Math.max(...splitSentences.map(parts => parts.length));
+            // 补齐较短的句子，避免 zip 时忽略较短句子的尾部
+            splitSentences.forEach(parts => {
+                while (parts.length < maxLen) {
+                    parts.push(''); // 用空字符串补齐较短的句子
+                }
+            });
+            // 初始化结果列表
+            const resultParts = [];
+            // 对每个逗号分隔的部分逐一比较
+            for (let i = 0; i < maxLen; i++) {
+                // 对逗号分隔的每个部分，按空格再拆分单词进行比较
+                const wordLists = splitSentences.map(part => part[i].split(/\s+/));
+                const maxWordsLen = Math.max(...wordLists.map(words => words.length));
+                // 补齐较短的部分
+                wordLists.forEach(words => {
+                    while (words.length < maxWordsLen) {
+                        words.push('');
+                    }
+                });
+                // 比较每个单词位置的差异
+                const result = [];
+                for (let j = 0; j < maxWordsLen; j++) {
+                    const wordTuple = wordLists.map(words => words[j]);
+                    const uniqueWords = [...new Set(wordTuple.filter(word => word))]; // 去除空字符串
+                    if (uniqueWords.length > 1) {
+                        result.push(`(${uniqueWords.join(', ')})`); // 不同的单词用括号和逗号隔开
+                    } else if (uniqueWords.length === 1) {
+                        result.push(uniqueWords[0]); // 如果单词相同，直接使用该单词
+                    }
+                }
+                // 将每个部分处理的结果合并为字符串
+                resultParts.push(result.join(' '));
+            }
+            // 最终结果为逗号分隔的各部分组合
+            return resultParts.join(', ');
+        }
 
     </script>
 
@@ -295,9 +593,11 @@
         integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
         crossorigin="anonymous"></script>
     <!-- rSlider JS -->
-    <script src="js/rSlider.min.js"></script>
+    <script src="./js/range.js"></script>
     <!-- Index JS -->
     <script src="./index.js"></script>
+
+
 
 </body>
 

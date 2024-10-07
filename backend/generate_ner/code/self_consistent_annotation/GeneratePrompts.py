@@ -9,7 +9,8 @@ import traceback
 from openai.embeddings_utils import cosine_similarity
 import tiktoken
 import argparse
-
+import sys
+sys.path.append('/home/user/PromptSDVis/backend/generate_ner/code/self_consistent_annotation/')
 from DesignPrompts import PromptPoolChinese, PromptPoolEnglish
 
 from os import path
@@ -49,7 +50,7 @@ class PromptGenerator(object):
         sorted_idxes = np.argsort(cos_sims).tolist()
         sorted_idxes.reverse()
         # skip top-n
-        if args.n_skip is not None:
+        if self.args.n_skip is not None:
             sorted_idxes = sorted_idxes[args.n_skip:]
         
         demos_selected = []
@@ -230,7 +231,7 @@ class PromptGenerator(object):
             
             # maximum length
             tmp_prompt += demo_prompt
-            if num_tokens_from_messages(tmp_prompt) > max_tokens(self.args.model) - args.output_token_len:
+            if num_tokens_from_messages(tmp_prompt) > max_tokens(self.args.model) - self.args.output_token_len:
                 print("\nExceed max len:\nidx = {}, sentence = \n{}".format(query_sample["idx"], query_sample["sentence"]))
                 exceed_max_len_flag = True
                 break
@@ -257,7 +258,7 @@ class PromptGenerator(object):
         '''Generate the entire dataset prompt'''
         data_prompts = []
         exceed_max_len_cnt = 0
-        if args.self_annotation:
+        if self.args.self_annotation:
             print(f"Annotation size = {args.annotation_size}")
             bar = tqdm(query_data[:args.annotation_size], ncols=100)
         else:
@@ -358,14 +359,14 @@ def main(args):
     save_data(args.save_prompt_path, prompts, json_format=json_format)
 
 """
-if args.few_shot_setting == "zs":
-        args.demo_data_path = None
+    args.few_shot_setting == "zs":
+    args.demo_data_path = None
 """
 def get_paths(args):
     dataname = args.dataname
-
     # label path
     args.abb2labelname_path = f"data/{args.dataname}/abb2labelname.json"
+    # print(f'args.abb2labelname_path->{args.abb2labelname_path}')
     args.abb2lname = json.load(open(args.abb2labelname_path, "r", encoding="utf-8"))
     args.id2label = list(args.abb2lname.values())
 
@@ -459,12 +460,12 @@ def get_paths(args):
     prompt_tricks = [args.task_hint, args.reason_hint, args.reason_hint_person, args.reason_hint_pos, tool_aug]
     prompt_tricks = [x for x in prompt_tricks if x]
     prompt_method_name = "_".join(prompt_tricks)
-
+    # 定義是否為self-annotate/self-supervision資料夾
     if args.self_annotation: # self-annotate
         prompt_filename = f"{datamode}_prompts_{prompt_method_name}_{args.few_shot_number}.json"
     else: # self-supervision
         prompt_filename = f"st_{args.self_annotate_tag}_{datamode}_prompts_{prompt_method_name}_{args.few_shot_number}.json"
- 
+
     sca_folder = "self_consistent_annotate"
     sa_sp_folder = "self_annotation" if args.self_annotation else "self_supervision"
     datamode_folder = datamode if args.self_annotation else args.demo_datamode
@@ -475,6 +476,125 @@ def get_paths(args):
     args.save_prompt_path = os.path.join(prompt_dir, prompt_filename)
 
     return args
+
+def generate_prompts_with_parameters(
+    abb2labelname_path,
+    query_data_path,
+    query_embs_path,
+    demo_data_path,
+    demo_embs_path,
+    save_prompt_path,
+    dataname="diffusiondb",
+    datamode="test",
+    model="gpt-3.5-turbo",
+    few_shot_setting="pool",
+    demo_size=21,
+    demo_datamode="train",
+    demo_select_method="std_c5",
+    demo_retrieval_method="GPTEmbDvrsKNN",
+    diverseKNN_number=10,
+    diverseKNN_sampling="Sc",
+    few_shot_number=8,
+    self_annotate_tag="std_c5"
+):
+    # 參數
+    parser = argparse.ArgumentParser()
+    # data
+    parser.add_argument("--dataname", default="diffusiondb", type=str)
+    parser.add_argument("--folder", default=0, type=int) # only for ace04
+    parser.add_argument("--datamode", default="test", type=str)
+    parser.add_argument("--demo_datamode", default=None, type=str)
+    # model
+    parser.add_argument("--model", default="gpt-3.5-turbo", type=str)
+    parser.add_argument("--output_token_len", default=1000, type=int)
+    # prompt
+    # parser.add_argument("--prompt_method", default="vanilla")
+    parser.add_argument("--task_hint", default=None)
+
+    # [None, key_noun, key_noun_verb, key_noun_verb_con_dep, key_con_dep_noun_verb]
+    parser.add_argument("--reason_hint", default=None)
+    parser.add_argument("--reason_hint_person", default="first", choices=["first", "second"])
+    parser.add_argument("--reason_hint_pos", default="f", choices=[None, "f", "b"])
+    # retrieval
+    parser.add_argument("--few_shot_setting", default="pool", choices=["fixed", "pool", "full", "zs"])
+    parser.add_argument("--demo_size", default=300, type=int)
+    parser.add_argument("--demo_select_method", default="GPTEmbClusterKmeans")
+    parser.add_argument("--demo_retrieval_method", default="GPTEmbCos", choices=["random", "GPTEmbCos", "SBERTEmbCos", "GPTEmbDvrsKNN"])
+    parser.add_argument("--few_shot_number", default=1, type=int)
+    # skip tok-k in KNN
+    parser.add_argument("--n_skip", default=None, type=int, help="skip top-n in Cosine Similar Retrieval.")
+    # settings for diverseKNN
+    parser.add_argument("--diverseKNN_number", default=50, type=int, help="#samples in diverse KNN.")
+    parser.add_argument("--diverseKNN_sampling", default="random", type=str, choices=["random", "Sc", "ScClEn"], help="Sampling method to sample from diverseKNN")
+
+    # tool aug
+    parser.add_argument("--tool_aug", default=None, choices=[None, "ToolTokCoarse", "ToolPos", "ToolDep", "ToolCon"])
+    parser.add_argument("--tool_desc", default=1, type=int)
+    parser.add_argument("--parse_tool", default="hanlp", choices=["hanlp", "spacy", "stanza"])
+
+    # Two modes：1. self_supervision; 2. self_annotation
+    parser.add_argument("--self_annotation", action="store_true")    
+    # For self-annotation, set to None; For self-supervision set to corresponding tag.
+    parser.add_argument("--self_annotate_tag", default=None, type=str) # basic, tool_aug, syn_prompt, ToolDep_ToolUseHint_first_b_consist_5_confident
+    # Iterative self-annotating
+    parser.add_argument("--annotation_size", default=None, type=int)
+    parser.add_argument("--iterative_self_annotate", action="store_true")
+
+    # 設置參數
+    args = parser.parse_args()
+    args.dataname = dataname
+    args.datamode = datamode
+    args.model = model
+    args.few_shot_setting = few_shot_setting
+    args.demo_size = demo_size
+    args.demo_datamode = demo_datamode
+    args.demo_select_method = demo_select_method
+    args.demo_retrieval_method = demo_retrieval_method
+    args.diverseKNN_number = diverseKNN_number
+    args.diverseKNN_sampling = diverseKNN_sampling
+    args.few_shot_number = few_shot_number
+    args.self_annotate_tag = self_annotate_tag
+    args.output_token_len = 1000  # 假設固定的最大 token 長度
+
+    args.lang = dataset_language_map[args.dataname]
+
+    if args.few_shot_setting == "fixed":
+        args.few_shot_number = args.demo_size
+        args.demo_retrieval_method = None
+    if args.few_shot_setting == "zs":
+        args.few_shot_number = 0        
+        args.demo_retrieval_method = None
+    if args.reason_hint is None:
+        args.reason_hint_pos = None
+        args.reason_hint_person = None
+    if args.tool_aug is None:
+        args.tool_desc = None
+    if args.few_shot_setting != "zs":
+        if args.reason_hint:
+            assert args.reason_hint_person == "second"
+            assert args.reason_hint_pos == "f"
+
+    # Change the model according to the maximum context length requirement
+    assert_gpt35_turbo_16k(args, chat_paradigm="standard")
+
+    # 調整讀取特定資料路徑
+    args.abb2labelname_path = os.path.join(abb2labelname_path)
+    args.abb2lname = json.load(open(args.abb2labelname_path, "r", encoding="utf-8"))
+    args.id2label = list(args.abb2lname.values())
+    # 動態設置路徑
+    args.query_data_path = os.path.join(query_data_path)
+    args.query_embs_path = os.path.join(query_embs_path)
+    args.demo_data_path = os.path.join(demo_data_path)
+    args.demo_embs_path = os.path.join(demo_embs_path)
+    args.save_prompt_path = os.path.join(save_prompt_path)
+
+    # 載入資料並生成提示詞
+    print("---------- Generate prompts ------------")
+    for arg in vars(args):
+        print(f"{arg}: {getattr(args, arg)}")
+    
+    # 調用 main 函數來生成提示詞
+    main(args)
 
 
 if __name__ == "__main__":

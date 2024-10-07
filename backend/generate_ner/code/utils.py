@@ -354,14 +354,16 @@ def run_llm(
         # Convert messages format to prompt format
         content_all = [x["content"] for x in messages]
         prompt = "\n".join(content_all)
+        print(f'run_llm1 request prompt-> {prompt}')
         response = agent.text(
             model=model_name, 
             prompt=prompt, 
             temperature=temperature, 
             stop=stop
             )
-
+        print(f'run_llm1 response-> {response}')
         if return_text:
+            print(f'run_llm2 response-> {response}')
             response = response['choices'][0]['text']
         return response
     else:
@@ -438,38 +440,17 @@ class SafeOpenai:
                 logger.info(f"http_cnt exceed max_read_timeout {max_http}. Skip this request.")
                 return f"Timeout exceeds {max_read_timeout}, skip."
                                     
-            completion = {'role': '', 'content': ''}
             try:
-                start_time = time.time()
+                print(f'chat -> {messages}')
                 response = openai.ChatCompletion.create(
                     model=model, 
                     messages=messages, 
                     temperature=temperature,
                     stop=stop,
-                    timeout=60,
-                    stream=True
                 )
-                
-                for i_event, event in enumerate(response):
-                    chunk_time = time.time() - start_time
-                    if chunk_time > stream_max_time:
-                        logger.info(f"Stream responded exceeds {stream_max_time}s. Give up and request again.")
-                        return f"===Stream responded exceeds {stream_max_time}s. Give up and request again.==="
-                    
-                    if event['choices'][0]['finish_reason'] == 'stop':
-                        if DEBUG:
-                            pass
-                            print(f'收到的完成数据: {completion}')
-                        break
-                    for delta_k, delta_v in event['choices'][0]['delta'].items():
-                        if DEBUG:
-                            print(f'流响应数据: {delta_k} = {delta_v}')
-                        completion[delta_k] += delta_v
-                # messages.append(completion)  # directly add msg into messages
-                msg = completion['content']     # parse returned msg
-
-                return msg
-            
+                completion_content = response['choices'][0]['message']['content']
+                print(f'chat response-> {completion_content}')
+                return completion_content
             except openai.error.APIError as e:
                 logger.info(f"OpenAI API returned an API Error: {e}")
                 if "maximum context length" in str(e): # if input exceed max len, just return

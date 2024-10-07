@@ -1,0 +1,1030 @@
+2024-09-02 16:16:38,144 - root - [INFO] - ---------- Ask ChatGPT - Self-Annotation ------------
+2024-09-02 16:16:38,144 - root - [INFO] - dataname: diffusiondb
+2024-09-02 16:16:38,144 - root - [INFO] - folder: 0
+2024-09-02 16:16:38,144 - root - [INFO] - datamode: train
+2024-09-02 16:16:38,144 - root - [INFO] - demo_datamode: train
+2024-09-02 16:16:38,144 - root - [INFO] - model: gpt-4o-mini
+2024-09-02 16:16:38,144 - root - [INFO] - ports: None
+2024-09-02 16:16:38,144 - root - [INFO] - task_hint: diffusiondb
+2024-09-02 16:16:38,145 - root - [INFO] - reason_hint: None
+2024-09-02 16:16:38,145 - root - [INFO] - reason_hint_person: None
+2024-09-02 16:16:38,145 - root - [INFO] - reason_hint_pos: None
+2024-09-02 16:16:38,145 - root - [INFO] - few_shot_setting: zs
+2024-09-02 16:16:38,145 - root - [INFO] - demo_size: 300
+2024-09-02 16:16:38,145 - root - [INFO] - demo_select_method: None
+2024-09-02 16:16:38,145 - root - [INFO] - demo_retrieval_method: None
+2024-09-02 16:16:38,145 - root - [INFO] - few_shot_number: 0
+2024-09-02 16:16:38,145 - root - [INFO] - n_skip: None
+2024-09-02 16:16:38,145 - root - [INFO] - diverseKNN_number: 50
+2024-09-02 16:16:38,145 - root - [INFO] - diverseKNN_sampling: random
+2024-09-02 16:16:38,145 - root - [INFO] - consistency: 1
+2024-09-02 16:16:38,145 - root - [INFO] - query_times: 5
+2024-09-02 16:16:38,145 - root - [INFO] - temperature: 0.1
+2024-09-02 16:16:38,145 - root - [INFO] - consistency_selection: two_stage_majority_voting
+2024-09-02 16:16:38,145 - root - [INFO] - tool_aug: None
+2024-09-02 16:16:38,145 - root - [INFO] - tool_desc: None
+2024-09-02 16:16:38,145 - root - [INFO] - parse_tool: hanlp
+2024-09-02 16:16:38,145 - root - [INFO] - self_annotation: True
+2024-09-02 16:16:38,145 - root - [INFO] - self_annotate_tag: None
+2024-09-02 16:16:38,145 - root - [INFO] - annotation_size: 500
+2024-09-02 16:16:38,145 - root - [INFO] - start_time: TIME_STAMP
+2024-09-02 16:16:38,145 - root - [INFO] - breakpoint_continue: False
+2024-09-02 16:16:38,145 - root - [INFO] - stop: None
+
+2024-09-02 16:16:38,145 - root - [INFO] - abb2labelname_path: data/diffusiondb/abb2labelname.json
+2024-09-02 16:16:38,145 - root - [INFO] - abb2lname: {'ST': 'Subject term', 'SM': 'Style modifier', 'IP': 'Image prompt', 'QB': 'Quality booster', 'RT': 'Repeating term', 'MT': 'Magic term'}
+2024-09-02 16:16:38,145 - root - [INFO] - id2label: ['Subject term', 'Style modifier', 'Image prompt', 'Quality booster', 'Repeating term', 'Magic term']
+2024-09-02 16:16:38,145 - root - [INFO] - prompt_path: prompts/self_consistent_annotate/diffusiondb/self_annotation/train/zs/train_prompts_diffusiondb_0.json
+2024-09-02 16:16:38,145 - root - [INFO] - MV_func: <function two_stage_majority_voting at 0x14ccf2d30>
+2024-09-02 16:16:38,145 - root - [INFO] - response_path: result/self_consistent_annotate/gptmini/diffusiondb/self_annotation/train/zs_consist_0.1_5_TSMV/TIME_STAMP_train_diffusiondb_0_response.txt
+2024-09-02 16:16:38,145 - root - [INFO] - log_path: log/self_consistent_annotate/gptmini/diffusiondb/self_annotation/train/zs_consist_0.1_5_TSMV/TIME_STAMP_train_diffusiondb_0_AskGPT.log
+2024-09-02 16:16:38,146 - root - [INFO] - Annotation size = 500
+2024-09-02 16:17:10,610 - root - [INFO] - ===== Error occured (Unparsable): image_3.png
+2024-09-02 16:17:10,610 - root - [INFO] -         Sent: royal side - view portrait of a man wearing a slim crown, buzzcut, stubble, wears a red coat, gothic stained glass window, shiny blue background, very masterful, backlit 
+2024-09-02 16:17:10,611 - root - [INFO] -         Label: {}
+2024-09-02 16:17:10,611 - root - [INFO] -         Question: None
+2024-09-02 16:17:10,611 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "royal side - view portrait of a man wearing a slim crown": "Subject term"},
+    {"Entity Name": "gothic stained glass window": "Style modifier"},
+    {"Entity Name": "shiny blue background": "Quality booster"},
+    {"Entity Name": "very masterful": "Quality booster"},
+    {"Entity Name": "backlit": "Quality booster"}
+]
+```
+2024-09-02 16:17:10,611 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:17:10,611 - root - [INFO] -         Error traceback:
+2024-09-02 16:17:10,611 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:17:11,503 - root - [INFO] - ===== Error occured (Unparsable): image_3.png
+2024-09-02 16:17:11,503 - root - [INFO] -         Sent: royal side - view portrait of a man wearing a slim crown, buzzcut, stubble, wears a red coat, gothic stained glass window, shiny blue background, very masterful, backlit 
+2024-09-02 16:17:11,504 - root - [INFO] -         Label: {}
+2024-09-02 16:17:11,504 - root - [INFO] -         Question: None
+2024-09-02 16:17:11,504 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "royal side - view portrait of a man wearing a slim crown": "Subject term"},
+    {"Entity Name": "gothic stained glass window": "Style modifier"},
+    {"Entity Name": "shiny blue background": "Quality booster"},
+    {"Entity Name": "very masterful": "Quality booster"},
+    {"Entity Name": "backlit": "Quality booster"}
+]
+```
+2024-09-02 16:17:11,504 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:17:11,504 - root - [INFO] -         Error traceback:
+2024-09-02 16:17:11,504 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:17:14,090 - root - [INFO] - ===== Error occured (Unparsable): image_3.png
+2024-09-02 16:17:14,090 - root - [INFO] -         Sent: royal side - view portrait of a man wearing a slim crown, buzzcut, stubble, wears a red coat, gothic stained glass window, shiny blue background, very masterful, backlit 
+2024-09-02 16:17:14,091 - root - [INFO] -         Label: {}
+2024-09-02 16:17:14,091 - root - [INFO] -         Question: None
+2024-09-02 16:17:14,091 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "royal side - view portrait of a man wearing a slim crown": "Subject term"},
+    {"Entity Name": "gothic stained glass window": "Style modifier"},
+    {"Entity Name": "shiny blue background": "Quality booster"},
+    {"Entity Name": "very masterful": "Quality booster"},
+    {"Entity Name": "backlit": "Quality booster"}
+]
+```
+2024-09-02 16:17:14,091 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:17:14,091 - root - [INFO] -         Error traceback:
+2024-09-02 16:17:14,091 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:17:15,216 - root - [INFO] - ===== Error occured (Unparsable): image_3.png
+2024-09-02 16:17:15,216 - root - [INFO] -         Sent: royal side - view portrait of a man wearing a slim crown, buzzcut, stubble, wears a red coat, gothic stained glass window, shiny blue background, very masterful, backlit 
+2024-09-02 16:17:15,216 - root - [INFO] -         Label: {}
+2024-09-02 16:17:15,216 - root - [INFO] -         Question: None
+2024-09-02 16:17:15,217 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "royal side - view portrait of a man wearing a slim crown": "Subject term"},
+    {"Entity Name": "gothic stained glass window": "Style modifier"},
+    {"Entity Name": "shiny blue background": "Quality booster"},
+    {"Entity Name": "very masterful": "Quality booster"},
+    {"Entity Name": "backlit": "Quality booster"}
+]
+```
+2024-09-02 16:17:15,217 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:17:15,217 - root - [INFO] -         Error traceback:
+2024-09-02 16:17:15,217 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:17:16,340 - root - [INFO] - ===== Error occured (Unparsable): image_3.png
+2024-09-02 16:17:16,340 - root - [INFO] -         Sent: royal side - view portrait of a man wearing a slim crown, buzzcut, stubble, wears a red coat, gothic stained glass window, shiny blue background, very masterful, backlit 
+2024-09-02 16:17:16,340 - root - [INFO] -         Label: {}
+2024-09-02 16:17:16,340 - root - [INFO] -         Question: None
+2024-09-02 16:17:16,340 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "royal side - view portrait of a man wearing a slim crown": "Subject term"},
+    {"Entity Name": "gothic stained glass window": "Style modifier"},
+    {"Entity Name": "shiny blue background": "Quality booster"},
+    {"Entity Name": "very masterful": "Quality booster"},
+    {"Entity Name": "backlit": "Quality booster"}
+]
+```
+2024-09-02 16:17:16,340 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:17:16,340 - root - [INFO] -         Error traceback:
+2024-09-02 16:17:16,340 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:17:18,184 - root - [INFO] - ===== Error occured (Unparsable): image_4.png
+2024-09-02 16:17:18,184 - root - [INFO] -         Sent: a woman with red hair and glasses sits on top of a tall pile of books, reading. clean cel shaded vector art by lois van baarle, artgerm, helen huang, by makoto shinkai and ilya kuvshinov, rossdraws, illustration, art by ilya kuvshinov 
+2024-09-02 16:17:18,184 - root - [INFO] -         Label: {}
+2024-09-02 16:17:18,184 - root - [INFO] -         Question: None
+2024-09-02 16:17:18,184 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a woman with red hair and glasses": "Subject term"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "by lois van baarle": "Style modifier"},
+    {"Entity Name": "artgerm": "Style modifier"},
+    {"Entity Name": "helen huang": "Style modifier"},
+    {"Entity Name": "by makoto shinkai": "Style modifier"},
+    {"Entity Name": "ilya kuvshinov": "Style modifier"},
+    {"Entity Name": "rossdraws": "Style modifier"},
+    {"Entity Name": "illustration": "Style modifier"},
+    {"Entity Name": "art by ilya kuvshinov": "Style modifier"}
+]
+```
+2024-09-02 16:17:18,184 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:17:18,184 - root - [INFO] -         Error traceback:
+2024-09-02 16:17:18,184 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:17:20,130 - root - [INFO] - ===== Error occured (Unparsable): image_4.png
+2024-09-02 16:17:20,130 - root - [INFO] -         Sent: a woman with red hair and glasses sits on top of a tall pile of books, reading. clean cel shaded vector art by lois van baarle, artgerm, helen huang, by makoto shinkai and ilya kuvshinov, rossdraws, illustration, art by ilya kuvshinov 
+2024-09-02 16:17:20,130 - root - [INFO] -         Label: {}
+2024-09-02 16:17:20,130 - root - [INFO] -         Question: None
+2024-09-02 16:17:20,130 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a woman with red hair and glasses": "Subject term"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "by lois van baarle": "Style modifier"},
+    {"Entity Name": "artgerm": "Style modifier"},
+    {"Entity Name": "helen huang": "Style modifier"},
+    {"Entity Name": "by makoto shinkai": "Style modifier"},
+    {"Entity Name": "ilya kuvshinov": "Style modifier"},
+    {"Entity Name": "rossdraws": "Style modifier"},
+    {"Entity Name": "illustration": "Style modifier"},
+    {"Entity Name": "art by ilya kuvshinov": "Style modifier"}
+]
+```
+2024-09-02 16:17:20,130 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:17:20,130 - root - [INFO] -         Error traceback:
+2024-09-02 16:17:20,130 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:17:22,280 - root - [INFO] - ===== Error occured (Unparsable): image_4.png
+2024-09-02 16:17:22,280 - root - [INFO] -         Sent: a woman with red hair and glasses sits on top of a tall pile of books, reading. clean cel shaded vector art by lois van baarle, artgerm, helen huang, by makoto shinkai and ilya kuvshinov, rossdraws, illustration, art by ilya kuvshinov 
+2024-09-02 16:17:22,280 - root - [INFO] -         Label: {}
+2024-09-02 16:17:22,280 - root - [INFO] -         Question: None
+2024-09-02 16:17:22,280 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a woman with red hair and glasses": "Subject term"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "by lois van baarle": "Style modifier"},
+    {"Entity Name": "artgerm": "Style modifier"},
+    {"Entity Name": "helen huang": "Style modifier"},
+    {"Entity Name": "by makoto shinkai": "Style modifier"},
+    {"Entity Name": "ilya kuvshinov": "Style modifier"},
+    {"Entity Name": "rossdraws": "Style modifier"},
+    {"Entity Name": "illustration": "Style modifier"},
+    {"Entity Name": "art by ilya kuvshinov": "Style modifier"}
+]
+```
+2024-09-02 16:17:22,280 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:17:22,280 - root - [INFO] -         Error traceback:
+2024-09-02 16:17:22,281 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:17:24,407 - root - [INFO] - ===== Error occured (Unparsable): image_4.png
+2024-09-02 16:17:24,407 - root - [INFO] -         Sent: a woman with red hair and glasses sits on top of a tall pile of books, reading. clean cel shaded vector art by lois van baarle, artgerm, helen huang, by makoto shinkai and ilya kuvshinov, rossdraws, illustration, art by ilya kuvshinov 
+2024-09-02 16:17:24,407 - root - [INFO] -         Label: {}
+2024-09-02 16:17:24,407 - root - [INFO] -         Question: None
+2024-09-02 16:17:24,407 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a woman with red hair and glasses": "Subject term"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "by lois van baarle": "Style modifier"},
+    {"Entity Name": "artgerm": "Style modifier"},
+    {"Entity Name": "helen huang": "Style modifier"},
+    {"Entity Name": "by makoto shinkai": "Style modifier"},
+    {"Entity Name": "ilya kuvshinov": "Style modifier"},
+    {"Entity Name": "rossdraws": "Style modifier"},
+    {"Entity Name": "illustration": "Style modifier"},
+    {"Entity Name": "art by ilya kuvshinov": "Style modifier"}
+]
+```
+2024-09-02 16:17:24,408 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:17:24,408 - root - [INFO] -         Error traceback:
+2024-09-02 16:17:24,408 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:17:26,377 - root - [INFO] - ===== Error occured (Unparsable): image_4.png
+2024-09-02 16:17:26,377 - root - [INFO] -         Sent: a woman with red hair and glasses sits on top of a tall pile of books, reading. clean cel shaded vector art by lois van baarle, artgerm, helen huang, by makoto shinkai and ilya kuvshinov, rossdraws, illustration, art by ilya kuvshinov 
+2024-09-02 16:17:26,377 - root - [INFO] -         Label: {}
+2024-09-02 16:17:26,378 - root - [INFO] -         Question: None
+2024-09-02 16:17:26,378 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a woman with red hair and glasses": "Subject term"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "by lois van baarle": "Style modifier"},
+    {"Entity Name": "artgerm": "Style modifier"},
+    {"Entity Name": "helen huang": "Style modifier"},
+    {"Entity Name": "by makoto shinkai": "Style modifier"},
+    {"Entity Name": "ilya kuvshinov": "Style modifier"},
+    {"Entity Name": "rossdraws": "Style modifier"},
+    {"Entity Name": "illustration": "Style modifier"},
+    {"Entity Name": "art by ilya kuvshinov": "Style modifier"}
+]
+```
+2024-09-02 16:17:26,378 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:17:26,378 - root - [INFO] -         Error traceback:
+2024-09-02 16:17:26,378 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:09,296 - root - [INFO] - ===== Error occured (Unparsable): image_8.png
+2024-09-02 16:18:09,298 - root - [INFO] -         Sent: spritesheet game asset vector art, smooth style beeple, by thomas kinkade hearstone league of legends dofus overwatch 
+2024-09-02 16:18:09,298 - root - [INFO] -         Label: {}
+2024-09-02 16:18:09,298 - root - [INFO] -         Question: None
+2024-09-02 16:18:09,298 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "spritesheet game asset": "Subject term"},
+    {"Entity Name": "vector art": "Style modifier"},
+    {"Entity Name": "smooth style": "Style modifier"},
+    {"Entity Name": "beeple": "Style modifier"},
+    {"Entity Name": "by thomas kinkade": "Style modifier"},
+    {"Entity Name": "hearstone league of legends dofus overwatch": "Repeating term"}
+]
+```
+2024-09-02 16:18:09,298 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:09,298 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:09,298 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:10,718 - root - [INFO] - ===== Error occured (Unparsable): image_8.png
+2024-09-02 16:18:10,719 - root - [INFO] -         Sent: spritesheet game asset vector art, smooth style beeple, by thomas kinkade hearstone league of legends dofus overwatch 
+2024-09-02 16:18:10,719 - root - [INFO] -         Label: {}
+2024-09-02 16:18:10,719 - root - [INFO] -         Question: None
+2024-09-02 16:18:10,719 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "spritesheet game asset": "Subject term"},
+    {"Entity Name": "vector art": "Style modifier"},
+    {"Entity Name": "smooth style": "Style modifier"},
+    {"Entity Name": "beeple": "Style modifier"},
+    {"Entity Name": "by thomas kinkade": "Style modifier"},
+    {"Entity Name": "hearstone league of legends dofus overwatch": "Repeating term"}
+]
+```
+2024-09-02 16:18:10,719 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:10,719 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:10,720 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:12,969 - root - [INFO] - ===== Error occured (Unparsable): image_8.png
+2024-09-02 16:18:12,969 - root - [INFO] -         Sent: spritesheet game asset vector art, smooth style beeple, by thomas kinkade hearstone league of legends dofus overwatch 
+2024-09-02 16:18:12,969 - root - [INFO] -         Label: {}
+2024-09-02 16:18:12,969 - root - [INFO] -         Question: None
+2024-09-02 16:18:12,969 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "spritesheet game asset": "Subject term"},
+    {"Entity Name": "vector art": "Style modifier"},
+    {"Entity Name": "smooth style": "Style modifier"},
+    {"Entity Name": "beeple": "Style modifier"},
+    {"Entity Name": "by thomas kinkade": "Style modifier"},
+    {"Entity Name": "hearthstone": "Subject term"},
+    {"Entity Name": "league of legends": "Subject term"},
+    {"Entity Name": "dofus": "Subject term"},
+    {"Entity Name": "overwatch": "Subject term"}
+]
+```
+2024-09-02 16:18:12,969 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:12,969 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:12,969 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:14,612 - root - [INFO] - ===== Error occured (Unparsable): image_8.png
+2024-09-02 16:18:14,612 - root - [INFO] -         Sent: spritesheet game asset vector art, smooth style beeple, by thomas kinkade hearstone league of legends dofus overwatch 
+2024-09-02 16:18:14,612 - root - [INFO] -         Label: {}
+2024-09-02 16:18:14,612 - root - [INFO] -         Question: None
+2024-09-02 16:18:14,612 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "spritesheet game asset": "Subject term"},
+    {"Entity Name": "vector art": "Style modifier"},
+    {"Entity Name": "smooth style": "Style modifier"},
+    {"Entity Name": "beeple": "Style modifier"},
+    {"Entity Name": "by thomas kinkade": "Style modifier"},
+    {"Entity Name": "hearthstone": "Subject term"},
+    {"Entity Name": "league of legends": "Subject term"},
+    {"Entity Name": "dofus": "Subject term"},
+    {"Entity Name": "overwatch": "Subject term"}
+]
+```
+2024-09-02 16:18:14,613 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:14,613 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:14,613 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:16,123 - root - [INFO] - ===== Error occured (Unparsable): image_8.png
+2024-09-02 16:18:16,124 - root - [INFO] -         Sent: spritesheet game asset vector art, smooth style beeple, by thomas kinkade hearstone league of legends dofus overwatch 
+2024-09-02 16:18:16,124 - root - [INFO] -         Label: {}
+2024-09-02 16:18:16,124 - root - [INFO] -         Question: None
+2024-09-02 16:18:16,124 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "spritesheet game asset": "Subject term"},
+    {"Entity Name": "vector art": "Style modifier"},
+    {"Entity Name": "smooth style": "Style modifier"},
+    {"Entity Name": "beeple": "Style modifier"},
+    {"Entity Name": "by thomas kinkade": "Style modifier"},
+    {"Entity Name": "hearstone league of legends dofus overwatch": "Subject term"}
+]
+```
+2024-09-02 16:18:16,124 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:16,124 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:16,124 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:25,770 - root - [INFO] - ===== Error occured (Unparsable): image_10.png
+2024-09-02 16:18:25,771 - root - [INFO] -         Sent: character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation 
+2024-09-02 16:18:25,771 - root - [INFO] -         Label: {}
+2024-09-02 16:18:25,771 - root - [INFO] -         Question: None
+2024-09-02 16:18:25,771 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "arrogant elegant man travels through time via steampunk portals": "Subject term"},
+    {"Entity Name": "dramatic lighting": "Quality booster"},
+    {"Entity Name": "maximalist pastel color palette": "Style modifier"},
+    {"Entity Name": "splatter paint": "Style modifier"},
+    {"Entity Name": "pixar and disney exploded - view drawing": "Image prompt"},
+    {"Entity Name": "graphic novel by fiona staples and dustin nguyen": "Image prompt"},
+    {"Entity Name": "peter elson": "Style modifier"},
+    {"Entity Name": "alan bean": "Style modifier"},
+    {"Entity Name": "wangechi mutu": "Style modifier"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "trending on artstation": "Quality booster"}
+]
+```
+2024-09-02 16:18:25,771 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:25,771 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:25,771 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:27,717 - root - [INFO] - ===== Error occured (Unparsable): image_10.png
+2024-09-02 16:18:27,717 - root - [INFO] -         Sent: character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation 
+2024-09-02 16:18:27,717 - root - [INFO] -         Label: {}
+2024-09-02 16:18:27,717 - root - [INFO] -         Question: None
+2024-09-02 16:18:27,717 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "arrogant elegant man travels through time via steampunk portals": "Subject term"},
+    {"Entity Name": "dramatic lighting": "Quality booster"},
+    {"Entity Name": "maximalist pastel color palette": "Style modifier"},
+    {"Entity Name": "splatter paint": "Style modifier"},
+    {"Entity Name": "pixar and disney exploded - view drawing": "Image prompt"},
+    {"Entity Name": "graphic novel by fiona staples and dustin nguyen": "Style modifier"},
+    {"Entity Name": "peter elson": "Style modifier"},
+    {"Entity Name": "alan bean": "Style modifier"},
+    {"Entity Name": "wangechi mutu": "Style modifier"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "trending on artstation": "Quality booster"}
+]
+```
+2024-09-02 16:18:27,718 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:27,718 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:27,718 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:29,662 - root - [INFO] - ===== Error occured (Unparsable): image_10.png
+2024-09-02 16:18:29,662 - root - [INFO] -         Sent: character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation 
+2024-09-02 16:18:29,662 - root - [INFO] -         Label: {}
+2024-09-02 16:18:29,662 - root - [INFO] -         Question: None
+2024-09-02 16:18:29,662 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "arrogant elegant man travels through time via steampunk portals": "Subject term"},
+    {"Entity Name": "dramatic lighting": "Quality booster"},
+    {"Entity Name": "maximalist pastel color palette": "Style modifier"},
+    {"Entity Name": "splatter paint": "Style modifier"},
+    {"Entity Name": "pixar and disney exploded - view drawing": "Image prompt"},
+    {"Entity Name": "graphic novel by fiona staples and dustin nguyen": "Image prompt"},
+    {"Entity Name": "peter elson": "Repeating term"},
+    {"Entity Name": "alan bean": "Repeating term"},
+    {"Entity Name": "wangechi mutu": "Repeating term"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "trending on artstation": "Quality booster"}
+]
+```
+2024-09-02 16:18:29,662 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:29,663 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:29,663 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:31,401 - root - [INFO] - ===== Error occured (Unparsable): image_10.png
+2024-09-02 16:18:31,402 - root - [INFO] -         Sent: character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation 
+2024-09-02 16:18:31,402 - root - [INFO] -         Label: {}
+2024-09-02 16:18:31,402 - root - [INFO] -         Question: None
+2024-09-02 16:18:31,403 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "arrogant elegant man travels through time via steampunk portals": "Subject term"},
+    {"Entity Name": "dramatic lighting": "Quality booster"},
+    {"Entity Name": "maximalist pastel color palette": "Style modifier"},
+    {"Entity Name": "splatter paint": "Style modifier"},
+    {"Entity Name": "pixar and disney exploded - view drawing": "Image prompt"},
+    {"Entity Name": "graphic novel by fiona staples and dustin nguyen": "Image prompt"},
+    {"Entity Name": "peter elson": "Style modifier"},
+    {"Entity Name": "alan bean": "Style modifier"},
+    {"Entity Name": "wangechi mutu": "Style modifier"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "trending on artstation": "Quality booster"}
+]
+```
+2024-09-02 16:18:31,403 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:31,403 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:31,403 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:33,450 - root - [INFO] - ===== Error occured (Unparsable): image_10.png
+2024-09-02 16:18:33,450 - root - [INFO] -         Sent: character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation 
+2024-09-02 16:18:33,450 - root - [INFO] -         Label: {}
+2024-09-02 16:18:33,450 - root - [INFO] -         Question: None
+2024-09-02 16:18:33,451 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "arrogant elegant man travels through time via steampunk portals": "Subject term"},
+    {"Entity Name": "dramatic lighting": "Quality booster"},
+    {"Entity Name": "maximalist pastel color palette": "Style modifier"},
+    {"Entity Name": "splatter paint": "Style modifier"},
+    {"Entity Name": "pixar and disney exploded - view drawing": "Image prompt"},
+    {"Entity Name": "graphic novel by fiona staples and dustin nguyen": "Image prompt"},
+    {"Entity Name": "peter elson": "Style modifier"},
+    {"Entity Name": "alan bean": "Style modifier"},
+    {"Entity Name": "wangechi mutu": "Style modifier"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "trending on artstation": "Quality booster"}
+]
+```
+2024-09-02 16:18:33,451 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:33,451 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:33,451 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:39,766 - root - [INFO] - ===== Error occured (Unparsable): image_11.png
+2024-09-02 16:18:39,766 - root - [INFO] -         Sent: sci - fi space base, space rocket!! mist, sunrays, dust in the air, unreal engine, octane render, dramatic lighting, lake, ultra clear detailed. digital art, by stanley artgerm lau, greg rutkowski, thomas kindkade, alphonse mucha, loish, norman rockwell 
+2024-09-02 16:18:39,767 - root - [INFO] -         Label: {}
+2024-09-02 16:18:39,767 - root - [INFO] -         Question: None
+2024-09-02 16:18:39,767 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "sci - fi space base": "Subject term"},
+    {"Entity Name": "space rocket": "Subject term"},
+    {"Entity Name": "mist": "Subject term"},
+    {"Entity Name": "sunrays": "Subject term"},
+    {"Entity Name": "dust in the air": "Subject term"},
+    {"Entity Name": "unreal engine": "Quality booster"},
+    {"Entity Name": "octane render": "Quality booster"},
+    {"Entity Name": "dramatic lighting": "Quality booster"},
+    {"Entity Name": "lake": "Subject term"},
+    {"Entity Name": "ultra clear detailed": "Quality booster"},
+    {"Entity Name": "digital art": "Style modifier"},
+    {"Entity Name": "by stanley artgerm lau": "Style modifier"},
+    {"Entity Name": "greg rutkowski": "Style modifier"},
+    {"Entity Name": "thomas kindkade": "Style modifier"},
+    {"Entity Name": "alphonse mucha": "Style modifier"},
+    {"Entity Name": "loish": "Style modifier"},
+    {"Entity Name": "norman rockwell": "Style modifier"}
+]
+```
+2024-09-02 16:18:39,767 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:39,767 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:39,767 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:50,030 - root - [INFO] - ===== Error occured (Unparsable): image_12.png
+2024-09-02 16:18:50,031 - root - [INFO] -         Sent: a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, oil on canvas, centered, wide shot, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:18:50,031 - root - [INFO] -         Label: {}
+2024-09-02 16:18:50,031 - root - [INFO] -         Question: None
+2024-09-02 16:18:50,031 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Style modifier"},
+    {"Entity Name": "oil on canvas": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:18:50,032 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:50,032 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:50,032 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:51,260 - root - [INFO] - ===== Error occured (Unparsable): image_12.png
+2024-09-02 16:18:51,260 - root - [INFO] -         Sent: a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, oil on canvas, centered, wide shot, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:18:51,260 - root - [INFO] -         Label: {}
+2024-09-02 16:18:51,261 - root - [INFO] -         Question: None
+2024-09-02 16:18:51,261 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Style modifier"},
+    {"Entity Name": "oil on canvas": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:18:51,261 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:51,261 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:51,261 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:52,691 - root - [INFO] - ===== Error occured (Unparsable): image_12.png
+2024-09-02 16:18:52,691 - root - [INFO] -         Sent: a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, oil on canvas, centered, wide shot, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:18:52,691 - root - [INFO] -         Label: {}
+2024-09-02 16:18:52,691 - root - [INFO] -         Question: None
+2024-09-02 16:18:52,691 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Style modifier"},
+    {"Entity Name": "oil on canvas": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:18:52,691 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:52,691 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:52,691 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:53,718 - root - [INFO] - ===== Error occured (Unparsable): image_12.png
+2024-09-02 16:18:53,719 - root - [INFO] -         Sent: a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, oil on canvas, centered, wide shot, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:18:53,719 - root - [INFO] -         Label: {}
+2024-09-02 16:18:53,719 - root - [INFO] -         Question: None
+2024-09-02 16:18:53,719 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Repeating term"},
+    {"Entity Name": "oil on canvas": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:18:53,719 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:53,719 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:53,719 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:18:55,148 - root - [INFO] - ===== Error occured (Unparsable): image_12.png
+2024-09-02 16:18:55,148 - root - [INFO] -         Sent: a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, oil on canvas, centered, wide shot, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:18:55,148 - root - [INFO] -         Label: {}
+2024-09-02 16:18:55,148 - root - [INFO] -         Question: None
+2024-09-02 16:18:55,148 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Style modifier"},
+    {"Entity Name": "oil on canvas": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:18:55,148 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:18:55,148 - root - [INFO] -         Error traceback:
+2024-09-02 16:18:55,149 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:04,877 - root - [INFO] - ===== Error occured (Unparsable): image_14.png
+2024-09-02 16:19:04,878 - root - [INFO] -         Sent: character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation 
+2024-09-02 16:19:04,878 - root - [INFO] -         Label: {}
+2024-09-02 16:19:04,878 - root - [INFO] -         Question: None
+2024-09-02 16:19:04,878 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "arrogant elegant man travels through time via steampunk portals": "Subject term"},
+    {"Entity Name": "dramatic lighting": "Quality booster"},
+    {"Entity Name": "maximalist pastel color palette": "Style modifier"},
+    {"Entity Name": "splatter paint": "Style modifier"},
+    {"Entity Name": "pixar and disney exploded - view drawing": "Image prompt"},
+    {"Entity Name": "graphic novel by fiona staples and dustin nguyen": "Image prompt"},
+    {"Entity Name": "peter elson": "Style modifier"},
+    {"Entity Name": "alan bean": "Style modifier"},
+    {"Entity Name": "wangechi mutu": "Style modifier"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "trending on artstation": "Quality booster"}
+]
+```
+2024-09-02 16:19:04,878 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:04,878 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:04,879 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:07,029 - root - [INFO] - ===== Error occured (Unparsable): image_14.png
+2024-09-02 16:19:07,030 - root - [INFO] -         Sent: character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation 
+2024-09-02 16:19:07,030 - root - [INFO] -         Label: {}
+2024-09-02 16:19:07,030 - root - [INFO] -         Question: None
+2024-09-02 16:19:07,030 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "arrogant elegant man travels through time via steampunk portals": "Subject term"},
+    {"Entity Name": "dramatic lighting": "Quality booster"},
+    {"Entity Name": "maximalist pastel color palette": "Style modifier"},
+    {"Entity Name": "splatter paint": "Style modifier"},
+    {"Entity Name": "pixar and disney exploded - view drawing": "Image prompt"},
+    {"Entity Name": "graphic novel by fiona staples and dustin nguyen": "Image prompt"},
+    {"Entity Name": "peter elson": "Repeating term"},
+    {"Entity Name": "alan bean": "Repeating term"},
+    {"Entity Name": "wangechi mutu": "Repeating term"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "trending on artstation": "Quality booster"}
+]
+```
+2024-09-02 16:19:07,030 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:07,031 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:07,031 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:13,171 - root - [INFO] - ===== Error occured (Unparsable): image_15.png
+2024-09-02 16:19:13,172 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, oil on canvas, centered, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:13,172 - root - [INFO] -         Label: {}
+2024-09-02 16:19:13,173 - root - [INFO] -         Question: None
+2024-09-02 16:19:13,173 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Style modifier"},
+    {"Entity Name": "oil on canvas": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:13,173 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:13,173 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:13,173 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:14,505 - root - [INFO] - ===== Error occured (Unparsable): image_15.png
+2024-09-02 16:19:14,506 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, oil on canvas, centered, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:14,506 - root - [INFO] -         Label: {}
+2024-09-02 16:19:14,506 - root - [INFO] -         Question: None
+2024-09-02 16:19:14,506 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Style modifier"},
+    {"Entity Name": "oil on canvas": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:14,506 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:14,506 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:14,506 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:15,549 - root - [INFO] - ===== Error occured (Unparsable): image_15.png
+2024-09-02 16:19:15,550 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, oil on canvas, centered, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:15,550 - root - [INFO] -         Label: {}
+2024-09-02 16:19:15,550 - root - [INFO] -         Question: None
+2024-09-02 16:19:15,550 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Repeating term"},
+    {"Entity Name": "oil on canvas": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:15,550 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:15,550 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:15,551 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:16,757 - root - [INFO] - ===== Error occured (Unparsable): image_15.png
+2024-09-02 16:19:16,757 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, oil on canvas, centered, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:16,757 - root - [INFO] -         Label: {}
+2024-09-02 16:19:16,758 - root - [INFO] -         Question: None
+2024-09-02 16:19:16,758 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Style modifier"},
+    {"Entity Name": "oil on canvas": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:16,758 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:16,758 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:16,758 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:17,985 - root - [INFO] - ===== Error occured (Unparsable): image_15.png
+2024-09-02 16:19:17,985 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, oil on canvas, centered, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:17,985 - root - [INFO] -         Label: {}
+2024-09-02 16:19:17,985 - root - [INFO] -         Question: None
+2024-09-02 16:19:17,985 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Repeating term"},
+    {"Entity Name": "oil on canvas": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:17,985 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:17,985 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:17,985 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:18,905 - root - [INFO] - ===== Error occured (Unparsable): image_16.png
+2024-09-02 16:19:18,906 - root - [INFO] -         Sent: side - view portrait of ciri from the witcher, 1 0 th century stained glass window, very masterful 
+2024-09-02 16:19:18,906 - root - [INFO] -         Label: {}
+2024-09-02 16:19:18,906 - root - [INFO] -         Question: None
+2024-09-02 16:19:18,906 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "ciri from the witcher": "Subject term"},
+    {"Entity Name": "1 0 th century stained glass window": "Style modifier"},
+    {"Entity Name": "very masterful": "Quality booster"}
+]
+```
+2024-09-02 16:19:18,906 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:18,906 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:18,906 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:20,955 - root - [INFO] - ===== Error occured (Unparsable): image_16.png
+2024-09-02 16:19:20,955 - root - [INFO] -         Sent: side - view portrait of ciri from the witcher, 1 0 th century stained glass window, very masterful 
+2024-09-02 16:19:20,955 - root - [INFO] -         Label: {}
+2024-09-02 16:19:20,955 - root - [INFO] -         Question: None
+2024-09-02 16:19:20,956 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "ciri from the witcher": "Subject term"},
+    {"Entity Name": "10th century stained glass window": "Style modifier"},
+    {"Entity Name": "very masterful": "Quality booster"}
+]
+```
+2024-09-02 16:19:20,956 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:20,956 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:20,956 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:22,085 - root - [INFO] - ===== Error occured (Unparsable): image_16.png
+2024-09-02 16:19:22,086 - root - [INFO] -         Sent: side - view portrait of ciri from the witcher, 1 0 th century stained glass window, very masterful 
+2024-09-02 16:19:22,086 - root - [INFO] -         Label: {}
+2024-09-02 16:19:22,086 - root - [INFO] -         Question: None
+2024-09-02 16:19:22,086 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "ciri from the witcher": "Subject term"},
+    {"Entity Name": "1 0 th century stained glass window": "Style modifier"},
+    {"Entity Name": "very masterful": "Quality booster"}
+]
+```
+2024-09-02 16:19:22,086 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:22,086 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:22,086 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:23,002 - root - [INFO] - ===== Error occured (Unparsable): image_16.png
+2024-09-02 16:19:23,002 - root - [INFO] -         Sent: side - view portrait of ciri from the witcher, 1 0 th century stained glass window, very masterful 
+2024-09-02 16:19:23,002 - root - [INFO] -         Label: {}
+2024-09-02 16:19:23,002 - root - [INFO] -         Question: None
+2024-09-02 16:19:23,002 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "ciri from the witcher": "Subject term"},
+    {"Entity Name": "1 0 th century stained glass window": "Style modifier"},
+    {"Entity Name": "very masterful": "Quality booster"}
+]
+```
+2024-09-02 16:19:23,002 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:23,002 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:23,002 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:24,436 - root - [INFO] - ===== Error occured (Unparsable): image_17.png
+2024-09-02 16:19:24,436 - root - [INFO] -         Sent: character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation 
+2024-09-02 16:19:24,436 - root - [INFO] -         Label: {}
+2024-09-02 16:19:24,436 - root - [INFO] -         Question: None
+2024-09-02 16:19:24,436 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "arrogant elegant man travels through time via steampunk portals": "Subject term"},
+    {"Entity Name": "dramatic lighting": "Quality booster"},
+    {"Entity Name": "maximalist pastel color palette": "Style modifier"},
+    {"Entity Name": "splatter paint": "Style modifier"},
+    {"Entity Name": "pixar and disney exploded - view drawing": "Image prompt"},
+    {"Entity Name": "graphic novel by fiona staples and dustin nguyen": "Style modifier"},
+    {"Entity Name": "peter elson": "Style modifier"},
+    {"Entity Name": "alan bean": "Style modifier"},
+    {"Entity Name": "wangechi mutu": "Style modifier"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "trending on artstation": "Quality booster"}
+]
+```
+2024-09-02 16:19:24,437 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:24,437 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:24,437 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:26,669 - root - [INFO] - ===== Error occured (Unparsable): image_17.png
+2024-09-02 16:19:26,669 - root - [INFO] -         Sent: character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation 
+2024-09-02 16:19:26,669 - root - [INFO] -         Label: {}
+2024-09-02 16:19:26,669 - root - [INFO] -         Question: None
+2024-09-02 16:19:26,669 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "arrogant elegant man travels through time via steampunk portals": "Subject term"},
+    {"Entity Name": "dramatic lighting": "Quality booster"},
+    {"Entity Name": "maximalist pastel color palette": "Style modifier"},
+    {"Entity Name": "splatter paint": "Style modifier"},
+    {"Entity Name": "pixar and disney exploded - view drawing": "Image prompt"},
+    {"Entity Name": "graphic novel by fiona staples and dustin nguyen": "Style modifier"},
+    {"Entity Name": "peter elson": "Style modifier"},
+    {"Entity Name": "alan bean": "Style modifier"},
+    {"Entity Name": "wangechi mutu": "Style modifier"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "trending on artstation": "Quality booster"}
+]
+```
+2024-09-02 16:19:26,669 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:26,669 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:26,669 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:30,941 - root - [INFO] - ===== Error occured (Unparsable): image_17.png
+2024-09-02 16:19:30,941 - root - [INFO] -         Sent: character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation 
+2024-09-02 16:19:30,941 - root - [INFO] -         Label: {}
+2024-09-02 16:19:30,941 - root - [INFO] -         Question: None
+2024-09-02 16:19:30,941 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "arrogant elegant man travels through time via steampunk portals": "Subject term"},
+    {"Entity Name": "dramatic lighting": "Quality booster"},
+    {"Entity Name": "maximalist pastel color palette": "Style modifier"},
+    {"Entity Name": "splatter paint": "Style modifier"},
+    {"Entity Name": "pixar and disney exploded - view drawing": "Image prompt"},
+    {"Entity Name": "graphic novel by fiona staples and dustin nguyen": "Image prompt"},
+    {"Entity Name": "peter elson": "Style modifier"},
+    {"Entity Name": "alan bean": "Style modifier"},
+    {"Entity Name": "wangechi mutu": "Style modifier"},
+    {"Entity Name": "clean cel shaded vector art": "Style modifier"},
+    {"Entity Name": "trending on artstation": "Quality booster"}
+]
+```
+2024-09-02 16:19:30,941 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:30,942 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:30,942 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:34,879 - root - [INFO] - ===== Error occured (Unparsable): image_18.png
+2024-09-02 16:19:34,879 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, beautiful oil painting, centered, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:34,879 - root - [INFO] -         Label: {}
+2024-09-02 16:19:34,880 - root - [INFO] -         Question: None
+2024-09-02 16:19:34,880 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Style modifier"},
+    {"Entity Name": "beautiful oil painting": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:34,880 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:34,880 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:34,880 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:36,108 - root - [INFO] - ===== Error occured (Unparsable): image_18.png
+2024-09-02 16:19:36,108 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, beautiful oil painting, centered, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:36,109 - root - [INFO] -         Label: {}
+2024-09-02 16:19:36,109 - root - [INFO] -         Question: None
+2024-09-02 16:19:36,109 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Repeating term"},
+    {"Entity Name": "beautiful oil painting": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:36,109 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:36,109 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:36,109 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:37,644 - root - [INFO] - ===== Error occured (Unparsable): image_18.png
+2024-09-02 16:19:37,644 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, beautiful oil painting, centered, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:37,644 - root - [INFO] -         Label: {}
+2024-09-02 16:19:37,644 - root - [INFO] -         Question: None
+2024-09-02 16:19:37,644 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Style modifier"},
+    {"Entity Name": "beautiful oil painting": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:37,644 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:37,644 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:37,644 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:38,874 - root - [INFO] - ===== Error occured (Unparsable): image_18.png
+2024-09-02 16:19:38,875 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, beautiful oil painting, centered, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:38,875 - root - [INFO] -         Label: {}
+2024-09-02 16:19:38,875 - root - [INFO] -         Question: None
+2024-09-02 16:19:38,875 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Repeating term"},
+    {"Entity Name": "beautiful oil painting": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:38,875 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:38,875 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:38,876 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:40,173 - root - [INFO] - ===== Error occured (Unparsable): image_18.png
+2024-09-02 16:19:40,173 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, beautiful oil painting, centered, highly detailed, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:40,173 - root - [INFO] -         Label: {}
+2024-09-02 16:19:40,173 - root - [INFO] -         Question: None
+2024-09-02 16:19:40,173 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Repeating term"},
+    {"Entity Name": "beautiful oil painting": "Style modifier"},
+    {"Entity Name": "highly detailed": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:40,173 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:40,173 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:40,173 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:46,147 - root - [INFO] - ===== Error occured (Unparsable): image_20.png
+2024-09-02 16:19:46,148 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, renaissance oil painting, centered, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:46,148 - root - [INFO] -         Label: {}
+2024-09-02 16:19:46,148 - root - [INFO] -         Question: None
+2024-09-02 16:19:46,148 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Repeating term"},
+    {"Entity Name": "renaissance oil painting": "Style modifier"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:46,148 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:46,148 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:46,148 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:47,649 - root - [INFO] - ===== Error occured (Unparsable): image_20.png
+2024-09-02 16:19:47,649 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, renaissance oil painting, centered, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:47,649 - root - [INFO] -         Label: {}
+2024-09-02 16:19:47,649 - root - [INFO] -         Question: None
+2024-09-02 16:19:47,649 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Repeating term"},
+    {"Entity Name": "renaissance oil painting": "Style modifier"},
+    {"Entity Name": "centered": "Quality booster"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:47,649 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:47,649 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:47,649 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:48,779 - root - [INFO] - ===== Error occured (Unparsable): image_20.png
+2024-09-02 16:19:48,779 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, renaissance oil painting, centered, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:48,779 - root - [INFO] -         Label: {}
+2024-09-02 16:19:48,779 - root - [INFO] -         Question: None
+2024-09-02 16:19:48,779 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Repeating term"},
+    {"Entity Name": "renaissance oil painting": "Style modifier"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:48,779 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:48,779 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:48,779 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:50,137 - root - [INFO] - ===== Error occured (Unparsable): image_20.png
+2024-09-02 16:19:50,137 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, renaissance oil painting, centered, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:50,137 - root - [INFO] -         Label: {}
+2024-09-02 16:19:50,137 - root - [INFO] -         Question: None
+2024-09-02 16:19:50,137 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Repeating term"},
+    {"Entity Name": "renaissance oil painting": "Style modifier"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:50,137 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:50,137 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:50,137 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:51,263 - root - [INFO] - ===== Error occured (Unparsable): image_20.png
+2024-09-02 16:19:51,263 - root - [INFO] -         Sent: a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, renaissance oil painting, centered, masterpiece, award winning, sharp focus 
+2024-09-02 16:19:51,263 - root - [INFO] -         Label: {}
+2024-09-02 16:19:51,263 - root - [INFO] -         Question: None
+2024-09-02 16:19:51,263 - root - [INFO] -         Error response_None: 
+```json
+[
+    {"Entity Name": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake": "Subject term"},
+    {"Entity Name": "mona lisa": "Repeating term"},
+    {"Entity Name": "renaissance oil painting": "Style modifier"},
+    {"Entity Name": "masterpiece": "Quality booster"},
+    {"Entity Name": "award winning": "Quality booster"},
+    {"Entity Name": "sharp focus": "Quality booster"}
+]
+```
+2024-09-02 16:19:51,263 - root - [INFO] -         Set and_processed as empty dict.
+2024-09-02 16:19:51,264 - root - [INFO] -         Error traceback:
+2024-09-02 16:19:51,264 - root - [INFO] - invalid syntax (<string>, line 1)
+2024-09-02 16:19:51,266 - root - [INFO] - Finished!
+2024-09-02 16:19:51,267 - root - [INFO] - response saved to: result/self_consistent_annotate/gptmini/diffusiondb/self_annotation/train/zs_consist_0.1_5_TSMV/TIME_STAMP_train_diffusiondb_0_response.txt
+

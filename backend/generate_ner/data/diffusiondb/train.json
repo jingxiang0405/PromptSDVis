@@ -8,6 +8,101 @@
     "idx": "image_1.png",
     "sentence": "island town, the stars shine in the starry sky, bright moon, waves, sparkling sea, clouds and fog, whimsical, detailed, volumetric lights, intricate details, raytracing, great complexity, cinematic, film, 8 k, octane render by ivan aivazovsky and noah bradley ",
     "label": "{}"
+  },
+  {
+    "idx": "image_2.png",
+    "sentence": "a beautiful 3 d render of a pond, perfect, hazy, volumetric lighting, snowy summits in the background, very detailed, serene, cirrus, cyan accents, gold accents, washed out colors, photorealistic, master level composition, raytracing ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_3.png",
+    "sentence": "royal side - view portrait of a man wearing a slim crown, buzzcut, stubble, wears a red coat, gothic stained glass window, shiny blue background, very masterful, backlit ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_4.png",
+    "sentence": "a woman with red hair and glasses sits on top of a tall pile of books, reading. clean cel shaded vector art by lois van baarle, artgerm, helen huang, by makoto shinkai and ilya kuvshinov, rossdraws, illustration, art by ilya kuvshinov ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_5.png",
+    "sentence": "island town, the stars shine in the starry sky, bright moon, waves, sparkling sea, clouds and fog, whimsical, detailed, volumetric lights, intricate details, raytracing, great complexity, cinematic, film, 8 k, octane render by ivan aivazovsky and noah bradley ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_6.png",
+    "sentence": "a retrowave style artwork of acadia national park, a land of the dead, divine, hazy, volumetric lighting, spacetime bending, very detailed, serene, gold accents, washed out colors, beautiful artwork, master level composition, raytracing ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_7.png",
+    "sentence": "a beautiful 3 d render of a pond, perfect, hazy, volumetric lighting, snowy summits in the background, very detailed, serene, cirrus, cyan accents, gold accents, washed out colors, photorealistic, master level composition, raytracing ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_8.png",
+    "sentence": "spritesheet game asset vector art, smooth style beeple, by thomas kinkade hearstone league of legends dofus overwatch ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_9.png",
+    "sentence": "kitchen made of moss, octane render, trending on artstation, very rough sand on wall, flooring made of hard rock ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_10.png",
+    "sentence": "character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_11.png",
+    "sentence": "sci - fi space base, space rocket!! mist, sunrays, dust in the air, unreal engine, octane render, dramatic lighting, lake, ultra clear detailed. digital art, by stanley artgerm lau, greg rutkowski, thomas kindkade, alphonse mucha, loish, norman rockwell ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_12.png",
+    "sentence": "a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, oil on canvas, centered, wide shot, highly detailed, masterpiece, award winning, sharp focus ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_13.png",
+    "sentence": "album cover of golden troop marvelous by akihiko yoshida ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_14.png",
+    "sentence": "character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_15.png",
+    "sentence": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, oil on canvas, centered, highly detailed, masterpiece, award winning, sharp focus ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_16.png",
+    "sentence": "side - view portrait of ciri from the witcher, 1 0 th century stained glass window, very masterful ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_17.png",
+    "sentence": "character environment design, arrogant elegant man travels through time via steampunk portals, pixiv fanbox, dramatic lighting, maximalist pastel color palette, splatter paint, pixar and disney exploded - view drawing, graphic novel by fiona staples and dustin nguyen, peter elson, alan bean, wangechi mutu, clean cel shaded vector art, trending on artstation ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_18.png",
+    "sentence": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, beautiful oil painting, centered, highly detailed, masterpiece, award winning, sharp focus ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_19.png",
+    "sentence": "mural of jean michel basquiat ",
+    "label": "{}"
+  },
+  {
+    "idx": "image_20.png",
+    "sentence": "a portrait picture of a skinny young woman wearing workout clothes doing yoga near the lake!, looks like mona lisa, renaissance oil painting, centered, masterpiece, award winning, sharp focus ",
+    "label": "{}"
   }
   
 ]

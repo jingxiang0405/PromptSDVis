@@ -1,0 +1,27 @@
+[
+    {
+        "idx": "0",
+        "sentence": "terrier, hello, cubism",
+        "label": "{}"
+    },
+    {
+        "idx": "5",
+        "sentence": "puppy, hello, cubism",
+        "label": "{}"
+    },
+    {
+        "idx": "6",
+        "sentence": "dog, hello, cubism",
+        "label": "{}"
+    },
+    {
+        "idx": "9",
+        "sentence": "dog, hello, auguste",
+        "label": "{}"
+    },
+    {
+        "idx": "15",
+        "sentence": "cat, hello, cubism",
+        "label": "{}"
+    }
+]
