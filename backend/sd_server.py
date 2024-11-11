@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, make_response, jsonify
 #from flask_cors import *
 import torch
-
+print(torch.__version__)
+print(torch.cuda.is_available())  # True 表示 CUDA 可用
+print(torch.backends.cudnn.is_available())  # True 表示 cuDNN 可用
 from util import get_img_base64
 # from workflow import *
 

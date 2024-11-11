@@ -1,27 +1,37 @@
 [
     {
-        "idx": "0",
-        "sentence": "terrier, hello, cubism",
+        "idx": "3",
+        "sentence": "dog, girls",
+        "label": "{}"
+    },
+    {
+        "idx": "4",
+        "sentence": "dog, girlfriend",
         "label": "{}"
     },
     {
         "idx": "5",
-        "sentence": "puppy, hello, cubism",
+        "sentence": "canine, girls",
         "label": "{}"
     },
     {
-        "idx": "6",
-        "sentence": "dog, hello, cubism",
+        "idx": "12",
+        "sentence": "animal, girls",
         "label": "{}"
     },
     {
-        "idx": "9",
-        "sentence": "dog, hello, auguste",
+        "idx": "20",
+        "sentence": "pet, girls",
         "label": "{}"
     },
     {
-        "idx": "15",
-        "sentence": "cat, hello, cubism",
+        "idx": "23",
+        "sentence": "pet, girlfriend",
+        "label": "{}"
+    },
+    {
+        "idx": "26",
+        "sentence": "puppy, girls",
         "label": "{}"
     }
 ]

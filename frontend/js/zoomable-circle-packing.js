@@ -96,7 +96,10 @@ function initZoomableCirclepacking(data) {
                 } else {
                     return "";  // 其他層級不顯示名稱
                 }
-            }).on("click", function (event, d) {
+            })
+            .style("stroke", "white")
+            .style("stroke-width", "2px")
+            .style("paint-order", "stroke").on("click", function (event, d) {
                 if (d.depth > 1) {
                     event.stopPropagation(); // 阻止缩放
                     handleLabelClick(d.data.name);
@@ -172,7 +175,7 @@ function initZoomableCirclepacking(data) {
                 });
         }
     }
-    function noData(){
+    function noData() {
         const svg = d3.select("#zoomable-circle-packing");
         svg.selectAll("*").remove();  // 清空畫布
         svg.append("text")
@@ -182,10 +185,10 @@ function initZoomableCirclepacking(data) {
             .style("font-size", "24px")
             .text("No data available for visualization");
     }
-    if (data.children.length === 0){
+    if (data.children.length === 0) {
         noData();
     } else {
         renderChart(data);
     }
-   
+
 }

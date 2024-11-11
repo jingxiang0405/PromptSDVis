@@ -1,0 +1,7 @@
+{'idx': '3', 'sentence': 'dog, girls', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '4', 'sentence': 'dog, girlfriend', 'label': '{}', 'response': "[{'dog': 'Subject term'}]", 'prediction': {'dog': 'Subject term'}}
+{'idx': '5', 'sentence': 'canine, girls', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '12', 'sentence': 'animal, girls', 'label': '{}', 'response': "[{'animal': 'Subject term'}]", 'prediction': {'animal': 'Subject term'}}
+{'idx': '20', 'sentence': 'pet, girls', 'label': '{}', 'response': "[{'pet': 'Subject term'}, {'girls': 'Subject term'}]", 'prediction': {'pet': 'Subject term', 'girls': 'Subject term'}}
+{'idx': '23', 'sentence': 'pet, girlfriend', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '26', 'sentence': 'puppy, girls', 'label': '{}', 'response': "[{'puppy': 'Subject term'}]", 'prediction': {'puppy': 'Subject term'}}

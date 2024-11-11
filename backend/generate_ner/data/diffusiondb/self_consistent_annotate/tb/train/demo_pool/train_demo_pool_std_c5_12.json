@@ -1,0 +1,110 @@
+[
+    {
+        "idx": "image_132.png",
+        "sentence": "spritesheet game asset vector art, smooth style beeple, by thomas kinkade hearstone league of legends dofus overwatch ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'by thomas kinkade': 'Style modifier'}",
+            "consistency_score": "{'entities': {('by thomas kinkade', 'Style modifier'): 4}, 'avg': 4.0}"
+        }
+    },
+    {
+        "idx": "image_133.png",
+        "sentence": "key to glitch switches, art by edward robert hughes, henry justice ford ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'edward robert hughes': 'Style modifier', 'henry justice ford': 'Style modifier'}",
+            "consistency_score": "{'entities': {('edward robert hughes', 'Style modifier'): 4, ('henry justice ford', 'Style modifier'): 4}, 'avg': 4.0}"
+        }
+    },
+    {
+        "idx": "image_134.png",
+        "sentence": "intricate highly detailed the womans is on lonely planet, high resolution uhd hyper realistic hyperdetailed 8 k pastel paint pour by peter mohrbacher ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'intricate': 'Quality booster', 'highly detailed': 'Quality booster', 'hyper realistic': 'Style modifier', 'hyperdetailed': 'Quality booster', '8 k': 'Quality booster', 'pastel paint pour': 'Style modifier', 'peter mohrbacher': 'Style modifier'}",
+            "consistency_score": "{'entities': {('intricate', 'Quality booster'): 4, ('highly detailed', 'Quality booster'): 5, ('hyper realistic', 'Style modifier'): 5, ('hyperdetailed', 'Quality booster'): 5, ('8 k', 'Quality booster'): 5, ('pastel paint pour', 'Style modifier'): 3, ('peter mohrbacher', 'Style modifier'): 3}, 'avg': 4.285714285714286}"
+        }
+    },
+    {
+        "idx": "image_135.png",
+        "sentence": "spritesheet game asset vector art, smooth style beeple, by thomas kinkade hearstone league of legends dofus overwatch ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'by thomas kinkade': 'Style modifier', 'spritesheet game asset vector art': 'Subject term', 'smooth style beeple': 'Style modifier'}",
+            "consistency_score": "{'entities': {('by thomas kinkade', 'Style modifier'): 5, ('spritesheet game asset vector art', 'Subject term'): 3, ('smooth style beeple', 'Style modifier'): 3}, 'avg': 3.6666666666666665}"
+        }
+    },
+    {
+        "idx": "image_136.png",
+        "sentence": "shark, underwater drone ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'shark': 'Subject term', 'underwater drone': 'Subject term'}",
+            "consistency_score": "{'entities': {('shark', 'Subject term'): 5, ('underwater drone', 'Subject term'): 3}, 'avg': 4.0}"
+        }
+    },
+    {
+        "idx": "image_137.png",
+        "sentence": "key to glitch switches, art by john berkey ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'key': 'Style modifier', 'glitch switches': 'Subject term', 'art by john berkey': 'Style modifier'}",
+            "consistency_score": "{'entities': {('key', 'Style modifier'): 2, ('glitch switches', 'Subject term'): 2, ('art by john berkey', 'Style modifier'): 2}, 'avg': 2.0}"
+        }
+    },
+    {
+        "idx": "image_138.png",
+        "sentence": "a duck holding a swiss army knife with its beak. ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'duck': 'Subject term'}",
+            "consistency_score": "{'entities': {('duck', 'Subject term'): 5}, 'avg': 5.0}"
+        }
+    },
+    {
+        "idx": "image_139.png",
+        "sentence": "intricate highly detailed the dragon is on lonely planet, full body portrait,, high resolution uhd hyper realistic hyperdetailed 8 k pastel paint pour by peter mohrbacher ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'intricate': 'Quality booster', 'highly detailed': 'Quality booster', 'hyper realistic': 'Style modifier', 'hyperdetailed': 'Quality booster', '8 k': 'Quality booster', 'pastel paint pour by peter mohrbacher': 'Style modifier'}",
+            "consistency_score": "{'entities': {('intricate', 'Quality booster'): 4, ('highly detailed', 'Quality booster'): 5, ('hyper realistic', 'Style modifier'): 5, ('hyperdetailed', 'Quality booster'): 5, ('8 k', 'Quality booster'): 5, ('pastel paint pour by peter mohrbacher', 'Style modifier'): 3}, 'avg': 4.5}"
+        }
+    },
+    {
+        "idx": "image_140.png",
+        "sentence": "spritesheet game asset vector art, smooth style beeple, by thomas kinkade hearstone league of legends dofus overwatch ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'by thomas kinkade': 'Style modifier', 'spritesheet game asset vector art': 'Style modifier', 'hearstone league of legends dofus overwatch': 'Subject term', 'smooth style beeple': 'Style modifier'}",
+            "consistency_score": "{'entities': {('by thomas kinkade', 'Style modifier'): 5, ('spritesheet game asset vector art', 'Style modifier'): 2, ('hearstone league of legends dofus overwatch', 'Subject term'): 2, ('smooth style beeple', 'Style modifier'): 3}, 'avg': 3.0}"
+        }
+    },
+    {
+        "idx": "image_141.png",
+        "sentence": "side - view portrait of the iorveth, scoia'tael leader, red cap, red bandana covering one eye, 1 0 th century stained glass window, very masterful ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'iorveth': 'Subject term', 'red cap': 'Style modifier', 'red bandana': 'Style modifier', '10th century stained glass window': 'Style modifier', 'very masterful': 'Quality booster'}",
+            "consistency_score": "{'entities': {('iorveth', 'Subject term'): 5, ('red cap', 'Style modifier'): 3, ('red bandana', 'Style modifier'): 3, ('10th century stained glass window', 'Style modifier'): 3, ('very masterful', 'Quality booster'): 3}, 'avg': 3.4}"
+        }
+    },
+    {
+        "idx": "image_142.png",
+        "sentence": "biomechanical siren queen, fully clothed!, ( ( ( nudity ) ) ), infinite detail, digital painting, artstation, concept art, smooth, sharp focus, illustration, ethereal lighting, dark mood, mysterious, unreal engine 5, 8 k, art by simon bisley and john alvin and leonardo da vinci ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'biomechanical siren queen': 'Subject term', 'digital painting': 'Style modifier', 'infinite detail': 'Quality booster', 'artstation': 'Quality booster', 'smooth': 'Style modifier', 'sharp focus': 'Quality booster', 'ethereal lighting': 'Style modifier', 'dark mood': 'Style modifier', 'mysterious': 'Style modifier', 'unreal engine 5': 'Style modifier', '8 k': 'Quality booster', 'art by simon bisley and john alvin and leonardo da vinci': 'Style modifier'}",
+            "consistency_score": "{'entities': {('biomechanical siren queen', 'Subject term'): 5, ('digital painting', 'Style modifier'): 5, ('infinite detail', 'Quality booster'): 5, ('artstation', 'Quality booster'): 5, ('smooth', 'Style modifier'): 2, ('sharp focus', 'Quality booster'): 2, ('ethereal lighting', 'Style modifier'): 2, ('dark mood', 'Style modifier'): 2, ('mysterious', 'Style modifier'): 2, ('unreal engine 5', 'Style modifier'): 3, ('8 k', 'Quality booster'): 5, ('art by simon bisley and john alvin and leonardo da vinci', 'Style modifier'): 3}, 'avg': 3.4166666666666665}"
+        }
+    },
+    {
+        "idx": "image_143.png",
+        "sentence": "constructivism art made of rectangle tetris, steel & glass, octane render, trending on artstation ",
+        "label": "{}",
+        "self_annotate": {
+            "prediction": "{'constructivism art': 'Style modifier', 'octane render': 'Quality booster', 'trending on artstation': 'Quality booster', 'rectangle tetris': 'Subject term', 'steel & glass': 'Subject term'}",
+            "consistency_score": "{'entities': {('constructivism art', 'Style modifier'): 5, ('octane render', 'Quality booster'): 5, ('trending on artstation', 'Quality booster'): 5, ('rectangle tetris', 'Subject term'): 4, ('steel & glass', 'Subject term'): 4}, 'avg': 4.6}"
+        }
+    }
+]

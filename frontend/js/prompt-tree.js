@@ -115,19 +115,19 @@ function initPromptTree(dataset) {
 
         // 找出所有标记为 'isNew' 且与特定节点 d 相关的节点的 ID
         let newNodeIds = dataset.nodes.filter(node => node.isNew && (node.relatedId === d.id)).map(node => node.id);
-        //console.log('newNodeIds:' + newNodeIds)
+        // console.log('newNodeIds:' + newNodeIds)
         // 过滤掉这些节点
         dataset.nodes = dataset.nodes.filter(node => !newNodeIds.includes(node.id));
-        //console.log(dataset.links);
-        //console.log("Removed Before.");
+        // console.log(dataset.links);
+        // console.log("Removed Before.");
         // 同时过滤掉与这些节点相关的链接
         dataset.links = dataset.links.filter(link => !newNodeIds.includes(link.source) && !newNodeIds.includes(link.target));
         // console.log("Removed After.");
-        //console.log(dataset.links);
+        // console.log(dataset.links);
         updateGraph()
-        //console.log("Removed new nodes and links.");
+        // console.log("Removed new nodes and links.");
 
-        //console.log(dataset.nodes);
+        // console.log(dataset.nodes);
     }
     // 假设节点的 ID 是从 0 开始，递增
     let lastId = dataset.nodes.reduce((max, node) => node.id > max ? node.id : max, -1);

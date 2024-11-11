@@ -21,6 +21,7 @@ function initScatterPlot(images) {
         .enter()
         .append('image')
         .attr('id', d => d.id)
+        .attr('data-title',  d => d.title)
         .attr('xlink:href', d => d.src)
         .attr('x', d => d.x)
         .attr('y', d => d.y)
@@ -44,6 +45,7 @@ function initScatterPlot(images) {
         .enter()
         .append('rect')
         .attr('class', 'image-border')
+        .attr('id', d => `rect-${d.id}`)  // 設置唯一的 id
         .attr('x', d => d.x)
         .attr('y', d => d.y)
         .attr('width', d => d.width)

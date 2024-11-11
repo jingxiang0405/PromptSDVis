@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>关系图示范</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- 确保这里引用了您的 JS 文件 -->
+    <script src="../js/prompt-tree-1.js"></script>
+</head>
+
+<body>
+    <textarea id="input-text" rows="4" cols="50" placeholder="请输入节点，例如：AA (A1, A2), BB, CC (C1, C2, C3)">AA, CC(VV,BB), DD, FF(F1,F2, F3)</textarea>
+    <br>
+    <button id="generate-button">生成关系图</button>
+    <div id="tree"></div>
+    <script>
+        function tokenize(input) {
+            let tokens = [];
+            let currentToken = '';
+            let nestingLevel = 0;
+
+            for (let i = 0; i < input.length; i++) {
+                let char = input[i];
+                if (char === '(') {
+                    nestingLevel++;
+                    currentToken += char;
+                } else if (char === ')') {
+                    nestingLevel--;
+                    currentToken += char;
+                } else if (char === ',' && nestingLevel === 0) {
+                    tokens.push(currentToken.trim());
+                    currentToken = '';
+                } else {
+                    currentToken += char;
+                }
+            }
+
+            if (currentToken.trim() !== '') {
+                tokens.push(currentToken.trim());
+            }
+
+            return tokens;
+        }
+
+        function parseNode(nodeStr, currentLevel, parentName = null, order = 0) {
+            nodeStr = nodeStr.trim();
+
+            // Check if nodeStr starts with '(' and ends with ')'
+            if (nodeStr.startsWith('(') && nodeStr.endsWith(')')) {
+                // Only child nodes, no main node
+                let childStr = nodeStr.substring(1, nodeStr.length - 1);
+                let childTokens = tokenize(childStr);
+                let data = { Nodes: [], links: [], deepestNodes: [] };
+                let deepestNodes = [];
+
+                let childOrder = 0; // 初始化子节点的顺序
+                for (let childToken of childTokens) {
+                    let childParseResult = parseNode(childToken, currentLevel, parentName, childOrder);
+                    data.Nodes.push(...childParseResult.Nodes);
+                    data.links.push(...childParseResult.links);
+                    deepestNodes.push(...childParseResult.deepestNodes);
+                    childOrder++; // 递增子节点顺序
+                }
+
+                data.deepestNodes = deepestNodes;
+                return data;
+            }
+
+            // Else, parse node with optional children
+            let name = '';
+            let childStr = '';
+            let hasChild = false;
+            let nestingLevel = 0;
+            let startIndex = 0;
+
+            for (let i = 0; i < nodeStr.length; i++) {
+                let char = nodeStr[i];
+                if (char === '(') {
+                    if (nestingLevel === 0) {
+                        name = nodeStr.substring(0, i).trim();
+                        startIndex = i + 1;
+                        hasChild = true;
+                    }
+                    nestingLevel++;
+                } else if (char === ')') {
+                    nestingLevel--;
+                    if (nestingLevel === 0) {
+                        childStr = nodeStr.substring(startIndex, i);
+                        break;
+                    }
+                }
+            }
+
+            if (!hasChild) {
+                name = nodeStr;
+            }
+
+            let data = { Nodes: [], links: [], deepestNodes: [] };
+
+            // Add current node with 'order' attribute
+            data.Nodes.push({ lvl: currentLevel, name: name, order: order });
+
+            // Build link to parent if any
+            if (parentName !== null) {
+                data.links.push({
+                    source_lvl: currentLevel - 1,
+                    source: parentName,
+                    target_lvl: currentLevel,
+                    target: name
+                });
+            }
+
+            let deepestNodes = [{ lvl: currentLevel, name: name }];
+
+            // Recurse into children if any
+            if (hasChild) {
+                let childTokens = tokenize(childStr);
+                let childData = [];
+                let childOrder = 0; // 初始化子节点的顺序
+                for (let childToken of childTokens) {
+                    let childParseResult = parseNode(childToken, currentLevel + 1, name, childOrder);
+                    data.Nodes.push(...childParseResult.Nodes);
+                    data.links.push(...childParseResult.links);
+                    childData.push(childParseResult);
+                    childOrder++; // 递增子节点顺序
+                }
+                // Update deepestNodes
+                deepestNodes = [];
+                for (let child of childData) {
+                    deepestNodes.push(...child.deepestNodes);
+                }
+            }
+
+            data.deepestNodes = deepestNodes;
+
+            return data;
+        }
+
+        function parseInput(inputText) {
+            const data = { Nodes: [], links: [] };
+            let prevDeepestNodes = [];
+            let maxLevel = -1;
+
+            // Tokenize the input
+            let tokens = tokenize(inputText);
+
+            for (let token of tokens) {
+                // Parse the token starting at level maxLevel + 1
+                let startLevel = maxLevel + 1;
+                let parseResult = parseNode(token, startLevel, null);
+
+                // Update maxLevel
+                for (let node of parseResult.Nodes) {
+                    if (node.lvl > maxLevel) {
+                        maxLevel = node.lvl;
+                    }
+                }
+
+                // Append nodes and links
+                data.Nodes.push(...parseResult.Nodes);
+                data.links.push(...parseResult.links);
+
+                // If there are previous deepest nodes, connect them to the root of this token
+                if (prevDeepestNodes.length > 0) {
+                    let rootName = parseResult.Nodes[0].name;
+                    let rootLevel = parseResult.Nodes[0].lvl;
+                    for (let prevNode of prevDeepestNodes) {
+                        data.links.push({
+                            source_lvl: prevNode.lvl,
+                            source: prevNode.name,
+                            target_lvl: rootLevel,
+                            target: rootName
+                        });
+                    }
+                }
+
+                // Update prevDeepestNodes to be the deepest nodes from this parse result
+                prevDeepestNodes = parseResult.deepestNodes;
+            }
+
+            return data;
+        }
+
+        document.getElementById('generate-button').addEventListener('click', function () {
+            // 获取用户输入
+            const inputText = document.getElementById('input-text').value;
+            // 调用函数，传入输入内容
+            const data = parseInput(inputText);
+            console.log(data); // 输出解析后的数据，您可以在控制台中查看
+
+            // 如果您有绘制图表的函数，可以在这里调用
+            initRelationshipGraph(data);
+        });
+    </script>
+</body>
+
+</html>

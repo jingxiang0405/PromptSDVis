@@ -1,5 +1,23 @@
-{'idx': '0', 'sentence': 'terrier, hello, cubism', 'label': '{}', 'response': '[]', 'prediction': {}}
-{'idx': '5', 'sentence': 'puppy, hello, cubism', 'label': '{}', 'response': "[{'puppy': 'Subject term'}]", 'prediction': {'puppy': 'Subject term'}}
-{'idx': '6', 'sentence': 'dog, hello, cubism', 'label': '{}', 'response': "[{'dog': 'Subject term'}]", 'prediction': {'dog': 'Subject term'}}
-{'idx': '9', 'sentence': 'dog, hello, auguste', 'label': '{}', 'response': '[]', 'prediction': {}}
-{'idx': '15', 'sentence': 'cat, hello, cubism', 'label': '{}', 'response': "[{'cat': 'Subject term'}]", 'prediction': {'cat': 'Subject term'}}
+{'idx': '3', 'sentence': 'halloween, dog, pablo', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '8', 'sentence': 'halloween, canine, pablo', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '29', 'sentence': 'halloween, puppy, pablo', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '35', 'sentence': 'halloween, pup, pablo', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '113', 'sentence': 'holiday, dog, pablo', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '144', 'sentence': 'costume, dog, picasso', 'label': '{}', 'response': "[{'picasso': 'Subject term'}]", 'prediction': {'picasso': 'Subject term'}}
+{'idx': '146', 'sentence': 'costume, dog, paintings', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '148', 'sentence': 'costume, dog, cubism', 'label': '{}', 'response': "[{'costume': 'Subject term'}, {'dog': 'Subject term'}, {'cubism': 'Style modifier'}]", 'prediction': {'costume': 'Subject term', 'dog': 'Subject term', 'cubism': 'Style modifier'}}
+{'idx': '149', 'sentence': 'costume, dog, pablo', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '153', 'sentence': 'costume, canine, impressionist', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '154', 'sentence': 'costume, canine, cubism', 'label': '{}', 'response': "[{'costume': 'Subject term'}, {'canine': 'Subject term'}, {'cubism': 'Style modifier'}]", 'prediction': {'costume': 'Subject term', 'canine': 'Subject term', 'cubism': 'Style modifier'}}
+{'idx': '155', 'sentence': 'costume, canine, pablo', 'label': '{}', 'response': "[{'costume': 'Subject term'}, {'canine': 'Subject term'}, {'pablo': 'Subject term'}]", 'prediction': {'costume': 'Subject term', 'canine': 'Subject term', 'pablo': 'Subject term'}}
+{'idx': '161', 'sentence': 'costume, animal, pablo', 'label': '{}', 'response': "[{'pablo': 'Subject term'}]", 'prediction': {'pablo': 'Subject term'}}
+{'idx': '165', 'sentence': 'costume, pet, impressionist', 'label': '{}', 'response': "[{'costume': 'Subject term'}, {'pet': 'Subject term'}, {'impressionist': 'Style modifier'}]", 'prediction': {'costume': 'Subject term', 'pet': 'Subject term', 'impressionist': 'Style modifier'}}
+{'idx': '167', 'sentence': 'costume, pet, pablo', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '168', 'sentence': 'costume, puppy, picasso', 'label': '{}', 'response': "[{'puppy': 'Subject term'}, {'picasso': 'Subject term'}]", 'prediction': {'puppy': 'Subject term', 'picasso': 'Subject term'}}
+{'idx': '171', 'sentence': 'costume, puppy, impressionist', 'label': '{}', 'response': "[{'puppy': 'Subject term'}, {'impressionist': 'Style modifier'}]", 'prediction': {'puppy': 'Subject term', 'impressionist': 'Style modifier'}}
+{'idx': '172', 'sentence': 'costume, puppy, cubism', 'label': '{}', 'response': "[{'puppy': 'Subject term'}]", 'prediction': {'puppy': 'Subject term'}}
+{'idx': '173', 'sentence': 'costume, puppy, pablo', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '176', 'sentence': 'costume, pup, paintings', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '177', 'sentence': 'costume, pup, impressionist', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '178', 'sentence': 'costume, pup, cubism', 'label': '{}', 'response': '[]', 'prediction': {}}
+{'idx': '179', 'sentence': 'costume, pup, pablo', 'label': '{}', 'response': '[]', 'prediction': {}}

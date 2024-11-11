@@ -9,7 +9,7 @@ temperature=0.7
 
 few_shot_setting=zs
 
-annotation_size=500
+annotation_size=100000
 
 start_time="TIME_STAMP"
 
@@ -74,3 +74,6 @@ python code/self_consistent_annotation/confidence_selection/Response2Annotation.
         --self_annotate_tag $self_annotate_tag \
         --demo_setting $demo_setting \
         --include_emb $include_emb \
+
+
+        

@@ -149,7 +149,7 @@
             <div class="col-8 image-browser">
                 <!-- Prompt Tree -->
                 <div id="prompt-tree">
-
+                    <svg id="prompt-tree-svg" width="980" height="300"></svg>
                 </div>
                 <!-- Scatter View-->
                 <div id="scatter-tree">
@@ -178,7 +178,7 @@
     <!-- Scatter JS -->
     <script src="js/scatter.js"></script>
     <!-- Prompt Tree JS -->
-    <script src="js/prompt-tree.js"></script>
+    <script src="js/prompt-tree-1.js"></script>
     <!-- Zoomable Circle Packing -->
     <script src="js/zoomable-circle-packing.js"></script>
 
@@ -239,6 +239,16 @@
         const METHOD_POST = "post"
         document.getElementById('generate').addEventListener('click', function (event) {
             event.preventDefault();
+
+            // 获取用户输入
+            const inputText = document.getElementById('prompt').value;
+            // 调用函数，传入输入内容
+            const parse_InputText = parseInput(inputText);
+            console.log(parse_InputText); // 输出解析后的数据，您可以在控制台中查看
+
+            // 如果您有绘制图表的函数，可以在这里调用
+            initRelationshipGraph(parse_InputText, inputText);
+
             const promptVal = document.getElementById('prompt').value;
             const negativePromptVal = document.getElementById('negative-prompt').value;
             const rangeSliderVal = document.getElementById('range').value;
@@ -302,24 +312,6 @@
             });
             console.log(images)
             initScatterPlot(images);
-            /*
-            /// 待處理 
-            // 转换为 nodes 和 links
-            let dataset = { nodes: [], links: [] };
-            // 假设每个 result 对应一个 embed_position
-            data.forEach((data, index) => {
-                dataset.nodes.push({
-                    id: index,
-                    name: data.result[index],  // 根据需求自定义名称
-                    hasSimilarity: true, // 假设都有相似度信息
-                    x: data.embed_position[index][0], // X坐标
-                    y: data.embed_position[index][1], // Y坐标
-                    details: result  // 存储具体的其他信息
-                });
-            });
-            /// 待處理 
-            //initPromptTree(dataset);
-            */
         }
 
         // This is the function you want to test
@@ -354,8 +346,10 @@
                     // Add top_similar items as children under the prediction node
                     prediction.top_similar.forEach(similarItem => {
                         const value = similarItem.similarity * 1000; // Scale similarity
-                        const trainImages = similarItem.train_indices.map(imageName => `../data/diffusiondb_data/images/${imageName}`);
-
+                        const trainImages = similarItem.train_indices.map(imageName => `../data/diffusiondb_data/random_5k/diffusiondb_random_5k/images/${imageName}`);
+                        console.log('trainImages')
+                        console.log(trainImages)
+                        console.log('---------------')
                         // Check if the similar item node already exists
                         let similarNode = predictionNode.children.find(child => child.name === similarItem.train_value);
                         if (!similarNode) {
@@ -395,66 +389,6 @@
         */
 
         function recieveDataFromSentenceAnalyze(data) {
-            //console.log(data)
-            /*
-            const fakeData = {
-                "name": "flare",
-                "children": [
-                    {
-                        "name": "Subject term",
-                        "children": [
-                            { "name": "CommunityStructure", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" },
-                            { "name": "AgglomerativeCluster", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" }
-                        ]
-                    },
-                    {
-                        "name": "Style modifier",
-                        "children": [
-                            { "name": "Easing", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" }
-                        ]
-                    },
-                    {
-                        "name": "Image prompt",
-                        "children": [
-                            { "name": "Easing", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" }
-                        ]
-                    }
-                    ,
-                    {
-                        "name": "Quality booster",
-                        "children": [
-                            { "name": "Easing", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" }
-                        ]
-                    },
-                    {
-                        "name": "Repeating term",
-                        "children": [
-                            { "name": "Easing", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" }
-                        ]
-                    },
-                    {
-                        "name": "Magic term",
-                        "children": [
-                            { "name": "Easing", "value": 600, "img": "https://i.postimg.cc/NjnNrbqv/temp-Imageqh-A8-Eh.avif" }
-                        ]
-                    }
-                ]
-            };
-            */
             covertData = transformTestResultsToData(data)
             console.log("transformTestResultsToData:", covertData);
             initZoomableCirclepacking(covertData);
@@ -581,6 +515,182 @@
             // 最终结果为逗号分隔的各部分组合
             return resultParts.join(', ');
         }
+
+        function tokenize(input) {
+            let tokens = [];
+            let currentToken = '';
+            let nestingLevel = 0;
+
+            for (let i = 0; i < input.length; i++) {
+                let char = input[i];
+                if (char === '(') {
+                    nestingLevel++;
+                    currentToken += char;
+                } else if (char === ')') {
+                    nestingLevel--;
+                    currentToken += char;
+                    // 如果下一個字符不是'('，那麼就認為這是一個完整的token
+                    if (nestingLevel === 0 && (i + 1 < input.length && input[i + 1] !== '(')) {
+                        tokens.push(currentToken.trim());
+                        currentToken = '';
+                    }
+                } else if (char === ',' && nestingLevel === 0) {
+                    if (currentToken.trim() !== '') {
+                        tokens.push(currentToken.trim());
+                    }
+                    currentToken = '';
+                } else {
+                    currentToken += char;
+                }
+            }
+            console.log('currentToken:' + currentToken)
+            if (currentToken.trim() !== '') {
+                tokens.push(currentToken.trim());
+            }
+
+            return tokens;
+        }
+
+        function parseNode(nodeStr, currentLevel, parentName = null, order = 0) {
+            nodeStr = nodeStr.trim();
+            console.log('nodeStr:' + nodeStr)
+            // Check if nodeStr starts with '(' and ends with ')'
+            if (nodeStr.startsWith('(') && nodeStr.endsWith(')')) {
+                // Only child nodes, no main node
+                let childStr = nodeStr.substring(1, nodeStr.length - 1);
+                let childTokens = tokenize(childStr);
+                let data = { Nodes: [], links: [], deepestNodes: [] };
+                let deepestNodes = [];
+
+                let childOrder = 0; // 初始化子节点的顺序
+                for (let childToken of childTokens) {
+                    let childParseResult = parseNode(childToken, currentLevel, parentName, childOrder);
+                    data.Nodes.push(...childParseResult.Nodes);
+                    data.links.push(...childParseResult.links);
+                    deepestNodes.push(...childParseResult.deepestNodes);
+                    childOrder++; // 递增子节点顺序
+                }
+
+                data.deepestNodes = deepestNodes;
+                return data;
+            }
+
+            // Else, parse node with optional children
+            let name = '';
+            let childStr = '';
+            let hasChild = false;
+            let nestingLevel = 0;
+            let startIndex = 0;
+
+            for (let i = 0; i < nodeStr.length; i++) {
+                let char = nodeStr[i];
+                if (char === '(') {
+                    if (nestingLevel === 0) {
+                        name = nodeStr.substring(0, i).trim();
+                        startIndex = i + 1;
+                        hasChild = true;
+                    }
+                    nestingLevel++;
+                } else if (char === ')') {
+                    nestingLevel--;
+                    if (nestingLevel === 0) {
+                        childStr = nodeStr.substring(startIndex, i);
+                        break;
+                    }
+                }
+            }
+
+            if (!hasChild) {
+                name = nodeStr;
+            }
+
+            let data = { Nodes: [], links: [], deepestNodes: [] };
+
+            // Add current node with 'order' attribute
+            data.Nodes.push({ lvl: currentLevel, name: name, order: order });
+
+            // Build link to parent if any
+            if (parentName !== null) {
+                data.links.push({
+                    source_lvl: currentLevel - 1,
+                    source: parentName,
+                    target_lvl: currentLevel,
+                    target: name
+                });
+            }
+
+            let deepestNodes = [{ lvl: currentLevel, name: name }];
+
+            // Recurse into children if any
+            if (hasChild) {
+                let childTokens = tokenize(childStr);
+                let childData = [];
+                let childOrder = 0; // 初始化子节点的顺序
+                for (let childToken of childTokens) {
+                    let childParseResult = parseNode(childToken, currentLevel + 1, name, childOrder);
+                    data.Nodes.push(...childParseResult.Nodes);
+                    data.links.push(...childParseResult.links);
+                    childData.push(childParseResult);
+                    childOrder++; // 递增子节点顺序
+                }
+                // Update deepestNodes
+                deepestNodes = [];
+                for (let child of childData) {
+                    deepestNodes.push(...child.deepestNodes);
+                }
+            }
+
+            data.deepestNodes = deepestNodes;
+
+            return data;
+        }
+
+        function parseInput(inputText) {
+            const data = { Nodes: [], links: [] };
+            let prevDeepestNodes = [];
+            let maxLevel = -1;
+
+            // Tokenize the input
+            let tokens = tokenize(inputText);
+            console.log('tokens:', tokens);
+            for (let token of tokens) {
+                // Parse the token starting at level maxLevel + 1
+                let startLevel = maxLevel + 1;
+                let parseResult = parseNode(token, startLevel, null);
+
+                // Update maxLevel
+                for (let node of parseResult.Nodes) {
+                    if (node.lvl > maxLevel) {
+                        maxLevel = node.lvl;
+                    }
+                }
+
+                // Append nodes and links
+                data.Nodes.push(...parseResult.Nodes);
+                data.links.push(...parseResult.links);
+
+                // If there are previous deepest nodes, connect them to the root nodes of this token
+                if (prevDeepestNodes.length > 0 && parseResult.Nodes.length > 0) {
+                    let rootNodes = parseResult.Nodes.filter(node => node.lvl === startLevel); // 根節點是該次解析的最頂層節點
+                    for (let prevNode of prevDeepestNodes) {
+                        for (let rootNode of rootNodes) {
+                            data.links.push({
+                                source_lvl: prevNode.lvl,
+                                source: prevNode.name,
+                                target_lvl: rootNode.lvl,
+                                target: rootNode.name
+                            });
+                        }
+                    }
+                }
+
+                // Update prevDeepestNodes to be the deepest nodes from this parse result
+                prevDeepestNodes = parseResult.deepestNodes;
+            }
+            console.log('data:', data)
+            return data;
+        }
+
 
     </script>
 

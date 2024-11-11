@@ -43,7 +43,7 @@ print('[Server] device', device)
 model, preprocess_img = clip.load("ViT-B/32", device=device, download_root='../.cache/clip')
 
 diffusiondb_data = []
-with open('../data/diffusiondb_data/imgs_with_keywords.csv', 'r') as file:
+with open('../data/diffusiondb_data/random_100k/diffusiondb_random_100k/imgs_rand100k_with_keywords.csv', 'r') as file:
     csv_reader = csv.DictReader(file)
     diffusiondb_data = [row for row in csv_reader]
 
@@ -118,38 +118,6 @@ def get_image_overview():
     # print(f'results:{results}')
     return json.dumps(results)
 
-"""
-    # 暫時先呈現結果
-    plt.figure(figsize=(8, 8))
-    print(embed_position[:, 0])
-    plt.plot(embed_position[:, 0], embed_position[:, 1], 'o')  # 'o' 是一个圆形标记
-    plt.title('2D projection with TSNE')
-    plt.xlabel('Component 1')
-    plt.ylabel('Component 2')
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png')
-    buf.seek(0)
-    plt_data = base64.b64encode(buf.getvalue()).decode('utf-8')
-
-    result_json = {"images": sd_data, "plt_result": plt_data}
-
-    plt.close()
-
-    ###################     response data   ######################
-    image_result_list = []
-    for i in range(numberOfGeneration + n_search):
-        data_item = {}
-        data_item['id'] = str(i)
-        data_item['x'] = str(embed_position[i][0])
-        data_item['y'] = str(embed_position[i][1])
-
-        compress_image = compress_PIL_image(all_origin_img_list[i])
-        data_item['img'] = getImgStr(compress_image)
-        img_type = 'generate' if i < numberOfGeneration else 'search'
-        data_item['type'] = img_type
-
-        image_result_list.append(data_item)
-"""
 
 # request POST to sd_server.py
 def sd_infer(prompt: str, negative_prompt: str, guidance_scale: float, n_epo=int, n_seed=int):
@@ -180,8 +148,8 @@ def encode_image(image_list, encode_model):
 # Embed the feature into 2D space
 def embed_feature(encode_feature):
 	# Use TSNE for projection
-	# embed_position = TSNE(n_components=2, init='random', perplexity=5, metric='cosine').fit_transform(encode_feature)
-	embed_position = TSNE(n_components=2, init='random', perplexity=2, metric='cosine').fit_transform(encode_feature)
+	embed_position = TSNE(n_components=2, init='random', perplexity=5, metric='cosine').fit_transform(encode_feature)
+	# embed_position = TSNE(n_components=2, init='random', perplexity=2, metric='cosine').fit_transform(encode_feature)
     # Use UMAP for projection
 	# embed_position = umap.UMAP(n_neighbors=5, min_dist=0.001, metric='cosine').fit_transform(encode_feature)
 	return embed_position.tolist()
@@ -225,7 +193,7 @@ def calculate_similarity_matrix(word_embeddings, keyword_embeddings, words, keyw
         word_similarities = similarity_matrix[i]
         # Filter out the input word and sort based on similarity score
         keyword_similarity_pairs = [(score.item(), keyword) for score, keyword in zip(word_similarities, keyword_list) if keyword != word]
-        top_keywords = sorted(keyword_similarity_pairs, reverse=True, key=lambda x: x[0])[:3]
+        top_keywords = sorted(keyword_similarity_pairs, reverse=True, key=lambda x: x[0])[:5]
         similarity_dict[word] = [{kw: round(score, 2)} for score, kw in top_keywords]
     return similarity_dict
 
@@ -476,7 +444,7 @@ def process_data(file_path_test, file_path_train):
                 })
             
             results["test_results"].append(result_item)
-        
+        #print('results-1:' + results)
         return results
     
     # 读取文件
@@ -517,7 +485,7 @@ def process_sentence_analyze():
         # 調用生成嵌入的函數
         
         # Generate Test Prompt Enbeddings 
-        """ """
+        """"""
         run_generate_embeddings(
             query_data_path=file_path + file_testjson,
             query_embs_path=file_path + file_testemd,
@@ -525,14 +493,16 @@ def process_sentence_analyze():
             datamode="test",
             emb_model="text-embedding-ada-002",
             emb_encoding="cl100k_base",
-            api_key="sk-proj-6EjYsmcueKH53UvGpuXxT3BlbkFJzvyPASEGgx6LRXD3PG9r"
+            api_key=""
         )
         print("Generated embeddings success")
-    
+
         file_abb2labelnamejson = "abb2labelname.json"
-        file_trainprompt = "self_consistent_annotate/tb/train/demo_pool/train_demo_pool_std_c5_21.json"
-        file_trainemb = "self_consistent_annotate/tb/train/demo_pool/train_demo_pool_std_c5_21_GPTEmb.npy"
-        file_generatepromptjson = "./generate_ner/prompts/self_consistent_annotate/diffusiondb/self_supervision/train/fs_pool_std_c5_21_GPTEmbDvrsKNN_10_Sc/st_std_c5_test_prompts__8.json"
+        file_trainprompt = "self_consistent_annotate/tb/train/demo_pool/train_demo_pool_std_c5_2348.json"
+        file_trainemb = "self_consistent_annotate/tb/train/demo_pool/train_demo_pool_std_c5_2348_GPTEmb.npy"
+        file_generatepromptjson = "./generate_ner/prompts/self_consistent_annotate/diffusiondb/self_supervision/train/fs_pool_std_c5_2348_GPTEmbDvrsKNN_100_Sc/st_std_c5_test_prompts__10.json"
+
+
         
         # Generate Test Prompt 
         """"""
@@ -547,13 +517,13 @@ def process_sentence_analyze():
             datamode="test",
             model="gpt-3.5-turbo",
             few_shot_setting="pool",
-            demo_size=21,
+            demo_size=2348,
             demo_datamode="train",
             demo_select_method="std_c5",
             demo_retrieval_method="GPTEmbDvrsKNN",
-            diverseKNN_number=10,
+            diverseKNN_number=100,
             diverseKNN_sampling="Sc",
-            few_shot_number=8,
+            few_shot_number=10,
             self_annotate_tag="std_c5"
         )
         
@@ -564,12 +534,10 @@ def process_sentence_analyze():
         log_path: ./generate_ner/log/self_consistent_annotate/tb/diffusiondb/self_supervision/train/fs_pool_std_c5_21_GPTEmbDvrsKNN_10_Sc/TIME_STAMP_st_std_c5_test__8_AskGPT.log
         """
         
-        file_abb2labelnamejson = "abb2labelname.json"
-        file_generatepromptjson = "./generate_ner/prompts/self_consistent_annotate/diffusiondb/self_supervision/train/fs_pool_std_c5_21_GPTEmbDvrsKNN_10_Sc/st_std_c5_test_prompts__8.json"
         
-        response_path = "./generate_ner/result/self_consistent_annotate/tb/diffusiondb/self_supervision/train/fs_pool_std_c5_21_GPTEmbDvrsKNN_10_Sc/Ask_Test_response_1.txt"
+        response_path = "./generate_ner/result/self_consistent_annotate/tb/diffusiondb/self_supervision/train/fs_pool_std_c5_2348_GPTEmbDvrsKNN_100_Sc/Ask_Test_response_1.txt"
         
-        log_path = "./generate_ner/log/self_consistent_annotate/tb/diffusiondb/self_supervision/train/fs_pool_std_c5_21_GPTEmbDvrsKNN_10_Sc/Ask_Test.log"
+        log_path = "./generate_ner/log/self_consistent_annotate/tb/diffusiondb/self_supervision/train/fs_pool_std_c5_2348_GPTEmbDvrsKNN_100_Sc/Ask_Test.log"
         
         ask_gpt_function(
             abb2labelname_path=file_path + file_abb2labelnamejson,
@@ -580,19 +548,19 @@ def process_sentence_analyze():
             datamode="test",
             model="gpt-3.5-turbo",
             few_shot_setting="pool",
-            demo_size=21,
+            demo_size=2348,
             demo_datamode="train",
             demo_select_method="std_c5",
             demo_retrieval_method="GPTEmbDvrsKNN",
-            diverseKNN_number=10,
+            diverseKNN_number=100,
             diverseKNN_sampling="Sc",
-            few_shot_number=8,
+            few_shot_number=10,
             self_annotate_tag="std_c5"
         )
         """"""
         
         # 讀取
-        result_train_all_data_path = "./generate_ner/result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/back_0902_21_1513/TIME_STAMP_train_diffusiondb_0_response.json"
+        result_train_all_data_path = "./generate_ner/result/self_consistent_annotate/tb/diffusiondb/self_annotation/train/zs_consist_0.7_5_TSMV/TIME_STAMP_train_diffusiondb_0_response.json"
 
         result = process_data(response_path, result_train_all_data_path)
         print(f'results->{result}')
@@ -604,9 +572,7 @@ def process_sentence_analyze():
         print(f"Error in sentence_analyze: {e}")
         # 返回错误响应
         return jsonify({"error": str(e)}), 500
-    """
-    return "123"
-    """
+    
 
 
 if __name__ == '__main__':

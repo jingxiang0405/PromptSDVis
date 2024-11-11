@@ -1,7 +1,8 @@
 import openai
 
+"""
 def check_openai_api_key(api_key):
-    openai.api_key = "sk-proj-6EjYsmcueKH53UvGpuXxT3BlbkFJzvyPASEGgx6LRXD3PG9r"
+    openai.api_key = ""
     try:
         print("openai.Model.list()")
         #print(openai.Model.list())
@@ -11,17 +12,17 @@ def check_openai_api_key(api_key):
         return True
 
 
-api_key = "sk-proj-6EjYsmcueKH53UvGpuXxT3BlbkFJzvyPASEGgx6LRXD3PG9r"
+api_key = ""
 is_valid = check_openai_api_key(api_key)
 
 if is_valid:
     print("Valid OpenAI API key.")
 else:
     print("Invalid OpenAI API key.")
-
+"""
 
 response = openai.ChatCompletion.create(
-    model="gpt-4o-mini",
+    model="http://140.119.162.202:11434",
     messages = [
     {
         'role': 'user',
