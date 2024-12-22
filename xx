@@ -1,0 +1,17 @@
+apt-get install software-properties-common
+add-apt-repository ppa:deadsnakes/ppa
+apt-get update
+apt-get install python3.8
+apt-get install python3.8-venv
+
+ln -sf /usr/bin/python3.8 /usr/bin/python
+python -m venv myenv
+source myenv/bin/activate
+pip install Flask
+pip install --upgrade pip
+pip install torch
+pip install diffusers
+pip install transformers
+pip install accelerate
+source myenv/bin/activate
+python ./sd_server.py 0

@@ -19,10 +19,51 @@
 
     <!-- body -->
     <style type="text/css">
+        table {
+            border-collapse: separate;
+            border-spacing: 5px;
+        }
+
+        .table-container {
+            width: 600px;
+            height: 250px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            border: 1px solid #ccc;
+            margin: 10px auto;
+        }
+
+        .classified-term {
+            background-color: lightgray;
+            /* 初始灰底 */
+            border-radius: 3px;
+            padding: 0 2px;
+            cursor: pointer;
+            /* 增加点击效果 */
+        }
+
+        /*高亮的样式*/
+        .classified-term.highlight {
+            background-color: #f8db64;
+            border-radius: 5px;
+            padding: 2px;
+        }
+
+        /*样式：突出显示句子单元格*/
+        td {
+            color: #000080;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 10px;
+            font-family:
+                'Arial',
+                sans-serif;
+        }
+
         .outlayer {
             width: 1900px;
             height: 1080px;
-            border-style: solid;
+            /*border-style:solid; */
         }
 
         body {
@@ -31,47 +72,45 @@
         }
 
         .header-title {
-            border-style: solid;
+            /*border-style:solid; */
             font-size: 48px;
         }
 
         /*
-            prompt-config image_browser local_exploration
+        prompt-config
+        image_browser
+        local_exploration
         */
-        .modules {
-            border-style: solid;
-        }
-
         .image-browser {
-            border-style: solid;
-            width: 1028px;
+            /*border-style:solid; */
+            width: 728px;
             height: 1028px;
         }
 
         .local-exploration {
-            border-style: solid;
-            width: 512px;
+            /*border-style:solid; */
             height: 1028px;
         }
 
-        /*
-            text
-        */
+        .circle-packing-zone {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /*text*/
         .main-title {
-            margin-bottom: 40px;
-            font-size: 30pt;
+            margin-bottom: 20px;
+            font-size: 25pt;
         }
 
         .sub-title {
             font-size: 20pt;
-
         }
 
-        /*
-            Prompt CSS
-        */
+        /* Prompt CSS */
         .prompt-config {
-            border-style: solid;
+            /*border-style:solid; */
             width: 417px;
             height: 1028px;
         }
@@ -86,9 +125,7 @@
             height: 32px;
         }
 
-        /*
-        < !-- Generation Input-->
-        */
+        /*Generation Input*/
         .generation-area {
             width: 377px;
             height: 32px;
@@ -104,13 +141,48 @@
             width: 100px;
             height: 32px;
         }
-    </style>
+
+        /*color box*/
+        /* 控制水平佈局 */
+        .controls {
+            display: flex;
+            align-items: center;
+            /* 垂直居中 */
+            gap: 20px;
+            /* 控制兩部分之間的距離 */
+            margin-bottom: 10px;
+            /* 與其他部分的間距 */
+        }
+
+        /* Legend container 樣式 */
+        #legend-container {
+            display: flex;
+            gap: 15px;
+            /* 控制每個 legend-item 的間距 */
+        }
+
+        /* Legend item 樣式 */
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            /* 控制 color-box 和文字之間的距離 */
+            font-size: 14px;
+        }
+
+        /* Color box 樣式 */
+        .color-box {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #000;
+            /* 可選：邊框 */
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
-        <div class="row header-title">PromtpSDVis</div>
+        <div class="row header-title">PromptSDVis</div>
         <div class="row modules">
             <div class="col-3 prompt-config">
                 <div class="main-title">Model Input</div>
@@ -148,12 +220,43 @@
 
             <div class="col-8 image-browser">
                 <!-- Prompt Tree -->
+                <div class="main-title">Noun-Words Combinations</div>
                 <div id="prompt-tree">
-                    <svg id="prompt-tree-svg" width="980" height="300"></svg>
+                    <svg id="prompt-tree-svg" width="680" height="300"></svg>
+                    <!--<svg id="prompt-tree-svg" width="980" height="300"></svg>-->
                 </div>
                 <!-- Scatter View-->
+                <div class="main-title">Image Browser</div>
+                <div class="controls">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="toggle-brush">
+                        <label class="form-check-label" for="toggle-brush">Draw Selection Box</label>
+                    </div>
+                    <div id="legend-container">
+                        <div class="legend-item">
+                            <span class="color-box" style="background-color: red;"></span>
+                            <span class="label">Selected</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="color-box" style="background-color: black;"></span>
+                            <span class="label">Unselected</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="color-box" style="background-color: orange;"></span>
+                            <span class="label">Related Combinations</span>
+                        </div>
+                    </div>
+                </div>
                 <div id="scatter-tree">
-                    <svg id="scatter" width="980" height="580"></svg>
+                    <svg id="scatter" width="680" height="480">
+                        <!-- Mini Map 作為子元素 -->
+                        <g id="scatter-minimap" transform="translate(470, 330)">
+                            <!-- 450, 330 是定位 Mini Map 的位置 -->
+                            <rect x="0" y="0" width="200" height="140" fill="white" stroke="black"></rect>
+                        </g>
+                    </svg>
+
+                    <!--<svg id="scatter" width="980" height="580"></svg>-->
                     <!--<svg id="scatter-minimap" width="200" height="100"></svg>-->
                     <div id="tooltip"
                         style="position: absolute; background: rgba(255,255,255,0.8); padding: 5px; border: 1px solid #d3d3d3; display: none;">
@@ -165,7 +268,18 @@
 
             <!-- 暫時先不動 -->
             <div class="col local-exploration">
-                <svg id="zoomable-circle-packing" width="400" height="400"></svg>
+                <!---->
+                <div class="main-title">Related With DiffusionDB</div>
+                <div class="table-container">
+                    <table id="image-sentence-table">
+
+                    </table>
+                </div>
+                <div class="main-title">Prompt Analyze</div>
+                <div class="circle-packing-zone">
+                    <svg id="zoomable-circle-packing" width="600" height="600"></svg>
+                </div>
+
             </div>
         </div>
     </div>
@@ -179,9 +293,10 @@
     <script src="js/scatter.js"></script>
     <!-- Prompt Tree JS -->
     <script src="js/prompt-tree-1.js"></script>
-    <!-- Zoomable Circle Packing -->
-    <script src="js/zoomable-circle-packing.js"></script>
-
+    <!-- Zoomable Circle Packing 
+    <script src="js/zoomable-circle-packing.js"></script>-->
+    <!-- Zoomable Circle Packing-1 -->
+    <script src="js/zoomable-circle-packing-2.js"></script>
     <script>
 
         // Prompt Tree data
@@ -263,6 +378,35 @@
             };
             sendXhttp(params, METHOD_GET, "image_overview", function (data) {
                 console.log("Image overview data:", data);
+                // 清空 sentences 數組
+                sentences = [];
+
+                // 確保返回的 data.result 存在並且是 array
+                if (Array.isArray(data.result)) {
+                    // 遍歷 result，提取每個 array 中的 prompt 值
+                    data.result.forEach(item => {
+                        if (item.prompt) {
+                            sentences.push(item.prompt);
+                        }
+                    });
+                } else {
+                    console.error("Invalid data.result format:", data.result);
+                }
+
+                console.log("Sentences array: ", sentences);
+
+                // 調用 compareSentences 函數生成結果
+                const result = compareSentences(sentences);
+                console.log("Comparison result: ", result);
+
+                // 將結果放到 prompt-input 的 textarea 中
+                document.getElementById('prompt').value = result;
+                // 调用函数，传入输入内容
+                const parse_InputText = parseInput(result);
+                console.log(parse_InputText); // 输出解析后的数据，您可以在控制台中查看
+
+                // 如果您有绘制图表的函数，可以在这里调用
+                initRelationshipGraph(parse_InputText, result);
                 recieveDataFromImageOverview(data);  // 调用 recieveData 处理返回的图片数据
             });
         })
@@ -301,13 +445,14 @@
             const images = data.embed_position.map((position, index) => {
                 const result = data.result[index];
                 return {
-                    id: index,
+                    id: data.result[index]['image_name'],
                     src: `data:image/png;base64,${result.img}`,
                     x: position[0],
                     y: position[1],
-                    width: 30,  // 假设宽度和高度为100，这个可以根据实际需求调整
-                    height: 30,
-                    title: result.prompt
+                    width: 8,  //圖片寬高
+                    height: 8,
+                    title: result.prompt,
+                    randomseed: result.seed
                 };
             });
             console.log(images)
@@ -315,6 +460,7 @@
         }
 
         // This is the function you want to test
+        /*
         function transformTestResultsToData(testResults) {
             const data = {
                 "name": "flare",
@@ -347,9 +493,7 @@
                     prediction.top_similar.forEach(similarItem => {
                         const value = similarItem.similarity * 1000; // Scale similarity
                         const trainImages = similarItem.train_indices.map(imageName => `../data/diffusiondb_data/random_5k/diffusiondb_random_5k/images/${imageName}`);
-                        console.log('trainImages')
-                        console.log(trainImages)
-                        console.log('---------------')
+                        //console.log(trainImages)
                         // Check if the similar item node already exists
                         let similarNode = predictionNode.children.find(child => child.name === similarItem.train_value);
                         if (!similarNode) {
@@ -383,25 +527,32 @@
 
             return data;
         }
-
+*/
         /*
             (Callback Function) Recieve Data from server.py Path -> sentence_analyze 
         */
 
         function recieveDataFromSentenceAnalyze(data) {
-            covertData = transformTestResultsToData(data)
-            console.log("transformTestResultsToData:", covertData);
-            initZoomableCirclepacking(covertData);
+            //covertData = transformTestResultsToData(data)
+            //console.log("transformTestResultsToData:", covertData);
+            initZoomableCirclepacking(data);
         }
 
         // 從 scatter.js 中scatterSelectionEnd  Send to Server.py Path -> sentence_analyze
         function sendSelectionToServer(selectedImages) {
             var params = selectedImages.map(image => ({
                 'id': image.id,
-                'title': image.title
+                'title': image.title,
+                'image_src': image.image_src
             }));
+            /*
             sendXhttp(params, METHOD_POST, "sentence_analyze", function (data) {
                 console.log("Rewrite Sentence analyze data:", data);
+                recieveDataFromSentenceAnalyze(data);
+            });
+            */
+            sendXhttp(params, METHOD_POST, "prompt_analyze", function (data) {
+                console.log("Rewrite Prompt analyze data:", data);
                 recieveDataFromSentenceAnalyze(data);
             });
         }
@@ -430,6 +581,14 @@
 
                 // 将结果放到 prompt-input 的 textarea 中
                 document.getElementById('prompt').value = result;
+
+
+                // 调用函数，传入输入内容
+                const parse_InputText = parseInput(result);
+                console.log(parse_InputText); // 输出解析后的数据，您可以在控制台中查看
+
+                // 如果您有绘制图表的函数，可以在这里调用
+                initRelationshipGraph(parse_InputText, result);
             }
 
             if (selectedImages.length != 0) {

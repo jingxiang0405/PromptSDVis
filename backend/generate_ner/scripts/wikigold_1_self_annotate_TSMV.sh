@@ -1,5 +1,6 @@
 #dataname=wikigold
 #datamode=train_shuffle_42
+
 dataname=diffusiondb
 datamode=train
 task_hint=diffusiondb
@@ -8,9 +9,8 @@ query_times=5
 temperature=0.7
 
 few_shot_setting=zs
-
-annotation_size=100000
-
+#----
+annotation_size=5000
 start_time="TIME_STAMP"
 
 # choices: majority_voting, two_stage_majority_voting
@@ -19,7 +19,7 @@ output_SC_all_answer=0
 parse_response=0
 
 # model 選擇
-model="gpt-3.5-turbo"
+model="gpt-4o-mini"
 
 # Self-annotating with two stage majority voting
 #python code/self_consistent_annotation/GeneratePrompts.py \
@@ -56,6 +56,10 @@ model="gpt-3.5-turbo"
 #        --model $model \
 
 
+
+
+#這是後續要用來做test比較相關 
+
 # Obtain self-annotated demonstration set
 demo_datamode=train_shuffle_42
 demo_datamode=train
@@ -64,6 +68,7 @@ self_annotate_tag=std_c5
 demo_setting=pool
 include_emb=1
 python code/self_consistent_annotation/confidence_selection/Response2Annotation.py \
+        --model $model\
         --dataname $dataname \
         --demo_datamode $demo_datamode \
         --task_hint $task_hint \
@@ -74,6 +79,4 @@ python code/self_consistent_annotation/confidence_selection/Response2Annotation.
         --self_annotate_tag $self_annotate_tag \
         --demo_setting $demo_setting \
         --include_emb $include_emb \
-
-
-        
+#--------------------------------

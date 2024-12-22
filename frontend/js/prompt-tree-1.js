@@ -3,7 +3,7 @@ function initRelationshipGraph(data, inputText) {
 
     // 调整节点间距
     const gap = { width: 50, height: 12 };
-    const margin = { top: 16, right: 16, bottom: 16, left: 16 };
+    //const margin = { top: 16, right: 16, bottom: 16, left: 16 };
     let Nodes = [], links = [], lvlCount = 0;
 
     // 创建 SVG 画布
@@ -34,9 +34,7 @@ function initRelationshipGraph(data, inputText) {
         .style("fill", "none")
         .style("pointer-events", "all")
         .on("click", function () {
-            // 清除所有高亮节点
-            highlightedNodes.clear();
-            update_selection();
+            clearSelection();
         });
 
     // 对角线函数
@@ -49,23 +47,6 @@ function initRelationshipGraph(data, inputText) {
         return Nodes.find((node) => node.lvl === lvl && node.name === name) || null;
     }
 
-    // 鼠标事件处理函数
-    function mouse_action(val, stat) {
-        if (highlightedNodes.has(val)) return; // 如果节点已被高亮，则不改变样式
-
-        d3.select("#" + val.id)
-            .style("fill", stat ? "orange" : "#CCC")
-            .style("stroke", stat ? "orange" : null);
-
-        links.forEach(function (d) {
-            if (d.source.id === val.id || d.target.id === val.id) {
-                d3.select("#" + d.id)
-                    .style("fill", "none")
-                    .style("stroke", stat ? "orange" : "#ccc")
-                    .style("stroke-width", "2.5px");
-            }
-        });
-    }
 
     // 函数用于打印所有可能的句子组合
     function printCombinations(highlightedNodes, baseSentence) {
@@ -108,44 +89,69 @@ function initRelationshipGraph(data, inputText) {
         // 生成所有可能的组合
         generateCombinations(0, []);
 
-        // 檢查每個組合是否匹配 tooltip 中的文本
-        combinations.forEach(combination => {
-            console.log(combination); // 打印組合
 
-            // 選擇所有包含圖像的 <div>
-            d3.selectAll("#scatter").each(function () {
-                console.log('in Scatter'); // 打印當前的 scatter 節點
-                const svgElement = d3.select(this);
-            
-                // 遍歷每個 <image> 標籤
-                svgElement.selectAll("image").each(function () {
-                    console.log('Select image'); // 打印當前被選中的圖片
-                    const imgElement = d3.select(this);
-                    const imgTitle = imgElement.attr("data-title").trim();
-                    console.log('imgTitle: ' + imgTitle);
-                
-                    // 初始化標誌，假設該圖像未匹配到任何組合
-                    let matched = false;
-                
-                    // 遍歷每個生成的組合
-                    combinations.forEach(combination => {
-                        console.log(combination); // 打印每個組合
-                
-                        // 如果生成的組合與 <image> 的 data-title 屬性匹配，標誌為 true
-                        if (imgTitle === combination) {
-                            console.log('imgTitle === combination');
-                            matched = true;
-                        }
-                    });
-                
-                    // 找到對應的 <rect> 並根據是否匹配更新邊框樣式
-                    svgElement.select(`#rect-${imgElement.attr('id')}`)
-                        .style("stroke", matched ? "orange" : "black")
-                        .style("stroke-width", matched ? "3" : "2");
-                });
-                
+
+        const combinationSet = new Set(combinations);
+        // 2. 收集所有需要更新的 rect
+        const rectUpdates = [];
+
+        // 選擇所有包含圖像的 <div>
+        d3.selectAll("#scatter image").each(function () {
+            const imgElement = d3.select(this);
+            const imgTitle = imgElement.attr("data-title")?.trim();
+
+            console.log('imgTitle: ' + imgTitle);
+
+            // 初始化 matched 標誌，檢查是否匹配 combinationSet
+            const matched = combinationSet.has(imgTitle);
+            console.log('qqqq')
+            console.log(matched)
+            // 找到對應的 <rect>
+            const rectElement = d3.select(`#rect-${imgElement.attr("id").replace('.png', '')}`);
+            console.log('sssss')
+            console.log(`#rect-${imgElement.attr("id").replace('.png', '')}`)
+            // 儲存原始外框顏色到屬性中
+            if (!rectElement.attr("data-original-stroke")) {
+                rectElement.attr("data-original-stroke", rectElement.style("stroke") || "black");
+            }
+
+            // 收集需要更新的 rect 信息
+            rectUpdates.push({
+                element: rectElement,
+                stroke: matched ? "orange" : rectElement.attr("data-original-stroke"),
+                strokeWidth: matched ? "3" : "2"
             });
         });
+
+        // 3. 統一應用樣式更新
+        rectUpdates.forEach(({ element, stroke, strokeWidth }) => {
+            element.style("stroke", stroke).style("stroke-width", strokeWidth);
+        });
+
+    }
+    // 清除选中状态的函数
+    function clearSelection() {
+
+        d3.selectAll("#scatter image").each(function () {
+            const imgElement = d3.select(this);
+            imgId = imgElement.attr("id").replace('.png', '')
+            if (!imgId) return; // 確保 id 存在
+
+            // 找到對應的 <rect>，恢復原始外框顏色
+            const rectElement = d3.select(`#rect-${imgId}`);
+            console.log('----------')
+            console.log(`#rect-${imgElement.attr("id").replace('.png', '')}`)
+            const originalStroke = rectElement.attr("data-original-stroke");
+
+            if (originalStroke) {
+                rectElement
+                    .style("stroke", originalStroke)
+                    .style("stroke-width", "2");
+            }
+        });
+        // 清除高亮狀態
+        highlightedNodes.clear();
+        update_selection();
     }
     // 更新选中状态的函数
     function update_selection(inputText) {

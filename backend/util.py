@@ -22,7 +22,7 @@ sd_data = {}
 
 
 
-def preprocess_text(text, max_duplicate=3, max_len=70):
+def preprocess_text(text, max_duplicate=3, max_len=40):
     duplicate_count = {}
     process_word_list = []
     text = text.replace(' ,', ',').replace(',', ' ,').replace(' , ,', ' ,').replace(',', ', ')

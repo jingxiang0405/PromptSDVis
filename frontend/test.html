@@ -35,17 +35,82 @@
             border-radius: 5px;
             overflow-x: auto;
         }
+
+        table,
+        th,
+        td,
+        tr {
+            border: none;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 5px;
+            /* 单元格之间的间距 */
+        }
+
+        .table-container {
+            width: 600px;
+            /* 固定宽度 */
+            height: 400px;
+            /* 固定高度 */
+            overflow-y: auto;
+            /* 当内容超出高度时，显示垂直滚动条 */
+            overflow-x: hidden;
+            /* 隐藏水平滚动条（如果不需要） */
+            border: 1px solid #ccc;
+            /* 可选：为容器添加边框 */
+            margin: 20px auto;
+            /* 可选：居中容器 */
+        }
+
+        /* 高亮表格行的样式 */
+        /* 高亮的样式 */
+        .classified-term.highlight {
+            background-color: #FFFF99;
+            /* 浅黄色背景 */
+            border-radius: 5px;
+            /* 圆角 */
+            padding: 2px;
+            /* 内边距 */
+        }
+
+        /* 样式：突出显示句子单元格 */
+        td {
+            color: #000080;
+            /* 深蓝色文字 */
+            font-weight: bold;
+            /* 加粗字体 */
+            font-size: 1.1em;
+            /* 增大字体大小 */
+            padding: 10px;
+            font-family: 'Arial', sans-serif;
+
+            /* 可选：添加边框 */
+        }
     </style>
     <!-- D3 JS -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
 <body>
-    <pre id="output"></pre>
-    <div class="container">
+    <pre id="output" style="display:none"></pre>
+    <div class="container" style="display:none">
         <h1>Test transformTestResultsToData Function</h1>
         <p>Check the console or see the output below:</p>
         <pre id="output"></pre>
+    </div>
+    <div class="table-container">
+        <table id="image-sentence-table" border="1">
+            <thead>
+                <tr>
+
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 动态生成的表格内容将插入在这里 -->
+            </tbody>
+        </table>
     </div>
     <div class="col local-exploration">
         <svg id="zoomable-circle-packing" width="400" height="400"></svg>
@@ -53,8 +118,130 @@
     <textarea class="prompt-input" placeholder="prompt" id="prompt"></textarea>
     <!-- Optional: You can include external JavaScript here -->
     <script>
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // 避免正則表達式的特殊字符影響
+        }
+
+        function createSentenceWithSpans(sentence, prediction) {
+            // 確保 prediction 是有效的對象
+            if (!prediction || typeof prediction !== 'object') {
+                console.error('Invalid prediction:', prediction);
+                return sentence;
+            }
+
+            // 將分類項目收集到一個陣列，並按長度降序排序
+            const classifiedTerms = Object.entries(prediction)
+                .map(([term]) => term)
+                .sort((a, b) => b.length - a.length); // 確保長詞優先處理
+
+            if (classifiedTerms.length === 0) {
+                return sentence; // 沒有分類項目，返回原句子
+            }
+
+            // 遍歷 classifiedTerms，逐一替換
+            let modifiedSentence = sentence;
+            classifiedTerms.forEach((term) => {
+                const regex = new RegExp(`(${escapeRegExp(term)})(?![^<]*>)`, 'gi'); // 確保不是已被 <span> 包裹的內容
+                modifiedSentence = modifiedSentence.replace(
+                    regex,
+                    `<span class="classified-term">$1</span>` // 使用通用的 classified-term 標籤
+                );
+            });
+
+            return modifiedSentence;
+        }
+        function creatTable(testResults) {
+            // 创建一个数组来存储以 test_sentence 为分组的数据
+            let groupedData = [];
+
+            // 遍历 test_results
+            testResults.test_results.forEach(testResult => {
+                const testSentence = testResult.test_sentence;
+
+                // 获取对应的 top5_similar_train 列表
+                const top5SimilarTrain = testResult.top5_similar_train.map(trainItem => {
+                    // 解析 prediction
+                    let predictionObj = {};
+                    if (trainItem.prediction && trainItem.prediction !== '{}') {
+                        try {
+                            // Replace single quotes with double quotes for valid JSON
+                            predictionObj = JSON.parse(trainItem.prediction.replace(/'/g, '"'));
+                        } catch (e) {
+                            console.error('Error parsing prediction:', trainItem.prediction);
+                        }
+                    }
+                    return {
+                        image: trainItem.train_idx,
+                        sentence: trainItem.sentence,
+                        prediction: predictionObj // 添加解析后的 prediction 对象
+                    };
+                });
+
+                // 将数据加入 groupedData 数组
+                groupedData.push({
+                    testSentence: testSentence,
+                    items: top5SimilarTrain
+                });
+            });
+
+            // 选择表格的 tbody
+            const tbody = document.querySelector("#image-sentence-table tbody");
+            console.log(groupedData)
+            // 遍历 groupedData，生成表格行
+            groupedData.forEach(group => {
+                const testSentence = group.testSentence;
+                const items = group.items;
+
+                // 插入一个新行，包含 test_sentence，合并所有列
+                const trTestSentence = document.createElement("tr");
+                const tdTestSentence = document.createElement("td");
+
+                tdTestSentence.textContent = `${testSentence}`;
+                tdTestSentence.colSpan = 2; // 假设有两列：图片和句子
+                tdTestSentence.classList.add("test-sentence-cell"); // 可选：添加类名以定制样式
+
+                trTestSentence.appendChild(tdTestSentence);
+                tbody.appendChild(trTestSentence);
+
+                // 为每个 item 创建一行，包含图片和句子
+                items.forEach(item => {
+                    const tr = document.createElement("tr");
+                    tr.setAttribute('data-idx', item.image); // 添加 idx 属性
+
+                    // 创建图片单元格
+                    const tdImage = document.createElement("td");
+                    const img = document.createElement("img");
+                    img.src = `path/to/images/${item.image}`; // 请替换为实际的图片路径
+                    img.alt = item.image;
+                    img.width = 100; // 设置图片宽度
+                    tdImage.appendChild(img);
+
+                    // 创建句子单元格
+                    const tdSentence = document.createElement("td");
+
+                    // 在句子中标记被分类的内容
+                    const sentenceWithSpans = createSentenceWithSpans(item.sentence, item.prediction);
+                    console.log(sentenceWithSpans)
+                    tdSentence.innerHTML = sentenceWithSpans; // 设置带有 <span> 标签的句子
+
+                    // 将单元格添加到行
+                    tr.appendChild(tdImage);
+                    tr.appendChild(tdSentence);
+
+                    // 将行添加到表格主体
+                    tbody.appendChild(tr);
+                });
+            });
+        }
         // Example test data
-        const testResults = {'test_results': [{'test_idx': '36', 'predictions': [{'test_prediction': 'Van Gogh', 'category': 'Style modifier', 'top_similar': [{'train_value': 'norman rockwell', 'train_indices': ['image_11.png'], 'similarity': 0.5830664038658142}, {'train_value': 'Lois van Baarle', 'train_indices': ['image_4.png'], 'similarity': 0.5372676849365234}, {'train_value': 'oil painting', 'train_indices': ['image_18.png'], 'similarity': 0.5255828499794006}, {'train_value': 'renaissance oil painting', 'train_indices': ['image_20.png'], 'similarity': 0.5245212316513062}, {'train_value': 'digital art', 'train_indices': ['image_11.png'], 'similarity': 0.42970049381256104}, {'train_value': 'mona lisa', 'train_indices': ['image_15.png', 'image_18.png', 'image_20.png'], 'similarity': 0.3978193700313568}, {'train_value': 'retrowave style artwork', 'train_indices': ['image_6.png'], 'similarity': 0.37302374839782715}, {'train_value': 'film', 'train_indices': ['image_1.png', 'image_5.png'], 'similarity': 0.3544333577156067}, {'train_value': 'Artgerm', 'train_indices': ['image_4.png'], 'similarity': 0.3247203528881073}, {'train_value': 'alan bean', 'train_indices': ['image_14.png', 'image_17.png'], 'similarity': 0.3231472969055176}]}, {'test_prediction': 'Norman Rockwell', 'category': 'Style modifier', 'top_similar': [{'train_value': 'norman rockwell', 'train_indices': ['image_11.png'], 'similarity': 1.0}, {'train_value': 'mona lisa', 'train_indices': ['image_15.png', 'image_18.png', 'image_20.png'], 'similarity': 0.5541529655456543}, {'train_value': 'digital art', 'train_indices': ['image_11.png'], 'similarity': 0.45089033246040344}, {'train_value': 'renaissance oil painting', 'train_indices': ['image_20.png'], 'similarity': 0.44155624508857727}, {'train_value': 'oil painting', 'train_indices': ['image_18.png'], 'similarity': 0.4259154200553894}, {'train_value': 'peter elson', 'train_indices': ['image_14.png', 'image_17.png'], 'similarity': 0.3917057514190674}, {'train_value': 'film', 'train_indices': ['image_1.png', 'image_5.png'], 'similarity': 0.3905155658721924}, {'train_value': 'photorealistic', 'train_indices': ['image_2.png', 'image_7.png'], 'similarity': 0.38707512617111206}, {'train_value': 'greg rutkowski', 'train_indices': ['image_11.png'], 'similarity': 0.3858761787414551}, {'train_value': 'Lois van Baarle', 'train_indices': ['image_4.png'], 'similarity': 0.3799628019332886}]}]}, {'test_idx': '42', 'predictions': [{'test_prediction': 'Van Gogh', 'category': 'Style modifier', 'top_similar': [{'train_value': 'norman rockwell', 'train_indices': ['image_11.png'], 'similarity': 0.5830664038658142}, {'train_value': 'Lois van Baarle', 'train_indices': ['image_4.png'], 'similarity': 0.5372676849365234}, {'train_value': 'oil painting', 'train_indices': ['image_18.png'], 'similarity': 0.5255828499794006}, {'train_value': 'renaissance oil painting', 'train_indices': ['image_20.png'], 'similarity': 0.5245212316513062}, {'train_value': 'digital art', 'train_indices': ['image_11.png'], 'similarity': 0.42970049381256104}, {'train_value': 'mona lisa', 'train_indices': ['image_15.png', 'image_18.png', 'image_20.png'], 'similarity': 0.3978193700313568}, {'train_value': 'retrowave style artwork', 'train_indices': ['image_6.png'], 'similarity': 0.37302374839782715}, {'train_value': 'film', 'train_indices': ['image_1.png', 'image_5.png'], 'similarity': 0.3544333577156067}, {'train_value': 'Artgerm', 'train_indices': ['image_4.png'], 'similarity': 0.3247203528881073}, {'train_value': 'alan bean', 'train_indices': ['image_14.png', 'image_17.png'], 'similarity': 0.3231472969055176}]}, {'test_prediction': 'Freeman Rockwell', 'category': 'Style modifier', 'top_similar': [{'train_value': 'norman rockwell', 'train_indices': ['image_11.png'], 'similarity': 0.7520495057106018}, {'train_value': 'greg rutkowski', 'train_indices': ['image_11.png'], 'similarity': 0.4694380760192871}, {'train_value': 'mona lisa', 'train_indices': ['image_15.png', 'image_18.png', 'image_20.png'], 'similarity': 0.3908300995826721}, {'train_value': 'thomas kindkade', 'train_indices': ['image_11.png'], 'similarity': 0.36228829622268677}, {'train_value': 'alan bean', 'train_indices': ['image_14.png', 'image_17.png'], 'similarity': 0.35842081904411316}, {'train_value': 'peter elson', 'train_indices': ['image_14.png', 'image_17.png'], 'similarity': 0.3333565890789032}, {'train_value': 'by Akihiko Yoshida', 'train_indices': ['image_13.png'], 'similarity': 0.3140556812286377}, {'train_value': 'digital art', 'train_indices': ['image_11.png'], 'similarity': 0.30148959159851074}, {'train_value': 'Lois van Baarle', 'train_indices': ['image_4.png'], 'similarity': 0.29788321256637573}, {'train_value': 'stubble', 'train_indices': ['image_3.png'], 'similarity': 0.2806892395019531}]}]}, {'test_idx': '43', 'predictions': [{'test_prediction': 'Van Gogh', 'category': 'Style modifier', 'top_similar': [{'train_value': 'norman rockwell', 'train_indices': ['image_11.png'], 'similarity': 0.5830664038658142}, {'train_value': 'Lois van Baarle', 'train_indices': ['image_4.png'], 'similarity': 0.5372676849365234}, {'train_value': 'oil painting', 'train_indices': ['image_18.png'], 'similarity': 0.5255828499794006}, {'train_value': 'renaissance oil painting', 'train_indices': ['image_20.png'], 'similarity': 0.5245212316513062}, {'train_value': 'digital art', 'train_indices': ['image_11.png'], 'similarity': 0.42970049381256104}, {'train_value': 'mona lisa', 'train_indices': ['image_15.png', 'image_18.png', 'image_20.png'], 'similarity': 0.3978193700313568}, {'train_value': 'retrowave style artwork', 'train_indices': ['image_6.png'], 'similarity': 0.37302374839782715}, {'train_value': 'film', 'train_indices': ['image_1.png', 'image_5.png'], 'similarity': 0.3544333577156067}, {'train_value': 'Artgerm', 'train_indices': ['image_4.png'], 'similarity': 0.3247203528881073}, {'train_value': 'alan bean', 'train_indices': ['image_14.png', 'image_17.png'], 'similarity': 0.3231472969055176}]}, {'test_prediction': 'Emmanuel Rockwell', 'category': 'Style modifier', 'top_similar': [{'train_value': 'norman rockwell', 'train_indices': ['image_11.png'], 'similarity': 0.8426313996315002}, {'train_value': 'mona lisa', 'train_indices': ['image_15.png', 'image_18.png', 'image_20.png'], 'similarity': 0.5298314094543457}, {'train_value': 'greg rutkowski', 'train_indices': ['image_11.png'], 'similarity': 0.43017953634262085}, {'train_value': 'Lois van Baarle', 'train_indices': ['image_4.png'], 'similarity': 0.38609176874160767}, {'train_value': 'digital art', 'train_indices': ['image_11.png'], 'similarity': 0.3827359080314636}, {'train_value': 'peter elson', 'train_indices': ['image_14.png', 'image_17.png'], 'similarity': 0.3827289342880249}, {'train_value': 'thomas kindkade', 'train_indices': ['image_11.png'], 'similarity': 0.36779525876045227}, {'train_value': 'renaissance oil painting', 'train_indices': ['image_20.png'], 'similarity': 0.3551015853881836}, {'train_value': 'film', 'train_indices': ['image_1.png', 'image_5.png'], 'similarity': 0.3536405861377716}, {'train_value': 'photorealistic', 'train_indices': ['image_2.png', 'image_7.png'], 'similarity': 0.34931328892707825}]}]}]}
+        const testResults1 = { 'test_results': [{'test_idx': '0', 'test_sentence': 'dog, animal', 'test_prediction': {'dog': 'Subject term'}, 'top5_similar_train': [{'train_idx': 'image_2078.png', 'prediction': '{}', 'sentence': 'a dog with a cats had, dslr 3 5 mm ', 'similarity_score': 0.4852}, {'train_idx': 'image_565.png', 'prediction': "{'cat riding a dog': 'Subject term'}", 'sentence': 'photo of a cat riding a dog. The dog is riding a horse', 'similarity_score': 0.4616}, {'train_idx': 'image_574.png', 'prediction': "{'cat': 'Subject term'}", 'sentence': "photo of a cat riding a dog that's riding a horse", 'similarity_score': 0.459}]}]}
+        // 假设您的数据已存储在 testResults 中
+        creatTable(testResults1);
+
+        // Example test data
+        const testResults = { 'test_results': [{'test_idx': '0', 'test_sentence': 'dog, animal', 'test_prediction': {'dog': 'Subject term'}, 'top5_similar_train': [{'train_idx': 'image_2078.png', 'prediction': '{}', 'sentence': 'a dog with a cats had, dslr 3 5 mm ', 'similarity_score': 0.4852}, {'train_idx': 'image_565.png', 'prediction': "{'cat riding a dog': 'Subject term'}", 'sentence': 'photo of a cat riding a dog. The dog is riding a horse', 'similarity_score': 0.4616}, {'train_idx': 'image_574.png', 'prediction': "{'cat': 'Subject term'}", 'sentence': "photo of a cat riding a dog that's riding a horse", 'similarity_score': 0.459}]}]}
+
+
         // Run the test and display result
         const resultData = transformTestResultsToData(testResults);
         document.getElementById("output").textContent = JSON.stringify(resultData, null, 2);
@@ -62,12 +249,18 @@
         function initZoomableCirclepacking(data) {
             function renderChart(data) {
                 const svg = d3.select("#zoomable-circle-packing")
+
+
+                // 移除先前的圖形元素，避免疊加
+                svg.selectAll("*").remove();
+
+
                 const width = svg.attr("width");
                 const height = svg.attr("height");
 
                 const color = d3.scaleLinear()
                     .domain([0, 5])
-                    .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
+                    .range(["white", "white"])
                     .interpolate(d3.interpolateHcl);
 
                 const pack = data => d3.pack()
@@ -78,9 +271,6 @@
                             .sort((a, b) => b.value - a.value)
                     );
 
-                // 移除現有的 <g> 元素
-                svg.selectAll("g").remove();
-
                 const root = pack(data);
 
                 svg.attr("viewBox", `-${width / 2} -${height / 2} ${width} ${height}`)
@@ -90,34 +280,53 @@
 
                 const node = svg.append("g")
                     .selectAll("circle")
-                    .data(root.descendants().slice(1))
+                    .data(root.descendants())
                     .join("circle")
-                    .attr("fill", d => d.data.img ? `url(#pattern-${d.data.name})` : color(d.depth))
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 2)
                     .attr("pointer-events", d => !d.children ? "none" : null)
                     .on("mouseover", function () {
-                        d3.select(this).attr("stroke", "#000");
+                        d3.select(this).attr("stroke", "red");
                     })
                     .on("mouseout", function () {
-                        d3.select(this).attr("stroke", null);
+                        d3.select(this).attr("stroke", "black");
                     })
                     .on("click", (event, d) => focus !== d && (zoom(event, d), event.stopPropagation()));
 
+                const clickedLabels = []; // 存储通过点击添加的标签名称
+
+                // 初始化节点的填充颜色
+                updateNodeColors();
+                function updateNodeColors() {
+                    node.attr("fill", d => {
+                        if (d.depth === 2) {
+                            if (clickedLabels.includes(d.data.name)) {
+                                return "orange"; // 被选中的节点设为橘色
+                            } else if (d.data.isTestPrediction) {
+                                return "#FFFACD"; // 淡黄色
+                            } else {
+                                return "#ADD8E6"; // 默认颜色（淡蓝色）
+                            }
+                        } else {
+                            return "white"; // 默认颜色
+                        }
+                    });
+                }
                 const defs = svg.append("defs");
 
-                root.descendants().filter(d => d.data.img).forEach(function (d) {
+                root.descendants().filter(d => d.data.img).forEach(d => {
                     defs.append("pattern")
-                        .attr("id", `pattern-${d.data.name}`)
-                        .attr("patternUnits", "userSpaceOnUse")
-                        .attr("width", d.r * 2)
-                        .attr("height", d.r * 2)
-                        .attr("x", -d.r)
-                        .attr("y", -d.r)
+                        .attr("id", `pattern-${d.data.name}-${d.depth}`)
+                        .attr("patternContentUnits", "objectBoundingBox")
+                        .attr("x", 0)
+                        .attr("y", 0)
+                        .attr("width", 1)
+                        .attr("height", 1)
                         .append("image")
-                        .attr("x", "0%")
-                        .attr("y", "0%")
-                        .attr("width", d.r * 2)
-                        .attr("height", d.r * 2)
-                        .attr("href", d.data.img);
+                        .attr("xlink:href", d.data.img)
+                        .attr("preserveAspectRatio", "xMidYMid meet")
+                        .attr("width", 1)
+                        .attr("height", 1);
                 });
 
                 // 新增部分
@@ -126,30 +335,136 @@
                 const initialText = textarea.property('value');
                 const initialLabels = initialText ? initialText.split('\n').map(s => s.trim()).filter(s => s) : [];
 
-                const clickedLabels = []; // 存储通过点击添加的标签名称
+
 
                 const label = svg.append("g")
-                    .style("font", "10px sans-serif")
-                    .attr("text-anchor", "middle")
-                    .selectAll("text")
+                    .selectAll("g")
                     .data(root.descendants())
-                    .join("text")
-                    .attr("pointer-events", d => d.depth > 1 ? "auto" : "none")
+                    .join("g")
+                    .attr("class", "label-group")
                     .style("fill-opacity", d => d.parent === root ? 1 : 0)
                     .style("display", d => d.parent === root ? "inline" : "none")
-                    .text(d => d.data.name)
+                    .attr("pointer-events", d => d.depth > 1 ? "auto" : "none")
                     .on("click", function (event, d) {
                         if (d.depth > 1) {
                             event.stopPropagation(); // 阻止缩放
-                            handleLabelClick(d.data.name);
+                            handleLabelClick(d.data.name); // 传递标签文字内容
                         }
                     });
+
+                label.each(function (d) {
+                    const g = d3.select(this);
+
+                    // 添加文字元素
+                    const text = g.append("text")
+                        .text(d.data.name)
+                        .attr("text-anchor", "middle")
+                        .attr("data-idx", d.data.idx) // 添加 idx 属性
+                        .style("stroke", "white")
+                        .style("stroke-width", "2px")
+                        .style("paint-order", "stroke")
+                        .each(function () {
+                            if (d.depth === 1 || d.depth === 2) {
+                                fitTextToCircle(d3.select(this), d.r);
+                            }
+                        });
+
+                    // 如果是第一层，添加背景矩形
+                    if (d.depth === 1) {
+                        // 在获取边界框之前，需要确保文字已经渲染
+                        // 可以使用 setTimeout 或者 requestAnimationFrame，或者在下一次事件循环中执行
+                        setTimeout(() => {
+                            const bbox = text.node().getBBox();
+
+                            // 在文字之前插入矩形
+                            g.insert("rect", "text")
+                                .attr("x", bbox.x - 5) // 留出一些边距
+                                .attr("y", bbox.y - 2)
+                                .attr("width", bbox.width + 10)
+                                .attr("height", bbox.height + 4)
+                                .attr("fill", "white");
+                        }, 0);
+                    }
+                });
+
+
+                // fitTextToCircle 函數，調整文字大小以適應圓圈
+                function fitTextToCircle(textElement, radius) {
+                    const maxWidth = radius * 1.8;  // 圓圈內的最大文字寬度
+                    let fontSize = 20;  // 初始字體大小
+                    const minFontSize = 10;  // 設定最小字體大小
+                    let maxIterations = 4;  // 最大迭代次數以防止無限循環
+                    textElement.style("font-size", `${fontSize}px`);
+                    // 將原始文本內容拆分成單詞
+                    let words = textElement.text().split(" ");
+                    let lines = [];
+                    // 如果文本包含多個單詞，先嘗試換行
+                    if (words.length > 1) {
+                        let line = "";
+                        words.forEach(word => {
+                            let testLine = line + word + " ";
+                            textElement.text(testLine.trim());
+                            if (textElement.node().getBBox().width > maxWidth && line !== "") {
+                                lines.push(line.trim());
+                                line = word + " ";
+                            } else {
+                                line = testLine;
+                            }
+                        });
+                        lines.push(line.trim());
+
+                        // 清空並設置換行後的文本
+                        textElement.text("");
+                        lines.forEach((line, i) => {
+                            textElement.append("tspan")
+                                .text(line)
+                                .attr("x", 0)
+                                .attr("dy", i === 0 ? 0 : "1.2em");  // 設置行間距
+                        });
+                    }
+
+                    // 確保文本在圓圈內，並逐步縮小字體
+                    while (true) {
+                        const bbox = textElement.node().getBBox();
+                        if ((bbox.width <= maxWidth && bbox.height <= radius * 1.6) || fontSize <= minFontSize || maxIterations-- <= 0) {
+                            break;
+                        }
+
+                        fontSize = Math.max(minFontSize, fontSize - 1);
+                        textElement.style("font-size", `${fontSize}px`);
+                    }
+
+                    // 如果有多行，則調整行的位置以保持居中
+                    const lineHeight = textElement.selectAll("tspan").nodes().length * fontSize * 1.2;  // 計算多行文本高度
+                    textElement.attr("y", -lineHeight / 2);  // 確保文本的行高度整體居中
+
+                    // 如果是單行文本，也進行垂直居中調整
+                    if (lines.length <= 1) {
+                        const textHeight = textElement.node().getBBox().height;
+                        textElement.attr("dy", textHeight / 4);
+                    }
+                }
+
+
+                function highlightTableText() {
+                    // 先移除之前的高亮
+                    d3.selectAll("#image-sentence-table .classified-term").classed('highlight', false);
+
+                    // 对于每个选中的标签，查找并高亮对应的表格文字
+                    clickedLabels.forEach(labelName => {
+                        d3.selectAll("#image-sentence-table .classified-term")
+                            .filter(function () {
+                                return this.textContent.trim().toLowerCase() === labelName.toLowerCase();
+                            })
+                            .classed('highlight', true);
+                    });
+                }
 
                 function handleLabelClick(labelName) {
                     // 检查是否已在 clickedLabels 中
                     const index = clickedLabels.lastIndexOf(labelName);
                     if (index !== -1) {
-                        // 存在，删除最近添加的一个
+                        // 存在，删除
                         clickedLabels.splice(index, 1);
                     } else {
                         // 不存在，添加到 clickedLabels
@@ -161,13 +476,19 @@
                     label.filter(d => d.data.name === labelName)
                         .classed('selected', isSelected);
 
+                    // 更新节点的颜色
+                    updateNodeColors();
+
                     // 更新 textarea 内容
                     updateTextarea();
+
+                    // 高亮对应的表格文字
+                    highlightTableText();
                 }
 
                 function updateTextarea() {
-                    const textareaContent = initialLabels.concat(clickedLabels);
-                    textarea.property('value', textareaContent.join('\n'));
+                    const textareaContent = initialLabels.concat(clickedLabels);  // 合併陣列
+                    textarea.property('value', textareaContent.join(', '));  // 用逗號串接字串，並設置到 textarea 中
                 }
 
                 // 初始时，标签不受 textarea 内容影响，不需要设置选中状态
@@ -182,24 +503,20 @@
                     const k = width / v[2];
                     view = v;
 
-                    label.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
+                    label.attr("transform", d => {
+                        const x = (d.x - v[0]) * k;
+                        const y = (d.y - v[1]) * k;
+                        if (d.depth === 1) {
+                            // 将深度为1的标签放置在圆圈的上方
+                            return `translate(${x},${y - d.r * k * 0.8})`;
+                        } else {
+                            // 将深度为2的标签放置在圆圈的中心
+                            return `translate(${x},${y})`;
+                        }
+                    });
+
                     node.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
                     node.attr("r", d => d.r * k);
-
-                    root.descendants().filter(d => d.data.img).forEach(d => {
-                        const pattern = d3.select(`#pattern-${d.data.name}`);
-                        const newRadius = d.r * k;
-
-                        pattern
-                            .attr("width", newRadius * 2)
-                            .attr("height", newRadius * 2)
-                            .attr("x", -newRadius)
-                            .attr("y", -newRadius);
-
-                        pattern.select("image")
-                            .attr("width", newRadius * 2)
-                            .attr("height", newRadius * 2);
-                    });
                 }
 
                 function zoom(event, d) {
@@ -214,18 +531,16 @@
                         });
 
                     label
-                        .filter(function (d) {
-                            return d.parent === focus || this.style.display === "inline";
-                        })
                         .transition(transition)
-                        .style("fill-opacity", d => d.parent === focus ? 1 : 0)
+                        .style("fill-opacity", d => (d.parent === focus || d === focus) ? 1 : 0)
                         .on("start", function (d) {
-                            if (d.parent === focus) this.style.display = "inline";
+                            if (d.parent === focus || d === focus) this.style.display = "inline";
                         })
                         .on("end", function (d) {
-                            if (d.parent !== focus) this.style.display = "none";
+                            if (d.parent !== focus && d !== focus) this.style.display = "none";
                         });
                 }
+
             }
 
             renderChart(data);
@@ -233,68 +548,100 @@
 
 
         function transformTestResultsToData(testResults) {
-    const data = {
-        "name": "flare",
-        "children": []
-    };
-
-    // Helper function to find or create category node
-    function findOrCreateNode(parentNode, nodeName) {
-        let node = parentNode.children.find(child => child.name === nodeName);
-        if (!node) {
-            console.log("Creating new node:", nodeName);
-            node = {
-                "name": nodeName,
+            const data = {
+                "name": "",
                 "children": []
             };
-            parentNode.children.push(node);
-        } else {
-            console.log("Using existing node:", nodeName);
-        }
-        return node;
-    }
 
-    // Iterate over test_results
-    testResults.test_results.forEach(testResult => {
-        testResult.predictions.forEach(prediction => {
-            const categoryNode = findOrCreateNode(data, prediction.category);
-            const predictionNode = findOrCreateNode(categoryNode, prediction.test_prediction);
-
-            // Add top_similar items as children under the prediction node
-            prediction.top_similar.forEach(similarItem => {
-                const value = similarItem.similarity * 1000; // Scale similarity
-                const trainImages = similarItem.train_indices.map(imageName => `../data/diffusiondb_data/images/${imageName}`);
-
-                // Check if the similar item node already exists
-                let similarNode = predictionNode.children.find(child => child.name === similarItem.train_value);
-                if (!similarNode) {
-                    // If not exist, create similar item node
-                    similarNode = {
-                        "name": similarItem.train_value,
-                        "value": value,
+            // Helper function to find or create category node
+            function findOrCreateNode(parentNode, nodeName) {
+                let node = parentNode.children.find(child => child.name === nodeName);
+                if (!node) {
+                    node = {
+                        "name": nodeName,
                         "children": []
                     };
-                    predictionNode.children.push(similarNode);
+                    parentNode.children.push(node);
+                }
+                return node;
+            }
+
+            // Map to keep track of contents under each category to avoid duplicates
+            const categoryContentMap = {};
+
+            // Iterate over test_results
+            testResults.test_results.forEach(testResult => {
+
+                // Process test_prediction
+                if (testResult.test_prediction && Object.keys(testResult.test_prediction).length > 0) {
+                    for (let content in testResult.test_prediction) {
+                        let category = testResult.test_prediction[content];
+
+                        // Find or create category node
+                        let categoryNode = findOrCreateNode(data, category);
+
+                        // Initialize the content set for this category if not exist
+                        if (!categoryContentMap[category]) {
+                            categoryContentMap[category] = new Set();
+                        }
+
+                        // Add the content if it's not already added
+                        if (!categoryContentMap[category].has(content)) {
+                            categoryContentMap[category].add(content);
+                            categoryNode.children.push({
+                                "name": content,
+                                "value": 100,
+                                "isTestPrediction": true // 标记为 test_prediction
+
+                            });
+                        }
+                    }
                 }
 
-                // Check if the train image already exists
-                trainImages.forEach((imgUrl, index) => {
-                    let existingImageNode = similarNode.children.find(child => child.name === similarItem.train_indices[index]);
-                    if (!existingImageNode) {
-                        // Only add the image if it doesn't already exist
-                        similarNode.children.push({
-                            "name": similarItem.train_indices[index], // e.g., "image_3.jpg"
-                            "value": value,
-                            "img": imgUrl
-                        });
+                // Process top5_similar_train
+                testResult.top5_similar_train.forEach(trainItem => {
+                    let prediction = trainItem.prediction;
+                    if (prediction && prediction !== '{}') {
+                        // Parse the prediction string into an object
+                        let predictionObj;
+                        try {
+                            // Replace single quotes with double quotes for valid JSON
+                            predictionObj = JSON.parse(prediction.replace(/'/g, '"'));
+                        } catch (e) {
+                            console.error('Error parsing prediction:', prediction);
+                            return;
+                        }
+
+                        // Iterate over the predictions
+                        for (let content in predictionObj) {
+                            let category = predictionObj[content];
+
+                            // Find or create category node
+                            let categoryNode = findOrCreateNode(data, category);
+
+                            // Initialize the content set for this category if not exist
+                            if (!categoryContentMap[category]) {
+                                categoryContentMap[category] = new Set();
+                            }
+
+                            // Add the content if it's not already added
+                            if (!categoryContentMap[category].has(content)) {
+                                categoryContentMap[category].add(content);
+                                categoryNode.children.push({
+                                    "name": content,
+                                    "value": 100,
+                                    "isTestPrediction": false, // 标记为 train_prediction
+                                    "idx": trainItem.train_idx // 添加 idx 属性
+                                });
+                            }
+                        }
                     }
                 });
             });
-        });
-    });
 
-    return data;
-}
+            return data;
+        }
+
 
 
 

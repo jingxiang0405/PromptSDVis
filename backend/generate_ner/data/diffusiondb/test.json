@@ -1,37 +1,7 @@
 [
     {
-        "idx": "3",
-        "sentence": "dog, girls",
-        "label": "{}"
-    },
-    {
-        "idx": "4",
-        "sentence": "dog, girlfriend",
-        "label": "{}"
-    },
-    {
-        "idx": "5",
-        "sentence": "canine, girls",
-        "label": "{}"
-    },
-    {
-        "idx": "12",
-        "sentence": "animal, girls",
-        "label": "{}"
-    },
-    {
-        "idx": "20",
-        "sentence": "pet, girls",
-        "label": "{}"
-    },
-    {
-        "idx": "23",
-        "sentence": "pet, girlfriend",
-        "label": "{}"
-    },
-    {
-        "idx": "26",
-        "sentence": "puppy, girls",
+        "idx": "4.png",
+        "sentence": "animal",
         "label": "{}"
     }
 ]

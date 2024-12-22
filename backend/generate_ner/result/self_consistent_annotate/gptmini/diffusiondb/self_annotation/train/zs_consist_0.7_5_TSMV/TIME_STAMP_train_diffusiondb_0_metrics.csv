@@ -1,0 +1,7 @@
+Type,Gold count,Gold rate,Pred count,Pred rate,Correct count,Prec,Rec,F1
+Subject term,0,0.00,9515,27.59,0,0.00,0.00,0.00
+Style modifier,0,0.00,9124,26.46,0,0.00,0.00,0.00
+Quality booster,0,0.00,13312,38.61,0,0.00,0.00,0.00
+Repeating term,0,0.00,1719,4.99,0,0.00,0.00,0.00
+Magic term,0,0.00,812,2.35,0,0.00,0.00,0.00
+ToTal,0,100,34482,100,0,0.00,0.00,0.00

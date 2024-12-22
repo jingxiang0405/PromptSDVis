@@ -12,7 +12,12 @@ class PromptPoolEnglish(object):
         if args.task_hint is None:
             return ""
         elif args.task_hint == "diffusiondb":
-            task_hint = "You are an expert in named entity recognition. You are good at information extraction. Now we will perform customized named entity recognition and first explain all entities.\n There are five entities that need to be recognized: Subject term, Style modifier, Quality booster, Repeating term, and Magic term. The definitions of these five entities are as follows:Subject term: Denotes the subject\nStyle modifier: Indicates an artistic style\nQuality booster: A term intended to improve the quality of the image\nRepeating term: Repetition of subject terms or style terms with the intention of strengthening this subject or style\nMagic term: A term that is semantically different from the rest of the prompt with the intention to produce surprising results\nHere are the detailed explanations:\nDetailed Description\nSubject Terms:\nIndicate the desired subject to the text-to-image system (e.g., “a landscape” or “an old car in a meadow”).\nEssential for controlling the image generation process.\nExample issue: Early systems struggled with specific subjects without titles, like Zdzisław Beksiński’s artworks.\n \nStyle Modifiers:\n \nAdded to produce images in a certain style or artistic medium.\n \nExamples: “oil painting,” “by Francisco Goya,” “hyperrealistic,” “Cubism.”\n \nCan include art periods, schools, styles, materials, media, techniques, and artists.\n \nQuality Boosters:\n \nIncrease aesthetic qualities and detail level in images.\n \nExamples: “trending on artstation,” “highly detailed,” “epic,” “8k.”\n \nVerbosity in prompts may improve detail but reduce subject control.\n \nRepeating Terms:\n \nStrengthen the associations formed by the generative system.\n \nExample: “space whale. a whale in space” produces better results.\n \nRepeating terms cause the system to activate related neural network regions.\n \nMagic Terms:\n \nIntroduce randomness leading to surprising results.\n \nExample: “control the soul” added to a prompt for “more magic, more wizard-ish imagery.”\n \nIntroduce unpredictability and increase variation in output.\n \nCan refer to non-visual qualities like touch, hearing, smell, and taste.\n Subsequently, we will proceed with the task of recognizing these entities."
+            task_hint = """
+            ##Task Description##
+            You are an expert in named entity recognition. You are good at information extraction.\n
+            """
+            #Original - task_hint = "You are an expert in named entity recognition. You are good at information extraction.\n"
+            #diffusiondb 目前用的 task_hint = "You are an expert in named entity recognition. You are good at information extraction. Now we will perform customized named entity recognition and first explain all entities.\n There are five entities that need to be recognized: Subject term, Style modifier, Quality booster, Repeating term, and Magic term. The definitions of these five entities are as follows:Subject term: Denotes the subject\nStyle modifier: Indicates an artistic style\nQuality booster: A term intended to improve the quality of the image\nRepeating term: Repetition of subject terms or style terms with the intention of strengthening this subject or style\nMagic term: A term that is semantically different from the rest of the prompt with the intention to produce surprising results\nHere are the detailed explanations:\nDetailed Description\nSubject Terms:\nIndicate the desired subject to the text-to-image system (e.g., “a landscape” or “an old car in a meadow”).\nEssential for controlling the image generation process.\nExample issue: Early systems struggled with specific subjects without titles, like Zdzisław Beksiński’s artworks.\n \nStyle Modifiers:\n \nAdded to produce images in a certain style or artistic medium.\n \nExamples: “oil painting,” “by Francisco Goya,” “hyperrealistic,” “Cubism.”\n \nCan include art periods, schools, styles, materials, media, techniques, and artists.\n \nQuality Boosters:\n \nIncrease aesthetic qualities and detail level in images.\n \nExamples: “trending on artstation,” “highly detailed,” “epic,” “8k.”\n \nVerbosity in prompts may improve detail but reduce subject control.\n \nRepeating Terms:\n \nStrengthen the associations formed by the generative system.\n \nExample: “space whale. a whale in space” produces better results.\n \nRepeating terms cause the system to activate related neural network regions.\n \nMagic Terms:\n \nIntroduce randomness leading to surprising results.\n \nExample: “control the soul” added to a prompt for “more magic, more wizard-ish imagery.”\n \nIntroduce unpredictability and increase variation in output.\n \nCan refer to non-visual qualities like touch, hearing, smell, and taste.\n Subsequently, we will proceed with the task of recognizing these entities."
         else:
             task_hint = "You are an expert in named entity recognition. You are good at information extraction.\n"
         
@@ -118,7 +123,7 @@ class PromptPoolEnglish(object):
         
     def get_task_instruction(self, args):
         
-        label_set = "Given entity label set: %s\n" % (args.id2label)
+        label_set = "**Given entity label set**: %s\n" % (args.id2label)
         
         if args.tool_desc:
             assert args.tool_aug
@@ -132,12 +137,39 @@ class PromptPoolEnglish(object):
                 given = "Given the text and the corresponding constituency tree, please recognize the named entities in the given text. "                              
         else:
             given = "Please recognize the named entities in the given text. "
-         
+        
         ans_format = "Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. "
+        # 實驗
 
-        task_instruct = label_set + given + ans_format          
+        task_exapmle= """\n
+        ##Task Example##
+        **Example1**:
+        Input Text: A futuristic cityscape, cyberpunk style, trending on artstation.\n
+        Answer: [{"futuristic cityscape": "Subject term"}, {"cyberpunk": "Style modifier"}, {"trending on artstation": "Quality booster"}]\n
+        **Example2**:
+        Input Text: A space whale. A whale in space.\n
+        Answer: [{"space whale": "Subject term"}, {"A whale in space": "Repeating term"}]\n
+        **Example3**:
+        Input Text: A landscape with vibrant colors, oil painting, control the soul.\n
+        Answer: [{"landscape": "Subject term"}, {"vibrant colors": "Quality booster"}, {"oil painting": "Style modifier"}, {"control the soul": "Magic term"}]\n
+        """
+        task_di_and = """\n
+        ##Entity Description and Examples##
+        **Subject term**: Denotes the subject (e.g., ##a landscape##, ##an old car in a meadow##).
+        - Essential for controlling the image generation process.\n
+        - Example issue: Early systems struggled with specific subjects without titles, like Zdzisław Beksiński’s artworks.\n
+        **Style modifier**: Indicates an artistic style (e.g., ##oil painting##, ##Cubism##, ##hyperrealistic##).
+        - Examples include art periods, schools, styles, materials, media, techniques, and artists.\n
+        **Quality booster**: A term intended to improve the quality of the image (e.g., ##trending on artstation##, ##8k##, ##epic##).
+        - Increases aesthetic qualities and detail level in images.\n
+        **Repeating term**: Repetition of subject terms or style terms with the intention of strengthening this subject or style.
+        - Example: ##space whale. a whale in space## produces better results.\n
+        **Magic term**: A term that is semantically different from the rest of the prompt with the intention to produce surprising results (e.g., ##control the soul##).
+        - Introduces randomness leading to surprising results.\n
+        """
+        #+  task_di_and + task_exapmle  
+        task_instruct = label_set + given + ans_format +  task_di_and + task_exapmle  
 
-            
         return task_instruct            
 
 
@@ -270,7 +302,7 @@ class PromptPoolEnglish(object):
             else:
                 raise ValueError(f"Unrecognized tool_aug: {args.tool_aug}")
         else:
-            input_output_instruction = "\nText: %s\nAnswer: " % (sent)
+            input_output_instruction = "\n**Text**: %s\n**Answer**: " % (sent)
 
         reason_hint = self.get_reason_hint(args) if args.reason_hint_pos == "b" else ""
         postfix = input_output_instruction + reason_hint

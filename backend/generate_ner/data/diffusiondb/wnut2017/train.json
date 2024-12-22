@@ -1,0 +1,1502 @@
+[
+  {
+    "idx": "0",
+    "sentence": "RT @ZodiacFacts : #ZodiacFacts As an #Aries romance isn't about what you're after -- it 's about taking chances , exploring and keeping an ...",
+    "label": "{}"
+  },
+  {
+    "idx": "1",
+    "sentence": "The EYE of the Storm .... The Calm Before It ...",
+    "label": "{}"
+  },
+  {
+    "idx": "2",
+    "sentence": "RT @m_candelaria : The amazing Follow Friday Train : @Sketchjobs @lollieshopping @philadelphiabn @elainebiss @TableMatters10 @STALKmyPRETT ...",
+    "label": "{}"
+  },
+  {
+    "idx": "3",
+    "sentence": "I liked a YouTube video -- Family Guy - Songs Named After a Girl http://youtu.be/ErPsx8zdnX4?a",
+    "label": "{'YouTube': 'corporation', 'Family Guy': 'creative-work'}"
+  },
+  {
+    "idx": "4",
+    "sentence": "Report : Michael Vick Will Start for Eagles on Sunday http://t.co/UqXcSXT",
+    "label": "{'Michael Vick': 'person', 'Eagles': 'group'}"
+  },
+  {
+    "idx": "5",
+    "sentence": "RT @DGCLEAN : This weeks daily Deal is a twofer 1 : window cleaning $4 per window with a $100 minimum or as an add on to a ......",
+    "label": "{}"
+  },
+  {
+    "idx": "6",
+    "sentence": "The Town might be one of the best movies I have seen all year . So , so good . And don't worry Ben , we already forgave you for Gigli . Really .",
+    "label": "{'The Town': 'creative-work', 'Ben': 'person', 'Gigli': 'creative-work'}"
+  },
+  {
+    "idx": "7",
+    "sentence": "Men 's soccer vs . Crown College at home tomorrow at 2 pm . Come support your Eagles ! Praying for you guys !",
+    "label": "{'Crown College': 'group', 'Eagles': 'group'}"
+  },
+  {
+    "idx": "8",
+    "sentence": "\" You may have given up on me , but I'm not given up on you .\" -The Boy You Use To Love",
+    "label": "{}"
+  },
+  {
+    "idx": "9",
+    "sentence": "@xiaomai_ Kom deze maand denk ik niet , next week Parijs , en allemaal toetsen en presentaties enzo &gt; . &lt; '....",
+    "label": "{}"
+  },
+  {
+    "idx": "10",
+    "sentence": "Sleeping time . Morgenochtend maar even de Koperdoos een schoonmaakbeurtje geven ...",
+    "label": "{}"
+  },
+  {
+    "idx": "11",
+    "sentence": "&quot; her lips , her lips i could kiss them all day if she'd let me ... hahahaha &quot; lol sooooooooo cute &lt; 3",
+    "label": "{}"
+  },
+  {
+    "idx": "12",
+    "sentence": "When Lari and I went to Futoosh , the owner gave us our drinks for free !",
+    "label": "{'Lari': 'person', 'Futoosh': 'location'}"
+  },
+  {
+    "idx": "13",
+    "sentence": "&quot; When you don't get what you want , you suffer . If you get it , you suffer too since you can't hold on to it forever .&quot; ~ Peaceful Warrior",
+    "label": "{}"
+  },
+  {
+    "idx": "14",
+    "sentence": "@aplusk What made you laugh ? This did , courtesy of @rainnwilson http://www.officetally.com/rainn-wilson-and-friends-seattle-oct-23",
+    "label": "{}"
+  },
+  {
+    "idx": "15",
+    "sentence": "Time magazine wrote an article saying the rumor touch is for fags",
+    "label": "{}"
+  },
+  {
+    "idx": "16",
+    "sentence": "Do n't Have Time To Stop In ??? Then , Check Out Our Quick Full Service Drive Thru Window :)",
+    "label": "{}"
+  },
+  {
+    "idx": "17",
+    "sentence": "@_AsToldByBV well i wrote you like 6 times this week ! urgh . RACHELLE im gonnauh kill YOU tonite !",
+    "label": "{'RACHELLE': 'person'}"
+  },
+  {
+    "idx": "18",
+    "sentence": "@lilwhitebear @GrouchoDuke I'm not kidding ! I used a book which was published in 2008 ( last year) ... it was an awesome book !",
+    "label": "{}"
+  },
+  {
+    "idx": "19",
+    "sentence": "RT @TRAEABN Headed to Shreveport then Lake Charles -might as well shoot through dat #BMT after the slab show in Lake Charles ..",
+    "label": "{'Shreveport': 'location', 'Lake Charles': 'location'}"
+  },
+  {
+    "idx": "20",
+    "sentence": "I just took \" ( ALL PARTS ) Your a normal belieber .... what happens when you find J ...\" and got : Part 1 : Holidays !! Try it : http://bit.ly/aOcpG6",
+    "label": "{}"
+  },
+  {
+    "idx": "21",
+    "sentence": "tonight at The Lodge : braised bison shortribs , kabocha squash risotto http://twitpic.com/2pdu4g",
+    "label": "{'The Lodge': 'location'}"
+  },
+  {
+    "idx": "22",
+    "sentence": "@LesColyer Who do you film for ? I was on SKY news 2 weeks ago #checkmeout",
+    "label": "{'SKY': 'corporation'}"
+  },
+  {
+    "idx": "23",
+    "sentence": "There was just a fire at work . Today is looking up .",
+    "label": "{}"
+  },
+  {
+    "idx": "24",
+    "sentence": "VIDEO : Showbiz Tonight - Is TV Too Gay ?: http://bit.ly/aAZMD6",
+    "label": "{'Showbiz Tonight': 'creative-work'}"
+  },
+  {
+    "idx": "25",
+    "sentence": "get ready to shop local !! RT @uniqueLA : BIG NEWS to start your weekend : Oct 22 @UniqueLA will be opening a store at @HDbuttercupLA .",
+    "label": "{}"
+  },
+  {
+    "idx": "26",
+    "sentence": "RT @hificlub Come get your blood flowing with @waxromeo &amp; @fordinho at The Heartbeat tonight , or as we call it Hide-and-Go Sikh !",
+    "label": "{'The Heartbeat': 'location'}"
+  },
+  {
+    "idx": "27",
+    "sentence": "Oh my goodness , I thought by Friday evening one 's supposed to breath easy , but at the moment this is sadly not the case .",
+    "label": "{}"
+  },
+  {
+    "idx": "28",
+    "sentence": "@BeNFranKCaptivE yea yea yea ... How was your day ?",
+    "label": "{}"
+  },
+  {
+    "idx": "29",
+    "sentence": "@MsAustinTaylor whats been going on today ?",
+    "label": "{}"
+  },
+  {
+    "idx": "30",
+    "sentence": "Follow Friday : Once again , I suggest you tell everyone you know to FOLLOW ME ! Let 's get me over 200 followers ! Porn robots welcome ! #ff",
+    "label": "{}"
+  },
+  {
+    "idx": "31",
+    "sentence": "Have DJ Got Us Fallin in Love in my head . \" Cause baby tonight , The dj got us fallin in love again \"",
+    "label": "{'DJ Got Us Fallin in Love': 'creative-work'}"
+  },
+  {
+    "idx": "32",
+    "sentence": "RT @GreatestQuotes : \" When everything seems to be going against you , remember that the airplane takes off against the wind , not with it .\" ...",
+    "label": "{}"
+  },
+  {
+    "idx": "33",
+    "sentence": "Well , after a fast-paced week full of prayer from family and friends , I now have a full time job and I pretty much start Monday :-)",
+    "label": "{}"
+  },
+  {
+    "idx": "34",
+    "sentence": "@flossyflop It 's a slightly off night tonight . Lots of requests I wouldn't normally play cos they're too slow .",
+    "label": "{}"
+  },
+  {
+    "idx": "35",
+    "sentence": "Great week in the Optimise office , another new client on board and we are close to signing a new team member",
+    "label": "{'Optimise': 'corporation'}"
+  },
+  {
+    "idx": "36",
+    "sentence": "been listenin to trey alllll week ... can u luv someone u never met ?? bcuz i think im in luv yeeuuuuppp !!!",
+    "label": "{'trey': 'person'}"
+  },
+  {
+    "idx": "37",
+    "sentence": "@zeeDOTi i might join in if I make it home in time . :)",
+    "label": "{}"
+  },
+  {
+    "idx": "38",
+    "sentence": "@DrHubaEvaluator Not long ago I responded to a angry cardiologist whom I have known yrs . when he spit venom to the newspaper but I did it +",
+    "label": "{}"
+  },
+  {
+    "idx": "39",
+    "sentence": "@IZONModels we all need it from time to time . :)",
+    "label": "{}"
+  },
+  {
+    "idx": "40",
+    "sentence": "The Basic Step Before You Even Start Thinking Of Making Your ...: Keyword research is a well known subject , yet so ... http://bit.ly/9XQgSr",
+    "label": "{}"
+  },
+  {
+    "idx": "41",
+    "sentence": "RT @BadAssNigerian : Chillin w | @Brownin21 .... n gettin pierced this week &lt; WHOOOOP !!!",
+    "label": "{}"
+  },
+  {
+    "idx": "42",
+    "sentence": "I got a very , very fun item from FedEx today . I'm so excited to add it to my demo bag ! #PassionParties . #WAHM",
+    "label": "{'FedEx': 'corporation'}"
+  },
+  {
+    "idx": "43",
+    "sentence": "Is so excited to get some dancing done tonight with @jdsamson /MEN at The Echo .",
+    "label": "{'The Echo': 'location'}"
+  },
+  {
+    "idx": "44",
+    "sentence": "Comment of the Day : The Depths of Poverty [ We Read You] :",
+    "label": "{}"
+  },
+  {
+    "idx": "45",
+    "sentence": "Coding typo of the day : \" resluts \" - &gt; \" results \"",
+    "label": "{}"
+  },
+  {
+    "idx": "46",
+    "sentence": "Yay . @penguin is coming to see me next week ... plotting my cooking now !",
+    "label": "{}"
+  },
+  {
+    "idx": "47",
+    "sentence": "'FREEGAME FRIDAY !!! text in the word \" FREEGAME \" to 59925 for a FREE 1hr timeplay gamecard !'",
+    "label": "{}"
+  },
+  {
+    "idx": "48",
+    "sentence": "u kno that day when the wanted will go 2 a radio station to find out if there number 1 with heart vacancy , when will that be ?",
+    "label": "{}"
+  },
+  {
+    "idx": "49",
+    "sentence": "I love seeing the U.S. Capitol building in my rearview mirror when I'm driving home from work . #ILoveDC",
+    "label": "{'U.S. Capitol building': 'location'}"
+  },
+  {
+    "idx": "50",
+    "sentence": "@mcflysandra haha yes :) have to go speak tomorrow :) good night xxx",
+    "label": "{}"
+  },
+  {
+    "idx": "51",
+    "sentence": "@Phoebe1_ and i also loved the last years eurovision entry !! hoppaa ! they were cool too !!",
+    "label": "{}"
+  },
+  {
+    "idx": "52",
+    "sentence": "just whooped st . francis preps asssss . and i scored a goal :) and its friday . and i have no homeworkkk . SICK LIFEEEE",
+    "label": "{}"
+  },
+  {
+    "idx": "53",
+    "sentence": "RT @ddockett : I got another account ... someone else will tweet when they think I would ! #fact | Although @NFL will probably figure that out",
+    "label": "{}"
+  },
+  {
+    "idx": "54",
+    "sentence": "Let 's all take a shot for Lindsay Lohan tonight . Maybe snort a line if you're a real dedicated fan .",
+    "label": "{'Lindsay Lohan': 'person'}"
+  },
+  {
+    "idx": "55",
+    "sentence": "@elwxnino @clausw @ManDee4 The #comcast outages have been increasing for the last year and yet the prices haven't gone down .",
+    "label": "{}"
+  },
+  {
+    "idx": "56",
+    "sentence": "@Mandiiemars she is asleep will do when she wakes up lol i already miss u :(",
+    "label": "{}"
+  },
+  {
+    "idx": "57",
+    "sentence": "I've listened to Tenshi ni Fureta yo so many times that I'm starting to memorize the lyrics , and it 's only been out for 4 days ! o . O",
+    "label": "{'Tenshi ni Fureta yo': 'creative-work'}"
+  },
+  {
+    "idx": "58",
+    "sentence": "RT @INTERMIX : Shopping on the High Holy Days . Retail , repent , retweet .",
+    "label": "{}"
+  },
+  {
+    "idx": "59",
+    "sentence": "4Dbling 's place til monday , party party party . &lt; 3",
+    "label": "{'4Dbling': 'person'}"
+  },
+  {
+    "idx": "60",
+    "sentence": "I stopped listening to this lecture like 20mins ago ... #sad",
+    "label": "{}"
+  },
+  {
+    "idx": "61",
+    "sentence": "It 's official !!! Vegas for the weekend ! Starting tonight !! #nohands",
+    "label": "{'Vegas': 'location'}"
+  },
+  {
+    "idx": "62",
+    "sentence": "@basboeit Een groeiproces in de ruimste zin van het woord . Ik arriveerde toen 5 kilo . Gelukkig viel ik er deze week evenzoveel weer uit .",
+    "label": "{}"
+  },
+  {
+    "idx": "63",
+    "sentence": "@alealshinn @BambingBling ~~~ @sunchips this is the second time they have messed up .... about to give up on them",
+    "label": "{}"
+  },
+  {
+    "idx": "64",
+    "sentence": "@peterc83 night night good luck tomorrow x",
+    "label": "{}"
+  },
+  {
+    "idx": "65",
+    "sentence": "Day 27 - Day 27- Why are you doing this 30 day challenge im doing this because i am bored :) http://tumblr.com/xooiuell3",
+    "label": "{}"
+  },
+  {
+    "idx": "66",
+    "sentence": "OK IMMA ASK THIS AGAIN HOW LONG DO YOU TALK TO A GIRL BEFORE U MAKE IT OFFICIAL &amp; START GOIN OUT WITH HER ????",
+    "label": "{}"
+  },
+  {
+    "idx": "67",
+    "sentence": "Morning ....! I really never enjoy to sleep ... hhmmm .. Have a nice saturday all ..! Hehehehehe",
+    "label": "{}"
+  },
+  {
+    "idx": "68",
+    "sentence": "@TheAndyKaufman A couple weeks ago ? It caught my attention , because my dad drove truck for Wal-mart/swift a few months back .",
+    "label": "{}"
+  },
+  {
+    "idx": "69",
+    "sentence": "I was 15 minutes late yesterday so I left 20 min earlier today . I will be 20 minutes late today . #lifeispointless",
+    "label": "{}"
+  },
+  {
+    "idx": "70",
+    "sentence": "some freshies sat at our lunch table today . so i sat with them and talked with them about .. stuff .",
+    "label": "{}"
+  },
+  {
+    "idx": "71",
+    "sentence": "#DiggyFollows50 right after his daddy stops tweeting via tub",
+    "label": "{}"
+  },
+  {
+    "idx": "72",
+    "sentence": "@OGOchoCinco ocho you know your talent , I have agreed with every statement you have said over the past 2 years",
+    "label": "{}"
+  },
+  {
+    "idx": "73",
+    "sentence": "What do a prostitute and a bungee jump have in common ? they cost the same , last as long , and if the rubber breaks you're screwed .",
+    "label": "{}"
+  },
+  {
+    "idx": "74",
+    "sentence": "RT @Jasmynebieberr : Teenage Dream is on the radio ! My day just got a little better .",
+    "label": "{'Teenage Dream': 'creative-work'}"
+  },
+  {
+    "idx": "75",
+    "sentence": "RT @ZodiacFacts : #ZodiacFacts As a #Gemini your energy is best spent delegating responsibilities and being there if or when people need you .",
+    "label": "{}"
+  },
+  {
+    "idx": "76",
+    "sentence": "Reminder : One-day tax workshops for small &amp; mid-size tax exempt orgs . First one is Sept . 22 in Detroit . Register now ! http://bit.ly/a2hvAv",
+    "label": "{'Detroit': 'location'}"
+  },
+  {
+    "idx": "77",
+    "sentence": "found some really funny pictures of 1st year : L going to put them on facebook now !!",
+    "label": "{'facebook': 'corporation'}"
+  },
+  {
+    "idx": "78",
+    "sentence": "Beautiful day in Chicago ! Nice to get away from the Florida heat .",
+    "label": "{'Chicago': 'location', 'Florida': 'location'}"
+  },
+  {
+    "idx": "79",
+    "sentence": "I jus saw his ass lol RT @BLikeHer Ima get my lil brother wasted tonight .",
+    "label": "{}"
+  },
+  {
+    "idx": "80",
+    "sentence": "@miaturner OOC : Feeling a little volent today , huh ?",
+    "label": "{}"
+  },
+  {
+    "idx": "81",
+    "sentence": "@superanne Can I get a Twitter software to spew random bullshit about airports/coffee/conferences ? Cause that would free up some time .",
+    "label": "{'Twitter': 'corporation'}"
+  },
+  {
+    "idx": "82",
+    "sentence": "RT @m_candelaria : The amazing Follow Friday Train : @Sketchjobs @lollieshopping @philadelphiabn @elainebiss @TableMatters10 @STALKmyPRETT ...",
+    "label": "{}"
+  },
+  {
+    "idx": "83",
+    "sentence": "@daraobriain hmmm . Cant wait . Comin on Thursday . First time to the Apollo .",
+    "label": "{'the Apollo': 'location'}"
+  },
+  {
+    "idx": "84",
+    "sentence": "John Acuff joined @daveramseys team ! sweet ! I hope Dave gives him his own show one day , but i'm excited for JA and wish him all the best",
+    "label": "{'John Acuff': 'person', 'Dave': 'person', 'JA': 'person'}"
+  },
+  {
+    "idx": "85",
+    "sentence": "@MATHHOFFA @darealjustjuice yo I put that bitch boy in his place the other day . Do n't even waste ya time wit clowns",
+    "label": "{}"
+  },
+  {
+    "idx": "86",
+    "sentence": "Ah , that has seriously made my day . :D @chrisbrown , iloveyousomuch&amp;hearts ;",
+    "label": "{}"
+  },
+  {
+    "idx": "87",
+    "sentence": "; I can upgrade to a BlackBerry in November !! Yesss . &lt; 3 BB Bold , here I come !",
+    "label": "{'BlackBerry': 'product', 'BB Bold': 'product'}"
+  },
+  {
+    "idx": "88",
+    "sentence": "In bed watching Day 51 HLs . ( Awaiting Marcus Bentley ! ) #BB11",
+    "label": "{'Marcus Bentley': 'person', '#BB11': 'creative-work'}"
+  },
+  {
+    "idx": "89",
+    "sentence": "even better than cocktail friday ! http://is.gd/ffDb9",
+    "label": "{}"
+  },
+  {
+    "idx": "90",
+    "sentence": "YEAH ! No jury duty . Yes class on Monday . still willing to send out study guides to those who send me an email request . sorgelaw@yahoo . com",
+    "label": "{}"
+  },
+  {
+    "idx": "91",
+    "sentence": "Political Wire : Bonus Quote of the Day http://bit.ly/9UiOqY",
+    "label": "{}"
+  },
+  {
+    "idx": "92",
+    "sentence": "Coach Germano , Albin , Haines and Burrow each had home damage from the storm yesterday , according to @JasonCorriher .",
+    "label": "{'Coach Germano': 'person', 'Albin': 'person', 'Haines': 'person', 'Burrow': 'person'}"
+  },
+  {
+    "idx": "93",
+    "sentence": "GUYS IF YOU WNNA BE IN AN AWESOME FAN BOOK . TWEET @JedwardsAngel AND WE'LL SORT IT OUT . WE'VE GOT 15COOOOL IDEAS WHEN WE SEE THEM !: D",
+    "label": "{}"
+  },
+  {
+    "idx": "94",
+    "sentence": "RT @fucking_way : A gente acostumou a escrever I Brought You My Bullets I Brought You Me Your Love , Danger Days :: The True Lives Of The Fa ...",
+    "label": "{}"
+  },
+  {
+    "idx": "95",
+    "sentence": "Just ordered pizza . First time since May to order Pizza Hut . Definitely not a fave , but Pizza by the Chef doesn't deliver five hours away/",
+    "label": "{'Pizza Hut': 'corporation'}"
+  },
+  {
+    "idx": "96",
+    "sentence": "Oct 9 ( happy dance ) RT @MiChY_pEaChY @LiifeSizeDoll wens ur bdayy boo ??!!",
+    "label": "{}"
+  },
+  {
+    "idx": "97",
+    "sentence": "@swavelbean13 :D How was your day ? :)",
+    "label": "{}"
+  },
+  {
+    "idx": "98",
+    "sentence": "Beginners Guides to Blogging and Twitter : Two amazing products from Mike 's Life . The 60 day Beginner 's Guide to Bl ... http://bit.ly/99wlho",
+    "label": "{'Twitter': 'corporation', 'Mike': 'person'}"
+  },
+  {
+    "idx": "99",
+    "sentence": "Don Mattingly will replace Joe Torre as LA Dodgers manager after this season",
+    "label": "{'Don Mattingly': 'person', 'Joe Torre': 'person', 'LA Dodgers': 'group'}"
+  },
+  {
+    "idx": "100",
+    "sentence": "@BEE_LYNN_BAYBEE Funniest shit of the day \" Im officially blown . Dont wanna to talk about it \" lls",
+    "label": "{}"
+  },
+  {
+    "idx": "101",
+    "sentence": "Google Music Rumors : Labels Happy About iTunes Alternative ? - Techland - TIME . com http://bit.ly/a4kSfV",
+    "label": "{'Google Music': 'product', 'iTunes': 'corporation', 'Techland': 'corporation'}"
+  },
+  {
+    "idx": "102",
+    "sentence": "i hate when i dont have any change for the customers ..",
+    "label": "{}"
+  },
+  {
+    "idx": "103",
+    "sentence": "I'm mad coach d want me to go to workouts at 9am tomorrow and I can't even play",
+    "label": "{}"
+  },
+  {
+    "idx": "104",
+    "sentence": "I'm shattered !! I'm looking forward to having a nice long lay in , in the morning :D",
+    "label": "{}"
+  },
+  {
+    "idx": "105",
+    "sentence": "@RotaryCarClub r you driving this time ?",
+    "label": "{}"
+  },
+  {
+    "idx": "106",
+    "sentence": "If Conn is less than impressed with chevre , he has a loyal ally in his grandscruffy , who finds it great when it 's good -- which is rarely .",
+    "label": "{'Conn': 'person'}"
+  },
+  {
+    "idx": "107",
+    "sentence": "Dollar steady versus yen but market wary of intervention | Money ...: The dollar held near its highest in a month ... http://bit.ly/a0F3dO",
+    "label": "{}"
+  },
+  {
+    "idx": "108",
+    "sentence": "When glass breaks , the cracks move faster than 3,000 miles per hour . To photograph it , a camera must shoot at a millionth of a second !",
+    "label": "{}"
+  },
+  {
+    "idx": "109",
+    "sentence": "@EimearJedward auditioning on sunday :) xo",
+    "label": "{}"
+  },
+  {
+    "idx": "110",
+    "sentence": "RT @geriatricus : May we all reflect on the workings of our hearts , and in our acts , with our Jewish friends and loved ones at the cusp o ...",
+    "label": "{}"
+  },
+  {
+    "idx": "111",
+    "sentence": "Soo Glad its Finally Friday ! Thiss week went to slow fo'me:/",
+    "label": "{}"
+  },
+  {
+    "idx": "112",
+    "sentence": "@thevoiceoverguy 9 days then Sydney",
+    "label": "{'Sydney': 'location'}"
+  },
+  {
+    "idx": "113",
+    "sentence": "to all my girls in london or travelling up tomorrow i love and miss you wish i could be there ! NEXT YEAR I WILL !",
+    "label": "{'london': 'location'}"
+  },
+  {
+    "idx": "114",
+    "sentence": "You gotta let em lick it before they stick it",
+    "label": "{}"
+  },
+  {
+    "idx": "115",
+    "sentence": "Pedigree Donates Dog Food for Blog Posts : These days , big brands usually look to the big social networks like Face ... http://bit.ly/bYWzrq",
+    "label": "{'Pedigree': 'corporation'}"
+  },
+  {
+    "idx": "116",
+    "sentence": "@Dishfunctional yeah . big time dancer . i might worship her a bit",
+    "label": "{}"
+  },
+  {
+    "idx": "117",
+    "sentence": "two auditions in one day , it&amp;#39 ; s almost as if I am a real actor",
+    "label": "{}"
+  },
+  {
+    "idx": "118",
+    "sentence": "http://yfrog.com/n6cdhzj Just picked my dog up from his posh day spa . Actually he can't run under vet orders . He swims here occasionally",
+    "label": "{}"
+  },
+  {
+    "idx": "119",
+    "sentence": "Why hate on somebody for doing well when you can simply say great job and move on .. [Haters u can kill yourself ] cuz ur losers",
+    "label": "{}"
+  },
+  {
+    "idx": "120",
+    "sentence": "Vanilla vodka infusion is done . Two weeks from now so will the apple :)",
+    "label": "{'Vanilla vodka': 'product'}"
+  },
+  {
+    "idx": "121",
+    "sentence": "#Offline For along time ... maybe not until tomorrow",
+    "label": "{}"
+  },
+  {
+    "idx": "122",
+    "sentence": "Friday Night Eats http://twitpic.com/2pdvtr",
+    "label": "{}"
+  },
+  {
+    "idx": "123",
+    "sentence": "ohh right ... im an actor ... back to work tonight WOOT",
+    "label": "{}"
+  },
+  {
+    "idx": "124",
+    "sentence": "RT @TeamVA : 81 Days Till Last Sacrifice",
+    "label": "{'Last Sacrifice': 'creative-work'}"
+  },
+  {
+    "idx": "125",
+    "sentence": "What should you do when you're sued . Here are a few tips . http://www.calitigationblog.com/2010/09/articles/what-to-do-when-you-are-sued/",
+    "label": "{}"
+  },
+  {
+    "idx": "126",
+    "sentence": "@ImBieberGuy If you would die tomorrow what would you do on your last day here on earth ahaha ? What a dramatic question :p",
+    "label": "{}"
+  },
+  {
+    "idx": "127",
+    "sentence": "heheRT @yuuuiee : @nissawaww LOL RT MirLes : jamanSD kalo nyabutin uban bokap dpt 100 perak satu uban ... eh , i tweeted this before ! Dejavu :-p",
+    "label": "{}"
+  },
+  {
+    "idx": "128",
+    "sentence": "RT @Teacher_Spirit : know this today . no thing will ever come upon you and overtake you . the love of Jesus Christ will overtake it . He is ...",
+    "label": "{'Jesus Christ': 'person'}"
+  },
+  {
+    "idx": "129",
+    "sentence": "Chevron gouging consumers by claiming payments are late when in reality statement delivery is very poor turnaround time . charging hefty fee 's",
+    "label": "{'Chevron': 'corporation'}"
+  },
+  {
+    "idx": "130",
+    "sentence": "@irishhooligan or the best is just walking along the road when a clump of it just appears to be waiting in front of you all that time #icky",
+    "label": "{}"
+  },
+  {
+    "idx": "131",
+    "sentence": "@evarley Yes , thanks . We're more traumatised than he is ... ;) I hate A&amp;E &lt; shudders &gt; Now it 's time to catch up with the day ...",
+    "label": "{}"
+  },
+  {
+    "idx": "132",
+    "sentence": "@Cuddle_Factory will send again tomorrow honey too",
+    "label": "{}"
+  },
+  {
+    "idx": "133",
+    "sentence": "Every time I watch Donnie Hathaway 's Unsung I just get speechless in amazement . He would be sooooo proud of his children if he were alive",
+    "label": "{'Donnie Hathaway': 'person', 'Unsung': 'creative-work'}"
+  },
+  {
+    "idx": "134",
+    "sentence": "LADY GAGA IS BETTER THE 5th TIME OH BABY( :",
+    "label": "{'LADY GAGA': 'person'}"
+  },
+  {
+    "idx": "135",
+    "sentence": "@iDame2Please yea u c da pic 1st Presbyterian all day lol",
+    "label": "{'1st Presbyterian': 'group'}"
+  },
+  {
+    "idx": "136",
+    "sentence": "@JazzLuvsJedward Yeah tomorrow 's grand ( : = yeah just email me cause I never go on msn ! I'll dm you &lt; 3",
+    "label": "{'msn': 'corporation'}"
+  },
+  {
+    "idx": "137",
+    "sentence": "Adam Beyer : Swedish Techno Pioneer : When it comes to his own DJing and sound , he 's slightly more diverse and likes ... http://bit.ly/c1E0I1",
+    "label": "{'Adam Beyer': 'person'}"
+  },
+  {
+    "idx": "138",
+    "sentence": "After work I'm breaking glass against my house and then doing yoga .",
+    "label": "{}"
+  },
+  {
+    "idx": "139",
+    "sentence": "@aplusk http://www.youtube.com/watch?v=eLMui7zBiXo we beat kilkenny after they beat us for the last 4 years in the hurling . Woo !!!",
+    "label": "{'kilkenny': 'location'}"
+  },
+  {
+    "idx": "140",
+    "sentence": "Shot with a Jaybilizer today ... my teacher designed this , totally sweet ! http://jaybilizer.com/products/jaybilizer-hdslr/",
+    "label": "{}"
+  },
+  {
+    "idx": "141",
+    "sentence": "3 an a half days then I'm on HOLIDAY oh yes can't wait ;-) ;-) ;-)",
+    "label": "{}"
+  },
+  {
+    "idx": "142",
+    "sentence": "RT if you think that @justinbieber is sexy but at the same time very talented &lt; 3",
+    "label": "{}"
+  },
+  {
+    "idx": "143",
+    "sentence": "@Kianerzzz showering sleeping and tanning always make me feel better when I'm sick .",
+    "label": "{}"
+  },
+  {
+    "idx": "144",
+    "sentence": "RT @WeScreamAlex : LET'S ALL GET WASTED TONIGHT OK ?",
+    "label": "{}"
+  },
+  {
+    "idx": "145",
+    "sentence": "For women the best aphrodisiacs are words . The G-spot is in the ears . He who looks for it below there is wasting his time .",
+    "label": "{}"
+  },
+  {
+    "idx": "146",
+    "sentence": "@endlesskies ik me 2 . At night I 'm wide awake but the daytime , I 'm so tired my day drags",
+    "label": "{}"
+  },
+  {
+    "idx": "147",
+    "sentence": "The only problem with taxing ur car online is its no fun not paying anything for a 5litre car when its a classic :)",
+    "label": "{}"
+  },
+  {
+    "idx": "148",
+    "sentence": "@valovanity hahah . Speaking of , when are you planning the savannah trip ? Like , budgeting it out and whatnot .",
+    "label": "{}"
+  },
+  {
+    "idx": "149",
+    "sentence": "@Yeweezii Jst lock her outside 4 d nite . It workz al d time :-D",
+    "label": "{}"
+  },
+  {
+    "idx": "150",
+    "sentence": "@NiccoleG when you coming to grandma house ?",
+    "label": "{}"
+  },
+  {
+    "idx": "151",
+    "sentence": "Im ' performing tonight at 8 Bond Street in Soho . If your in the city , hit me up , and then swing through around 10ish !",
+    "label": "{'Soho': 'location'}"
+  },
+  {
+    "idx": "152",
+    "sentence": "Ok off to bed BUT WHEN I WAKE UP I BETTER HAVE WON A T-SHIRT",
+    "label": "{}"
+  },
+  {
+    "idx": "153",
+    "sentence": "@stefaniwashburn Me too ! I always get so full with chips and salsa before my entree comes ? I like the Verde salsa the best !",
+    "label": "{}"
+  },
+  {
+    "idx": "154",
+    "sentence": "i just woke up from the worst nap eva .. arggghhh ! now its time for work .. double arggghhh !!",
+    "label": "{}"
+  },
+  {
+    "idx": "155",
+    "sentence": "@26Promo YOU CAN DO IT ! Just start with one task at a time .",
+    "label": "{}"
+  },
+  {
+    "idx": "156",
+    "sentence": "Right arm Rousseff , Erenice War , 51 years , became chief minister of the Civil House in April this year",
+    "label": "{'Rousseff': 'person', 'Erenice War': 'person', 'Civil House': 'group'}"
+  },
+  {
+    "idx": "157",
+    "sentence": "Any 1 know when season 3 True Blood is back on the telly ?",
+    "label": "{'True Blood': 'creative-work'}"
+  },
+  {
+    "idx": "158",
+    "sentence": "Balloon glowing ? We'd love to see you before or after at Pi ! CWE and Delmar are around the corner , Kirkwood &amp; ... http://fb.me/I6SZ52nW",
+    "label": "{'Pi': 'location', 'CWE': 'location', 'Delmar': 'location', 'Kirkwood': 'location'}"
+  },
+  {
+    "idx": "159",
+    "sentence": "RT @MATTHARDYBRAND : Thx to everyone who wished my Dad , &quot; The Legend &quot; a Happy 88th B-Day just a couple days ago .. He 's my inspiration &amp; me ...",
+    "label": "{}"
+  },
+  {
+    "idx": "160",
+    "sentence": "http://sk.mu/aEnsGunwfr9 : Above&amp;Beyond - Trance Around The World 338 ( Wippenberg Guestmix ) ( 17 September 2010 ) #Trance #Trancefamily #TATW",
+    "label": "{'Trance Around The World 338': 'creative-work', 'Wippenberg': 'group', 'Guestmix': 'creative-work'}"
+  },
+  {
+    "idx": "161",
+    "sentence": "Band hall . Game time . Lets get it .",
+    "label": "{'Band hall': 'location'}"
+  },
+  {
+    "idx": "162",
+    "sentence": "Damn . Is he in town tonite ?",
+    "label": "{}"
+  },
+  {
+    "idx": "163",
+    "sentence": "#blackholidays \" National forget the he say she say ... what do God say day \"",
+    "label": "{'God': 'person'}"
+  },
+  {
+    "idx": "164",
+    "sentence": "I hope the weeks keep flying . It 's actually fantastic the way none of the days dragged this week .... like NONE . :D",
+    "label": "{}"
+  },
+  {
+    "idx": "165",
+    "sentence": "When you judge another you don't define them , you define yourself . ~Wayne Dyer",
+    "label": "{'~Wayne Dyer': 'person'}"
+  },
+  {
+    "idx": "166",
+    "sentence": "Five Bullpens to Stay Away From in MLB Odds : When you think of the worst teams in baseball , you think of teams tha ... http://bit.ly/9R73CK",
+    "label": "{}"
+  },
+  {
+    "idx": "167",
+    "sentence": "Thank you so very much EVERYONE for the lovely Friday Follows today - you are all too lovely :) Sorry I've not had time to reciprocate xXx",
+    "label": "{}"
+  },
+  {
+    "idx": "168",
+    "sentence": "@morgancharlie mmm deffo one of ' those ' thought provoking days :/ Never mind , onwards &amp; upwards we shall go !!",
+    "label": "{}"
+  },
+  {
+    "idx": "169",
+    "sentence": "@AishaHanii2 @starflower1204 Ahhh okay . I've never ordered a CD before so I have NO idea . just say I NEED IT TO GET THROUGH THE WEEKEND !! xD",
+    "label": "{}"
+  },
+  {
+    "idx": "170",
+    "sentence": "Lines for Tonight 's game 9:00 pm at Burnaby 8Rinks . Please note , these are not the lines for showering tonight ! http://twitpic.com/2pducs",
+    "label": "{'Burnaby': 'location'}"
+  },
+  {
+    "idx": "171",
+    "sentence": "@hdscc Yo Man , just won $1000 tonight . 100% Bonus , Bonus Code : win2bet ! Fantastic Place to Play http://bit.ly/aoDEls?=njq4",
+    "label": "{}"
+  },
+  {
+    "idx": "172",
+    "sentence": "Chicago Blackhawks general manager Stan Bowman said Cristobal Huet will be gone in two weeks ... http://fan.ac/Ydv #NHL",
+    "label": "{'Chicago Blackhawks': 'group', 'Stan Bowman': 'person', 'Cristobal Huet': 'person'}"
+  },
+  {
+    "idx": "173",
+    "sentence": "@TheTiniestVole It is . It 's getting across London that 's the killer . Still miss it , though . Lived there for 20 years .",
+    "label": "{'London': 'location'}"
+  },
+  {
+    "idx": "174",
+    "sentence": "total 9 for Clark Duke RT @Naathan_B : Just watched hot tub time machine . Funny film ! Quite enjoyable ! Hmm 7.5 /10",
+    "label": "{'Clark Duke': 'person'}"
+  },
+  {
+    "idx": "175",
+    "sentence": "This is one of my favorite days on twitter ever . @radhallman and @foofmcewan kudos",
+    "label": "{'twitter': 'corporation'}"
+  },
+  {
+    "idx": "176",
+    "sentence": "You blink when you breathe and you breathe when you lie . You blink when you lie .",
+    "label": "{}"
+  },
+  {
+    "idx": "177",
+    "sentence": "Takin ' ur hapiness before mine",
+    "label": "{}"
+  },
+  {
+    "idx": "178",
+    "sentence": "RT @DollarVanDemos : #BROOKLYN ! Stay up late tonight to catch the 1 hr special of Demos @ 3AM on BCAT feat @BlissyCakes @YaGirlNicolette ...",
+    "label": "{'Demos': 'creative-work', 'BCAT': 'group'}"
+  },
+  {
+    "idx": "179",
+    "sentence": "AI : DEMAND RELEASE FOR SYRIAN BLOGGER : 17-9-2010Tal al-Mallohi , a 19-year-old Syrian woman , has been held incommun ... http://bit.ly/aDG3ub",
+    "label": "{'al-Mallohi': 'person'}"
+  },
+  {
+    "idx": "180",
+    "sentence": "Hope to see you tonight at Morgan Le Fays !! Great time :)",
+    "label": "{'Morgan Le Fays': 'location'}"
+  },
+  {
+    "idx": "181",
+    "sentence": "A week in New Jersey , of all places , and I never want to hear a *Boston* accent again .",
+    "label": "{'New Jersey': 'location', '*Boston*': 'location'}"
+  },
+  {
+    "idx": "182",
+    "sentence": "RT @MarioBB9 : Pope says atheists pick and choose their morals . Correct . Today I will be frowning on child abuse and not having a proble ...",
+    "label": "{'Pope': 'person'}"
+  },
+  {
+    "idx": "183",
+    "sentence": "@SaviiISJAPAN nooo - i have when people ask me so i dont ask people lool .",
+    "label": "{}"
+  },
+  {
+    "idx": "184",
+    "sentence": "Now time too do my hair ! New look on deck !",
+    "label": "{}"
+  },
+  {
+    "idx": "185",
+    "sentence": "@ConorMc_Ginty GaGa played here a few weeks back . She spoke out against SB1070 during the show . God bless her for that .",
+    "label": "{'GaGa': 'person', 'SB1070': 'product'}"
+  },
+  {
+    "idx": "186",
+    "sentence": "Dems to voters : You may hate us , but GOP is worse ( AP ) AP - With just six weeks to avoid a possible election catastrophe , http://tiny.ly/wc5",
+    "label": "{'Dems': 'group', 'GOP': 'group'}"
+  },
+  {
+    "idx": "187",
+    "sentence": "@singingislife15 Follow Friday :)",
+    "label": "{}"
+  },
+  {
+    "idx": "188",
+    "sentence": "RT @rocsidiaz : @Wale ill be in DC tonight where u at ?? Ill be at muse 717 6th St Nw Dc to party",
+    "label": "{'DC': 'location', 'muse': 'location'}"
+  },
+  {
+    "idx": "189",
+    "sentence": "Sooo I jus found out that the rising senior class of The @Oprah Leadership Academy is comin to my skool nxt Saturday yeeee !!! :)",
+    "label": "{}"
+  },
+  {
+    "idx": "190",
+    "sentence": "@MrzEndy tru tru I 'm leavin again on Tuesday yo",
+    "label": "{}"
+  },
+  {
+    "idx": "191",
+    "sentence": "@carolermp ;) did you read about my mealworm prank the other day ? ;)",
+    "label": "{}"
+  },
+  {
+    "idx": "192",
+    "sentence": "Oh PEI , i always forget how beautiful you are . Especially when you stop hanging out with tourists .",
+    "label": "{'PEI': 'person'}"
+  },
+  {
+    "idx": "193",
+    "sentence": "I think that today the party has been canceled makes too much air in the street loll . miss u twitfriends . xx",
+    "label": "{}"
+  },
+  {
+    "idx": "194",
+    "sentence": "Thank you for all your support . Best wishes from DUKETERS'S..have a nice day",
+    "label": "{}"
+  },
+  {
+    "idx": "195",
+    "sentence": "I'm a little too excited to be a social media goy tomorrow .",
+    "label": "{}"
+  },
+  {
+    "idx": "196",
+    "sentence": "So happy this hellish week is over ! Nothing that some sushi and sake can fix ;)",
+    "label": "{}"
+  },
+  {
+    "idx": "197",
+    "sentence": "@JennyVeronica92 thats whassup . when u posed to be comin out here",
+    "label": "{}"
+  },
+  {
+    "idx": "198",
+    "sentence": "Shoutout to @HarryReid for his help with DADT . Thanks for following . Good luck on Tuesday !",
+    "label": "{}"
+  },
+  {
+    "idx": "199",
+    "sentence": "Tomorrow is Saturday . Aka #dreadlock day . Bring on the twist n rip ... #TnR #reggae #rasta #marley #bobmarley",
+    "label": "{}"
+  },
+  {
+    "idx": "200",
+    "sentence": "Saw some people from my past over at the school today . They all remembered me . :)",
+    "label": "{}"
+  },
+  {
+    "idx": "201",
+    "sentence": "@snarkobabble I'll look for you tonight ! #wineparty",
+    "label": "{}"
+  },
+  {
+    "idx": "202",
+    "sentence": "We thank you for your interest and consideration and we look forward to working with you this year at the 20 ... http://tinyurl.com/27ypv4o",
+    "label": "{}"
+  },
+  {
+    "idx": "203",
+    "sentence": "@sarahk47 Okay The doc 's saying Keep it tamped down a coupla days then bring her out early ?",
+    "label": "{}"
+  },
+  {
+    "idx": "204",
+    "sentence": "Rep . Bono Mack to criticize fellow desert dweller Barbara Boxer at event today . http://tinyurl.com/2bhyuq7",
+    "label": "{'Bono Mack': 'person', 'Barbara Boxer': 'person'}"
+  },
+  {
+    "idx": "205",
+    "sentence": "@rishi_syd hey , I'm fine !! Thanx :) u too have a great day ;)",
+    "label": "{}"
+  },
+  {
+    "idx": "206",
+    "sentence": "Football game tonight !!!!! V-I-K-I-N-G-S !!!!!!!",
+    "label": "{'V-I-K-I-N-G-S': 'group'}"
+  },
+  {
+    "idx": "207",
+    "sentence": "Goodnight and may peace be upon you and yours . &lt; 3",
+    "label": "{}"
+  },
+  {
+    "idx": "208",
+    "sentence": "I just took \" After getting trampled at a Justin Bieber concert , yoiu wake up and ...\" and got : Part 6 :) ! Try it : http://tinyurl.com/26zeju5",
+    "label": "{'Justin Bieber': 'person'}"
+  },
+  {
+    "idx": "209",
+    "sentence": "@ls_n perhaps , but folks may find something in the gallery that is helpful in their day-to-day work as well . Even just to use it .",
+    "label": "{}"
+  },
+  {
+    "idx": "210",
+    "sentence": "@LightBringer87 I'm too busy asking @leestanleyinnqy formspring questions , I may get around to you later ;)",
+    "label": "{}"
+  },
+  {
+    "idx": "211",
+    "sentence": "Oscar 's new favorite pass time is running as fast as he can from one end of the house to another yelling BuhBYYYYYE",
+    "label": "{'Oscar': 'person'}"
+  },
+  {
+    "idx": "212",
+    "sentence": "Asprin , check , cup of tea , check , pillow , check , warm sleeping bag , check , fanfiction on the laptop , check . Time to settle down and relax",
+    "label": "{}"
+  },
+  {
+    "idx": "213",
+    "sentence": "Maybe it 's compulsary .. when you're over the age of 30 and an unemployed wrestler you have to act like a total tool . http://fb.me/GpyFjTgp",
+    "label": "{}"
+  },
+  {
+    "idx": "214",
+    "sentence": "@bougiemagazine You are really showing out today lol .",
+    "label": "{}"
+  },
+  {
+    "idx": "215",
+    "sentence": "going to tucson tonight :/",
+    "label": "{'tucson': 'location'}"
+  },
+  {
+    "idx": "216",
+    "sentence": "going now guiseeeee ... if i dont see you through the week ill see you through the window :) :)",
+    "label": "{}"
+  },
+  {
+    "idx": "217",
+    "sentence": "even better than cocktail friday ! http://is.gd/ffDb9",
+    "label": "{}"
+  },
+  {
+    "idx": "218",
+    "sentence": "Going to the country fair today :)",
+    "label": "{}"
+  },
+  {
+    "idx": "219",
+    "sentence": "@angelajames @roxannestclaire I have n't tried MAC . Next time !",
+    "label": "{'MAC': 'corporation'}"
+  },
+  {
+    "idx": "220",
+    "sentence": "RT @CantBeliebIt : When Justin gets a girlfriend That Should Be Me is gonna be #1 on iTunes .",
+    "label": "{'Justin': 'person', 'iTunes': 'product'}"
+  },
+  {
+    "idx": "221",
+    "sentence": "RT @BorisKodjoe : Okaaay ! RT @NBC_Undercovers : Want a chance 2 meet Boris Kodjoe ? He'll be in NYC for a meet n greet next Wednesday ! http ...",
+    "label": "{'Boris Kodjoe': 'person', 'NYC': 'location'}"
+  },
+  {
+    "idx": "222",
+    "sentence": "OMFresh man he has a body yes i finally saw it today lolz during gym he was lifting up his shirt ;) #TeamWonder",
+    "label": "{}"
+  },
+  {
+    "idx": "223",
+    "sentence": "@jaredleto ... ive been to 13 30stm concerts now and you never got me on stage during/before kings and queens :( ((",
+    "label": "{'30stm': 'group', 'kings and queens': 'group'}"
+  },
+  {
+    "idx": "224",
+    "sentence": "Halo Reach was a bit crap tonight",
+    "label": "{'Halo Reach': 'product'}"
+  },
+  {
+    "idx": "225",
+    "sentence": "George N . Parks , UMass band director , dies after performance in Ohio : George N . Parks , for 33 years the dire ... http://tinyurl.com/2femvgq",
+    "label": "{'George N . Parks': 'person', 'UMass': 'corporation', 'Ohio': 'location'}"
+  },
+  {
+    "idx": "226",
+    "sentence": "yupp ! RT @TrentShelton have u ever met some1 that when u tell a story THEY HAVE to tell their story 2 overshadow yours to feel superior",
+    "label": "{}"
+  },
+  {
+    "idx": "227",
+    "sentence": "After 2 months not even a word . Guess ure fine .. thanks for being nothing but a fake . Seriously cycling ?",
+    "label": "{}"
+  },
+  {
+    "idx": "228",
+    "sentence": "Quick Question : Chink-A-Link Have You Ever Scratched Before ? Lls",
+    "label": "{}"
+  },
+  {
+    "idx": "229",
+    "sentence": "Ugh I DO N'T HAVE MY EARPHONES I GUESS I WO N'T B TALKING AND DRIVING TODAY LOL .... Excuses Excuses Excuses SMH",
+    "label": "{}"
+  },
+  {
+    "idx": "230",
+    "sentence": "@sardesairajdeep I can see three kinds of reactions after Ayodhya verdict .",
+    "label": "{'Ayodhya': 'person'}"
+  },
+  {
+    "idx": "231",
+    "sentence": "Checking out this weeks tell ' em Steve Dave Podcast",
+    "label": "{'Steve Dave': 'person'}"
+  },
+  {
+    "idx": "232",
+    "sentence": "RT @Sn00ki : Haha yes !!! I love that you knew that :) RT @trishamelissa @Sn00ki Is phenomenal the word of the day ?",
+    "label": "{}"
+  },
+  {
+    "idx": "233",
+    "sentence": "New Trailer For Platinum Games ' Vanquish for PS3 , Xbox 360 : by Widro - September 17 , 2010 | Email the author Direc ... http://bit.ly/aCPM2x",
+    "label": "{'Vanquish': 'product', 'PS3': 'product', 'Xbox 360': 'product', 'Widro': 'corporation'}"
+  },
+  {
+    "idx": "234",
+    "sentence": "@playavolta haha it 's not that bad now but when i was little i used to freak out so i would use the chewables that tasted like chalk .",
+    "label": "{}"
+  },
+  {
+    "idx": "235",
+    "sentence": "Whats goin on ( in tally ) tonight twitter !!",
+    "label": "{'twitter': 'corporation'}"
+  },
+  {
+    "idx": "236",
+    "sentence": "Soulja Boy | TheDeAndreWay . com - The DeAndre Way in stores Nov 2 , 2010 http://t.co/8XvVWHz via @SouljaBoy",
+    "label": "{'Soulja Boy': 'person', 'TheDeAndreWay': 'creative-work', 'The DeAndre Way': 'creative-work'}"
+  },
+  {
+    "idx": "237",
+    "sentence": "Damn all mi niggas havin babies on meh . Nope nope ! I not da step mommy . Time for a new team . I'm talkin #allstarlineup",
+    "label": "{}"
+  },
+  {
+    "idx": "238",
+    "sentence": "RT @Sexstrology : Pisces tend to escape into fantasy and day dreams . There they are free .",
+    "label": "{}"
+  },
+  {
+    "idx": "239",
+    "sentence": "RT @medeadly : 50 tyson droppin a video before you bumass rappers .... i bet they hella mad ... yall niggas been rappin for years and still a ...",
+    "label": "{'50 tyson': 'person'}"
+  },
+  {
+    "idx": "240",
+    "sentence": "iz gettin a eye full of pussys tonight .",
+    "label": "{}"
+  },
+  {
+    "idx": "241",
+    "sentence": "@Loserface_Laura when mike lets me know , I will let you know . I mean everyone might just switch out a lot .",
+    "label": "{'mike': 'person'}"
+  },
+  {
+    "idx": "242",
+    "sentence": "RT @Gina_says_xo : Football and partiesss . This is the only thing I love about the school year . &lt; 3",
+    "label": "{}"
+  },
+  {
+    "idx": "243",
+    "sentence": "Salem Daily Dish// Chef 's Choice Menu at Spoons NW Bistro for tonight ...: Caramalized Onion Tarthousemade tart wit ... http://bit.ly/98QmI9",
+    "label": "{'Salem': 'location', 'Spoons NW Bistro': 'location'}"
+  },
+  {
+    "idx": "244",
+    "sentence": "Looks like we will be living in the studio for the next couple of months",
+    "label": "{}"
+  },
+  {
+    "idx": "245",
+    "sentence": "@johngirvin you've been working on that all night ! I suspect you may even have opened a git manual .",
+    "label": "{'git': 'product'}"
+  },
+  {
+    "idx": "246",
+    "sentence": "@bakontrack I was on a successful business trip !!! I had no time to tweet !!!",
+    "label": "{}"
+  },
+  {
+    "idx": "247",
+    "sentence": "datjayycarterkidd asked : omg hey sir ?? omg what color are oyu eyes ?? hit up the ask box when you can !! http://tumblr.com/xn3iud2q8",
+    "label": "{}"
+  },
+  {
+    "idx": "248",
+    "sentence": "Why Your Homepage May Matter Less Than You Think http://t.co/dNyFfPP via @TMGmedia",
+    "label": "{}"
+  },
+  {
+    "idx": "249",
+    "sentence": "@angelportugues LMAO ! When is tht one day ?: P",
+    "label": "{}"
+  },
+  {
+    "idx": "250",
+    "sentence": "@emmarose99 hows ur day ?",
+    "label": "{}"
+  },
+  {
+    "idx": "251",
+    "sentence": "That 's when you start to laugh . Saying I just want what I can't have . Won't even give me a chance .",
+    "label": "{}"
+  },
+  {
+    "idx": "252",
+    "sentence": "the tears may have been and gone , but the feeling still stay the same .",
+    "label": "{}"
+  },
+  {
+    "idx": "253",
+    "sentence": "@BadgerBlogger LOL ! Yes it would have . \" Let 's have one every dang day !\"",
+    "label": "{}"
+  },
+  {
+    "idx": "254",
+    "sentence": "It 's still Friday here so my first #FF goes to @rockmybones - its her birthday today and @Hungryforbones - thank you :)",
+    "label": "{}"
+  },
+  {
+    "idx": "255",
+    "sentence": "when did @thecodysimpson last tweet ,? ;)",
+    "label": "{}"
+  },
+  {
+    "idx": "256",
+    "sentence": "RT @Slijterijmeisje : Kreeg net een bruikbare tip van iemand die vorige week was begonnen met een whiskydieet , hij was nu al 3 dagen kwijt",
+    "label": "{}"
+  },
+  {
+    "idx": "257",
+    "sentence": "Good morning ! Today 's Software Freedom Day . Join us at UP Diliman for a day of great events . Free admission ! http://ow.ly/2FM1n #sfdphils",
+    "label": "{'UP Diliman': 'location'}"
+  },
+  {
+    "idx": "258",
+    "sentence": "No I 'm not saying I 'm sorry One day , maybe 'll meet again No No No No ( 8 )",
+    "label": "{}"
+  },
+  {
+    "idx": "259",
+    "sentence": "Dinner tonight : Gnocchi with Italian Sausage , Swiss Chard and Ripe Tomatoes !",
+    "label": "{'Gnocchi': 'product', 'Italian Sausage': 'product', 'Swiss Chard': 'product', 'Tomatoes': 'product'}"
+  },
+  {
+    "idx": "260",
+    "sentence": "This . RT @bethanyshondark : RT @duchess_rebecca : Twitter is going to be less fun tonight without the snarky Joos . Aw !!",
+    "label": "{'Twitter': 'corporation'}"
+  },
+  {
+    "idx": "261",
+    "sentence": "RT @dengshot Mochi waffles ! @ new Teaze cafe by the library ! Try two for $4 w/ today 's #IndulgeLivingVA deal ! http://tinyurl.com/2fd6yba",
+    "label": "{'new Teaze cafe': 'location'}"
+  },
+  {
+    "idx": "262",
+    "sentence": "IG | Nieuws : Football Manager 2011 komt op 5 november ( PC ) http://bit.ly/aKe1HL",
+    "label": "{}"
+  },
+  {
+    "idx": "263",
+    "sentence": "I'm being stalked by @thisisiceland . I saw this when I opened flipboard just now . http://yfrog.com/eir70oj",
+    "label": "{'flipboard': 'corporation'}"
+  },
+  {
+    "idx": "264",
+    "sentence": "... four fucking years I 've been configuring iBGP and eBGP on Cisco AND Juniper routers for America 's largest wireless ISP ... and I get a 612",
+    "label": "{'Cisco': 'corporation', 'Juniper': 'corporation', 'America': 'location'}"
+  },
+  {
+    "idx": "265",
+    "sentence": "RT @RMBWilliams : Here in DC ! About to get some rest ! Looking forward to tonight ! Yes-sir !",
+    "label": "{'DC': 'location'}"
+  },
+  {
+    "idx": "266",
+    "sentence": "twenty-four days for Costa do Sauipe *-*",
+    "label": "{'Costa do Sauipe': 'location'}"
+  },
+  {
+    "idx": "267",
+    "sentence": "#sp Facebook Job-Hunting App BranchOut Raises $6 Million From Accel And Super Angels : When you want to hang out ... http://migre.me/1kO1K",
+    "label": "{'Facebook': 'corporation', 'BranchOut': 'product', 'Accel': 'corporation'}"
+  },
+  {
+    "idx": "268",
+    "sentence": "One day the things i say and do is gonna get me a nice slap ..",
+    "label": "{}"
+  },
+  {
+    "idx": "269",
+    "sentence": "@CHRIS_Daughtry Aw ur cute when u get mad ur songs r Killing me I just Love Ur Voice ! even my bros do which is weird they don't like my stuff",
+    "label": "{}"
+  },
+  {
+    "idx": "270",
+    "sentence": "@peasmom3 and as if I was n't obsessed with AFL already , after Sunday I 've gotten even more so !! I 'm so obsessed with his sexiness !!!!",
+    "label": "{}"
+  },
+  {
+    "idx": "271",
+    "sentence": "I just took \" When your mom makes you go live with your dad Scooter Braun , your life ...\" and got : Part 7 ! Try it : http://tinyurl.com/27r2pdz",
+    "label": "{'Scooter Braun': 'person'}"
+  },
+  {
+    "idx": "272",
+    "sentence": "Tarantula in my lounge last night , hoping i dont get a repeat tonight",
+    "label": "{}"
+  },
+  {
+    "idx": "273",
+    "sentence": "@jackjohnson where can I get the official set list to the show at Berkeley in Oct 6th ?!",
+    "label": "{'Berkeley': 'location'}"
+  },
+  {
+    "idx": "274",
+    "sentence": "Before I proceed into the paradise , let 's not forget the Princess Lover OVA 1 teaser pic , SFW http://yfrog.com/0fg2kfj",
+    "label": "{'Princess Lover OVA 1': 'creative-work'}"
+  },
+  {
+    "idx": "275",
+    "sentence": "Selling a home : Strategies for selling in a slow market : by Denise Calaman The July 2010 housing market sales repo ... http://bit.ly/d1xAoc",
+    "label": "{'Denise Calaman': 'person'}"
+  },
+  {
+    "idx": "276",
+    "sentence": "@SweetTartelette Glad to hear they are okay . A drunk ran into the back of my son 's car this week . He said it was frightening . N",
+    "label": "{}"
+  },
+  {
+    "idx": "277",
+    "sentence": "jus about to get dressed and leave again .... smh a very long day",
+    "label": "{}"
+  },
+  {
+    "idx": "278",
+    "sentence": "U shoulda known ! Its a Friday ! RT @BoRnStar88 Tutoring ppl all day at work on a Friday is already a bore then the students don't show up !!.",
+    "label": "{}"
+  },
+  {
+    "idx": "279",
+    "sentence": "@DahlDana ooooh when 's he releasing it ?",
+    "label": "{}"
+  },
+  {
+    "idx": "280",
+    "sentence": "I called my sister and she asked why i want a mcdonalds at this time of nigh t.i said ' blame rose ' she said ' who 's rose ?' lmao",
+    "label": "{'mcdonalds': 'corporation', 'rose': 'person'}"
+  },
+  {
+    "idx": "281",
+    "sentence": "Train with us for the HCA 8K ! We start tomorrow morning at 7:30 am at the showroom !",
+    "label": "{'HCA': 'group'}"
+  },
+  {
+    "idx": "282",
+    "sentence": "@usnOOzin Ahh Steve , you're so good to me , every week . #FF . Thanks so much . How 's the wife recovering ???",
+    "label": "{'Steve': 'person'}"
+  },
+  {
+    "idx": "283",
+    "sentence": "@SheSo_Major they giving the nigga a realllllll hard time about it lmfaoo as they should and now his feelings are hurt ... i like him tho LMAO",
+    "label": "{}"
+  },
+  {
+    "idx": "284",
+    "sentence": "Football game tonight :) yeeah boilers .. oh wait , we suck . haha",
+    "label": "{'boilers': 'group'}"
+  },
+  {
+    "idx": "285",
+    "sentence": "@toukie_s i'mgoing to sleep , not feeling very well , see you tomorrow",
+    "label": "{}"
+  },
+  {
+    "idx": "286",
+    "sentence": "Well had the weigh in today . I've lost a pound !!! I've had no alcohol , no puddings , no crisps , no chocolate &amp; I've only lost a pound !!!!!",
+    "label": "{}"
+  },
+  {
+    "idx": "287",
+    "sentence": "RT @JDay_Sept15 : RT @Ashanie_di_Don : @JDay_Sept15 lol i see someone hyped and ready for #FlavaFridays tonight &lt; every week . Lets get it !",
+    "label": "{}"
+  },
+  {
+    "idx": "288",
+    "sentence": "Maikes hair . School . Webinar at the first job . Changed ... ti second job ... then time with the boy ! What a day .; )",
+    "label": "{}"
+  },
+  {
+    "idx": "289",
+    "sentence": "@SinfulSalvatore { drinks slowly from my cup observing your actions before clearing my throat } is -this- your plans for today ?",
+    "label": "{}"
+  },
+  {
+    "idx": "290",
+    "sentence": "@Dazzx I think you may have mentioned it . Once or twice . :)",
+    "label": "{}"
+  },
+  {
+    "idx": "291",
+    "sentence": "Photo : Chillo ?? Trying out for the 1st time this shit !! http://tumblr.com/x0jiuemje",
+    "label": "{}"
+  },
+  {
+    "idx": "292",
+    "sentence": "@abzmedic I 'm missing autumn because of work . :( I must get into the forests tomorrow !",
+    "label": "{}"
+  },
+  {
+    "idx": "293",
+    "sentence": "waiting one extra day was a STUPID IDEA because now everything is super expensive AAAAAHHH . x_x *freakingoutkhsf*",
+    "label": "{}"
+  },
+  {
+    "idx": "294",
+    "sentence": "I just took \" ( All Parts ) + (* New Season 2 , All Parts*) You've been fri ...\" and got : PART 10 , A MILLION YEARS !! Try it : http://bit.ly/bRCD9M",
+    "label": "{}"
+  },
+  {
+    "idx": "295",
+    "sentence": "Companies fixing a problem that 's wholly their fault and calling it a \" one-time courtesy \" is insult to injury . They 're clearly not sorry !",
+    "label": "{}"
+  },
+  {
+    "idx": "296",
+    "sentence": "Its stupid I hate getn a attitude from ppl when I 'm jus tryna be nice n shit . WTF now I 'm mad so dnt talk to me right now",
+    "label": "{}"
+  },
+  {
+    "idx": "297",
+    "sentence": "RT @OMGwhatateen : RT if you are happy it 's friday . #OMGwhatateen",
+    "label": "{}"
+  },
+  {
+    "idx": "298",
+    "sentence": "@bowlerhatlover Been trying to find a copy of \" Nostalgia \" for years . http://hollisframpton.org.uk/",
+    "label": "{'Nostalgia': 'product'}"
+  },
+  {
+    "idx": "299",
+    "sentence": "@jeffpulver @wildman94 @MusicIsGood4U thanks for hitting me and @shoewolf up . Let me know when that DM with all the info has been sent .",
+    "label": "{}"
+  }
+]

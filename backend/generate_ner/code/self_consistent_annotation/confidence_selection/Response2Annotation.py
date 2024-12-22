@@ -100,6 +100,7 @@ def prediction2annotation(args):
     else:
         train_data_parse = None
     if args.include_emb:
+        print(args.train_GPTEmb_path)
         train_data_GPTEmb = np.load(args.train_GPTEmb_path)
         assert len(train_data) == len(train_data_GPTEmb)
     else:
@@ -224,7 +225,7 @@ def get_paths(args):
 
     model_folder = model_list[args.model]["abbr"]
     args.confident_pred_path = f"result/{sca_folder}/{model_folder}/{dataname}/{sa_sp_folder}/{datamode_folder}/{folder}/{confident_pred_filename}"
-    
+    print(args.confident_pred_path)
     # self-annotation data saving path: 
     # 1. data; 2. data with parsing; 3. ChatGPT embs;.
     demo_datamode = args.demo_datamode
@@ -240,6 +241,7 @@ def get_paths(args):
     # When args.confident_sample_size=0时， the actual self-annotated sample size is total sample sizes in the file
     if args.confident_sample_size==0:
         data_confident_pred = load_data(args.confident_pred_path)
+        print(args.confident_pred_path)
         actual_sample_size = len(data_confident_pred)
 
     self_annotated_data_dir = f"data/{dataname}/{sca_folder}/{model_folder}/{demo_datamode}/{demo_folder}"
