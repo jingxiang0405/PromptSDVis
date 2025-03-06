@@ -89,8 +89,6 @@ function initRelationshipGraph(data, inputText) {
         // 生成所有可能的组合
         generateCombinations(0, []);
 
-
-
         const combinationSet = new Set(combinations);
         // 2. 收集所有需要更新的 rect
         const rectUpdates = [];
@@ -99,22 +97,16 @@ function initRelationshipGraph(data, inputText) {
         d3.selectAll("#scatter image").each(function () {
             const imgElement = d3.select(this);
             const imgTitle = imgElement.attr("data-title")?.trim();
-
             console.log('imgTitle: ' + imgTitle);
-
             // 初始化 matched 標誌，檢查是否匹配 combinationSet
             const matched = combinationSet.has(imgTitle);
-            console.log('qqqq')
-            console.log(matched)
             // 找到對應的 <rect>
             const rectElement = d3.select(`#rect-${imgElement.attr("id").replace('.png', '')}`);
-            console.log('sssss')
             console.log(`#rect-${imgElement.attr("id").replace('.png', '')}`)
             // 儲存原始外框顏色到屬性中
             if (!rectElement.attr("data-original-stroke")) {
                 rectElement.attr("data-original-stroke", rectElement.style("stroke") || "black");
             }
-
             // 收集需要更新的 rect 信息
             rectUpdates.push({
                 element: rectElement,
@@ -139,10 +131,7 @@ function initRelationshipGraph(data, inputText) {
 
             // 找到對應的 <rect>，恢復原始外框顏色
             const rectElement = d3.select(`#rect-${imgId}`);
-            console.log('----------')
-            console.log(`#rect-${imgElement.attr("id").replace('.png', '')}`)
             const originalStroke = rectElement.attr("data-original-stroke");
-
             if (originalStroke) {
                 rectElement
                     .style("stroke", originalStroke)
@@ -155,7 +144,6 @@ function initRelationshipGraph(data, inputText) {
     }
     // 更新选中状态的函数
     function update_selection(inputText) {
-        console.log('update_selection:' + inputText)
         // 清除所有节点和链接的样式
         container.selectAll(".unit rect")
             .style("fill", "#CCC")

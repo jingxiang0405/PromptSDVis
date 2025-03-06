@@ -37,7 +37,7 @@ pipe = pipe.to(device)
 print("Start inference")
 
 # 沒有設定method get or post 都可以
-@app.route('/sd', methods=['GET', 'POST'])
+@app.route('/sd', methods=['POST'])
 def sd():
     #. POST 如何取得參數
     args = request.get_json()
@@ -50,7 +50,7 @@ def sd():
     print('Guidance scale :', guidance_scale)
     print('Random seed :', random_seed)
 
-    if (random_seed < 0) or (random_seed > random.randrange(2**32 - 1)):
+    if (random_seed < 0):
         random_seed = random.randrange(2**32 - 1)
     
 

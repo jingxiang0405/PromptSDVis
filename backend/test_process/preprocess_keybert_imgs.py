@@ -28,3 +28,5 @@ with open('/home/user/PromptSDVis/data/diffusiondb_data/random_100k/diffusiondb_
     csv_writer.writerows(diffusiondb_data)
 
 print("Keywords added and file updated successfully.")
+
+

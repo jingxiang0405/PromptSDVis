@@ -1,7 +1,12 @@
 [
     {
+        "idx": "2.png",
+        "sentence": "a scottish fold cat",
+        "label": "{}"
+    },
+    {
         "idx": "4.png",
-        "sentence": "animal",
+        "sentence": "a scottish fold feline",
         "label": "{}"
     }
 ]

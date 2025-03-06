@@ -396,8 +396,9 @@
                 console.log("Sentences array: ", sentences);
 
                 // 調用 compareSentences 函數生成結果
-                const result = compareSentences(sentences);
-                console.log("Comparison result: ", result);
+                prompt = document.getElementById('prompt').value;
+                const result = compareSentences(prompt, sentences);
+                console.log("Comparison result2: ", result);
 
                 // 將結果放到 prompt-input 的 textarea 中
                 document.getElementById('prompt').value = result;
@@ -447,10 +448,11 @@
                 return {
                     id: data.result[index]['image_name'],
                     src: `data:image/png;base64,${result.img}`,
+                    resizedsrc: `data:image/png;base64,${result.resized_img}`,
                     x: position[0],
                     y: position[1],
-                    width: 8,  //圖片寬高
-                    height: 8,
+                    width: 30,  //圖片寬高
+                    height: 30,
                     title: result.prompt,
                     randomseed: result.seed
                 };
@@ -459,82 +461,11 @@
             initScatterPlot(images);
         }
 
-        // This is the function you want to test
-        /*
-        function transformTestResultsToData(testResults) {
-            const data = {
-                "name": "flare",
-                "children": []
-            };
-
-            // Helper function to find or create category node
-            function findOrCreateNode(parentNode, nodeName) {
-                let node = parentNode.children.find(child => child.name === nodeName);
-                if (!node) {
-                    console.log("Creating new node:", nodeName);
-                    node = {
-                        "name": nodeName,
-                        "children": []
-                    };
-                    parentNode.children.push(node);
-                } else {
-                    console.log("Using existing node:", nodeName);
-                }
-                return node;
-            }
-
-            // Iterate over test_results
-            testResults.test_results.forEach(testResult => {
-                testResult.predictions.forEach(prediction => {
-                    const categoryNode = findOrCreateNode(data, prediction.category);
-                    const predictionNode = findOrCreateNode(categoryNode, prediction.test_prediction);
-
-                    // Add top_similar items as children under the prediction node
-                    prediction.top_similar.forEach(similarItem => {
-                        const value = similarItem.similarity * 1000; // Scale similarity
-                        const trainImages = similarItem.train_indices.map(imageName => `../data/diffusiondb_data/random_5k/diffusiondb_random_5k/images/${imageName}`);
-                        //console.log(trainImages)
-                        // Check if the similar item node already exists
-                        let similarNode = predictionNode.children.find(child => child.name === similarItem.train_value);
-                        if (!similarNode) {
-                            console.log("Creating similarNode:", similarNode);
-                            // If not exist, create similar item node
-                            similarNode = {
-                                "name": similarItem.train_value,
-                                "value": value,
-                                "children": []
-                            };
-                            predictionNode.children.push(similarNode);
-                        } else {
-                            console.log("existing similarNode:", similarNode);
-                        }
-
-                        // Check if the train image already exists
-                        trainImages.forEach((imgUrl, index) => {
-                            let existingImageNode = similarNode.children.find(child => child.name === similarItem.train_indices[index]);
-                            if (!existingImageNode) {
-                                // Only add the image if it doesn't already exist
-                                similarNode.children.push({
-                                    "name": similarItem.train_indices[index], // e.g., "image_3.jpg"
-                                    "value": value,
-                                    "img": imgUrl
-                                });
-                            }
-                        });
-                    });
-                });
-            });
-
-            return data;
-        }
-*/
         /*
             (Callback Function) Recieve Data from server.py Path -> sentence_analyze 
         */
 
         function recieveDataFromSentenceAnalyze(data) {
-            //covertData = transformTestResultsToData(data)
-            //console.log("transformTestResultsToData:", covertData);
             initZoomableCirclepacking(data);
         }
 
@@ -545,12 +476,6 @@
                 'title': image.title,
                 'image_src': image.image_src
             }));
-            /*
-            sendXhttp(params, METHOD_POST, "sentence_analyze", function (data) {
-                console.log("Rewrite Sentence analyze data:", data);
-                recieveDataFromSentenceAnalyze(data);
-            });
-            */
             sendXhttp(params, METHOD_POST, "prompt_analyze", function (data) {
                 console.log("Rewrite Prompt analyze data:", data);
                 recieveDataFromSentenceAnalyze(data);
@@ -576,8 +501,9 @@
                 console.log("Sentences array: ", sentences);
 
                 // 调用 compareSentences 函数生成结果
-                const result = compareSentences(sentences);
-                console.log("Comparison result: ", result);
+                prompt = document.getElementById('prompt').value;
+                const result = compareSentences(prompt, sentences);
+                console.log("Comparison result2: ", result);
 
                 // 将结果放到 prompt-input 的 textarea 中
                 document.getElementById('prompt').value = result;
@@ -632,47 +558,140 @@
             }
         }
 
-        // 比對匡選圖片關的詞是否有不同
-        function compareSentences(sentences) {
-            // 将每个句子按逗号分隔为多个部分，再分别处理每个部分的差异
-            const splitSentences = sentences.map(sentence => sentence.split(/\s*,\s*/));
-            // 找到最长句子的长度
-            const maxLen = Math.max(...splitSentences.map(parts => parts.length));
-            // 补齐较短的句子，避免 zip 时忽略较短句子的尾部
-            splitSentences.forEach(parts => {
-                while (parts.length < maxLen) {
-                    parts.push(''); // 用空字符串补齐较短的句子
+
+        function splitByTopLevelComma(str) {
+            const result = [];
+            let current = '';
+            let bracketDepth = 0;
+
+            for (let i = 0; i < str.length; i++) {
+                const ch = str[i];
+                if (ch === '(') {
+                    bracketDepth++;
+                    current += ch;
+                } else if (ch === ')') {
+                    bracketDepth--;
+                    current += ch;
+                } else if (ch === ',' && bracketDepth === 0) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += ch;
+                }
+            }
+            if (current.trim()) {
+                result.push(current.trim());
+            }
+            return result;
+        }
+
+        function splitByTopLevelSpace(str) {
+            const result = [];
+            let current = '';
+            let bracketDepth = 0;
+
+            for (let i = 0; i < str.length; i++) {
+                const ch = str[i];
+                if (ch === '(') {
+                    bracketDepth++;
+                    current += ch;
+                } else if (ch === ')') {
+                    bracketDepth--;
+                    current += ch;
+                } else if (ch === ' ' && bracketDepth === 0) {
+                    if (current.trim()) {
+                        result.push(current.trim());
+                    }
+                    current = '';
+                } else {
+                    current += ch;
+                }
+            }
+            if (current.trim()) {
+                result.push(current.trim());
+            }
+            return result;
+        }
+
+        function compareSentences(prompt, sentences) {
+            // ---------- (A) 以「最外層逗號」拆出各分段 ----------
+            const promptChunks = splitByTopLevelComma(prompt);
+            const sentenceChunksArray = sentences.map(line => splitByTopLevelComma(line));
+
+            // 找最大分段數
+            const maxChunks = Math.max(
+                promptChunks.length,
+                ...sentenceChunksArray.map(chunks => chunks.length)
+            );
+
+            // 補齊 promptChunks
+            while (promptChunks.length < maxChunks) promptChunks.push('');
+            // 補齊每行 sentence 的分段
+            sentenceChunksArray.forEach(chunks => {
+                while (chunks.length < maxChunks) {
+                    chunks.push('');
                 }
             });
-            // 初始化结果列表
-            const resultParts = [];
-            // 对每个逗号分隔的部分逐一比较
-            for (let i = 0; i < maxLen; i++) {
-                // 对逗号分隔的每个部分，按空格再拆分单词进行比较
-                const wordLists = splitSentences.map(part => part[i].split(/\s+/));
-                const maxWordsLen = Math.max(...wordLists.map(words => words.length));
-                // 补齐较短的部分
-                wordLists.forEach(words => {
-                    while (words.length < maxWordsLen) {
-                        words.push('');
-                    }
-                });
-                // 比较每个单词位置的差异
-                const result = [];
+
+            // ---------- (C) 單一回合比較 + 多詞括號檢查 ----------
+            const finalChunks = [];
+
+            for (let i = 0; i < maxChunks; i++) {
+                const promptChunk = promptChunks[i] || '';
+                const onePositionChunks = sentenceChunksArray.map(ch => ch[i] || '');
+
+                // 拆「最外層空白」=> 取得 token
+                const pWords = splitByTopLevelSpace(promptChunk);
+                const wordLists = onePositionChunks.map(chunk => splitByTopLevelSpace(chunk));
+
+                // 找最大「單字」長度
+                const maxWordsLen = Math.max(
+                    pWords.length,
+                    ...wordLists.map(words => words.length)
+                );
+
+                const finalSegmentWords = [];
+
                 for (let j = 0; j < maxWordsLen; j++) {
-                    const wordTuple = wordLists.map(words => words[j]);
-                    const uniqueWords = [...new Set(wordTuple.filter(word => word))]; // 去除空字符串
+                    const promptWord = pWords[j] || '';
+                    const sentenceWordsAtJ = wordLists.map(words => words[j] || '');
+                    // 去掉空字串
+                    const nonEmpty = sentenceWordsAtJ.filter(w => w);
+                    const uniqueWords = [...new Set(nonEmpty)];
+
                     if (uniqueWords.length > 1) {
-                        result.push(`(${uniqueWords.join(', ')})`); // 不同的单词用括号和逗号隔开
+                        // 多個不同 => (word1, word2, ...)
+                        finalSegmentWords.push(`(${uniqueWords.join(', ')})`);
                     } else if (uniqueWords.length === 1) {
-                        result.push(uniqueWords[0]); // 如果单词相同，直接使用该单词
+                        const single = uniqueWords[0];
+
+                        // 判斷 promptWord 是否為 "(...)" (多詞)，且裡面逗號分隔 > 1
+                        const isPromptMultiple = (
+                            /^\(.*\)$/.test(promptWord) &&
+                            promptWord.replace(/^\(|\)$/g, '')
+                                .split(/\s*,\s*/).length > 1
+                        );
+                        const isSingleWordInBrackets = /^\(.*\)$/.test(promptWord) &&
+                            promptWord.replace(/^\(|\)$/g, '')
+                                .split(/\s*,\s*/).length === 1;
+                        if (isPromptMultiple || isSingleWordInBrackets) {
+                            finalSegmentWords.push(`(${single})`);
+                        } else {
+                            finalSegmentWords.push(single);
+                        }
                     }
                 }
-                // 将每个部分处理的结果合并为字符串
-                resultParts.push(result.join(' '));
+
+                // 組合成該分段字串
+                const finalSegmentStr = finalSegmentWords.join(' ').trim();
+                // 這邊決定要不要 push 空分段(可自行取捨)
+                if (finalSegmentStr) {
+                    finalChunks.push(finalSegmentStr);
+                }
             }
-            // 最终结果为逗号分隔的各部分组合
-            return resultParts.join(', ');
+
+            // 最後用逗號串起
+            return finalChunks.join(', ');
         }
 
         function tokenize(input) {
@@ -709,6 +728,8 @@
 
             return tokens;
         }
+
+
 
         function parseNode(nodeStr, currentLevel, parentName = null, order = 0) {
             nodeStr = nodeStr.trim();

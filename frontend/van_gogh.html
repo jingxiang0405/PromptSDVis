@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/range.css">
+    <link rel="stylesheet" href="./css/scatter.css">
+    <link rel="stylesheet" href="./index.css">
+
+
+    <style>
+        /* 調整佈局和樣式 */
+        body {
+            font-family: Arial, sans-serif;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .color-box {
+    display: inline-block; /* 確保為內聯塊，能正常顯示 */
+    width: 20px;           /* 顏色框的寬度 */
+    height: 20px;          /* 顏色框的高度 */
+    border-radius: 4px;    /* 可選：讓框有圓角 */
+    margin-right: 8px;     /* 與文字之間的間距 */
+}
+.container-fluid {
+    display: flex; /* 使用 Flexbox 排版 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    height: 100vh; /* 確保內容填滿視窗高度 */
+}
+
+.row.modules {
+    width: 100%; /* 確保內容寬度占滿容器 */
+    max-width: 1200px; /* 限制最大寬度 */
+    margin: auto; /* 垂直居中 */
+}
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row modules">
+            <div class="col-3 prompt-config">
+                <button type="button" class="btn btn-primary" id="generate">click</button>
+            </div>
+
+            <div class="col-8 image-browser">
+                <div class="main-title">Image Browser</div>
+                <div class="controls">
+                    <div id="legend-container">
+                    </div>
+                </div>
+                <div id="scatter-tree">
+                    <svg id="scatter" width="680" height="480">
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+
+        /**
+         * 向後端發送 GET 請求，並處理回應數據。
+         * @param {string} path - API 路徑。
+         * @param {function} callback - 回調函數。
+         */
+        function sendXhttp(path, callback) {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    const response = JSON.parse(this.responseText);
+                    callback(response); // 將回應數據傳遞給回調函數
+                }
+            };
+            xhttp.open("GET", `http://127.0.0.1:5000/${path}`, true);
+            xhttp.send();
+        }
+
+        /**
+ * 從後端數據提取標籤和顏色，動態生成圖例。
+ * @param {object[]} data - 後端返回的數據。
+ */
+        function updateLegendFromData(data) {
+            const legendContainer = document.getElementById('legend-container');
+            legendContainer.innerHTML = ''; // 清空圖例容器
+
+            // 提取唯一的標籤和顏色對
+            const uniqueLabels = Array.from(
+                new Set(data.map(item => JSON.stringify({ label: item.label, color: item.color })))
+            ).map(json => JSON.parse(json));
+
+            // 為每個標籤生成圖例
+            uniqueLabels.forEach(({ label, color }) => {
+                const legendItem = document.createElement('div');
+                legendItem.className = 'legend-item';
+
+                const colorBox = document.createElement('span');
+                colorBox.className = 'color-box';
+                colorBox.style.backgroundColor = color;
+
+                const labelSpan = document.createElement('span');
+                labelSpan.className = 'label';
+                labelSpan.textContent = label;
+
+                legendItem.appendChild(colorBox);
+                legendItem.appendChild(labelSpan);
+
+                legendContainer.appendChild(legendItem);
+            });
+        }
+
+        /**
+         * 處理來自後端的數據，更新圖例並繪製散點圖。
+         * @param {object} data - 後端返回的數據。
+         */
+        function recieveDataFromImageOverview(data) {
+            updateLegendFromData(data); // 更新圖例
+            const images = data.map(item => ({
+                src: item.src,
+                x: item.x,
+                y: item.y,
+                label: item.label,
+                color: item.color,
+                width: 1,
+                height: 1,
+            }));
+            initScatterPlot(images); // 繪製散點圖
+        }
+        // 點擊 "Generate" 按鈕，向後端發送請求
+        document.getElementById('generate').addEventListener('click', function () {
+            sendXhttp("van_gogh", recieveDataFromImageOverview);
+        });
+    </script>
+    <script src="js/scatter_vangogh.js"></script>
+</body>
+
+</html>

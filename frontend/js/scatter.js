@@ -15,6 +15,7 @@ function initScatterPlot(images) {
     const miniWidth = +rectElement.attr("width");
     const miniHeight = +rectElement.attr("height");
 
+
     const xMin = d3.min(images, d => d.x);
     const xMax = d3.max(images, d => d.x);
     const yMin = d3.min(images, d => d.y);
@@ -46,6 +47,13 @@ function initScatterPlot(images) {
 
     // 清空 mini map 的內容，但保留標籤
     gElement.selectAll("g.mini-group").remove();
+    // 添加白色背景
+    gElement.select("rect.minimap-background").remove();
+    gElement.insert("rect", ":first-child") // 确保背景是第一个元素
+        .attr("class", "minimap-background")
+        .attr("width", miniWidth)
+        .attr("height", miniHeight)
+        .attr("fill", "white"); // 设置背景为白色
     const miniG = gElement.append("g").attr("class", "mini-group");
 
     // 在 mini map 上繪製資料點
@@ -80,14 +88,14 @@ function initScatterPlot(images) {
         .append('image')
         .attr('id', d => d.id)
         .attr('data-title', d => d.title)
-        .attr('xlink:href', d => d.src)
+        .attr('xlink:href', d => d.resizedsrc)
         .attr('x', d => xScaleMain(d.x))
         .attr('y', d => yScaleMain(d.y))
         .attr('width', d => d.width)
         .attr('height', d => d.height)
         .on('mouseover', function (event, d) {
             tooltip.style('display', 'block')
-                .html(`<img src="${d.src}" width="100" height="100"><br><strong>prompt: ${d.title}</strong><br><strong>randomseed: ${d.randomseed}</strong>`)
+                .html(`<img src="${d.src}" width="150" height="150"><br><strong>prompt: ${d.title}</strong><br><strong>randomseed: ${d.randomseed}</strong>`)
                 .style('left', `${event.pageX + 10}px`)
                 .style('top', `${event.pageY + 10}px`);
         })

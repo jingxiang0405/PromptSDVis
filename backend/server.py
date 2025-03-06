@@ -2,6 +2,7 @@ import os
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ['CUDA_VISIBLE_DEVICES'] = "0"  # Use 0-index GPU for server pipeline
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 import io
 from datetime import datetime
 from flask import Flask, render_template, request, make_response, jsonify
@@ -36,9 +37,12 @@ from collections import defaultdict
 from sentence_transformers import SentenceTransformer, util
 import torch
 import heapq
+
 from generate_ner.code.self_consistent_annotation.GeneratePrompts import generate_prompts_with_parameters
 from generate_ner.code.standard.GenerateEmbsGPT import run_generate_embeddings
 from generate_ner.code.self_consistent_annotation.AskGPT import ask_gpt_function
+
+
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 print(f'torch.cuda.is_available():{torch.cuda.is_available()}')
@@ -89,7 +93,8 @@ def get_image_overview():
     # keywords 有5個
     similarity_keywords = find_similarity_keywords(words, keywords) # {'person':[{'church':80}, {'porche':60}], 'person':[{'church':80}, {'porche':60}]}
     print(f'similarity_keywords:{similarity_keywords}')
-    permutations = all_permutations(prompt, similarity_keywords) # [['hello, human cute, hot puppy, beautiful dog'], ['hello, human cute, hot puppy, beautiful puppy']] 
+    permutations = all_permutations1(prompt, similarity_keywords, 200)
+    #permutations = all_permutations(prompt, similarity_keywords, 200) # [['hello, human cute, hot puppy, beautiful dog'], ['hello, human cute, hot puppy, beautiful puppy']] 
     # print(f'permutations:{permutations}')
     # print(f'permutations length:{len(permutations)}')
     
@@ -99,7 +104,7 @@ def get_image_overview():
         "http://140.119.164.166:9868/sd",  # 快速端口，重复 3 次
         "http://140.119.164.166:9868/sd",
         "http://140.119.164.166:9868/sd",
-        #"http://140.119.164.19:6887/sd"    # 慢速端口，重复 1 次
+        "http://140.119.164.19:6887/sd"    # 慢速端口，重复 1 次
     ])
 
     results = {}
@@ -118,9 +123,12 @@ def get_image_overview():
     
     # Create a directory to save images if it doesn't exist
     current_time_str = datetime.now().strftime("%Y%m%d%H%M%S")
-
+    
     image_dir = '/media/user/新增磁碟區/sd-generate-images/' + current_time_str
     os.makedirs(image_dir, exist_ok=True)
+    
+    resized_image_dir = '/media/user/新增磁碟區/sd-generate-resizedimages/' + current_time_str
+    os.makedirs(resized_image_dir, exist_ok=True)
     
     # Prepare data for CSV
     csv_data = []
@@ -128,6 +136,7 @@ def get_image_overview():
     # Process the result and save images + metadata
     for i, result in enumerate(results['result']):
         image_base64 = result['img']
+        
         # Convert base64 to image
         img_data = base64.b64decode(image_base64)
         img = Image.open(BytesIO(img_data))
@@ -135,8 +144,22 @@ def get_image_overview():
         # Save the image
         image_name = f"{i+1}.png"
         image_filename = f"{image_dir}/{image_name}"
-
         img.save(image_filename)
+
+        # Save the resized image (1/4 of the original size)
+        resized_img = img.resize((img.width // 4, img.height // 4), Image.ANTIALIAS)
+        resized_image_name = f"{i+1}.png"
+        resized_image_filename = f"{resized_image_dir}/{resized_image_name}"
+        resized_img.save(resized_image_filename)
+
+        # Convert resized image to Base64
+        buffered = BytesIO()
+        resized_img.save(buffered, format="PNG")
+        resized_image_base64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
+
+        # Add the resized image Base64 to the result
+        results['result'][i]['resized_img'] = resized_image_base64
+
 
         # Prepare metadata for CSV
         metadata = {
@@ -168,6 +191,8 @@ def get_image_overview():
     
     image_features = encode_image(all_process_img_list)
     print(image_features.shape)
+    # 定义 UMAP 参数范围
+
     embed_position = embed_feature(image_features.cpu())
     # print(f'embed_position:{embed_position}')
     results['embed_position'] = embed_position
@@ -200,9 +225,9 @@ def encode_image(image_list):
 def embed_feature(encode_feature):
 	# Use TSNE for projection
 	# embed_position = TSNE(n_components=2, init='random', perplexity=3, metric='cosine').fit_transform(encode_feature)
-	# embed_position = TSNE(n_components=2, init='random', perplexity=2, metric='cosine').fit_transform(encode_feature)
+	# embed_position = TSNE(n_components=2, init='random', perplexity=30, metric='cosine').fit_transform(encode_feature)
     # Use UMAP for projection
-	embed_position = UMAP(n_neighbors=2, min_dist=0.001, metric='cosine').fit_transform(encode_feature)
+	embed_position = umap.UMAP(n_neighbors=4, min_dist=0.01, metric='cosine').fit_transform(encode_feature)
 	return embed_position.tolist()
 
 # Get POS Tag Words
@@ -254,6 +279,14 @@ def calculate_similarity_matrix(word_embeddings, keyword_embeddings, words, keyw
 # return format
 # {'person':[{'church':80}, {'porche':60}], 'person':[{'church':80}, {'porche':60}]}
 def find_similarity_keywords(words, keywords):
+    """
+    如果 words 為空，就直接回傳空字典 (或其他你想要的結構)，
+    避免在後面 torch.stack 等操作報錯。
+    """
+    if not words:
+        # 直接回傳空字典，或依你的需求自訂回傳內容
+        return {}
+
     embedding_model = SentenceTransformer('all-mpnet-base-v2')
     keyword_embeddings = encode_keywords(keywords, embedding_model)
     word_embeddings = encode_keywords([words], embedding_model)  # Wrap words in a list to use the same function
@@ -263,6 +296,7 @@ def find_similarity_keywords(words, keywords):
 
 # 递归处理每个括号内和括号外的组合
 def generate_combinations(text):
+
     def split_brackets(text):
         # 提取括号内和括号外的部分
         match = re.match(r'(.*?)\((.*?)\)(.*)', text)
@@ -280,7 +314,7 @@ def generate_combinations(text):
 
     # 提取括号前、括号内和括号后的内容
     before, in_brackets, after = split_brackets(text)
-    print(f'split_brackets(text)-> {split_brackets(text)}')
+    #print(f'split_brackets(text)-> {split_brackets(text)}')
     if in_brackets:
         # 如果存在括号内的内容，生成组合
         sub_combinations = []
@@ -301,8 +335,89 @@ def generate_combinations(text):
     else:
         # 没有括号的情况，直接返回文本
         combinations.append(before.strip())
-
+    print(f'combinations->{combinations}')
     return combinations
+
+
+
+
+
+def all_permutations1(input_prompt: str, data: dict, max_combinations):
+    """
+    1. 先單純計算「所有括號展開」後的總組合數 (不含任何同義詞 / 相似詞替換)，
+        如果已經超過 max_combinations，就直接保留這些超量組合，後續 (括號外) 替換不再執行。
+    2. 如果括號展開後尚未超量，才進行替換外部內容 + 再做排列組合。
+    """
+
+    # Step 1: 根據逗號(但忽略括號中的逗號)來分割字串
+    items = re.split(r',\s*(?![^(]*\))', input_prompt)
+
+    # 如果 data 是空，則無替換規則
+    if not data:
+        print("No replacement data. Skipping external replacement step.")
+
+    # Step 2: 準備「外部替換」的對照表 (同義詞或相似詞)
+    replacement_map = {}
+    if data:  # 如果 data 不為空，才建立 replacement_map
+        for key, replacements in data.items():
+            replacement_map[key] = [list(rep.keys())[0] for rep in replacements]
+
+    print(f'replacement_map: {replacement_map}')
+
+    # ─────────────────────────────────────────────────────────
+    # (A) 計算「純括號」的所有展開
+    # ─────────────────────────────────────────────────────────
+    bracket_expanded_data = []
+    total_bracket_combos = 1
+
+    for item in items:
+        # 只使用 generate_combinations，展開括號內的所有排列
+        bracket_only = generate_combinations(item)
+        bracket_expanded_data.append(bracket_only)
+        total_bracket_combos *= len(bracket_only)
+
+    print(f"Bracket-only combinations count = {total_bracket_combos}")
+
+    # 如果「純括號展開」已經超過 max_combinations -> 直接保留
+    if total_bracket_combos > max_combinations:
+        print(f"Bracket expansions exceed max_combinations -> {total_bracket_combos} > {max_combinations}")
+        bracket_product = list(itertools.product(*bracket_expanded_data))
+        bracket_product = bracket_product[:max_combinations]
+        comma_separated_strings = [', '.join(combo) for combo in bracket_product]
+        print(f"Len datas (bracket only) = {len(comma_separated_strings)}")
+        return comma_separated_strings
+
+    # ─────────────────────────────────────────────────────────
+    # (B) 若未超量，才做「外部替換 + 再展開括號」
+    # ─────────────────────────────────────────────────────────
+    replace_data = []
+    for item in items:
+        # 先把「原 item」放進去 (不替換)
+        replace_item = [item]
+
+        # 如果 replacement_map 不為空，才進行替換
+        if replacement_map:
+            for key in replacement_map:
+                if key in item:
+                    # 替換括號外內容
+                    replace_item.extend(replace_outside_brackets(item, key, replacement_map[key]))
+
+        # 再對「每個版本」做括號展開
+        replace_item_comb = []
+        for sub_item in replace_item:
+            replace_item_comb.extend(generate_combinations(sub_item))
+
+        replace_data.append(replace_item_comb)
+
+    # 最後做笛卡兒積，並限制 max_combinations
+    product_result = list(itertools.product(*replace_data))[:max_combinations]
+    print(f'Len datas (with synonyms) = {len(product_result)}')
+
+    comma_separated_strings = [', '.join(combination) for combination in product_result]
+    return comma_separated_strings
+
+
+
 
 # 替换括号外的内容，不改变括号内的内容
 def replace_outside_brackets(text, key, replacements):
@@ -366,42 +481,83 @@ def replace_outside_brackets(text, key, replacements):
     ['dd, dog in the park', 'dd, puppy in the park', 'dd, terrier in the park', 'dd, cat in the park', 'dd, dog in the tt', 'dd, dog in the ff', 'dd, dog in the gg']
     '''
 # 主函数，处理输入提示并生成所有排列组合
-def all_permutations(input_prompt: str, data: dict):
+def all_permutations(input_prompt: str, data: dict, max_combinations: int):
+    import re
+    print(f'input_prompt:{input_prompt}')
     # 使用正则表达式查找所有符合条件的部分
+    # 這裡依舊示範拆分逗號，但你可以改為適合你需求的拆分方式
     items = re.split(r',\s*(?![^(]*\))', input_prompt)
-    #print(f'Items: {items}')
 
-    # 准备替换映射
+    # 準備替換映射
     replacement_map = {}
     for key, replacements in data.items():
+        # 假設 data = { "dog": [ {"pet": "xxx"}, {"animal": "yyy"} ], ... }
+        # 這裡的 replacements 可能是 list，每個元素都是 dict
+        # 我們只取 key(字串) 來做替換示意
         replacement_map[key] = [list(rep.keys())[0] for rep in replacements]
-    #print(f'replacement_map: {replacement_map}')
 
-    # 存储替换后的组合
+    # 用來儲存每個分段（item）對應的「所有替代結果列表」
     replace_data = []
-    for item in items:
-        replace_item = [item]  # 初始化
-        #print(f'Original item: {replace_item}')
 
-        # 替换外部内容
+    total_combinations = 1  # 初始化總組合數
+
+    for i, item in enumerate(items):
+        # 先把「原文」放進一個容器
+        replace_item = [item]
+
+        # 針對該 item，檢查有哪些 key 可以替換
         for key in replacement_map:
             if key in item:
+                # 如果有匹配到 key，就將替換後的版本放到 replace_item
                 replace_item.extend(replace_outside_brackets(item, key, replacement_map[key]))
-                #print(f'After replace_item: {replace_item}')
 
-        # 生成排列组合
+        # 產生進一步的組合 (視你的邏輯而定)
         replace_item_comb = []
         for sub_item in replace_item:
             replace_item_comb.extend(generate_combinations(sub_item))
-        #print(f'replace_item_comb: {replace_item_comb}')
-        replace_data.append(replace_item_comb)
+            print(f"replace_item_comb: {replace_item_comb}")
+        # 嘗試更新「假設加入這些組合後」的總組合數
+        projected = total_combinations * len(replace_item_comb)
+        if projected > max_combinations:
+            # 如果超出限制，只保留當前 item 的「原文」(不做額外替換)
+            print(f"Combination limit reached: {max_combinations}")
+            
+            # 只留原文 (item 本身)
+            replace_item_comb = [item]
 
-    # 生成所有排列组合
+            # 先把這個單一選擇 append 進 replace_data
+            replace_data.append(replace_item_comb)
+            total_combinations = total_combinations * 1  # 只乘 1
+
+            # 後面的 items 通通只留原文
+            for k in range(i + 1, len(items)):
+                replace_data.append([items[k]])
+            # 跳出整個迴圈，不再處理後續
+            break
+        else:
+            # 如果還沒超標，正常加入
+            replace_data.append(replace_item_comb)
+            # 更新 total_combinations
+            total_combinations = projected
+
+    else:
+        # 注意：for-else
+        # 如果沒有透過 break 中斷，表示所有 items 都處理完，也可在這裡補齊邏輯
+        pass
+
+    # 如果前面的處理在中途 break，表示已把後續直接附加「原文」了
+    # 如果沒 break，則表示 replace_data 可能剛好不超標
+
+    # 產生排列組合
+    # 這裡 product(...) 若 total_combinations 很大，可能很耗時
     product_result = list(itertools.product(*replace_data))
-    #print(f'product_result: {product_result}')
-    print(f'Len datas: {len(product_result)}')
-    # 转换为逗号分隔的字符串
+
+    # 截取前 max_combinations 筆
+    product_result = product_result[:max_combinations]
+    print(f'product_result->{product_result}')
+    # 將 tuple 轉成逗號分隔字串
     comma_separated_strings = [', '.join(combination) for combination in product_result]
+    print(f'comma_separated_strings->{comma_separated_strings}')
     return comma_separated_strings
 
 
@@ -628,9 +784,9 @@ def process_sentence_analyze_1():
         demo_datamode="train",
         demo_select_method="std_c5",
         demo_retrieval_method="GPTEmbDvrsKNN",
-        diverseKNN_number=100,
+        diverseKNN_number=30,
         diverseKNN_sampling="Sc",
-        few_shot_number=10,
+        few_shot_number=5,
         self_annotate_tag="std_c5"
     )
     
