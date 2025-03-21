@@ -6,6 +6,7 @@ import torch
 from tqdm import tqdm
 import pandas as pd
 from decimal import Decimal
+import requests
 
 def copy_file_to_path(data, dir, path):
     if not os.path.isdir(dir):
@@ -255,6 +256,8 @@ def set_api_key(model_name, ports=None):
     model_publisher = model_list[model_name]["publisher"]
     if  model_publisher == "openai":
         api_keys = my_openai_api_keys
+    elif model_publisher == "self":
+        api_keys = " "
     else:
         assert ports != None
         api_keys = []
@@ -346,48 +349,71 @@ def run_llm(
         return_text=True
 ):
     assert return_text == True
-    agent = SafeOpenai(openai_key, model_name=model_name,ports=ports)
 
     rerequest_signal = "Give up and request again."
 
-    if "text" in model_name or "instruct" in model_name:
-        # Convert messages format to prompt format
+    if "gemma2:27b" in model_name:
+        # Gemma API
         content_all = [x["content"] for x in messages]
         prompt = "\n".join(content_all)
-        print(f'run_llm1 request prompt-> {prompt}')
-        response = agent.text(
-            model=model_name, 
-            prompt=prompt, 
-            temperature=temperature, 
-            stop=stop
-            )
-        print(f'run_llm1 response-> {response}')
-        if return_text:
-            print(f'run_llm2 response-> {response}')
-            response = response['choices'][0]['text']
-        return response
+        
+        api_url = "http://140.119.162.202:11430/api/generate"
+        payload = {
+            "model": model_name,
+            "prompt": prompt,
+            "stream": False
+        }
+
+        print(f'run_llm request to Gemma API -> {payload}')
+        response = requests.post(api_url, json=payload)
+        
+        if response.status_code == 200:
+            response_json = response.json()
+            print(f'run_llm Gemma API response -> {response_json}')
+            return response_json.get("response", "")
+        else:
+            print(f"Gemma API error: {response.text}")
+            return None
+
     else:
-        response = agent.chat(
-            model=model_name, 
-            messages=messages, 
-            temperature=temperature, 
-            stop=stop
+        # OpenAI API (SafeOpenai)
+        agent = SafeOpenai(openai_key, model_name=model_name, ports=ports)
+
+        if "text" in model_name or "instruct" in model_name:
+            # Convert messages format to prompt format
+            content_all = [x["content"] for x in messages]
+            prompt = "\n".join(content_all)
+            print(f'run_llm OpenAI request prompt -> {prompt}')
+            response = agent.text(
+                model=model_name, 
+                prompt=prompt, 
+                temperature=temperature, 
+                stop=stop
             )
-        
-        if rerequest_signal in response:
-            response = run_llm(
+            print(f'run_llm OpenAI response -> {response}')
+            if return_text:
+                response = response['choices'][0]['text']
+            return response
+        else:
+            response = agent.chat(
+                model=model_name, 
                 messages=messages, 
-                openai_key=openai_key, 
-                model_name=model_name, 
-                temperature=temperature,
-                stop=stop,
-                ports=ports,
-                return_text=return_text
+                temperature=temperature, 
+                stop=stop
             )
-        
-        # if return_text:
-        #     response = response['choices'][0]['message']['content']
-        return response
+
+            if rerequest_signal in response:
+                response = run_llm(
+                    messages=messages, 
+                    openai_key=openai_key, 
+                    model_name=model_name, 
+                    temperature=temperature,
+                    stop=stop,
+                    ports=ports,
+                    return_text=return_text
+                )
+
+            return response
 
 class SafeOpenai:
     def __init__(self, keys=None, model_name=None, start_id=None, proxy=None, ports=None):
