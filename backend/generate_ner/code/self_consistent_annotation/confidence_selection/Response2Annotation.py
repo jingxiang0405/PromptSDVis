@@ -266,7 +266,7 @@ if __name__ == "__main__":
     parser.add_argument("--dataname", default="PowerPlantFlat", type=str)
     parser.add_argument("--folder", default=0, type=int) # only for ace04
     # mode
-    parser.add_argument("--model", default="gpt-3.5-turbo", type=str)
+    parser.add_argument("--model", default="gemma3:27b", type=str)
     # prompt
     # parser.add_argument("--prompt_method", default="vanilla")
     parser.add_argument("--task_hint", default=None)

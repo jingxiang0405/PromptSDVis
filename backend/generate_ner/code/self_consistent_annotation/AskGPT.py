@@ -260,7 +260,7 @@ def ask_gpt_function(
     log_path,
     dataname="diffusiondb",
     datamode="test",
-    model="gpt-3.5-turbo",
+    model="gemma:3:27b",
     few_shot_setting="pool",
     demo_size=21,
     demo_datamode="train",

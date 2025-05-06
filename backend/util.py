@@ -79,12 +79,7 @@ def compress_PIL_image(image, compress_rate=0.2):
     return resize_image
 
 
-def get_img_base64(img):
-    output_buffer = BytesIO()
-    img.save(output_buffer, format='png')
-    byte_data = output_buffer.getvalue()
-    image_str = base64.b64encode(byte_data).decode('utf-8')
-    return image_str
+
 
 def base64_to_image(base64_str):
     image = base64.b64decode(base64_str, altchars=None, validate=False)

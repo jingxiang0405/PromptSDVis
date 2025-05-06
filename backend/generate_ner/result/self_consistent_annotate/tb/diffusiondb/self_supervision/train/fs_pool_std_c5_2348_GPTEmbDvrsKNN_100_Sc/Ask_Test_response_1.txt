@@ -1,2 +1,1 @@
-{'idx': '2.png', 'sentence': 'a scottish fold cat', 'label': '{}', 'response': '[{"a scottish fold cat": "Subject term"}]', 'prediction': {'a scottish fold cat': 'Subject term'}}
-{'idx': '4.png', 'sentence': 'a scottish fold feline', 'label': '{}', 'response': '[{"a scottish fold feline": "Subject term"}]', 'prediction': {'a scottish fold feline': 'Subject term'}}
+{'idx': '1.png', 'sentence': 'ca', 'label': '{}', 'response': '[]', 'prediction': {}}

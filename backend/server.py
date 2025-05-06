@@ -101,10 +101,10 @@ def get_image_overview():
     ###################     Stable Diffison   ######################
     # 调整端口分配比重为 3:1
     ports = cycle([
-        "http://140.119.164.166:9868/sd",  # 快速端口，重复 3 次
-        "http://140.119.164.166:9868/sd",
-        "http://140.119.164.166:9868/sd",
-        "http://140.119.164.19:6887/sd"    # 慢速端口，重复 1 次
+        "http://140.119.164.166:9868/sd",  
+        "http://140.119.162.202:9868/sd",
+        "http://140.119.162.16:9868/sd",
+        "http://140.119.164.166:9868/sd" 
     ])
 
     results = {}
@@ -756,7 +756,7 @@ def process_sentence_analyze_1():
         datamode="test",
         emb_model="text-embedding-ada-002",
         emb_encoding="cl100k_base",
-        api_key=""
+        api_key="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"
     )
     print("Generated embeddings success")
 

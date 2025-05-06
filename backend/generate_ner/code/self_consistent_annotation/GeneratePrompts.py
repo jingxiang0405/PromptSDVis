@@ -486,7 +486,7 @@ def generate_prompts_with_parameters(
     save_prompt_path,
     dataname="diffusiondb",
     datamode="test",
-    model="gpt-3.5-turbo",
+    model="gpt-4o-mini",
     few_shot_setting="pool",
     demo_size=21,
     demo_datamode="train",

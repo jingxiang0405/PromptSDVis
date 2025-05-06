@@ -1,0 +1,32 @@
+2025-03-18 14:31:01,784 - root - [INFO] - ---------- Ask ChatGPT ------------
+2025-03-18 14:31:01,784 - root - [INFO] - dataname: wikigold
+2025-03-18 14:31:01,784 - root - [INFO] - folder: 0
+2025-03-18 14:31:01,784 - root - [INFO] - datamode: test
+2025-03-18 14:31:01,784 - root - [INFO] - model: gemma2:27b
+2025-03-18 14:31:01,784 - root - [INFO] - ports: None
+2025-03-18 14:31:01,784 - root - [INFO] - task_hint: None
+2025-03-18 14:31:01,784 - root - [INFO] - reason_hint: None
+2025-03-18 14:31:01,784 - root - [INFO] - reason_hint_person: None
+2025-03-18 14:31:01,784 - root - [INFO] - reason_hint_pos: None
+2025-03-18 14:31:01,784 - root - [INFO] - few_shot_setting: zs
+2025-03-18 14:31:01,784 - root - [INFO] - demo_size: 300
+2025-03-18 14:31:01,784 - root - [INFO] - demo_select_method: None
+2025-03-18 14:31:01,784 - root - [INFO] - demo_retrieval_method: None
+2025-03-18 14:31:01,784 - root - [INFO] - few_shot_number: 0
+2025-03-18 14:31:01,784 - root - [INFO] - consistency: 0
+2025-03-18 14:31:01,784 - root - [INFO] - query_times: 5
+2025-03-18 14:31:01,784 - root - [INFO] - temperature: 0
+2025-03-18 14:31:01,784 - root - [INFO] - consistency_selection: two_stage_majority_voting
+2025-03-18 14:31:01,784 - root - [INFO] - tool_aug: None
+2025-03-18 14:31:01,784 - root - [INFO] - tool_desc: None
+2025-03-18 14:31:01,784 - root - [INFO] - parse_tool: hanlp
+2025-03-18 14:31:01,784 - root - [INFO] - start_time: None
+2025-03-18 14:31:01,784 - root - [INFO] - breakpoint_continue: False
+2025-03-18 14:31:01,784 - root - [INFO] - stop: None
+2025-03-18 14:31:01,784 - root - [INFO] - api_key:  
+2025-03-18 14:31:01,784 - root - [INFO] - abb2labelname_path: data/wikigold/abb2labelname.json
+2025-03-18 14:31:01,784 - root - [INFO] - abb2lname: {'ORG': 'Organization', 'PER': 'Person', 'LOC': 'Location', 'MISC': 'Miscellaneous'}
+2025-03-18 14:31:01,784 - root - [INFO] - id2label: ['Organization', 'Person', 'Location', 'Miscellaneous']
+2025-03-18 14:31:01,784 - root - [INFO] - prompt_path: prompts/wikigold/zs/test_prompts__0.json
+2025-03-18 14:31:01,784 - root - [INFO] - response_path: result/gemma227/wikigold/zs/03181431_test__0_response.txt
+2025-03-18 14:31:01,784 - root - [INFO] - log_path: log/gemma227/wikigold/zs/03181431_test__0_AskGPT.log

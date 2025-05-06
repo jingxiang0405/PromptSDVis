@@ -4,7 +4,6 @@ import torch
 print(torch.__version__)
 print(torch.cuda.is_available())  # True 表示 CUDA 可用
 print(torch.backends.cudnn.is_available())  # True 表示 cuDNN 可用
-from util import get_img_base64
 # from workflow import *
 
 from diffusers import StableDiffusionPipeline, DPMSolverMultistepScheduler
@@ -15,11 +14,15 @@ import sys
 import time
 from config import *
 import random
+import base64
+from io import BytesIO
 from threading import Lock
 lock = Lock()
 
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 # CORS(app, supports_credentials=True)
 
 device_id = sys.argv[1]
@@ -36,6 +39,12 @@ print("Set device")
 pipe = pipe.to(device)
 print("Start inference")
 
+def get_img_base64(img):
+    output_buffer = BytesIO()
+    img.save(output_buffer, format='png')
+    byte_data = output_buffer.getvalue()
+    image_str = base64.b64encode(byte_data).decode('utf-8')
+    return image_str
 # 沒有設定method get or post 都可以
 @app.route('/sd', methods=['POST'])
 def sd():

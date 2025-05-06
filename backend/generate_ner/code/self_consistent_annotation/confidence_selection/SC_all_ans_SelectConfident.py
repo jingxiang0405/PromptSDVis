@@ -227,7 +227,7 @@ if __name__ == "__main__":
     parser.add_argument("--datamode", default="train", type=str)
     parser.add_argument("--demo_datamode", default=None, type=str)
 
-    parser.add_argument("--model", default="gpt-3.5-turbo", type=str)
+    parser.add_argument("--model", default="gemma3:27b", type=str)
     
     # prompt
     # parser.add_argument("--prompt_method", default="vanilla")

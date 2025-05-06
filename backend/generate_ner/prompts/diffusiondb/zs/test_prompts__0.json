@@ -1,0 +1,140 @@
+[
+    {
+        "idx": "1.png",
+        "sentence": "animal, hamster, pencil sketch, awardm winning, a duckling of doom, national geographic photographer",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awardm winning, a duckling of doom, national geographic photographer\nAnswer: "
+    },
+    {
+        "idx": "2.png",
+        "sentence": "animal, hamster, pencil sketch, award winning, a ducklings of doom, national geographic photographic",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, award winning, a ducklings of doom, national geographic photographic\nAnswer: "
+    },
+    {
+        "idx": "3.png",
+        "sentence": "animal, hamster, pencil sketch, awardm winning, a ducks of doom, national geographic photographic",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awardm winning, a ducks of doom, national geographic photographic\nAnswer: "
+    },
+    {
+        "idx": "5.png",
+        "sentence": "animal, hamster, pencil sketch, awarded winning, a ducks of doom, national geographic photographer",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awarded winning, a ducks of doom, national geographic photographer\nAnswer: "
+    },
+    {
+        "idx": "10.png",
+        "sentence": "animal, hamster, pencil sketch, awardm winning, a ducklings of doom, national geographic photographer",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awardm winning, a ducklings of doom, national geographic photographer\nAnswer: "
+    },
+    {
+        "idx": "16.png",
+        "sentence": "animal, hamster, pencil sketch, awardm winning, a duck of doom, national geographic photographers",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awardm winning, a duck of doom, national geographic photographers\nAnswer: "
+    },
+    {
+        "idx": "17.png",
+        "sentence": "animal, hamster, pencil sketch, awarded winning, a duckling of doom, national geographic photographers",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awarded winning, a duckling of doom, national geographic photographers\nAnswer: "
+    },
+    {
+        "idx": "18.png",
+        "sentence": "animal, hamster, pencil sketch, awardm winning, a ducks of doom, national geographic photography",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awardm winning, a ducks of doom, national geographic photography\nAnswer: "
+    },
+    {
+        "idx": "19.png",
+        "sentence": "animal, hamster, pencil sketch, awards winning, a duckling of doom, national geographic photographer",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awards winning, a duckling of doom, national geographic photographer\nAnswer: "
+    },
+    {
+        "idx": "24.png",
+        "sentence": "animal, hamster, pencil sketch, award winning, a duck of doom, national geographic photographers",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, award winning, a duck of doom, national geographic photographers\nAnswer: "
+    },
+    {
+        "idx": "26.png",
+        "sentence": "animal, hamster, pencil sketch, awardm winning, a duckling of doom, national geographic photographers",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awardm winning, a duckling of doom, national geographic photographers\nAnswer: "
+    },
+    {
+        "idx": "28.png",
+        "sentence": "animal, hamster, pencil sketch, awardm winning, a duckling of doom, national geographic photographic",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awardm winning, a duckling of doom, national geographic photographic\nAnswer: "
+    },
+    {
+        "idx": "32.png",
+        "sentence": "animal, hamster, pencil sketch, awarded winning, a duck of doom, national geographic photographic",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awarded winning, a duck of doom, national geographic photographic\nAnswer: "
+    },
+    {
+        "idx": "34.png",
+        "sentence": "animal, hamster, pencil sketch, awards winning, a ducks of doom, national geographic photographer",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awards winning, a ducks of doom, national geographic photographer\nAnswer: "
+    },
+    {
+        "idx": "37.png",
+        "sentence": "animal, hamster, pencil sketch, awards winning, a duckling of doom, national geographic photographic",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awards winning, a duckling of doom, national geographic photographic\nAnswer: "
+    },
+    {
+        "idx": "39.png",
+        "sentence": "animal, hamster, pencil sketch, awardm winning, a duck of doom, national geographic photographic",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awardm winning, a duck of doom, national geographic photographic\nAnswer: "
+    },
+    {
+        "idx": "43.png",
+        "sentence": "animal, hamster, pencil sketch, awards winning, a ducks of doom, national geographic photography",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awards winning, a ducks of doom, national geographic photography\nAnswer: "
+    },
+    {
+        "idx": "52.png",
+        "sentence": "animal, hamster, pencil sketch, award winning, a duckling of doom, national geographic photographer",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, award winning, a duckling of doom, national geographic photographer\nAnswer: "
+    },
+    {
+        "idx": "56.png",
+        "sentence": "animal, hamster, pencil sketch, awarded winning, a ducks of doom, national geographic photographers",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awarded winning, a ducks of doom, national geographic photographers\nAnswer: "
+    },
+    {
+        "idx": "60.png",
+        "sentence": "animal, hamster, pencil sketch, awards winning, a duck of doom, national geographic photographer",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, awards winning, a duck of doom, national geographic photographer\nAnswer: "
+    },
+    {
+        "idx": "61.png",
+        "sentence": "animal, hamster, pencil sketch, award winning, a duckling of doom, national geographic photographers",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, award winning, a duckling of doom, national geographic photographers\nAnswer: "
+    },
+    {
+        "idx": "62.png",
+        "sentence": "animal, hamster, pencil sketch, award winning, a ducks of doom, national geographic photographer",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, award winning, a ducks of doom, national geographic photographer\nAnswer: "
+    },
+    {
+        "idx": "64.png",
+        "sentence": "animal, hamster, pencil sketch, award winning, a duck of doom, national geographic photographic",
+        "label": "{}",
+        "prompt": "Given entity label set: ['Subject term', 'Style modifier', 'Quality booster', 'Repeating term', 'Magic term']\nPlease recognize the named entities in the given text. Based on the given entity label set, provide answer in the following JSON format: [{\"Entity Name\": \"Entity Label\"}]. If there is no entity in the text, return the following empty list: []. \nText: animal, hamster, pencil sketch, award winning, a duck of doom, national geographic photographic\nAnswer: "
+    }
+]
